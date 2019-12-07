@@ -132,15 +132,6 @@ class CustomTextActivity : AppCompatActivity() {
                                 lineHeight = 20.sp
                             )
                         )
-
-                        CustomStyledText("The line height of this text has been increased " +
-                                "hence you will be able to see more space between each line in this " +
-                                "paragraph.",
-                            paragraphStyle = ParagraphStyle(
-                                textAlign = TextAlign.Justify,
-                                lineHeight = 20.sp
-                            )
-                        )
                     }
                 }
             }
