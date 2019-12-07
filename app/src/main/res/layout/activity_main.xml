@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_height"
         app:cardBackgroundColor="@color/colorPrimary"
-        android:padding="@dimen/default_padding">
+        android:padding="@dimen/default_padding"
+        android:onClick="startSimpleTextExample"
+        app:cardCornerRadius="@dimen/card_corner_radius">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +23,7 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:fontFamily="monospace"
-            android:onClick="startSimpleTextExample"/>
+            />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -29,7 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_height"
         app:cardBackgroundColor="@color/colorPrimary"
-        android:padding="@dimen/default_padding">
+        android:padding="@dimen/default_padding"
+        android:onClick="startCustomTextExample"
+        android:layout_marginTop="@dimen/default_padding"
+        app:cardCornerRadius="@dimen/card_corner_radius">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +42,7 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:fontFamily="monospace"
-            android:onClick="startCustomTextExample"/>
+            />
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

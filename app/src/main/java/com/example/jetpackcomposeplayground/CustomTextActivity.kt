@@ -8,11 +8,13 @@ import androidx.ui.core.px
 import androidx.ui.core.setContent
 import androidx.ui.core.sp
 import androidx.ui.engine.geometry.Offset
+import androidx.ui.foundation.VerticalScroller
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Shadow
 import androidx.ui.layout.Column
 import androidx.ui.layout.FlexRow
 import androidx.ui.material.Divider
+import androidx.ui.material.MaterialTheme
 import androidx.ui.text.ParagraphStyle
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -32,128 +34,115 @@ class CustomTextActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Here, Message is a Composable function which is going to describe the contents of
-            // this activity that will be rendered on the screen.
-            Column {
-                CustomStyledText("This is the default text style")
+            MaterialTheme {
+                VerticalScroller {
+                    Column {
+                        CustomStyledText("This is the default text style")
 
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text is blue in color",
-                    style = TextStyle(
-                        color = Color.Blue
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text has a bigger font size",
-                    style = TextStyle(
-                        fontSize = 30.sp
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text is bold",
-                    style = TextStyle(
-                        fontWeight = FontWeight.W700
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text is italic",
-                    style = TextStyle(
-                        fontStyle = FontStyle.Italic
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text is using a custom font family",
-                    style = TextStyle(
-                        fontFamily = FontFamily.Cursive
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text has an underline",
-                    style = TextStyle(
-                        decoration = TextDecoration.Underline
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text has a strikethrough line",
-                    style = TextStyle(
-                        decoration = TextDecoration.LineThrough
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text will add an ellipsis to the end of the " +
-                        "text if the text is longer that 1 line long.",
-                    maxLines = 1
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text has a shadow",
-                    style = TextStyle(
-                        shadow = Shadow(color = Color.Black, blurRadius = 10.px,
-                            offset = Offset(2f, 2f)
+                        CustomStyledText("This text is blue in color",
+                            style = TextStyle(
+                                color = Color.Blue
+                            )
                         )
-                    )
-                )
 
-                Divider(color = Color.Gray)
+                        CustomStyledText("This text has a bigger font size",
+                            style = TextStyle(
+                                fontSize = 30.sp
+                            )
+                        )
 
-                FlexRow {
-                    expanded(1f) {
-                        CustomStyledText("This text is center aligned",
+                        CustomStyledText("This text is bold",
+                            style = TextStyle(
+                                fontWeight = FontWeight.W700
+                            )
+                        )
+
+                        CustomStyledText("This text is italic",
+                            style = TextStyle(
+                                fontStyle = FontStyle.Italic
+                            )
+                        )
+
+                        CustomStyledText("This text is using a custom font family",
+                            style = TextStyle(
+                                fontFamily = FontFamily.Cursive
+                            )
+                        )
+
+                        CustomStyledText("This text has an underline",
+                            style = TextStyle(
+                                decoration = TextDecoration.Underline
+                            )
+                        )
+
+                        CustomStyledText("This text has a strikethrough line",
+                            style = TextStyle(
+                                decoration = TextDecoration.LineThrough
+                            )
+                        )
+
+                        CustomStyledText("This text will add an ellipsis to the end of the " +
+                                "text if the text is longer that 1 line long.",
+                            maxLines = 1
+                        )
+
+                        CustomStyledText("This text has a shadow",
+                            style = TextStyle(
+                                shadow = Shadow(color = Color.Black, blurRadius = 10.px,
+                                    offset = Offset(2f, 2f)
+                                )
+                            )
+                        )
+
+                        FlexRow {
+                            expanded(1f) {
+                                Text(text = "This text is center aligned",
+                                    paragraphStyle = ParagraphStyle(
+                                        textAlign = TextAlign.Center
+                                    )
+                                )
+                            }
+                        }
+
+                        Divider(color = Color.Gray)
+
+                        CustomStyledText("This text will demonstrate how to justify your " +
+                                "paragraph to ensure that the text that ends with a soft line break " +
+                                "spreads and takes the entire width of the container",
                             paragraphStyle = ParagraphStyle(
-                                textAlign = TextAlign.Center
+                                textAlign = TextAlign.Justify
+                            )
+                        )
+
+                        CustomStyledText("This text will demonstrate how to add indentation " +
+                                "to your text. In this example, indentation was only added to the first " +
+                                "line. You also have the option to add indentation to the rest of the " +
+                                "lines if you'd like",
+                            paragraphStyle = ParagraphStyle(
+                                textAlign = TextAlign.Justify,
+                                textIndent = TextIndent(firstLine = 30.sp)
+                            )
+                        )
+
+                        CustomStyledText("The line height of this text has been increased " +
+                                "hence you will be able to see more space between each line in this " +
+                                "paragraph.",
+                            paragraphStyle = ParagraphStyle(
+                                textAlign = TextAlign.Justify,
+                                lineHeight = 20.sp
+                            )
+                        )
+
+                        CustomStyledText("The line height of this text has been increased " +
+                                "hence you will be able to see more space between each line in this " +
+                                "paragraph.",
+                            paragraphStyle = ParagraphStyle(
+                                textAlign = TextAlign.Justify,
+                                lineHeight = 20.sp
                             )
                         )
                     }
                 }
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text will demonstrate how to justify your " +
-                        "paragraph to ensure that the text that ends with a soft line break " +
-                        "spreads and takes the entire width of the container",
-                    paragraphStyle = ParagraphStyle(
-                        textAlign = TextAlign.Justify
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("This text will demonstrate how to add indentation " +
-                        "to your text. In this example, indentation was only added to the first " +
-                        "line. You also have the option to add indentation to the rest of the " +
-                        "lines if you'd like",
-                    paragraphStyle = ParagraphStyle(
-                        textAlign = TextAlign.Justify,
-                        textIndent = TextIndent(firstLine = 30.sp)
-                    )
-                )
-
-                Divider(color = Color.Gray)
-
-                CustomStyledText("The line height of this text has been increased " +
-                        "hence you will be able to see more space between each line in this " +
-                        "paragraph.",
-                    paragraphStyle = ParagraphStyle(
-                        textAlign = TextAlign.Justify,
-                        lineHeight = 20.sp
-                    )
-                )
             }
         }
     }
@@ -170,6 +159,8 @@ fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: In
     // in your app.
     Text(text = displayText, style = style, maxLines = maxLines, overflow = TextOverflow.Ellipsis,
         paragraphStyle = paragraphStyle)
+
+    Divider(color = Color.Gray)
 }
 
 // Android Studio lets you preview your composable functions within the IDE itself, instead of
