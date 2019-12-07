@@ -44,6 +44,9 @@ dependencies {
     implementation deps.support.appCompat
     implementation deps.support.ktx
 
+    // CardView
+    implementation deps.cardView
+
     // Constraint Layout
     implementation deps.constraintLayout
 
