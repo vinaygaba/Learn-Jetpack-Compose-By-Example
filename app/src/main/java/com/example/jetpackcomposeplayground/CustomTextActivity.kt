@@ -3,16 +3,14 @@ package com.example.jetpackcomposeplayground
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.Text
-import androidx.ui.core.px
-import androidx.ui.core.setContent
-import androidx.ui.core.sp
+import androidx.ui.core.*
 import androidx.ui.engine.geometry.Offset
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Shadow
 import androidx.ui.layout.Column
 import androidx.ui.layout.FlexRow
+import androidx.ui.layout.Spacing
 import androidx.ui.material.Divider
 import androidx.ui.material.MaterialTheme
 import androidx.ui.text.ParagraphStyle
@@ -81,8 +79,8 @@ class CustomTextActivity : AppCompatActivity() {
                             )
                         )
 
-                        CustomStyledText("This text will add an ellipsis to the end of the " +
-                                "text if the text is longer that 1 line long.",
+                        CustomStyledText("This text will add an ellipsis to the end " +
+                                "of the text if the text is longer that 1 line long.",
                             maxLines = 1
                         )
 
@@ -99,34 +97,35 @@ class CustomTextActivity : AppCompatActivity() {
                                 Text(text = "This text is center aligned",
                                     paragraphStyle = ParagraphStyle(
                                         textAlign = TextAlign.Center
-                                    )
+                                    ),
+                                    modifier = Spacing(16.dp)
                                 )
                             }
                         }
 
                         Divider(color = Color.Gray)
 
-                        CustomStyledText("This text will demonstrate how to justify your " +
-                                "paragraph to ensure that the text that ends with a soft line break " +
-                                "spreads and takes the entire width of the container",
+                        CustomStyledText("This text will demonstrate how to justify " +
+                                "your paragraph to ensure that the text that ends with a soft " +
+                                "line break spreads and takes the entire width of the container",
                             paragraphStyle = ParagraphStyle(
                                 textAlign = TextAlign.Justify
                             )
                         )
 
-                        CustomStyledText("This text will demonstrate how to add indentation " +
-                                "to your text. In this example, indentation was only added to the first " +
-                                "line. You also have the option to add indentation to the rest of the " +
-                                "lines if you'd like",
+                        CustomStyledText("This text will demonstrate how to add " +
+                                "indentation to your text. In this example, indentation was only " +
+                                "added to the first line. You also have the option to add " +
+                                "indentation to the rest of the lines if you'd like",
                             paragraphStyle = ParagraphStyle(
                                 textAlign = TextAlign.Justify,
                                 textIndent = TextIndent(firstLine = 30.sp)
                             )
                         )
 
-                        CustomStyledText("The line height of this text has been increased " +
-                                "hence you will be able to see more space between each line in this " +
-                                "paragraph.",
+                        CustomStyledText("The line height of this text has been " +
+                                "increased hence you will be able to see more space between each " +
+                                "line in this paragraph.",
                             paragraphStyle = ParagraphStyle(
                                 textAlign = TextAlign.Justify,
                                 lineHeight = 20.sp
@@ -149,7 +148,7 @@ fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: In
     // pre-defined by the Compose UI library; you call that function to declare a text element
     // in your app.
     Text(text = displayText, style = style, maxLines = maxLines, overflow = TextOverflow.Ellipsis,
-        paragraphStyle = paragraphStyle)
+        paragraphStyle = paragraphStyle, modifier = Spacing(16.dp))
 
     Divider(color = Color.Gray)
 }
