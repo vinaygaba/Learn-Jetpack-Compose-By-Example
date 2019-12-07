@@ -17,6 +17,7 @@ buildscript {
     ext.deps = [
             'cardView': "androidx.cardview:cardview:${versions.cardView}",
             'compose': [
+                    'core': "androidx.ui:ui-core:${versions.compose}",
                     'foundation': "androidx.ui:ui-foundation:${versions.compose}",
                     'framework': "androidx.ui:ui-framework:${versions.compose}",
                     'tooling': "androidx.ui:ui-tooling:${versions.compose}",
