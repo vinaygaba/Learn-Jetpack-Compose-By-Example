@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Jetpack Compose Playground</string>
     <string name="title_activity_compose">My Compose App</string>
+    <string name="simple_text_example">Display Text</string>
 </resources>
