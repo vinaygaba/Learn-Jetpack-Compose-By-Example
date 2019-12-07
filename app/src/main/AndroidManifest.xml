@@ -18,9 +18,14 @@
         </activity>
         <activity
             android:name=".SimpleTextActivity"
+            android:exported="true"
             android:label="@string/title_activity_compose"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CustomTextActivity"
+            android:exported="true"
+            android:label="@string/title_activity_custom_text"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

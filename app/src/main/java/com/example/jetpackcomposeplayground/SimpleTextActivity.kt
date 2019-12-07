@@ -15,9 +15,9 @@ class SimpleTextActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Here, Message is a Composable function which is going to describe the contents of
+            // Here, SimpleText is a Composable function which is going to describe the contents of
             // this activity that will be rendered on the screen.
-            Message("This is the Jetpack Compose Playground")
+            SimpleText("This is the Jetpack Compose Playground")
         }
     }
 }
@@ -25,7 +25,7 @@ class SimpleTextActivity : AppCompatActivity() {
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
 // functions can only be called from within the scope of other composable functions.
 @Composable
-fun Message(displayText: String) {
+fun SimpleText(displayText: String) {
     // We should think of composable functions to be similar to lego blocks - each composable
     // function is in turn built up of smaller composable functions. Here, the Text() function is
     // pre-defined by the Compose UI library; you call that function to declare a text element
@@ -43,6 +43,6 @@ fun Message(displayText: String) {
 // params. Also, don't forget to annotate it with @Preview & @Composable annotations.
 @Preview
 @Composable
-fun DefaultPreview() {
-    Message("This is the Jetpack Compose Playground")
+fun SimpleTextPreview() {
+    SimpleText("This is the Jetpack Compose Playground")
 }

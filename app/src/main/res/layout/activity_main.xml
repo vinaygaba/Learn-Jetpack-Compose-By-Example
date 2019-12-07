@@ -9,7 +9,7 @@
     tools:context=".MainActivity"
     >
     <androidx.cardview.widget.CardView
-        android:id="@+id/simpleTextExample"
+        android:id="@+id/simple_text_example"
         android:layout_width="match_parent"
         android:layout_height="@dimen/cardview_height"
         app:cardBackgroundColor="@color/colorPrimary"
@@ -17,11 +17,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/simple_text_example"
+            android:text="@string/tv_simple_text_example"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:fontFamily="monospace"
             android:onClick="startSimpleTextExample"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/custom_text_example"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cardview_height"
+        app:cardBackgroundColor="@color/colorPrimary"
+        android:padding="@dimen/default_padding">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_custom_text_example"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:fontFamily="monospace"
+            android:onClick="startCustomTextExample"/>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

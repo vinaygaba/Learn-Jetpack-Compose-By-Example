@@ -15,4 +15,8 @@ class MainActivity : AppCompatActivity() {
     fun startSimpleTextExample(view: View) {
         startActivity(Intent(this, SimpleTextActivity::class.java))
     }
+
+    fun startCustomTextExample(view: View) {
+        startActivity(Intent(this, CustomTextActivity::class.java))
+    }
 }
