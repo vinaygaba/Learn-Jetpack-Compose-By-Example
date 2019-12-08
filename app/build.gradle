@@ -58,6 +58,10 @@ dependencies {
     implementation deps.compose.layout
     implementation deps.compose.material
 
+    implementation 'androidx.ui:ui-framework:0.1.0-dev03'
+    implementation 'androidx.ui:ui-layout:0.1.0-dev03'
+    implementation 'androidx.ui:ui-material:0.1.0-dev03'
+    implementation 'androidx.ui:ui-tooling:0.1.0-dev03'
     testImplementation deps.test.junit
     androidTestImplementation deps.test.junitImplementation
 }

@@ -25,6 +25,16 @@
             android:name=".CustomTextActivity"
             android:exported="true"
             android:label="@string/title_activity_custom_text"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VerticalScrollableActivity"
+            android:exported="true"
+            android:label="@string/title_activity_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HorizontalScrollableActivity"
+            android:exported="true"
+            android:label="@string/title_activity_horizontal_scrollable"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

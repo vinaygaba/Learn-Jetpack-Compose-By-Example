@@ -19,4 +19,12 @@ class MainActivity : AppCompatActivity() {
     fun startCustomTextExample(view: View) {
         startActivity(Intent(this, CustomTextActivity::class.java))
     }
+
+    fun startVerticalScrollableExample(view: View) {
+        startActivity(Intent(this, VerticalScrollableActivity::class.java))
+    }
+
+    fun startHorizontalScrollableExample(view: View) {
+        startActivity(Intent(this, HorizontalScrollableActivity::class.java))
+    }
 }

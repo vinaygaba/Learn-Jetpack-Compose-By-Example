@@ -2,6 +2,11 @@
     <string name="app_name">Jetpack Compose Playground</string>
     <string name="title_activity_compose">Simple Text Example</string>
     <string name="title_activity_custom_text">Custom Text Example</string>
+    <string name="title_activity_list">Vertical Scrollable Example</string>
+    <string name="title_activity_horizontal_scrollable">Horizontal Carousel Example</string>
+
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
+    <string name="tv_vertical_scrollable_example">Vertical Scrollable List</string>
+    <string name="tv_horizontal_scrollable_example">Horizontal Carousel</string>
 </resources>
