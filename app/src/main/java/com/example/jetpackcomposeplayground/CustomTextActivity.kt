@@ -12,6 +12,7 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.FlexRow
 import androidx.ui.layout.Spacing
 import androidx.ui.material.Divider
+import androidx.ui.text.AnnotatedString
 import androidx.ui.text.ParagraphStyle
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -31,6 +32,8 @@ class CustomTextActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
+            // Vertical scroller is a composable that adds the ability to scroll through the
+            // child views
             VerticalScroller {
                 Column {
                     CustomStyledText("This is the default text style")
@@ -129,6 +132,14 @@ class CustomTextActivity : AppCompatActivity() {
                             lineHeight = 20.sp
                         )
                     )
+
+                    val annotatedString = AnnotatedString {
+                        append("This string has style spans")
+                        addStyle(style = TextStyle(color = Color.Red), start = 0, end = 4)
+                        addStyle(style = TextStyle(color = Color.Green), start = 5, end = 21)
+                        addStyle(style = TextStyle(color = Color.Blue), start = 22, end = 27)
+                    }
+                    Text(annotatedString, modifier = Spacing(16.dp))
                 }
             }
         }
