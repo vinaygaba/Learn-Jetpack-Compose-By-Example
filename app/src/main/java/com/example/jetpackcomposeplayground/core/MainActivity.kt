@@ -1,9 +1,14 @@
-package com.example.jetpackcomposeplayground
+package com.example.jetpackcomposeplayground.core
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcomposeplayground.R
+import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
+import com.example.jetpackcomposeplayground.scrollers.VerticalScrollableActivity
+import com.example.jetpackcomposeplayground.text.CustomTextActivity
+import com.example.jetpackcomposeplayground.text.SimpleTextActivity
 
 class MainActivity : AppCompatActivity() {
 

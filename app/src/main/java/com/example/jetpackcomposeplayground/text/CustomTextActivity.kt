@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeplayground
+package com.example.jetpackcomposeplayground.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -36,58 +36,70 @@ class CustomTextActivity : AppCompatActivity() {
             // child views
             VerticalScroller {
                 Column {
-                    CustomStyledText("This is the default text style")
+                    CustomStyledText(
+                        "This is the default text style"
+                    )
 
-                    CustomStyledText("This text is blue in color",
+                    CustomStyledText(
+                        "This text is blue in color",
                         style = TextStyle(
                             color = Color.Blue
                         )
                     )
 
-                    CustomStyledText("This text has a bigger font size",
+                    CustomStyledText(
+                        "This text has a bigger font size",
                         style = TextStyle(
                             fontSize = 30.sp
                         )
                     )
 
-                    CustomStyledText("This text is bold",
+                    CustomStyledText(
+                        "This text is bold",
                         style = TextStyle(
                             fontWeight = FontWeight.W700
                         )
                     )
 
-                    CustomStyledText("This text is italic",
+                    CustomStyledText(
+                        "This text is italic",
                         style = TextStyle(
                             fontStyle = FontStyle.Italic
                         )
                     )
 
-                    CustomStyledText("This text is using a custom font family",
+                    CustomStyledText(
+                        "This text is using a custom font family",
                         style = TextStyle(
                             fontFamily = FontFamily.Cursive
                         )
                     )
 
-                    CustomStyledText("This text has an underline",
+                    CustomStyledText(
+                        "This text has an underline",
                         style = TextStyle(
                             decoration = TextDecoration.Underline
                         )
                     )
 
-                    CustomStyledText("This text has a strikethrough line",
+                    CustomStyledText(
+                        "This text has a strikethrough line",
                         style = TextStyle(
                             decoration = TextDecoration.LineThrough
                         )
                     )
 
-                    CustomStyledText("This text will add an ellipsis to the end " +
-                            "of the text if the text is longer that 1 line long.",
+                    CustomStyledText(
+                        "This text will add an ellipsis to the end " +
+                                "of the text if the text is longer that 1 line long.",
                         maxLines = 1
                     )
 
-                    CustomStyledText("This text has a shadow",
+                    CustomStyledText(
+                        "This text has a shadow",
                         style = TextStyle(
-                            shadow = Shadow(color = Color.Black, blurRadius = 10.px,
+                            shadow = Shadow(
+                                color = Color.Black, blurRadius = 10.px,
                                 offset = Offset(2f, 2f)
                             )
                         )
@@ -106,27 +118,30 @@ class CustomTextActivity : AppCompatActivity() {
 
                     Divider(color = Color.Gray)
 
-                    CustomStyledText("This text will demonstrate how to justify " +
-                            "your paragraph to ensure that the text that ends with a soft " +
-                            "line break spreads and takes the entire width of the container",
+                    CustomStyledText(
+                        "This text will demonstrate how to justify " +
+                                "your paragraph to ensure that the text that ends with a soft " +
+                                "line break spreads and takes the entire width of the container",
                         paragraphStyle = ParagraphStyle(
                             textAlign = TextAlign.Justify
                         )
                     )
 
-                    CustomStyledText("This text will demonstrate how to add " +
-                            "indentation to your text. In this example, indentation was only " +
-                            "added to the first line. You also have the option to add " +
-                            "indentation to the rest of the lines if you'd like",
+                    CustomStyledText(
+                        "This text will demonstrate how to add " +
+                                "indentation to your text. In this example, indentation was only " +
+                                "added to the first line. You also have the option to add " +
+                                "indentation to the rest of the lines if you'd like",
                         paragraphStyle = ParagraphStyle(
                             textAlign = TextAlign.Justify,
                             textIndent = TextIndent(firstLine = 30.sp)
                         )
                     )
 
-                    CustomStyledText("The line height of this text has been " +
-                            "increased hence you will be able to see more space between each " +
-                            "line in this paragraph.",
+                    CustomStyledText(
+                        "The line height of this text has been " +
+                                "increased hence you will be able to see more space between each " +
+                                "line in this paragraph.",
                         paragraphStyle = ParagraphStyle(
                             textAlign = TextAlign.Justify,
                             lineHeight = 20.sp
@@ -171,7 +186,8 @@ fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: In
 @Preview
 @Composable
 fun CustomStyledTextPreview() {
-    CustomStyledText("This is preview text",
+    CustomStyledText(
+        "This is preview text",
         maxLines = 2,
         style = TextStyle(
             color = Color.Red,

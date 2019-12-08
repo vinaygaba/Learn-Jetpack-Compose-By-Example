@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeplayground
+package com.example.jetpackcomposeplayground.core
 
 fun getPersonList() = listOf<Person>(
     Person("Grace Hopper", 25),

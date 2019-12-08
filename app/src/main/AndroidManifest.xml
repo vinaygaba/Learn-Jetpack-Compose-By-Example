@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".core.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,22 +17,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SimpleTextActivity"
+            android:name=".text.SimpleTextActivity"
             android:exported="true"
             android:label="@string/title_activity_compose"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CustomTextActivity"
+            android:name=".text.CustomTextActivity"
             android:exported="true"
             android:label="@string/title_activity_custom_text"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".VerticalScrollableActivity"
+            android:name=".scrollers.VerticalScrollableActivity"
             android:exported="true"
             android:label="@string/title_activity_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HorizontalScrollableActivity"
+            android:name=".scrollers.HorizontalScrollableActivity"
             android:exported="true"
             android:label="@string/title_activity_horizontal_scrollable"
             android:theme="@style/AppTheme.NoActionBar"/>

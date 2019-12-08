@@ -1,23 +1,13 @@
-package com.example.jetpackcomposeplayground
+package com.example.jetpackcomposeplayground.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Text
-import androidx.ui.core.dp
 import androidx.ui.core.setContent
-import androidx.ui.core.sp
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.FlexRow
-import androidx.ui.layout.Spacing
-import androidx.ui.material.surface.Card
-import androidx.ui.text.TextStyle
 import androidx.ui.tooling.preview.Preview
 
-class VerticalScrollableActivity : AppCompatActivity() {
+class SimpleTextActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -25,7 +15,9 @@ class VerticalScrollableActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            VerticalScrollableComponent(getPersonList())
+            // Here, SimpleText is a Composable function which is going to describe the contents of
+            // this activity that will be rendered on the screen.
+            SimpleText("This is the Jetpack Compose Playground")
         }
     }
 }
@@ -33,28 +25,14 @@ class VerticalScrollableActivity : AppCompatActivity() {
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
 // functions can only be called from within the scope of other composable functions.
 @Composable
-fun VerticalScrollableComponent(personList: List<Person>) {
-    // Vertical scroller is a composable that adds the ability to scroll through the
-    // child composables that are declared inside it. One caveat here is that this is not optimized
-    // to recycle the views. It is more similar to [ScrollView] and should not be thought of as a
-    // replacement for [RecyclerView]
-    VerticalScroller {
-        Column {
-            for(person in personList) {
-                FlexRow(modifier = Spacing(16.dp)) {
-                   expanded(1f) {
-                       Card(shape = RoundedCornerShape(4.dp), color = Color.Black) {
-                           Text(person.name, style = TextStyle(
-                               color = Color.White,
-                               fontSize = 20.sp
-                           ), modifier = Spacing(16.dp))
-                       }
-                   }
-                }
-            }
-        }
-    }
+fun SimpleText(displayText: String) {
+    // We should think of composable functions to be similar to lego blocks - each composable
+    // function is in turn built up of smaller composable functions. Here, the Text() function is
+    // pre-defined by the Compose UI library; you call that function to declare a text element
+    // in your app.
+    Text(text = displayText)
 }
+
 
 // Android Studio lets you preview your composable functions within the IDE itself, instead of
 // needing to download the app to an Android device or emulator. This is a fantastic feature as you
@@ -65,6 +43,6 @@ fun VerticalScrollableComponent(personList: List<Person>) {
 // params. Also, don't forget to annotate it with @Preview & @Composable annotations.
 @Preview
 @Composable
-fun VerticalScrollableComponentPreview() {
-    VerticalScrollableComponent(getPersonList())
+fun SimpleTextPreview() {
+    SimpleText("This is the Jetpack Compose Playground")
 }

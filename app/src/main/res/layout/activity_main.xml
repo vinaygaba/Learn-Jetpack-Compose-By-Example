@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/default_padding"
-    tools:context=".MainActivity"
+    tools:context=".core.MainActivity"
     >
     <androidx.cardview.widget.CardView
         android:id="@+id/simple_text_example"
