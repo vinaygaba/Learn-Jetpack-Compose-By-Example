@@ -3,7 +3,6 @@ package com.example.jetpackcomposeplayground.image
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
@@ -42,8 +41,10 @@ fun DisplayImagesComponent() {
     TitleComponent("Load image from the resource folder")
     LocalResourceImageComponent(R.drawable.lenna)
 
-    TitleComponent("Load image from url")
-    NetworkImageComponent(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+    TitleComponent("Load image from url using Picasso")
+    NetworkImageComponentPicasso(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+
+    // Look at NetworkImageComponentGlide below for an example with Glide.
 }
 
 @Composable
@@ -59,7 +60,7 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
 }
 
 @Composable
-fun NetworkImageComponent(url: String) {
+fun NetworkImageComponentPicasso(url: String) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
     var image by +state<Image?> { null }
@@ -73,12 +74,10 @@ fun NetworkImageComponent(url: String) {
             }
 
             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-                Log.e("Bitmap failed", "Failed $e")
                 drawable = errorDrawable
             }
 
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                Log.e("Bitmap loaded", "successfully")
                 image = bitmap?.let { AndroidImage(it) }
             }
         }
@@ -103,6 +102,52 @@ fun NetworkImageComponent(url: String) {
         }
     }
 }
+
+/**
+ * There is an ongoing issue with kapt and compose since it uses the IR backend. This causes the
+ * app to not even compile - https://issuetracker.google.com/issues/143232368. For that reason,
+ * I am commenting this for now and removing the dependency on glide, but once that issue is
+ * resolved, the below code should ideally work with Glide.
+ */
+//@Composable
+//fun NetworkImageComponentGlide(url: String) {
+//    var image by +state<Image?> { null }
+//    var drawable by +state<Drawable?> { null }
+//    +onCommit(url) {
+//        val context = +ambient(ContextAmbient)
+//        val glide = Glide.with(context)
+//        val target = object : CustomTarget<Bitmap>() {
+//            override fun onLoadCleared(placeholder: Drawable?) {
+//                image = null
+//                drawable = placeholder
+//            }
+//
+//            override fun onResourceReady(bitmap: Bitmap, transition: Transition<in Bitmap>?) {
+//                image = AndroidImage(bitmap)
+//            }
+//        }
+//        glide
+//            .asBitmap()
+//            .load(url)
+//            .into(target)
+//
+//        onDispose {
+//            image = null
+//            drawable = null
+//            glide.clear(target)
+//        }
+//    }
+//
+//    Container(modifier = Height(200.dp) wraps ExpandedWidth) {
+//        val theImage = image
+//        val theDrawable = drawable
+//        if (theImage != null) {
+//            DrawImage(image = theImage)
+//        } else if (theDrawable != null) {
+//            Draw { canvas, parentSize -> theDrawable.draw(canvas.nativeCanvas) }
+//        }
+//    }
+//}
 
 @Composable
 fun TitleComponent(title: String) {

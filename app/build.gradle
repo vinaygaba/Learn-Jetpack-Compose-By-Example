@@ -59,7 +59,7 @@ dependencies {
     implementation deps.compose.material
 
     // Image loading
-    implementation deps.picasso
+    implementation deps.imageLoading.picasso
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.junitImplementation
