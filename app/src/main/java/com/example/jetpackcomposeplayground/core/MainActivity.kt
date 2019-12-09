@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jetpackcomposeplayground.R
+import com.example.jetpackcomposeplayground.image.ImageActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcomposeplayground.scrollers.VerticalScrollableActivity
 import com.example.jetpackcomposeplayground.text.CustomTextActivity
@@ -31,5 +32,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startHorizontalScrollableExample(view: View) {
         startActivity(Intent(this, HorizontalScrollableActivity::class.java))
+    }
+
+    fun starLoadImageExample(view: View) {
+        startActivity(Intent(this, ImageActivity::class.java))
     }
 }

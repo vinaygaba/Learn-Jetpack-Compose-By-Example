@@ -35,7 +35,13 @@
             android:name=".scrollers.HorizontalScrollableActivity"
             android:exported="true"
             android:label="@string/title_activity_horizontal_scrollable"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".image.ImageActivity"
+            android:exported="true"
+            android:label="@string/title_activity_image"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
