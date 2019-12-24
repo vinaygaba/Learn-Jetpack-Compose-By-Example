@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jetpackcomposeplayground.R
 import com.example.jetpackcomposeplayground.image.ImageActivity
+import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcomposeplayground.scrollers.VerticalScrollableActivity
 import com.example.jetpackcomposeplayground.text.CustomTextActivity
@@ -36,5 +37,9 @@ class MainActivity : AppCompatActivity() {
 
     fun starLoadImageExample(view: View) {
         startActivity(Intent(this, ImageActivity::class.java))
+    }
+
+    fun startGridExample(view: View) {
+        startActivity(Intent(this, GridLayoutActivity::class.java))
     }
 }
