@@ -12,8 +12,10 @@ import androidx.compose.unaryPlus
 import androidx.ui.core.*
 import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Image
 import androidx.ui.layout.*
+import androidx.ui.material.surface.Card
 import androidx.ui.res.loadImageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -44,6 +46,9 @@ fun DisplayImagesComponent() {
     TitleComponent("Load image from url using Picasso")
     NetworkImageComponentPicasso(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
 
+    TitleComponent("Image with rounded corners")
+    ImageWithRoundedCorners(R.drawable.lenna)
+
     // Look at NetworkImageComponentGlide below for an example with Glide.
 }
 
@@ -54,6 +59,18 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     val image = +loadImageResource(resId)
     image.resource.resource?.let {
         Container(modifier = Height(200.dp) wraps ExpandedWidth) {
+            DrawImage(image = it)
+        }
+    }
+}
+
+@Composable
+fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
+    // There are multiple methods available to load an image resource in Compose. However, it would
+    // be advisable to use the loadImageResource method as it loads the image asynchronously
+    val image = +loadImageResource(resId)
+    image.resource.resource?.let {
+        Card(shape = RoundedCornerShape(8.dp), modifier = Height(200.dp) wraps ExpandedWidth) {
             DrawImage(image = it)
         }
     }
