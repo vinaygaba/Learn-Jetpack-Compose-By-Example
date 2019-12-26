@@ -12,6 +12,7 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.FlexRow
 import androidx.ui.layout.Spacing
 import androidx.ui.material.Divider
+import androidx.ui.material.surface.Surface
 import androidx.ui.text.AnnotatedString
 import androidx.ui.text.ParagraphStyle
 import androidx.ui.text.TextStyle
@@ -155,6 +156,11 @@ class CustomTextActivity : AppCompatActivity() {
                         addStyle(style = TextStyle(color = Color.Blue), start = 22, end = 27)
                     }
                     Text(annotatedString, modifier = Spacing(16.dp))
+                    Divider(color = Color.Gray)
+
+                    Surface(color = Color.Yellow) {
+                        Text(text = "This text has a background color", modifier = Spacing(16.dp))
+                    }
                 }
             }
         }
