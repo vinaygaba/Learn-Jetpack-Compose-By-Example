@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcomposeplayground.ClickableActivity
 import com.example.jetpackcomposeplayground.R
 import com.example.jetpackcomposeplayground.image.ImageActivity
 import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
@@ -41,5 +42,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startGridExample(view: View) {
         startActivity(Intent(this, GridLayoutActivity::class.java))
+    }
+
+    fun startClickableExample(view: View) {
+        startActivity(Intent(this, ClickableActivity::class.java))
     }
 }

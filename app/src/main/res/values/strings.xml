@@ -6,6 +6,7 @@
     <string name="title_activity_horizontal_scrollable">Horizontal Carousel Example</string>
     <string name="title_activity_grid_layout">Grid Example</string>
     <string name="title_activity_image">Load Image Example</string>
+    <string name="title_activity_clickable">Clickable Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -13,4 +14,5 @@
     <string name="tv_horizontal_scrollable_example">Horizontal Carousel</string>
     <string name="tv_load_image_example">Loading Images</string>
     <string name="tv_grid_example">Grid Layout</string>
+    <string name="tv_clickable_component_example">Clickable Component</string>
 </resources>
