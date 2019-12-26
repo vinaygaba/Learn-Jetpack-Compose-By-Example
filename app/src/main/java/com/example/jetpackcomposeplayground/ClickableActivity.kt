@@ -34,18 +34,25 @@ fun ClickableText() {
     Clickable(onClick = { showPopup = true }) {
         Text("Click to see Popup")
     }
+    val onPopupDismissed = { showPopup = false }
+
     if (showPopup) {
-        Popup(
-            alignment = Alignment.Center,
-            popupProperties = PopupProperties(
-                // This ensures that the popup is dismissed when you tap outside the boundaries of
-                // the popup
-                isFocusable = true,
-                // We reset the showPopup value when the popup is dismissed
-                onDismissRequest = { showPopup = false }
-            )
-        ) {
-            Text("Congratulations! You just clicked the text successfully")
-        }
+        PopupComponent(onPopupDismissed)
+    }
+}
+
+@Composable
+fun PopupComponent(onPopupDismissed: () -> Unit) {
+    Popup(
+        alignment = Alignment.Center,
+        popupProperties = PopupProperties(
+            // This ensures that the popup is dismissed when you tap outside the boundaries of
+            // the popup
+            isFocusable = true,
+            // We reset the showPopup value when the popup is dismissed
+            onDismissRequest = onPopupDismissed
+        )
+    ) {
+        Text("Congratulations! You just clicked the text successfully")
     }
 }
