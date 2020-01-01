@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jetpackcomposeplayground.ClickableActivity
+import com.example.jetpackcomposeplayground.DrawerAppActivity
 import com.example.jetpackcomposeplayground.R
 import com.example.jetpackcomposeplayground.image.ImageActivity
 import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
@@ -46,5 +47,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startClickableExample(view: View) {
         startActivity(Intent(this, ClickableActivity::class.java))
+    }
+
+    fun startDrawerExample(view: View) {
+        startActivity(Intent(this, DrawerAppActivity::class.java))
     }
 }
