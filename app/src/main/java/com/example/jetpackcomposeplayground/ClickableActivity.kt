@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.state
 import androidx.compose.unaryPlus
-import androidx.ui.core.*
+import androidx.ui.core.Text
+import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
+import androidx.ui.material.AlertDialog
 
 class ClickableActivity: AppCompatActivity() {
 
@@ -37,22 +39,15 @@ fun ClickableText() {
     val onPopupDismissed = { showPopup = false }
 
     if (showPopup) {
-        PopupComponent(onPopupDismissed)
-    }
-}
-
-@Composable
-fun PopupComponent(onPopupDismissed: () -> Unit) {
-    Popup(
-        alignment = Alignment.Center,
-        popupProperties = PopupProperties(
-            // This ensures that the popup is dismissed when you tap outside the boundaries of
-            // the popup
-            isFocusable = true,
-            // We reset the showPopup value when the popup is dismissed
-            onDismissRequest = onPopupDismissed
-        )
-    ) {
-        Text("Congratulations! You just clicked the text successfully")
+        AlertDialog(
+            onCloseRequest = onPopupDismissed,
+            text = {
+                Text("Congratulations! You just clicked the text successfully")
+            },
+            confirmButton = {
+                Clickable(onClick = onPopupDismissed) {
+                    Text("Ok")
+                }
+            })
     }
 }
