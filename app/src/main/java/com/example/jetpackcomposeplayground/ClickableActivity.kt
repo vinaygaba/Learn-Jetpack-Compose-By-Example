@@ -9,6 +9,7 @@ import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
 import androidx.ui.material.AlertDialog
+import androidx.ui.material.Button
 
 class ClickableActivity: AppCompatActivity() {
 
@@ -45,9 +46,10 @@ fun ClickableText() {
                 Text("Congratulations! You just clicked the text successfully")
             },
             confirmButton = {
-                Clickable(onClick = onPopupDismissed) {
-                    Text("Ok")
-                }
+                Button(
+                    text = "OK",
+                    onClick = onPopupDismissed
+                )
             })
     }
 }
