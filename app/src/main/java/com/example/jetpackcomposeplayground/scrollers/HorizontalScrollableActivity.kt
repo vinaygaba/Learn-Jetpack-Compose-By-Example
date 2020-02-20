@@ -3,19 +3,19 @@ package com.example.jetpackcomposeplayground.scrollers
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.compose.ambient
-import androidx.compose.unaryPlus
 import androidx.ui.core.*
 import androidx.ui.foundation.HorizontalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
+import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.Row
-import androidx.ui.layout.Spacing
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.tooling.preview.Preview
+import androidx.ui.unit.dp
+import androidx.ui.unit.sp
 import com.example.jetpackcomposeplayground.core.Person
 import com.example.jetpackcomposeplayground.core.getPersonList
 import com.example.jetpackcomposeplayground.image.TitleComponent
@@ -52,9 +52,10 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
         Row() {
             for(person in personList) {
                 Card(shape = RoundedCornerShape(4.dp), color = Color.Black,
-                    modifier = Spacing(16.dp)) {
+                    modifier = LayoutPadding(16.dp)
+                ) {
                     Text(person.name,
-                        modifier = Spacing(16.dp),
+                        modifier = LayoutPadding(16.dp),
                         style = TextStyle(
                             color = Color.White,
                             fontSize = 20.sp
@@ -70,18 +71,18 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
 @Composable
 fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
     HorizontalScroller {
-        val context = +ambient(ContextAmbient)
+        val context = ContextAmbient.current
         val resources = context.resources
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels / displayMetrics.density
         val spacing = 16.dp
-        Row() {
+        Row {
             for(person in personList) {
                 Card(shape = RoundedCornerShape(4.dp), color = Color.Black,
-                    modifier = Spacing(spacing)) {
+                    modifier = LayoutPadding(16.dp)) {
                     Container(width = screenWidth.dp - (spacing * 2)) {
                         Text(person.name,
-                            modifier = Spacing(spacing),
+                            modifier = LayoutPadding(16.dp),
                             style = TextStyle(
                                 color = Color.White,
                                 fontSize = 20.sp

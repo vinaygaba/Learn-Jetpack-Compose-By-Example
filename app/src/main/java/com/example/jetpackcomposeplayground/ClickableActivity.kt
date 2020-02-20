@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.state
-import androidx.compose.unaryPlus
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
@@ -29,13 +28,13 @@ class ClickableActivity: AppCompatActivity() {
 
 @Composable
 fun ClickableText() {
-    var showPopup by +state { false }
+    var showPopup by state { false }
     // Clickable wraps the child composable and enables it to react to a click through the onClick
     // callback similar to the onClick listener that we are accustomed to on Android.
     // Here, we just change the value of showPopup to be true every time we click on the text that
     // says "Click to see Popup"
     Clickable(onClick = { showPopup = true }) {
-        Text("Click to see Popup")
+        Text("Click to see Dialog")
     }
     val onPopupDismissed = { showPopup = false }
 
@@ -47,9 +46,10 @@ fun ClickableText() {
             },
             confirmButton = {
                 Button(
-                    text = "OK",
                     onClick = onPopupDismissed
-                )
+                ) {
+                    Text(text = "Ok")
+                }
             })
     }
 }

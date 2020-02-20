@@ -1,15 +1,15 @@
 package com.example.jetpackcomposeplayground.core
 
+import android.text.style.LineHeightSpan
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
-import androidx.compose.unaryPlus
 import androidx.ui.core.Modifier
-import androidx.ui.core.WithDensity
+import androidx.ui.core.WithConstraints
 import androidx.ui.foundation.Clickable
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.vector.DrawVector
 import androidx.ui.layout.Container
-import androidx.ui.layout.Size
+import androidx.ui.layout.LayoutSize
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.res.vectorResource
 
@@ -40,12 +40,10 @@ fun VectorImageButton(@DrawableRes id: Int, onClick: () -> Unit) {
 
 @Composable
 fun VectorImage(modifier: Modifier = Modifier.None, @DrawableRes id: Int, tint: Color = Color.Transparent) {
-    val vector = +vectorResource(id)
-    WithDensity {
-        Container(
-            modifier = modifier wraps Size(vector.defaultWidth.toDp(), vector.defaultHeight.toDp())
-        ) {
-            DrawVector(vector, tint)
-        }
+    val vector = vectorResource(id)
+    Container(
+        modifier = modifier + LayoutSize(vector.defaultWidth, vector.defaultHeight)
+    ) {
+        DrawVector(vector, tint)
     }
 }

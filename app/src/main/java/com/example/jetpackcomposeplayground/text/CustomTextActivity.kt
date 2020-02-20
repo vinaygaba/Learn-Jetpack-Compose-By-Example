@@ -4,17 +4,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.*
-import androidx.ui.engine.geometry.Offset
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.geometry.Offset
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Shadow
 import androidx.ui.layout.Column
-import androidx.ui.layout.FlexRow
-import androidx.ui.layout.Spacing
+import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.LayoutWidth
+import androidx.ui.layout.Row
 import androidx.ui.material.Divider
 import androidx.ui.material.surface.Surface
 import androidx.ui.text.AnnotatedString
-import androidx.ui.text.ParagraphStyle
+import androidx.ui.text.SpanStyle
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontStyle
@@ -24,6 +25,9 @@ import androidx.ui.text.style.TextDecoration
 import androidx.ui.text.style.TextIndent
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
+import androidx.ui.unit.dp
+import androidx.ui.unit.px
+import androidx.ui.unit.sp
 
 class CustomTextActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,14 +83,14 @@ class CustomTextActivity : AppCompatActivity() {
                     CustomStyledText(
                         "This text has an underline",
                         style = TextStyle(
-                            decoration = TextDecoration.Underline
+                            textDecoration = TextDecoration.Underline
                         )
                     )
 
                     CustomStyledText(
                         "This text has a strikethrough line",
                         style = TextStyle(
-                            decoration = TextDecoration.LineThrough
+                            textDecoration = TextDecoration.LineThrough
                         )
                     )
 
@@ -106,15 +110,13 @@ class CustomTextActivity : AppCompatActivity() {
                         )
                     )
 
-                    FlexRow {
-                        expanded(1f) {
+                    Row(modifier = LayoutWidth.Fill) {
                             Text(text = "This text is center aligned",
-                                paragraphStyle = ParagraphStyle(
+                                style = TextStyle(
                                     textAlign = TextAlign.Center
                                 ),
-                                modifier = Spacing(16.dp)
+                                modifier = LayoutPadding(16.dp)
                             )
-                        }
                     }
 
                     Divider(color = Color.Gray)
@@ -123,7 +125,7 @@ class CustomTextActivity : AppCompatActivity() {
                         "This text will demonstrate how to justify " +
                                 "your paragraph to ensure that the text that ends with a soft " +
                                 "line break spreads and takes the entire width of the container",
-                        paragraphStyle = ParagraphStyle(
+                        style = TextStyle(
                             textAlign = TextAlign.Justify
                         )
                     )
@@ -133,7 +135,7 @@ class CustomTextActivity : AppCompatActivity() {
                                 "indentation to your text. In this example, indentation was only " +
                                 "added to the first line. You also have the option to add " +
                                 "indentation to the rest of the lines if you'd like",
-                        paragraphStyle = ParagraphStyle(
+                        style = TextStyle(
                             textAlign = TextAlign.Justify,
                             textIndent = TextIndent(firstLine = 30.sp)
                         )
@@ -143,7 +145,7 @@ class CustomTextActivity : AppCompatActivity() {
                         "The line height of this text has been " +
                                 "increased hence you will be able to see more space between each " +
                                 "line in this paragraph.",
-                        paragraphStyle = ParagraphStyle(
+                        style = TextStyle(
                             textAlign = TextAlign.Justify,
                             lineHeight = 20.sp
                         )
@@ -151,15 +153,15 @@ class CustomTextActivity : AppCompatActivity() {
 
                     val annotatedString = AnnotatedString {
                         append("This string has style spans")
-                        addStyle(style = TextStyle(color = Color.Red), start = 0, end = 4)
-                        addStyle(style = TextStyle(color = Color.Green), start = 5, end = 21)
-                        addStyle(style = TextStyle(color = Color.Blue), start = 22, end = 27)
+                        addStyle(style = SpanStyle(color = Color.Red), start = 0, end = 4)
+                        addStyle(style = SpanStyle(color = Color.Green), start = 5, end = 21)
+                        addStyle(style = SpanStyle(color = Color.Blue), start = 22, end = 27)
                     }
-                    Text(annotatedString, modifier = Spacing(16.dp))
+                    Text(annotatedString, modifier = LayoutPadding(16.dp))
                     Divider(color = Color.Gray)
 
                     Surface(color = Color.Yellow) {
-                        Text(text = "This text has a background color", modifier = Spacing(16.dp))
+                        Text(text = "This text has a background color", modifier = LayoutPadding(16.dp))
                     }
                 }
             }
@@ -170,15 +172,18 @@ class CustomTextActivity : AppCompatActivity() {
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
 // functions can only be called from within the scope of other composable functions.
 @Composable
-fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: Int? = null,
-                     paragraphStyle: ParagraphStyle? = null) {
+fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: Int? = null) {
     // We should think of composable functions to be similar to lego blocks - each composable
     // function is in turn built up of smaller composable functions. Here, the Text() function is
     // pre-defined by the Compose UI library; you call that function to declare a text element
     // in your app.
-    Text(text = displayText, style = style, maxLines = maxLines, overflow = TextOverflow.Ellipsis,
-        paragraphStyle = paragraphStyle, modifier = Spacing(16.dp))
-
+    Text(
+        text = displayText,
+        modifier = LayoutPadding(16.dp),
+        style = style,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = maxLines ?: Int.MAX_VALUE
+    )
     Divider(color = Color.Gray)
 }
 
@@ -200,9 +205,7 @@ fun CustomStyledTextPreview() {
             fontWeight = FontWeight.W900,
             fontStyle = FontStyle.Italic,
             fontFamily = FontFamily.Serif,
-            fontSize = 20.sp
-        ),
-        paragraphStyle = ParagraphStyle(
+            fontSize = 20.sp,
             textAlign = TextAlign.Justify
         )
     )

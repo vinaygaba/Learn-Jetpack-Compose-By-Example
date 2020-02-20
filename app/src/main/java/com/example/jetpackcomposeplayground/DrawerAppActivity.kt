@@ -3,20 +3,16 @@ package com.example.jetpackcomposeplayground
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.compose.State
+import androidx.compose.MutableState
 import androidx.compose.state
-import androidx.compose.unaryPlus
 import androidx.ui.core.Text
-import androidx.ui.core.dp
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
-import androidx.ui.layout.Center
-import androidx.ui.layout.Column
-import androidx.ui.layout.Expanded
-import androidx.ui.layout.Spacing
+import androidx.ui.layout.*
 import androidx.ui.material.DrawerState
 import androidx.ui.material.ModalDrawerLayout
 import androidx.ui.material.TopAppBar
+import androidx.ui.unit.dp
 import com.example.jetpackcomposeplayground.core.VectorImageButton
 
 class DrawerAppActivity: AppCompatActivity() {
@@ -31,8 +27,8 @@ class DrawerAppActivity: AppCompatActivity() {
 
 @Composable
 fun DrawerAppComponent() {
-    val (drawerState, onDrawerStateChange) = +state { DrawerState.Closed }
-    val currentScreen = +state { DrawerAppScreen.Screen1 }
+    val (drawerState, onDrawerStateChange) = state { DrawerState.Closed }
+    val currentScreen = state { DrawerAppScreen.Screen1 }
     ModalDrawerLayout(
         drawerState = drawerState,
         onStateChange = onDrawerStateChange,
@@ -56,29 +52,29 @@ fun DrawerAppComponent() {
 
 @Composable
 fun DrawerContentComponent(
-    currentScreen: State<DrawerAppScreen>,
+    currentScreen: MutableState<DrawerAppScreen>,
     closeDrawer: () -> Unit
 ) {
-    Column(modifier = Expanded) {
+    Column(modifier = LayoutHeight.Fill) {
         Clickable(onClick = {
             currentScreen.value = DrawerAppScreen.Screen1
             closeDrawer()
         }) {
-            Text(text = DrawerAppScreen.Screen1.name, modifier = Spacing(16.dp))
+            Text(text = DrawerAppScreen.Screen1.name, modifier = LayoutPadding(16.dp))
         }
 
         Clickable(onClick = {
             currentScreen.value = DrawerAppScreen.Screen2
             closeDrawer()
         }) {
-            Text(text = DrawerAppScreen.Screen2.name, modifier = Spacing(16.dp))
+            Text(text = DrawerAppScreen.Screen2.name, modifier = LayoutPadding(16.dp))
         }
 
         Clickable(onClick = {
             currentScreen.value = DrawerAppScreen.Screen3
             closeDrawer()
         }) {
-            Text(text = DrawerAppScreen.Screen3.name, modifier = Spacing(16.dp))
+            Text(text = DrawerAppScreen.Screen3.name, modifier = LayoutPadding(16.dp))
         }
     }
 }
@@ -97,7 +93,7 @@ fun BodyContentComponent(
 
 @Composable
 fun Screen1Component(openDrawer: () -> Unit) {
-    Column(modifier = Expanded) {
+    Column(modifier = LayoutSize.Fill) {
         TopAppBar(
             title = { Text("Screen 1 Title") },
             navigationIcon = {
@@ -112,7 +108,7 @@ fun Screen1Component(openDrawer: () -> Unit) {
 
 @Composable
 fun Screen2Component(openDrawer: () -> Unit) {
-    Column(modifier = Expanded) {
+    Column(modifier = LayoutSize.Fill) {
         TopAppBar(
             title = { Text("Screen 2 Title") },
             navigationIcon = {
@@ -127,7 +123,7 @@ fun Screen2Component(openDrawer: () -> Unit) {
 
 @Composable
 fun Screen3Component(openDrawer: () -> Unit) {
-    Column(modifier = Expanded) {
+    Column(modifier = LayoutSize.Fill) {
         TopAppBar(
             title = { Text("Screen 3 Title") },
             navigationIcon = {

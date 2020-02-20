@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.onCommit
 import androidx.compose.state
-import androidx.compose.unaryPlus
 import androidx.ui.core.*
 import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.VerticalScroller
@@ -21,6 +20,8 @@ import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
+import androidx.ui.unit.dp
+import androidx.ui.unit.sp
 import com.example.jetpackcomposeplayground.R
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
@@ -30,7 +31,7 @@ class ImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             VerticalScroller {
-                Column(modifier = ExpandedHeight wraps Spacing(16.dp)) {
+                Column(modifier = LayoutSize.Fill + LayoutPadding(16.dp)) {
                     DisplayImagesComponent()
                 }
             }
@@ -56,9 +57,9 @@ fun DisplayImagesComponent() {
 fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
     // be advisable to use the loadImageResource method as it loads the image asynchronously
-    val image = +loadImageResource(resId)
+    val image = loadImageResource(resId)
     image.resource.resource?.let {
-        Container(modifier = Height(200.dp) wraps ExpandedWidth) {
+        Container(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
             DrawImage(image = it)
         }
     }
@@ -68,9 +69,9 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
 fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
     // be advisable to use the loadImageResource method as it loads the image asynchronously
-    val image = +loadImageResource(resId)
+    val image = loadImageResource(resId)
     image.resource.resource?.let {
-        Card(shape = RoundedCornerShape(8.dp), modifier = Height(200.dp) wraps ExpandedWidth) {
+        Card(shape = RoundedCornerShape(8.dp), modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
             DrawImage(image = it)
         }
     }
@@ -80,9 +81,9 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 fun NetworkImageComponentPicasso(url: String) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
-    var image by +state<Image?> { null }
-    var drawable by +state<Drawable?> { null }
-    +onCommit(url) {
+    var image by state<Image?> { null }
+    var drawable by state<Drawable?> { null }
+    onCommit(url) {
         val picasso = Picasso.get()
         val target = object : Target {
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
@@ -109,7 +110,7 @@ fun NetworkImageComponentPicasso(url: String) {
         }
     }
 
-    Container(modifier = Height(200.dp) wraps ExpandedWidth) {
+    Container(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
         val theImage = image
         val theDrawable = drawable
         if (theImage != null) {
@@ -169,7 +170,7 @@ fun NetworkImageComponentPicasso(url: String) {
 @Composable
 fun TitleComponent(title: String) {
     Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
-        fontSize = 14.sp), modifier = Spacing(16.dp))
+        fontSize = 14.sp), modifier = LayoutPadding(16.dp))
 }
 
 @Preview

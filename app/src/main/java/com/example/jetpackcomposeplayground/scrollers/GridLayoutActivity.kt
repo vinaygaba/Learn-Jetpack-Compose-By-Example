@@ -4,16 +4,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Text
-import androidx.ui.core.dp
 import androidx.ui.core.setContent
-import androidx.ui.core.sp
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.Spacing
+import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Table
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
+import androidx.ui.text.style.TextAlign
 import androidx.ui.tooling.preview.Preview
+import androidx.ui.unit.dp
+import androidx.ui.unit.sp
 import com.example.jetpackcomposeplayground.core.Person
 import com.example.jetpackcomposeplayground.core.getPersonList
 
@@ -43,13 +45,14 @@ fun GridLayoutComponent(personList: List<Person>) {
             tableRow {
                 for (j in 0 until numberOfColumns) {
                     Card(shape = RoundedCornerShape(4.dp), color = Color.Black,
-                        modifier = Spacing(16.dp)
+                        modifier = LayoutPadding(16.dp) + LayoutWidth.Fill
                     ) {
-                        Text(personList[i + j].name,
-                            modifier = Spacing(16.dp),
+                        Text(text = personList[i + j].name,
+                            modifier = LayoutPadding(16.dp),
                             style = TextStyle(
                                 color = Color.White,
-                                fontSize = 20.sp
+                                fontSize = 20.sp,
+                                textAlign = TextAlign.Center
                             )
                         )
                     }

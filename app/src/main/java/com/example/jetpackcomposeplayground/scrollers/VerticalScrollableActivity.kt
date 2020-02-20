@@ -4,18 +4,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Text
-import androidx.ui.core.dp
 import androidx.ui.core.setContent
-import androidx.ui.core.sp
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.FlexRow
-import androidx.ui.layout.Spacing
+import androidx.ui.layout.*
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
+import androidx.ui.text.style.TextAlign
 import androidx.ui.tooling.preview.Preview
+import androidx.ui.unit.dp
+import androidx.ui.unit.sp
 import com.example.jetpackcomposeplayground.core.Person
 import com.example.jetpackcomposeplayground.core.getPersonList
 
@@ -44,16 +43,17 @@ fun VerticalScrollableComponent(personList: List<Person>) {
     // replacement for [RecyclerView]
     VerticalScroller {
         Column {
-            for(person in personList) {
-                FlexRow(modifier = Spacing(16.dp)) {
-                   expanded(1f) {
-                       Card(shape = RoundedCornerShape(4.dp), color = Color.Black) {
-                           Text(person.name, style = TextStyle(
-                               color = Color.White,
-                               fontSize = 20.sp
-                           ), modifier = Spacing(16.dp))
-                       }
-                   }
+            for (person in personList) {
+                Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
+                    Card(shape = RoundedCornerShape(4.dp), color = Color.Black, modifier = LayoutWidth.Fill) {
+                        Text(
+                            person.name, style = TextStyle(
+                                color = Color.White,
+                                fontSize = 20.sp,
+                                textAlign = TextAlign.Center
+                            ), modifier = LayoutPadding(16.dp)
+                        )
+                    }
                 }
             }
         }
