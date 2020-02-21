@@ -1,10 +1,8 @@
 package com.example.jetpackcomposeplayground.core
 
-import android.text.style.LineHeightSpan
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
 import androidx.ui.core.Modifier
-import androidx.ui.core.WithConstraints
 import androidx.ui.foundation.Clickable
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.vector.DrawVector
@@ -21,7 +19,10 @@ fun getPersonList() = listOf<Person>(
     Person("Will Smith", 31),
     Person("Robert James", 42),
     Person("Anthony Curry", 91),
-    Person("Kevin Jackson", 22)
+    Person("Kevin Jackson", 22),
+    Person("Robert Curry", 1),
+    Person("John Curry", 9),
+    Person("Ada Jackson", 2)
 )
 
 data class Person(

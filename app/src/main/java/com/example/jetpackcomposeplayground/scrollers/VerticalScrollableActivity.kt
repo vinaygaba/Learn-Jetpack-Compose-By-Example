@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
@@ -26,7 +27,7 @@ class VerticalScrollableActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            VerticalScrollableComponent(
+            AdapterListingScrollableComponent(
                 getPersonList()
             )
         }
@@ -40,7 +41,8 @@ fun VerticalScrollableComponent(personList: List<Person>) {
     // Vertical scroller is a composable that adds the ability to scroll through the
     // child composables that are declared inside it. One caveat here is that this is not optimized
     // to recycle the views. It is more similar to [ScrollView] and should not be thought of as a
-    // replacement for [RecyclerView]
+    // replacement for [RecyclerView]. Instead look at the example below that uses AdapterList
+    // which is supposed to be more efficient.
     VerticalScroller {
         Column {
             for (person in personList) {
@@ -60,6 +62,25 @@ fun VerticalScrollableComponent(personList: List<Person>) {
     }
 }
 
+@Composable
+fun AdapterListingScrollableComponent(personList: List<Person>) {
+    // AdapterList is a vertically scrolling list that only composes and lays out the currently
+    // visible items.
+    AdapterList(data = personList) { person ->
+        Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
+            Card(shape = RoundedCornerShape(4.dp), color = Color.Black, modifier = LayoutWidth.Fill) {
+                Text(
+                    person.name, style = TextStyle(
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center
+                    ), modifier = LayoutPadding(16.dp)
+                )
+            }
+        }
+    }
+}
+
 // Android Studio lets you preview your composable functions within the IDE itself, instead of
 // needing to download the app to an Android device or emulator. This is a fantastic feature as you
 // can preview all your custom components(read composable functions) from the comforts of the IDE.
@@ -71,6 +92,14 @@ fun VerticalScrollableComponent(personList: List<Person>) {
 @Composable
 fun VerticalScrollableComponentPreview() {
     VerticalScrollableComponent(
+        getPersonList()
+    )
+}
+
+@Preview
+@Composable
+fun AdapterListingScrollableComponentPreview() {
+    AdapterListingScrollableComponent(
         getPersonList()
     )
 }
