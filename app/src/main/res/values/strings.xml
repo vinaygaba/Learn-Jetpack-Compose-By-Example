@@ -8,6 +8,7 @@
     <string name="title_activity_image">Load Image Example</string>
     <string name="title_activity_clickable">Clickable Example</string>
     <string name="title_activity_drawer">Drawer App Example</string>
+    <string name="title_activity_button">Buttons Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -17,4 +18,5 @@
     <string name="tv_grid_example">Grid Layout</string>
     <string name="tv_clickable_component_example">Clickable Component</string>
     <string name="tv_drawer_component_example">Drawer App Component</string>
+    <string name="tv_buttons_component_example">Buttons Component</string>
 </resources>

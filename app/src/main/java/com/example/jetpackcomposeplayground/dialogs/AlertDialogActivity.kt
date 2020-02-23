@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeplayground
+package com.example.jetpackcomposeplayground.dialogs
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,7 @@ import androidx.ui.foundation.Clickable
 import androidx.ui.material.AlertDialog
 import androidx.ui.material.Button
 
-class ClickableActivity: AppCompatActivity() {
+class AlertDialogActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

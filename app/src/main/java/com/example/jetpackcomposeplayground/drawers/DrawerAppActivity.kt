@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeplayground
+package com.example.jetpackcomposeplayground.drawers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +13,7 @@ import androidx.ui.material.DrawerState
 import androidx.ui.material.ModalDrawerLayout
 import androidx.ui.material.TopAppBar
 import androidx.ui.unit.dp
+import com.example.jetpackcomposeplayground.R
 import com.example.jetpackcomposeplayground.core.VectorImageButton
 
 class DrawerAppActivity: AppCompatActivity() {
@@ -36,7 +37,7 @@ fun DrawerAppComponent() {
         drawerContent = {
             DrawerContentComponent(
                 currentScreen = currentScreen,
-                closeDrawer =  { onDrawerStateChange(DrawerState.Closed) }
+                closeDrawer = { onDrawerStateChange(DrawerState.Closed) }
             )
         },
         bodyContent = {
@@ -57,21 +58,24 @@ fun DrawerContentComponent(
 ) {
     Column(modifier = LayoutHeight.Fill) {
         Clickable(onClick = {
-            currentScreen.value = DrawerAppScreen.Screen1
+            currentScreen.value =
+                DrawerAppScreen.Screen1
             closeDrawer()
         }) {
             Text(text = DrawerAppScreen.Screen1.name, modifier = LayoutPadding(16.dp))
         }
 
         Clickable(onClick = {
-            currentScreen.value = DrawerAppScreen.Screen2
+            currentScreen.value =
+                DrawerAppScreen.Screen2
             closeDrawer()
         }) {
             Text(text = DrawerAppScreen.Screen2.name, modifier = LayoutPadding(16.dp))
         }
 
         Clickable(onClick = {
-            currentScreen.value = DrawerAppScreen.Screen3
+            currentScreen.value =
+                DrawerAppScreen.Screen3
             closeDrawer()
         }) {
             Text(text = DrawerAppScreen.Screen3.name, modifier = LayoutPadding(16.dp))
@@ -85,9 +89,15 @@ fun BodyContentComponent(
     openDrawer: () -> Unit
 ) {
     when (currentScreen) {
-        DrawerAppScreen.Screen1 -> Screen1Component(openDrawer)
-        DrawerAppScreen.Screen2 -> Screen2Component(openDrawer)
-        DrawerAppScreen.Screen3 -> Screen3Component(openDrawer)
+        DrawerAppScreen.Screen1 -> Screen1Component(
+            openDrawer
+        )
+        DrawerAppScreen.Screen2 -> Screen2Component(
+            openDrawer
+        )
+        DrawerAppScreen.Screen3 -> Screen3Component(
+            openDrawer
+        )
     }
 }
 
