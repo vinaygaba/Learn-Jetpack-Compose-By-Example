@@ -12,6 +12,7 @@ import com.example.jetpackcomposeplayground.image.ImageActivity
 import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcomposeplayground.scrollers.VerticalScrollableActivity
+import com.example.jetpackcomposeplayground.state.StateActivity
 import com.example.jetpackcomposeplayground.text.CustomTextActivity
 import com.example.jetpackcomposeplayground.text.SimpleTextActivity
 
@@ -56,5 +57,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startButtonsExample(view: View) {
         startActivity(Intent(this, ButtonActivity::class.java))
+    }
+
+    fun startStateExample(view: View) {
+        startActivity(Intent(this, StateActivity::class.java))
     }
 }

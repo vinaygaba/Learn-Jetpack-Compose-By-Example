@@ -62,6 +62,12 @@
             android:exported="true"
             android:label="@string/title_activity_button"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".state.StateActivity"
+            android:exported="true"
+            android:label="@string/title_activity_state"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 
