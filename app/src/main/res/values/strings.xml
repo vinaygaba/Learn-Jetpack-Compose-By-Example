@@ -10,6 +10,8 @@
     <string name="title_activity_drawer">Drawer App Example</string>
     <string name="title_activity_button">Buttons Example</string>
     <string name="title_activity_state">State Example</string>
+    <string name="title_custom_view">Custom View Example</string>
+    <string name="title_custom_view_paint">Custom View Paint Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -21,4 +23,6 @@
     <string name="tv_drawer_component_example">Drawer App Component</string>
     <string name="tv_buttons_component_example">Buttons Component</string>
     <string name="tv_state_component_example">State Component</string>
+    <string name="tv_custom_view_example">Custom View Component</string>
+    <string name="tv_custom_view_paint_example">Custom View Paint Component</string>
 </resources>

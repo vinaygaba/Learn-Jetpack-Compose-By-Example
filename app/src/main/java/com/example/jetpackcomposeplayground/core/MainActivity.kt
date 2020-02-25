@@ -8,6 +8,8 @@ import com.example.jetpackcomposeplayground.dialogs.AlertDialogActivity
 import com.example.jetpackcomposeplayground.drawers.DrawerAppActivity
 import com.example.jetpackcomposeplayground.R
 import com.example.jetpackcomposeplayground.button.ButtonActivity
+import com.example.jetpackcomposeplayground.customview.CustomViewActivity
+import com.example.jetpackcomposeplayground.customview.CustomViewPainActivity
 import com.example.jetpackcomposeplayground.image.ImageActivity
 import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
@@ -61,5 +63,13 @@ class MainActivity : AppCompatActivity() {
 
     fun startStateExample(view: View) {
         startActivity(Intent(this, StateActivity::class.java))
+    }
+
+    fun startCustomViewExample(view: View) {
+        startActivity(Intent(this, CustomViewActivity::class.java))
+    }
+
+    fun startCustomViewPaintExample(view: View) {
+        startActivity(Intent(this, CustomViewPainActivity::class.java))
     }
 }
