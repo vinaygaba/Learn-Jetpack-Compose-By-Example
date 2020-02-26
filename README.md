@@ -22,13 +22,28 @@ concepts that its using with comments. Compose also comes with this
 nifty feature that lets you preview each component in the IntelliJ IDE
 itself. To do so, go to any of the examples examples and the click on
 the preview button in the top right corner. This is possible if your
-@Composable component has a corresponding @Preview method associated
-with it. Dive into the examples to understand what exactly this means.
+`@Composable` component has a corresponding `@Preview` method associated
+with it. Look at the examples below for all this to make a bit more
+sense.
 
 ![Jetpack Compose Preview Functionality](screenshots/compose_preview.gif)
 
-
-
+|Example|Preview|
+|-------|-------|
+|1. [How do I display "Hello World" on the screen using Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/SimpleTextActivity.kt)| |
+|2. [How do I style & customize my text?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt)| |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
+| | |
 
 Credits
 -----------------
