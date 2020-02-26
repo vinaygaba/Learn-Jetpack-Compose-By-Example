@@ -64,6 +64,7 @@ dependencies {
 
     // Image loading
     implementation deps.imageLoading.picasso
+    implementation deps.imageLoading.glideCore
 
     testImplementation deps.test.junit
     androidTestImplementation deps.test.junitImplementation

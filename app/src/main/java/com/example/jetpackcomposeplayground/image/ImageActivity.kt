@@ -22,6 +22,9 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.jetpackcomposeplayground.R
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
@@ -47,10 +50,11 @@ fun DisplayImagesComponent() {
     TitleComponent("Load image from url using Picasso")
     NetworkImageComponentPicasso(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
 
+    TitleComponent("Load image from url using Glide")
+    NetworkImageComponentGlide(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+
     TitleComponent("Image with rounded corners")
     ImageWithRoundedCorners(R.drawable.lenna)
-
-    // Look at NetworkImageComponentGlide below for an example with Glide.
 }
 
 @Composable
@@ -123,49 +127,49 @@ fun NetworkImageComponentPicasso(url: String) {
 
 /**
  * There is an ongoing issue with kapt and compose since it uses the IR backend. This causes the
- * app to not even compile - https://issuetracker.google.com/issues/143232368. For that reason,
- * I am commenting this for now and removing the dependency on glide, but once that issue is
- * resolved, the below code should ideally work with Glide.
+ * app to not even compile if you are using kapt- https://issuetracker.google.com/issues/143232368.
+ * For that reason, I am avoiding a dependency on the glide annotation processor. If you add that
+ * dependency(or any other kapt related dependency for that matter), the app won't even compile.
  */
-//@Composable
-//fun NetworkImageComponentGlide(url: String) {
-//    var image by +state<Image?> { null }
-//    var drawable by +state<Drawable?> { null }
-//    +onCommit(url) {
-//        val context = +ambient(ContextAmbient)
-//        val glide = Glide.with(context)
-//        val target = object : CustomTarget<Bitmap>() {
-//            override fun onLoadCleared(placeholder: Drawable?) {
-//                image = null
-//                drawable = placeholder
-//            }
-//
-//            override fun onResourceReady(bitmap: Bitmap, transition: Transition<in Bitmap>?) {
-//                image = AndroidImage(bitmap)
-//            }
-//        }
-//        glide
-//            .asBitmap()
-//            .load(url)
-//            .into(target)
-//
-//        onDispose {
-//            image = null
-//            drawable = null
-//            glide.clear(target)
-//        }
-//    }
-//
-//    Container(modifier = Height(200.dp) wraps ExpandedWidth) {
-//        val theImage = image
-//        val theDrawable = drawable
-//        if (theImage != null) {
-//            DrawImage(image = theImage)
-//        } else if (theDrawable != null) {
-//            Draw { canvas, parentSize -> theDrawable.draw(canvas.nativeCanvas) }
-//        }
-//    }
-//}
+@Composable
+fun NetworkImageComponentGlide(url: String) {
+    var image by state<Image?> { null }
+    var drawable by state<Drawable?> { null }
+    val context = ContextAmbient.current
+    onCommit(url) {
+        val glide = Glide.with(context)
+        val target = object : CustomTarget<Bitmap>() {
+            override fun onLoadCleared(placeholder: Drawable?) {
+                image = null
+                drawable = placeholder
+            }
+
+            override fun onResourceReady(bitmap: Bitmap, transition: Transition<in Bitmap>?) {
+                image = AndroidImage(bitmap)
+            }
+        }
+        glide
+            .asBitmap()
+            .load(url)
+            .into(target)
+
+        onDispose {
+            image = null
+            drawable = null
+            glide.clear(target)
+        }
+    }
+
+    Container(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
+        val theImage = image
+        val theDrawable = drawable
+        if (theImage != null) {
+            DrawImage(image = theImage)
+        } else if (theDrawable != null) {
+            Draw { canvas, parentSize -> theDrawable.draw(canvas.nativeCanvas) }
+        }
+    }
+}
 
 @Composable
 fun TitleComponent(title: String) {
