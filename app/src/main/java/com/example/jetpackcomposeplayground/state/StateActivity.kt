@@ -88,4 +88,4 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
 }
 
 @Model
-data class CounterState(var counter: Int = 0)
+class CounterState(var counter: Int = 0)
