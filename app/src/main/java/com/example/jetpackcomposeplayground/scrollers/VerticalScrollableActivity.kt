@@ -37,35 +37,10 @@ class VerticalScrollableActivity : AppCompatActivity() {
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
 // functions can only be called from within the scope of other composable functions.
 @Composable
-fun VerticalScrollableComponent(personList: List<Person>) {
-    // Vertical scroller is a composable that adds the ability to scroll through the
-    // child composables that are declared inside it. One caveat here is that this is not optimized
-    // to recycle the views. It is more similar to [ScrollView] and should not be thought of as a
-    // replacement for [RecyclerView]. Instead look at the example below that uses AdapterList
-    // which is supposed to be more efficient.
-    VerticalScroller {
-        Column {
-            for (person in personList) {
-                Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
-                    Card(shape = RoundedCornerShape(4.dp), color = Color.Black, modifier = LayoutWidth.Fill) {
-                        Text(
-                            person.name, style = TextStyle(
-                                color = Color.White,
-                                fontSize = 20.sp,
-                                textAlign = TextAlign.Center
-                            ), modifier = LayoutPadding(16.dp)
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
 fun AdapterListingScrollableComponent(personList: List<Person>) {
     // AdapterList is a vertically scrolling list that only composes and lays out the currently
-    // visible items.
+    // visible items. This is very similar to what RecylerView tries to do as it's more optimized
+    // than the VerticalScroller.
     AdapterList(data = personList) { person ->
         Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
             Card(shape = RoundedCornerShape(4.dp), color = Color.Black, modifier = LayoutWidth.Fill) {
@@ -81,6 +56,33 @@ fun AdapterListingScrollableComponent(personList: List<Person>) {
     }
 }
 
+@Composable
+fun VerticalScrollableComponent(personList: List<Person>) {
+    // Vertical scroller is a composable that adds the ability to scroll through the
+    // child composables that are declared inside it. One caveat here is that this is not optimized
+    // to recycle the views. It is more similar to [ScrollView] and should not be thought of as a
+    // replacement for [RecyclerView]. Instead look at the example below that uses AdapterList
+    // which is supposed to be more efficient.
+    VerticalScroller {
+        Column {
+            for (person in personList) {
+                Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
+                    Card(shape = RoundedCornerShape(4.dp), color = Color.Black,
+                        modifier = LayoutWidth.Fill) {
+                        Text(
+                            person.name, style = TextStyle(
+                                color = Color.White,
+                                fontSize = 20.sp,
+                                textAlign = TextAlign.Center
+                            ), modifier = LayoutPadding(16.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
 // Android Studio lets you preview your composable functions within the IDE itself, instead of
 // needing to download the app to an Android device or emulator. This is a fantastic feature as you
 // can preview all your custom components(read composable functions) from the comforts of the IDE.
@@ -90,16 +92,17 @@ fun AdapterListingScrollableComponent(personList: List<Person>) {
 // params. Also, don't forget to annotate it with @Preview & @Composable annotations.
 @Preview
 @Composable
-fun VerticalScrollableComponentPreview() {
-    VerticalScrollableComponent(
+fun AdapterListingScrollableComponentPreview() {
+    AdapterListingScrollableComponent(
         getPersonList()
     )
 }
 
 @Preview
 @Composable
-fun AdapterListingScrollableComponentPreview() {
-    AdapterListingScrollableComponent(
+fun VerticalScrollableComponentPreview() {
+    VerticalScrollableComponent(
         getPersonList()
     )
 }
+
