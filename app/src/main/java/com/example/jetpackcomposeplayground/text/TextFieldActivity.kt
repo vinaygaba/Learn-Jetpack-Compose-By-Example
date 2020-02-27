@@ -1,9 +1,13 @@
 package com.example.jetpackcomposeplayground.text
 
+import android.graphics.Rect
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.state
+import androidx.ui.autofill.AutofillNode
+import androidx.ui.autofill.AutofillType
+import androidx.ui.core.AutofillAmbient
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.TextField
 import androidx.ui.core.setContent
@@ -124,6 +128,40 @@ fun PasswordVisualTransformationInputComponent() {
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
             visualTransformation = PasswordVisualTransformation(),
+            onValueChange = {
+                textValue = it
+            }
+        )
+    }
+}
+
+// Not working yet for some reason
+@Composable
+fun AutoFillTextInputComponent() {
+    val autofillAmbient = AutofillAmbient.current
+    Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+        var textValue by state { "" }
+        TextField(value = textValue,
+            modifier = LayoutPadding(16.dp),
+            keyboardType = KeyboardType.Email,
+            onFocus = {
+                autofillAmbient?.requestAutofillForNode(
+                    autofillNode = AutofillNode(
+                        autofillTypes = listOf(AutofillType.EmailAddress),
+                        boundingBox = Rect(0, 0, 400, 400),
+                        onFill = {
+                            textValue = it
+                        }
+                    )
+                )
+            },
+            onBlur = {
+                autofillAmbient?.cancelAutofillForNode(autofillNode = AutofillNode(
+                    autofillTypes = listOf(AutofillType.EmailAddress),
+                    onFill = {}
+                ))
+            },
+            imeAction = ImeAction.Done,
             onValueChange = {
                 textValue = it
             }
