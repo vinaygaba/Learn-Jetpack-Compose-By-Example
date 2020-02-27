@@ -15,6 +15,7 @@ import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcomposeplayground.scrollers.VerticalScrollableActivity
 import com.example.jetpackcomposeplayground.state.StateActivity
+import com.example.jetpackcomposeplayground.text.TextFieldActivity
 import com.example.jetpackcomposeplayground.text.CustomTextActivity
 import com.example.jetpackcomposeplayground.text.SimpleTextActivity
 
@@ -71,5 +72,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startCustomViewPaintExample(view: View) {
         startActivity(Intent(this, CustomViewPainActivity::class.java))
+    }
+
+    fun startAutofillTextExample(view: View) {
+        startActivity(Intent(this, TextFieldActivity::class.java))
     }
 }

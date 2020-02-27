@@ -1,7 +1,10 @@
 package com.example.jetpackcomposeplayground.core
 
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
+import androidx.compose.Context
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Clickable
 import androidx.ui.graphics.Color
@@ -10,6 +13,7 @@ import androidx.ui.layout.Container
 import androidx.ui.layout.LayoutSize
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.res.vectorResource
+
 
 fun getPersonList() = listOf<Person>(
     Person("Grace Hopper", 25),
@@ -47,4 +51,9 @@ fun VectorImage(modifier: Modifier = Modifier.None, @DrawableRes id: Int, tint: 
     ) {
         DrawVector(vector, tint)
     }
+}
+
+fun hideKeyboard(context: Context) {
+    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 }
