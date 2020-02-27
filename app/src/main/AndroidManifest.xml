@@ -86,6 +86,12 @@
             android:exported="true"
             android:label="@string/title_text_input_example"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".stack.StackActivity"
+            android:exported="true"
+            android:label="@string/title_stack_example"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 

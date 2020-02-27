@@ -14,6 +14,7 @@ import com.example.jetpackcomposeplayground.image.ImageActivity
 import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcomposeplayground.scrollers.VerticalScrollableActivity
+import com.example.jetpackcomposeplayground.stack.StackActivity
 import com.example.jetpackcomposeplayground.state.StateActivity
 import com.example.jetpackcomposeplayground.text.TextFieldActivity
 import com.example.jetpackcomposeplayground.text.CustomTextActivity
@@ -76,5 +77,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startAutofillTextExample(view: View) {
         startActivity(Intent(this, TextFieldActivity::class.java))
+    }
+
+    fun startStackExample(view: View) {
+        startActivity(Intent(this, StackActivity::class.java))
     }
 }

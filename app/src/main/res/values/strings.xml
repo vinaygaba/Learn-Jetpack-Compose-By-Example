@@ -13,6 +13,7 @@
     <string name="title_custom_view">Custom View Example</string>
     <string name="title_custom_view_paint">Custom View Paint Example</string>
     <string name="title_text_input_example">Text Input Example</string>
+    <string name="title_stack_example">Stack Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -27,4 +28,5 @@
     <string name="tv_custom_view_example">Custom View Component</string>
     <string name="tv_custom_view_paint_example">Custom View Paint Component</string>
     <string name="tv_text_input_example">Text Input Component</string>
+    <string name="tv_stack_example">Stack Component</string>
 </resources>
