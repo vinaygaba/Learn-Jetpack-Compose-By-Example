@@ -28,27 +28,72 @@ sense.
 
 ![Jetpack Compose Preview Functionality](screenshots/compose_preview.gif)
 
+#### Text
+
 |Example|Preview|
 |-------|-------|
-|[1. How do I display "Hello World" on the screen using Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/SimpleTextActivity.kt)| |
-|[2. How do I style & customize my text?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt)| |
-|[3. How do I add a Button to my screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/button/ButtonActivity.kt)||
-|[4. How do I make a view clickable and do actions when clicked?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/dialogs/AlertDialogActivity.kt#L36)| |
-|[5. How do I display an alert dialog/popup modal?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/dialogs/AlertDialogActivity.kt)| |
-|[6. How do I display an image in Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt) <br> [6a. How to load an image from the resource folder?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L61)<br>[6b. How to make an image view with rounded corners?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L73)<br>[6c. How to load an image over the network using Picasso?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L85) <br> [6d. How to load an image over the network using Glide?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L135)| |
-|[7. How do I add a drawer to my screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/drawers/DrawerAppActivity.kt)| |
-|[8. How do I draw using a canvas?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/customview/CustomViewActivity.kt)| |
-|[9. How do I detect touch events in a custom view?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/customview/CustomViewPainActivity.kt)| |
-|[10. How do I display a list in my app?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/VerticalScrollableActivity.kt) <br>[10a. Is there a RecyclerView equivalent?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/VerticalScrollableActivity.kt#L40) <br> [10b. How can I have a grid layout?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/GridLayoutActivity.kt) <br> [10.c How can I build a horizontally scrollable carousel?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/HorizontalScrollableActivity.kt)| |
-|[11. What's the EditText equivalent in Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt) <br>[11a. How can I use a custom text style for a text input?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L71) <br>[11b. How can I change the keyboard type to accept numbers?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L90) <br>[11c. How can I create a Search bar?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L104) <br>[11d. How can I apply a visual transformation to an input text?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L123)| |
-|[12. How do I get FrameLayout like functionality to stack views on top of one another?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/stack/StackActivity.kt)| |
-|[13. How do I add padding around a view?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/button/ButtonActivity.kt#L37)| |
-|[14. How do I add a background color to any section of the screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt#L163)| |
-|[15. How do I store state information in Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/state/StateActivity.kt)| |
-|[]()| |
-|[]()| |
-|[]()| |
-|[]()| |
+|[How do I display "Hello World" on the screen using Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/SimpleTextActivity.kt)| |
+|[How do I style & customize my text?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt)| |
+|[How do you take text input from a user in Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt)
+|[How can I use a custom text style for a text input?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L71)| |
+|[How can I change the keyboard type to accept numbers?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L90)| |
+|[How can I create a Search bar?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L104)| |
+|[How can I apply a visual transformation to an input text?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L123)| |
+
+
+#### Images
+
+|Example|Preview|
+|-------|-------|
+|[How do I display an image in Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt)| |
+|[How to load an image from the resource folder?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L61)| |
+|[How to make an image view with rounded corners?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L73)| |
+|[How to load an image over the network using Picasso?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L85)| |
+|[How to load an image over the network using Glide?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L135)| |
+
+
+#### Lists
+
+|Example|Preview|
+|-------|-------|
+|[How do I display a list in my app?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/VerticalScrollableActivity.kt)| |
+|[Is there a RecyclerView equivalent?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/VerticalScrollableActivity.kt#L40)| |
+|[How can I have a grid layout?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/GridLayoutActivity.kt)| |
+|[How can I build a horizontally scrollable carousel?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/HorizontalScrollableActivity.kt)| |
+
+
+#### Material Design
+
+|Example|Preview|
+|-------|-------|
+|[How do I add a Button to my screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/button/ButtonActivity.kt)||
+|[How do I add a drawer to my screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/drawers/DrawerAppActivity.kt)| |
+|[How do I display an alert dialog/popup modal?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/dialogs/AlertDialogActivity.kt)| |
+
+
+#### Custom Views
+
+|Example|Preview|
+|-------|-------|
+|[How do I draw using a canvas?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/customview/CustomViewActivity.kt)| |
+|[How do I detect touch events in a custom view?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/customview/CustomViewPainActivity.kt)| |
+
+
+#### General
+
+|Example|Preview|
+|-------|-------|
+|[How do I make a view clickable and do actions when clicked?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/dialogs/AlertDialogActivity.kt#L36)| |
+|[How do I get FrameLayout like functionality to stack views on top of one another?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/stack/StackActivity.kt)| |
+|[How do I add padding around a view?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/button/ButtonActivity.kt#L37)| |
+|[How do I add a background color to any section of the screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt#L163)| |
+
+
+#### State Management
+|Example|Preview|
+|-------|-------|
+|[How do I store state information in Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/state/StateActivity.kt)| |
+
 
 Credits
 -----------------
