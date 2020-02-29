@@ -28,11 +28,21 @@ sense.
 
 ![Jetpack Compose Preview Functionality](screenshots/compose_preview.gif)
 
-#### Text
+#### General
 
 |Example|Preview|
 |-------|-------|
 |[How do I display "Hello World" on the screen using Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/SimpleTextActivity.kt)| |
+|[How do I make a view clickable and do actions when clicked?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/dialogs/AlertDialogActivity.kt#L36)| |
+|[How do I get FrameLayout like functionality to stack views on top of one another?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/stack/StackActivity.kt)| |
+|[How do I add padding around a view?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/button/ButtonActivity.kt#L37)| |
+|[How do I add a background color to any section of the screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt#L163)| |
+
+
+#### Text
+
+|Example|Preview|
+|-------|-------|
 |[How do I style & customize my text?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt)| |
 |[How do you take text input from a user in Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt)
 |[How can I use a custom text style for a text input?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L71)| |
@@ -77,16 +87,6 @@ sense.
 |-------|-------|
 |[How do I draw using a canvas?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/customview/CustomViewActivity.kt)| |
 |[How do I detect touch events in a custom view?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/customview/CustomViewPainActivity.kt)| |
-
-
-#### General
-
-|Example|Preview|
-|-------|-------|
-|[How do I make a view clickable and do actions when clicked?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/dialogs/AlertDialogActivity.kt#L36)| |
-|[How do I get FrameLayout like functionality to stack views on top of one another?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/stack/StackActivity.kt)| |
-|[How do I add padding around a view?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/button/ButtonActivity.kt#L37)| |
-|[How do I add a background color to any section of the screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt#L163)| |
 
 
 #### State Management
