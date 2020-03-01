@@ -28,7 +28,7 @@ sense.
 
 ![Jetpack Compose Preview Functionality](screenshots/compose_preview.gif)
 
-#### General
+### General
 
 |Example|Preview|
 |-------|-------|
@@ -39,7 +39,7 @@ sense.
 |[How do I add a background color to any section of the screen?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/CustomTextActivity.kt#L163)| |
 
 
-#### Text
+### Text
 
 |Example|Preview|
 |-------|-------|
@@ -51,7 +51,7 @@ sense.
 |[How can I apply a visual transformation to an input text?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/TextFieldActivity.kt#L123)| |
 
 
-#### Images
+### Images
 
 |Example|Preview|
 |-------|-------|
