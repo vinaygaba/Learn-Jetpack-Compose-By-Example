@@ -62,7 +62,7 @@ sense.
 |[How to load an image over the network using Glide?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/image/ImageActivity.kt#L135)| |
 
 
-#### Lists
+### Lists
 
 |Example|Preview|
 |-------|-------|
@@ -72,7 +72,7 @@ sense.
 |[How can I build a horizontally scrollable carousel?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/scrollers/HorizontalScrollableActivity.kt)| |
 
 
-#### Material Design
+### Material Design
 
 |Example|Preview|
 |-------|-------|
@@ -81,7 +81,7 @@ sense.
 |[How do I display an alert dialog/popup modal?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/dialogs/AlertDialogActivity.kt)| |
 
 
-#### Flexible Layouts
+### Flexible Layouts
 |Example|Preview|
 |-------|-------|
 |[How do I align the baseline of two views?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L164)| |
@@ -89,7 +89,7 @@ sense.
 |**How do I auto arrange my views similar to FlexBox?**<br>[Add space between views](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L89)<br>[Evenly distribute space](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L104)<br>[Add space around the views](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L119)<br>[Tightly packed centering of views](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L134)| |
 |[]()| |
 
-#### Custom Views
+### Custom Views
 
 |Example|Preview|
 |-------|-------|
@@ -97,7 +97,7 @@ sense.
 |[How do I detect touch events in a custom view?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/customview/CustomViewPainActivity.kt)| |
 
 
-#### State Management
+### State Management
 |Example|Preview|
 |-------|-------|
 |[How do I store state information in Jetpack Compose?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/state/StateActivity.kt)| |
