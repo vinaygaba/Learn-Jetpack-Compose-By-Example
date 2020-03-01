@@ -81,6 +81,14 @@ sense.
 |[How do I display an alert dialog/popup modal?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/dialogs/AlertDialogActivity.kt)| |
 
 
+#### Flexible Layouts
+|Example|Preview|
+|-------|-------|
+|[How do I align the baseline of two views?](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L164)| |
+|How do I make equal width views (Layout weight equivalent in Jetpack Compose)? <br>[Example 1](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L59) <br>[Example with unequal weights](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L74)| |
+|How do I auto arrange my views similar to FlexBox?<br>[Add space between views](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L89)<br>[Evenly distribute space](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L104)<br>[Add space around the views](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L119)<br>[Tightly packed centering of views](https://github.com/vinaygaba/Jetpack-Compose-Playground/blob/master/app/src/main/java/com/example/jetpackcomposeplayground/text/ViewLayoutConfigurationsActivity.kt#L134)| |
+|[]()| |
+
 #### Custom Views
 
 |Example|Preview|
