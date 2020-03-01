@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.jetpackcomposeplayground.dialogs.AlertDialogActivity
-import com.example.jetpackcomposeplayground.drawers.DrawerAppActivity
+import com.example.jetpackcomposeplayground.material.AlertDialogActivity
+import com.example.jetpackcomposeplayground.material.DrawerAppActivity
 import com.example.jetpackcomposeplayground.R
-import com.example.jetpackcomposeplayground.button.ButtonActivity
+import com.example.jetpackcomposeplayground.material.ButtonActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewPainActivity
 import com.example.jetpackcomposeplayground.image.ImageActivity

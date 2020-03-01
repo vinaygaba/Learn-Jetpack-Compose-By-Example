@@ -49,17 +49,17 @@
             android:label="@string/title_activity_image"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".dialogs.AlertDialogActivity"
+            android:name=".material.AlertDialogActivity"
             android:exported="true"
             android:label="@string/title_activity_clickable"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".drawers.DrawerAppActivity"
+            android:name=".material.DrawerAppActivity"
             android:exported="true"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".button.ButtonActivity"
+            android:name=".material.ButtonActivity"
             android:exported="true"
             android:label="@string/title_activity_button"
             android:theme="@style/AppTheme.NoActionBar" />
