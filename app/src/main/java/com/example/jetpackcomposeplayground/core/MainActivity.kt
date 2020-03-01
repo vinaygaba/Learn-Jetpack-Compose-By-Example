@@ -11,6 +11,7 @@ import com.example.jetpackcomposeplayground.button.ButtonActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewPainActivity
 import com.example.jetpackcomposeplayground.image.ImageActivity
+import com.example.jetpackcomposeplayground.material.MaterialActivity
 import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcomposeplayground.scrollers.VerticalScrollableActivity
@@ -86,5 +87,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startViewAlignExample(view: View) {
         startActivity(Intent(this, ViewLayoutConfigurationsActivity::class.java))
+    }
+
+    fun startMaterialDesignExample(view: View) {
+        startActivity(Intent(this, MaterialActivity::class.java))
     }
 }

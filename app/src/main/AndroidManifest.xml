@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jetpackcomposeplayground">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -40,65 +42,62 @@
             android:name=".scrollers.GridLayoutActivity"
             android:exported="true"
             android:label="@string/title_activity_grid_layout"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".image.ImageActivity"
             android:exported="true"
             android:label="@string/title_activity_image"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".dialogs.AlertDialogActivity"
             android:exported="true"
             android:label="@string/title_activity_clickable"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".drawers.DrawerAppActivity"
             android:exported="true"
             android:label="@string/title_activity_drawer"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".button.ButtonActivity"
             android:exported="true"
             android:label="@string/title_activity_button"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".state.StateActivity"
             android:exported="true"
             android:label="@string/title_activity_state"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".customview.CustomViewActivity"
             android:exported="true"
             android:label="@string/title_custom_view"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".customview.CustomViewPainActivity"
             android:exported="true"
             android:label="@string/title_custom_view_paint"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".text.TextFieldActivity"
             android:exported="true"
             android:label="@string/title_text_input_example"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".stack.StackActivity"
             android:exported="true"
             android:label="@string/title_stack_example"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".text.ViewLayoutConfigurationsActivity"
             android:exported="true"
-            android:label="@string/title_stack_example"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="@string/title_view_arrangement_example"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".material.MaterialActivity"
+            android:exported="true"
+            android:label="@string/title_material_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
