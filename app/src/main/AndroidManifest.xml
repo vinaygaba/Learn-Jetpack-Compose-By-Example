@@ -92,6 +92,12 @@
             android:exported="true"
             android:label="@string/title_stack_example"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".text.ViewLayoutConfigurationsActivity"
+            android:exported="true"
+            android:label="@string/title_stack_example"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 

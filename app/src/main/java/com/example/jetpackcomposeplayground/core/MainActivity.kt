@@ -19,6 +19,7 @@ import com.example.jetpackcomposeplayground.state.StateActivity
 import com.example.jetpackcomposeplayground.text.TextFieldActivity
 import com.example.jetpackcomposeplayground.text.CustomTextActivity
 import com.example.jetpackcomposeplayground.text.SimpleTextActivity
+import com.example.jetpackcomposeplayground.text.ViewLayoutConfigurationsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -81,5 +82,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startStackExample(view: View) {
         startActivity(Intent(this, StackActivity::class.java))
+    }
+
+    fun startViewAlignExample(view: View) {
+        startActivity(Intent(this, ViewLayoutConfigurationsActivity::class.java))
     }
 }
