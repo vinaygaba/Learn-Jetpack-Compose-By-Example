@@ -1,4 +1,4 @@
-package com.example.jetpackcomposeplayground.dialogs
+package com.example.jetpackcomposeplayground.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
