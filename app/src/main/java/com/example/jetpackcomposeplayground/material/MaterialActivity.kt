@@ -11,6 +11,7 @@ import androidx.ui.foundation.SimpleImage
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.selection.ToggleableState
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
+import androidx.ui.graphics.Color
 import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.*
 import androidx.ui.material.*
@@ -59,6 +60,9 @@ class MaterialActivity : AppCompatActivity() {
 
                     TitleComponent("This is a radio button group")
                     MaterialRadioButtonGroupComponent()
+
+                    TitleComponent("This is a switch component")
+                    MaterialSwitchComponent()
                 }
             }
         }
@@ -180,6 +184,21 @@ fun MateriaContinousSliderComponent() {
 fun MaterialDiscreteSliderComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
         Slider(position = SliderPosition(initial = 0f, valueRange = 0f..10f, steps = 5))
+    }
+}
+
+@Composable
+fun MaterialSwitchComponent() {
+    var checked by state { false}
+    Card(shape = RoundedCornerShape(4.dp),
+        modifier = LayoutPadding(8.dp) + LayoutWidth.Fill,
+        color = Color(249, 249, 249)) {
+        Row(modifier = LayoutPadding(16.dp)) {
+            Switch(checked = checked, onCheckedChange = {
+                checked = !checked
+            })
+            Text(text = "Enable Dark Mode", modifier = LayoutPadding(left = 8.dp))
+        }
     }
 }
 
