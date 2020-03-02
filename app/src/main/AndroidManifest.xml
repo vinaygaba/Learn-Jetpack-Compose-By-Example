@@ -98,6 +98,11 @@
             android:exported="true"
             android:label="@string/title_material_example"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".material.BottomAppBarActivity"
+            android:exported="true"
+            android:label="@string/title_material_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

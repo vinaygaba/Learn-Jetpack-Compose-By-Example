@@ -8,10 +8,12 @@ import androidx.compose.state
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
+import androidx.ui.graphics.Color
 import androidx.ui.layout.*
 import androidx.ui.material.DrawerState
 import androidx.ui.material.ModalDrawerLayout
 import androidx.ui.material.TopAppBar
+import androidx.ui.material.surface.Surface
 import androidx.ui.unit.dp
 import com.example.jetpackcomposeplayground.R
 import com.example.jetpackcomposeplayground.core.VectorImageButton
@@ -110,8 +112,10 @@ fun Screen1Component(openDrawer: () -> Unit) {
                 VectorImageButton((R.drawable.ic_baseline_menu_24), openDrawer)
             }
         )
-        Center {
-            Text(text = "Screen 1")
+        Surface(color = Color(255, 222, 3), modifier = LayoutFlexible(1f)) {
+            Center {
+                Text(text = "Screen 1")
+            }
         }
     }
 }
@@ -125,8 +129,10 @@ fun Screen2Component(openDrawer: () -> Unit) {
                 VectorImageButton((R.drawable.ic_baseline_menu_24), openDrawer)
             }
         )
-        Center {
-            Text(text = "Screen 2")
+        Surface(color = Color(3, 54, 255), modifier = LayoutFlexible(1f)) {
+            Center {
+                Text(text = "Screen 2")
+            }
         }
     }
 }
@@ -140,8 +146,10 @@ fun Screen3Component(openDrawer: () -> Unit) {
                 VectorImageButton((R.drawable.ic_baseline_menu_24), openDrawer)
             }
         )
-        Center {
-            Text(text = "Screen 3")
+        Surface(color = Color(255, 2, 102), modifier = LayoutFlexible(1f)) {
+            Center {
+                Text(text = "Screen 3")
+            }
         }
     }
 }
