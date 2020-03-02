@@ -13,6 +13,7 @@ import androidx.ui.material.Divider
 import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
+import com.example.jetpackcomposeplayground.image.TitleComponent
 
 class StateActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +21,9 @@ class StateActivity: AppCompatActivity() {
         setContent {
             Column(modifier = LayoutHeight.Fill) {
                 StateComponent()
+                Divider()
                 ModelComponent()
             }
-
         }
     }
 }
@@ -30,57 +31,50 @@ class StateActivity: AppCompatActivity() {
 @Composable
 fun StateComponent() {
     var counter by state { 0 }
-    Text(text = "Example using State", modifier = LayoutPadding(16.dp), style = TextStyle(
-        fontSize = 20.sp
-    ))
-    Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceEvenly) {
+    TitleComponent("Example using state class to store state")
+    Row(modifier = LayoutWidth.Fill) {
         Button(
-            modifier = LayoutPadding(16.dp),
+            modifier = LayoutPadding(16.dp) + LayoutFlexible(1f),
             elevation = 5.dp,
             onClick = {
                 counter++
             }) {
-            Text(text = "Increment Counter", modifier = LayoutPadding(16.dp))
+            Text(text = "Increment", modifier = LayoutPadding(16.dp))
         }
 
         Button(
-            modifier = LayoutPadding(16.dp),
+            modifier = LayoutPadding(16.dp) + LayoutFlexible(1f),
             elevation = 5.dp,
             onClick = {
                 counter = 0
             }) {
-            Text(text = "Reset Counter", modifier = LayoutPadding(16.dp))
+            Text(text = "Reset", modifier = LayoutPadding(16.dp))
         }
     }
 
     Text(text = "Counter value is $counter", modifier = LayoutPadding(16.dp))
-    Divider()
 }
 
 @Composable
 fun ModelComponent(counterState: CounterState = CounterState()) {
-    Text(
-        text = "Example using Model", modifier = LayoutPadding(16.dp), style = TextStyle(
-            fontSize = 20.sp
-        )
-    )
+    TitleComponent("Example using Model class to store state")
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceEvenly) {
         Button(
-            modifier = LayoutPadding(16.dp),
+            modifier = LayoutPadding(16.dp) + LayoutFlexible(1f),
             elevation = 5.dp,
             onClick = {
                 counterState.counter++
             }) {
-            Text(text = "Increment Counter", modifier = LayoutPadding(16.dp))
+            Text(text = "Increment", modifier = LayoutPadding(16.dp))
         }
 
         Button(
-            modifier = LayoutPadding(16.dp),
+            modifier = LayoutPadding(16.dp) + LayoutFlexible(1f),
             elevation = 5.dp,
             onClick = {
                 counterState.counter = 0
             }) {
-            Text(text = "Reset Counter", modifier = LayoutPadding(16.dp))
+            Text(text = "Reset", modifier = LayoutPadding(16.dp))
         }
     }
 

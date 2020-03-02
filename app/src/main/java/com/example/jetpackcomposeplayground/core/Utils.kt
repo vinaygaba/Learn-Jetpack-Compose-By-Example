@@ -26,7 +26,8 @@ fun getPersonList() = listOf<Person>(
     Person("Kevin Jackson", 22),
     Person("Robert Curry", 1),
     Person("John Curry", 9),
-    Person("Ada Jackson", 2)
+    Person("Ada Jackson", 2),
+    Person("Joe Defoe", 35)
 )
 
 data class Person(
