@@ -6,13 +6,20 @@ import androidx.annotation.DrawableRes
 import androidx.compose.Composable
 import androidx.compose.Context
 import androidx.ui.core.Modifier
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.ContentGravity
+import androidx.ui.foundation.contentColor
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.vector.DrawVector
+import androidx.ui.graphics.vector.VectorAsset
 import androidx.ui.layout.Container
+import androidx.ui.layout.LayoutHeight
 import androidx.ui.layout.LayoutSize
+import androidx.ui.layout.LayoutWidth
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.res.vectorResource
+import androidx.ui.unit.dp
 
 
 fun getPersonList() = listOf<Person>(

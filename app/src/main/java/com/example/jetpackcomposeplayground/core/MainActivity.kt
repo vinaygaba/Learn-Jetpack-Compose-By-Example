@@ -4,14 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.jetpackcomposeplayground.material.AlertDialogActivity
-import com.example.jetpackcomposeplayground.material.DrawerAppActivity
 import com.example.jetpackcomposeplayground.R
-import com.example.jetpackcomposeplayground.material.ButtonActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewPainActivity
 import com.example.jetpackcomposeplayground.image.ImageActivity
-import com.example.jetpackcomposeplayground.material.MaterialActivity
+import com.example.jetpackcomposeplayground.material.*
 import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcomposeplayground.scrollers.VerticalScrollableActivity
@@ -91,5 +88,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startMaterialDesignExample(view: View) {
         startActivity(Intent(this, MaterialActivity::class.java))
+    }
+
+    fun startBottomAppBarExample(view: View) {
+        startActivity(Intent(this, BottomAppBarActivity::class.java))
     }
 }

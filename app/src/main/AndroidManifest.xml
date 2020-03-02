@@ -101,7 +101,7 @@
         <activity
             android:name=".material.BottomAppBarActivity"
             android:exported="true"
-            android:label="@string/title_material_example"
+            android:label="@string/title_bottom_app_bar_example"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
