@@ -103,6 +103,11 @@
             android:exported="true"
             android:label="@string/title_bottom_app_bar_example"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".layout.ConstraintLayoutActivity"
+            android:exported="true"
+            android:label="@string/title_constraint_layout_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

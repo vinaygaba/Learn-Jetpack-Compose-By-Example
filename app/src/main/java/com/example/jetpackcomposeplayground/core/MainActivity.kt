@@ -8,6 +8,7 @@ import com.example.jetpackcomposeplayground.R
 import com.example.jetpackcomposeplayground.customview.CustomViewActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewPainActivity
 import com.example.jetpackcomposeplayground.image.ImageActivity
+import com.example.jetpackcomposeplayground.layout.ConstraintLayoutActivity
 import com.example.jetpackcomposeplayground.material.*
 import com.example.jetpackcomposeplayground.scrollers.GridLayoutActivity
 import com.example.jetpackcomposeplayground.scrollers.HorizontalScrollableActivity
@@ -92,5 +93,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startBottomAppBarExample(view: View) {
         startActivity(Intent(this, BottomAppBarActivity::class.java))
+    }
+
+    fun startConstraintLayoutExample(view: View) {
+        startActivity(Intent(this, ConstraintLayoutActivity::class.java))
     }
 }

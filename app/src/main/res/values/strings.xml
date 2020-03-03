@@ -17,6 +17,7 @@
     <string name="title_view_arrangement_example">View Layout Arrangement Examples</string>
     <string name="title_material_example">Material Design Examples</string>
     <string name="title_bottom_app_bar_example">Bottom App Bar Example</string>
+    <string name="title_constraint_layout_example">Constraint Layout Examples</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -35,4 +36,5 @@
     <string name="tv_view_layout_arrangement_example">View Layout Arrangements Components</string>
     <string name="tv_material_design_example">Material Design Components</string>
     <string name="tv_bottom_app_bar_example">Bottom App Bar Component</string>
+    <string name="tv_constraint_layout_example">Constraint Layout Components</string>
 </resources>
