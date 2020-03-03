@@ -89,7 +89,7 @@
             android:label="@string/title_stack_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".text.ViewLayoutConfigurationsActivity"
+            android:name=".layout.ViewLayoutConfigurationsActivity"
             android:exported="true"
             android:label="@string/title_view_arrangement_example"
             android:theme="@style/AppTheme.NoActionBar" />

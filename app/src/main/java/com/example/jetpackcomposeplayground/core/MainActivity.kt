@@ -17,7 +17,7 @@ import com.example.jetpackcomposeplayground.state.StateActivity
 import com.example.jetpackcomposeplayground.text.TextFieldActivity
 import com.example.jetpackcomposeplayground.text.CustomTextActivity
 import com.example.jetpackcomposeplayground.text.SimpleTextActivity
-import com.example.jetpackcomposeplayground.text.ViewLayoutConfigurationsActivity
+import com.example.jetpackcomposeplayground.layout.ViewLayoutConfigurationsActivity
 
 class MainActivity : AppCompatActivity() {
 
