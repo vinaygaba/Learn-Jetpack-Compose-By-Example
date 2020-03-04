@@ -7,6 +7,8 @@ import androidx.compose.state
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Box
+import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.SimpleImage
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.selection.ToggleableState
@@ -15,8 +17,11 @@ import androidx.ui.graphics.Color
 import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.*
 import androidx.ui.material.*
+import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
 import androidx.ui.text.TextStyle
+import androidx.ui.text.font.FontFamily
+import androidx.ui.unit.TextUnit
 import androidx.ui.unit.dp
 import com.example.jetpackcomposeplayground.R
 import com.example.jetpackcomposeplayground.image.TitleComponent
@@ -63,6 +68,9 @@ class MaterialActivity : AppCompatActivity() {
 
                     TitleComponent("This is a switch component")
                     MaterialSwitchComponent()
+
+                    TitleComponent("This is how you add a ripple effect to a view")
+                    MaterialRippleComponent()
                 }
             }
         }
@@ -198,6 +206,22 @@ fun MaterialSwitchComponent() {
                 checked = !checked
             })
             Text(text = "Enable Dark Mode", modifier = LayoutPadding(left = 8.dp))
+        }
+    }
+}
+
+@Composable
+fun MaterialRippleComponent() {
+    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
+        Ripple(bounded = true) {
+            Clickable(onClick = {}) {
+                Box(backgroundColor = Color.LightGray, shape = RoundedCornerShape(4.dp)) {
+                    Text(text = "Click Me", modifier = LayoutPadding(16.dp), style = TextStyle(
+                        fontSize = TextUnit.Companion.Sp(12), fontFamily = FontFamily.Serif
+                    ))
+                }
+
+            }
         }
     }
 }
