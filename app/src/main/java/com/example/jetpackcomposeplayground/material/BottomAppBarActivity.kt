@@ -43,8 +43,7 @@ fun ScaffoldWithBottomBarAndCutout() {
         scaffoldState = scaffoldState,
         topAppBar = { TopAppBar(title = { Text("Scaffold Examples") }) },
         bottomAppBar = { fabConfiguration ->
-            BottomAppBar(fabConfiguration = fabConfiguration, cutoutShape = fabShape) { _: String ->
-            }
+            BottomAppBar(fabConfiguration = fabConfiguration, cutoutShape = fabShape) {}
         },
         floatingActionButton = {
             FloatingActionButton(

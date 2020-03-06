@@ -6,9 +6,22 @@ import androidx.compose.Composable
 import androidx.compose.state
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.shape.corner.RoundedCornerShape
+import androidx.ui.graphics.Color
+import androidx.ui.layout.Column
+import androidx.ui.layout.LayoutHeight
+import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.LayoutWidth
 import androidx.ui.material.AlertDialog
 import androidx.ui.material.Button
+import androidx.ui.material.ripple.Ripple
+import androidx.ui.material.surface.Card
+import androidx.ui.text.TextStyle
+import androidx.ui.text.font.FontFamily
+import androidx.ui.unit.TextUnit
+import androidx.ui.unit.dp
 
 class AlertDialogActivity: AppCompatActivity() {
 
@@ -21,7 +34,9 @@ class AlertDialogActivity: AppCompatActivity() {
         setContent {
             // Here, ClickableText is a @Composable function which is going to describe the contents
             // of this activity that will be rendered on the screen.
-            ClickableText()
+            Column {
+                ClickableText()
+            }
         }
     }
 }
@@ -34,8 +49,15 @@ fun ClickableText() {
     // Here, we just change the value of showPopup to be true every time we click on the text that
     // says "Click to see Popup"
     Clickable(onClick = { showPopup = true }) {
-        Text("Click to see Dialog")
+        Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp),
+            color = Color.LightGray) {
+            Text(text = "Click to see dialog", modifier = LayoutPadding(16.dp),
+                style = TextStyle(fontSize = TextUnit.Sp(16),
+                    fontFamily = FontFamily.Serif)
+            )
+        }
     }
+
     val onPopupDismissed = { showPopup = false }
 
     if (showPopup) {

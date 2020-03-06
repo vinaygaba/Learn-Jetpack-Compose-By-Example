@@ -3,7 +3,7 @@
 buildscript {
     ext.versions = [
             'cardView': '1.0.0',
-            'compose': '0.1.0-dev05',
+            'compose': '0.1.0-dev06',
             'constraintLayout' : '1.1.3',
             'espresso': '3.2.0',
             'glide': '4.10.0',
@@ -19,6 +19,8 @@ buildscript {
     ext.deps = [
             'cardView': "androidx.cardview:cardview:${versions.cardView}",
             'compose': [
+                    'composeComplier': "androidx.compose:compose-compiler:${versions.compose}",
+                    'composeRuntime': "androidx.compose:compose-runtime:${versions.compose}",
                     'core': "androidx.ui:ui-core:${versions.compose}",
                     'foundation': "androidx.ui:ui-foundation:${versions.compose}",
                     'framework': "androidx.ui:ui-framework:${versions.compose}",

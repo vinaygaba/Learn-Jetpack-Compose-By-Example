@@ -9,10 +9,10 @@ import androidx.compose.Composable
 import androidx.compose.onCommit
 import androidx.compose.state
 import androidx.ui.core.*
-import androidx.ui.foundation.DrawImage
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Image
+import androidx.ui.graphics.painter.ImagePainter
 import androidx.ui.layout.*
 import androidx.ui.material.surface.Card
 import androidx.ui.res.loadImageResource
@@ -64,7 +64,7 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     val image = loadImageResource(resId)
     image.resource.resource?.let {
         Container(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
-            DrawImage(image = it)
+            ImagePainter(it)
         }
     }
 }
@@ -76,7 +76,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     val image = loadImageResource(resId)
     image.resource.resource?.let {
         Card(shape = RoundedCornerShape(8.dp), modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
-            DrawImage(image = it)
+            ImagePainter(it)
         }
     }
 }
@@ -118,7 +118,7 @@ fun NetworkImageComponentPicasso(url: String) {
         val theImage = image
         val theDrawable = drawable
         if (theImage != null) {
-            DrawImage(image = theImage)
+            ImagePainter(theImage)
         } else if (theDrawable != null) {
             Draw { canvas, parentSize -> theDrawable.draw(canvas.nativeCanvas) }
         }
@@ -164,7 +164,7 @@ fun NetworkImageComponentGlide(url: String) {
         val theImage = image
         val theDrawable = drawable
         if (theImage != null) {
-            DrawImage(image = theImage)
+            ImagePainter(theImage)
         } else if (theDrawable != null) {
             Draw { canvas, parentSize -> theDrawable.draw(canvas.nativeCanvas) }
         }

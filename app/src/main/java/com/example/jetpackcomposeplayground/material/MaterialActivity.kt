@@ -102,7 +102,7 @@ fun MaterialCheckboxComponent() {
                 onCheckedChange = {
                     checked = !checked
                 })
-            Text(text = "Use Jetpack Compose", modifier = LayoutPadding(left = 8.dp))
+            Text(text = "Use Jetpack Compose", modifier = LayoutPadding(start = 8.dp))
         }
     }
 }
@@ -118,7 +118,7 @@ fun MaterialTriStateCheckboxComponent() {
                 onClick = {
                     counter++
                 })
-            Text(text = "Use Jetpack Compose", modifier = LayoutPadding(left = 8.dp))
+            Text(text = "Use Jetpack Compose", modifier = LayoutPadding(start = 8.dp))
         }
 
     }
@@ -205,14 +205,14 @@ fun MaterialSwitchComponent() {
             Switch(checked = checked, onCheckedChange = {
                 checked = !checked
             })
-            Text(text = "Enable Dark Mode", modifier = LayoutPadding(left = 8.dp))
+            Text(text = "Enable Dark Mode", modifier = LayoutPadding(start = 8.dp))
         }
     }
 }
 
 @Composable
 fun MaterialRippleComponent() {
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
+    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
         Ripple(bounded = true) {
             Clickable(onClick = {}) {
                 Box(backgroundColor = Color.LightGray, shape = RoundedCornerShape(4.dp)) {

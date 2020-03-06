@@ -1,10 +1,10 @@
 package com.example.jetpackcomposeplayground.core
 
 import android.app.Activity
+import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
-import androidx.compose.Context
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Clickable
 import androidx.ui.graphics.Color

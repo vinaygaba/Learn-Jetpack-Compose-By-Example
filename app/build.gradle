@@ -55,6 +55,7 @@ dependencies {
     implementation deps.constraintLayout
 
     // Compose
+    implementation deps.compose.composeRuntime
     implementation deps.compose.core
     implementation deps.compose.foundation
     implementation deps.compose.framework
