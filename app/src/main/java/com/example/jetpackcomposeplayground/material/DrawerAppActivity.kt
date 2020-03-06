@@ -8,15 +8,17 @@ import androidx.compose.state
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.Icon
 import androidx.ui.graphics.Color
 import androidx.ui.layout.*
 import androidx.ui.material.DrawerState
+import androidx.ui.material.IconButton
 import androidx.ui.material.ModalDrawerLayout
 import androidx.ui.material.TopAppBar
+import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.Menu
 import androidx.ui.material.surface.Surface
 import androidx.ui.unit.dp
-import com.example.jetpackcomposeplayground.R
-import com.example.jetpackcomposeplayground.core.VectorImageButton
 
 class DrawerAppActivity: AppCompatActivity() {
 
@@ -109,7 +111,9 @@ fun Screen1Component(openDrawer: () -> Unit) {
         TopAppBar(
             title = { Text("Screen 1 Title") },
             navigationIcon = {
-                VectorImageButton((R.drawable.ic_baseline_menu_24), openDrawer)
+                IconButton(onClick = openDrawer) {
+                    Icon(icon = Icons.Filled.Menu)
+                }
             }
         )
         Surface(color = Color(255, 222, 3), modifier = LayoutFlexible(1f)) {
@@ -126,7 +130,9 @@ fun Screen2Component(openDrawer: () -> Unit) {
         TopAppBar(
             title = { Text("Screen 2 Title") },
             navigationIcon = {
-                VectorImageButton((R.drawable.ic_baseline_menu_24), openDrawer)
+                IconButton(onClick = openDrawer) {
+                    Icon(icon = Icons.Filled.Menu)
+                }
             }
         )
         Surface(color = Color(3, 54, 255), modifier = LayoutFlexible(1f)) {
@@ -143,7 +149,9 @@ fun Screen3Component(openDrawer: () -> Unit) {
         TopAppBar(
             title = { Text("Screen 3 Title") },
             navigationIcon = {
-                VectorImageButton((R.drawable.ic_baseline_menu_24), openDrawer)
+                IconButton(onClick = openDrawer) {
+                    Icon(icon = Icons.Filled.Menu)
+                }
             }
         )
         Surface(color = Color(255, 2, 102), modifier = LayoutFlexible(1f)) {

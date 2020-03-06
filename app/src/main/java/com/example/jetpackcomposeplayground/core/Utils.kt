@@ -35,25 +35,6 @@ data class Person(
     val age: Int
 )
 
-@Composable
-fun VectorImageButton(@DrawableRes id: Int, onClick: () -> Unit) {
-    Ripple(bounded = false) {
-        Clickable(onClick = onClick) {
-            VectorImage(id = id)
-        }
-    }
-}
-
-@Composable
-fun VectorImage(modifier: Modifier = Modifier.None, @DrawableRes id: Int, tint: Color = Color.Transparent) {
-    val vector = vectorResource(id)
-    Container(
-        modifier = modifier + LayoutSize(vector.defaultWidth, vector.defaultHeight)
-    ) {
-        DrawVector(vector, tint)
-    }
-}
-
 fun hideKeyboard(context: Context) {
     val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);

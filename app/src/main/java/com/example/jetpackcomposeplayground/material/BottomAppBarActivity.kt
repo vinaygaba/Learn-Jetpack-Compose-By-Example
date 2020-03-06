@@ -11,10 +11,10 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.*
 import androidx.ui.material.*
+import androidx.ui.material.icons.Icons
+import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.material.surface.Card
 import androidx.ui.unit.dp
-import com.example.jetpackcomposeplayground.R
-import com.example.jetpackcomposeplayground.core.VectorImageButton
 
 class BottomAppBarActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +50,9 @@ fun ScaffoldWithBottomBarAndCutout() {
                 shape = fabShape,
                 color = MaterialTheme.colors().secondary
             ) {
-                VectorImageButton(id = R.drawable.ic_baseline_favorite_24, onClick = {})
+                IconButton(onClick = {}) {
+                    Icon(icon = Icons.Filled.Favorite)
+                }
             }
         },
         floatingActionButtonPosition = Scaffold.FabPosition.CenterDocked,
