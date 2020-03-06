@@ -99,9 +99,9 @@
             android:label="@string/title_material_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".material.BottomAppBarActivity"
+            android:name=".material.FixedActionButtonActivity"
             android:exported="true"
-            android:label="@string/title_bottom_app_bar_example"
+            android:label="@string/title_fab_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".layout.ConstraintLayoutActivity"
@@ -111,7 +111,7 @@
         <activity
             android:name=".material.BottomNavigationActivity"
             android:exported="true"
-            android:label="@string/title_constraint_layout_example"
+            android:label="@string/title_bottom_navigation_example"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

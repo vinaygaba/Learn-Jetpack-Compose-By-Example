@@ -16,7 +16,7 @@ import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.material.surface.Card
 import androidx.ui.unit.dp
 
-class BottomAppBarActivity: AppCompatActivity() {
+class FixedActionButtonActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

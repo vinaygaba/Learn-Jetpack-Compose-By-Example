@@ -91,11 +91,15 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, MaterialActivity::class.java))
     }
 
-    fun startBottomAppBarExample(view: View) {
-        startActivity(Intent(this, BottomAppBarActivity::class.java))
+    fun startFixedActionButtonExample(view: View) {
+        startActivity(Intent(this, FixedActionButtonActivity::class.java))
     }
 
     fun startConstraintLayoutExample(view: View) {
         startActivity(Intent(this, ConstraintLayoutActivity::class.java))
+    }
+
+    fun startBottomNavigationExample(view: View) {
+        startActivity(Intent(this, BottomNavigationActivity::class.java))
     }
 }
