@@ -9,12 +9,13 @@ import androidx.compose.Composable
 import androidx.compose.onCommit
 import androidx.compose.state
 import androidx.ui.core.*
+import androidx.ui.foundation.Box
+import androidx.ui.foundation.Canvas
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Image
 import androidx.ui.graphics.painter.ImagePainter
 import androidx.ui.layout.*
-import androidx.ui.material.surface.Card
 import androidx.ui.res.loadImageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -34,8 +35,18 @@ class ImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             VerticalScroller {
-                Column(modifier = LayoutSize.Fill + LayoutPadding(16.dp)) {
-                    DisplayImagesComponent()
+                Column(LayoutPadding(16.dp)) {
+                    TitleComponent("Load image from the resource folder")
+                    LocalResourceImageComponent(R.drawable.lenna)
+
+                    TitleComponent("Load image from url using Picasso")
+                    NetworkImageComponentPicasso(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+
+                    TitleComponent("Load image from url using Glide")
+                    NetworkImageComponentGlide(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+
+                    TitleComponent("Image with rounded corners")
+                    ImageWithRoundedCorners(R.drawable.lenna)
                 }
             }
         }
@@ -44,17 +55,7 @@ class ImageActivity : AppCompatActivity() {
 
 @Composable
 fun DisplayImagesComponent() {
-    TitleComponent("Load image from the resource folder")
-    LocalResourceImageComponent(R.drawable.lenna)
 
-    TitleComponent("Load image from url using Picasso")
-    NetworkImageComponentPicasso(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
-
-    TitleComponent("Load image from url using Glide")
-    NetworkImageComponentGlide(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
-
-    TitleComponent("Image with rounded corners")
-    ImageWithRoundedCorners(R.drawable.lenna)
 }
 
 @Composable
@@ -63,9 +64,8 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     // be advisable to use the loadImageResource method as it loads the image asynchronously
     val image = loadImageResource(resId)
     image.resource.resource?.let {
-        Container(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
-            ImagePainter(it)
-        }
+        Box(modifier = LayoutHeight.Max(200.dp) + ImagePainter(it)
+            .toModifier())
     }
 }
 
@@ -75,8 +75,8 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // be advisable to use the loadImageResource method as it loads the image asynchronously
     val image = loadImageResource(resId)
     image.resource.resource?.let {
-        Card(shape = RoundedCornerShape(8.dp), modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
-            ImagePainter(it)
+        Clip(shape = RoundedCornerShape(8.dp)) {
+            Box(modifier = LayoutHeight.Max(200.dp) + ImagePainter(it).toModifier())
         }
     }
 }
@@ -114,13 +114,16 @@ fun NetworkImageComponentPicasso(url: String) {
         }
     }
 
-    Container(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
-        val theImage = image
-        val theDrawable = drawable
-        if (theImage != null) {
-            ImagePainter(theImage)
-        } else if (theDrawable != null) {
-            Draw { canvas, parentSize -> theDrawable.draw(canvas.nativeCanvas) }
+    val theImage = image
+    val theDrawable = drawable
+    if (theImage != null) {
+        Container(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp) + ImagePainter(theImage)
+            .toModifier()) {
+
+        }
+    } else if (theDrawable != null) {
+        Canvas(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
+            theDrawable.draw(this.nativeCanvas)
         }
     }
 }
@@ -160,13 +163,14 @@ fun NetworkImageComponentGlide(url: String) {
         }
     }
 
-    Container(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
-        val theImage = image
-        val theDrawable = drawable
-        if (theImage != null) {
-            ImagePainter(theImage)
-        } else if (theDrawable != null) {
-            Draw { canvas, parentSize -> theDrawable.draw(canvas.nativeCanvas) }
+    val theImage = image
+    val theDrawable = drawable
+    if (theImage != null) {
+        Box(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp) +
+                ImagePainter(theImage).toModifier())
+    } else if (theDrawable != null) {
+        Canvas(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
+            theDrawable.draw(this.nativeCanvas)
         }
     }
 }
