@@ -12,7 +12,11 @@ import androidx.ui.core.*
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.shape.corner.CornerSize
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
+import androidx.ui.geometry.RRect
+import androidx.ui.geometry.Radius
+import androidx.ui.graphics.Canvas
 import androidx.ui.graphics.Image
 import androidx.ui.graphics.painter.ImagePainter
 import androidx.ui.layout.*
@@ -21,8 +25,7 @@ import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
+import androidx.ui.unit.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -30,23 +33,14 @@ import com.example.jetpackcomposeplayground.R
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
+
 class ImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             VerticalScroller {
                 Column(LayoutPadding(16.dp)) {
-                    TitleComponent("Load image from the resource folder")
-                    LocalResourceImageComponent(R.drawable.lenna)
-
-                    TitleComponent("Load image from url using Picasso")
-                    NetworkImageComponentPicasso(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
-
-                    TitleComponent("Load image from url using Glide")
-                    NetworkImageComponentGlide(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
-
-                    TitleComponent("Image with rounded corners")
-                    ImageWithRoundedCorners(R.drawable.lenna)
+                    DisplayImagesComponent()
                 }
             }
         }
@@ -55,7 +49,17 @@ class ImageActivity : AppCompatActivity() {
 
 @Composable
 fun DisplayImagesComponent() {
+    TitleComponent("Load image from the resource folder")
+    LocalResourceImageComponent(R.drawable.lenna)
 
+    TitleComponent("Load image from url using Picasso")
+    NetworkImageComponentPicasso(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+
+    TitleComponent("Load image from url using Glide")
+    NetworkImageComponentGlide(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+
+    TitleComponent("Image with rounded corners")
+    ImageWithRoundedCorners(R.drawable.lenna)
 }
 
 @Composable
@@ -74,9 +78,14 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
     // be advisable to use the loadImageResource method as it loads the image asynchronously
     val image = loadImageResource(resId)
+    val shape = RoundedCornerShape(8.dp)
     image.resource.resource?.let {
-        Clip(shape = RoundedCornerShape(8.dp)) {
-            Box(modifier = LayoutHeight.Max(200.dp) + ImagePainter(it).toModifier())
+        Align(alignment = Alignment.Center) {
+            Box(modifier = LayoutHeight(200.dp) + LayoutWidth(200.dp)
+                    + RoundedCornerClipModifier(shape.topLeft, shape.topRight, shape.bottomLeft,
+                shape.bottomRight)
+                    + ImagePainter(it).toModifier(),
+                shape = shape)
         }
     }
 }
@@ -186,3 +195,24 @@ fun TitleComponent(title: String) {
 fun DisplayImagesComponentPreview() {
     DisplayImagesComponent()
 }
+
+private data class RoundedCornerClipModifier(val topLeftCornerSize: CornerSize,
+                                             val topRightCornerSize: CornerSize,
+                                             val bottomLeftCornerSize: CornerSize,
+                                             val bottomRightCornerSize:CornerSize) : DrawModifier {
+    override fun draw(density: Density, drawContent: () -> Unit, canvas: Canvas, size: PxSize) {
+        canvas.save()
+        val topLeft =  topLeftCornerSize.toPx(size, density)
+        val topRight =  topRightCornerSize.toPx(size, density)
+        val bottomLeft =  bottomLeftCornerSize.toPx(size, density)
+        val bottomRight =  bottomRightCornerSize.toPx(size, density)
+        canvas.clipRRect(RRect(rect = size.toRect(),
+            topLeft = topLeft.toRadius(),
+            topRight = topRight.toRadius(),
+            bottomLeft = bottomLeft.toRadius(),
+            bottomRight = bottomRight.toRadius()))
+        drawContent()
+    }
+}
+
+private fun Px.toRadius() = Radius.circular(this.value)
