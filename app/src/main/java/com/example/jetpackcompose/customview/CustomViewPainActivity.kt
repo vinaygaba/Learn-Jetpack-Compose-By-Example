@@ -4,10 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.state
-import androidx.ui.core.Draw
+import androidx.ui.core.Modifier
 import androidx.ui.core.gesture.PressGestureDetector
 import androidx.ui.core.setContent
-import androidx.ui.graphics.*
+import androidx.ui.foundation.Canvas
+import androidx.ui.graphics.Color
+import androidx.ui.graphics.Paint
+import androidx.ui.graphics.PaintingStyle
+import androidx.ui.graphics.Path
+import androidx.ui.graphics.StrokeJoin
 import androidx.ui.layout.Container
 import androidx.ui.layout.LayoutSize
 
@@ -43,17 +48,16 @@ data class Paths(
     val y: Float
 )
 
-
 @Composable
 fun DrawingBoardComposable(paths: List<Paths>, paint: Paint) {
     Container(modifier = LayoutSize.Fill) {
-        Draw { canvas, parentSize ->
+        Canvas(modifier = Modifier.None) {
             val p = Path()
             for (path in paths) {
                 p.lineTo(path.x, path.y)
                 p.moveTo(path.x, path.y)
             }
-            canvas.drawPath(p, paint)
+            drawPath(p, paint)
         }
     }
 }

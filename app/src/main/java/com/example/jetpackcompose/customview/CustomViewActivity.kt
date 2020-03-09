@@ -3,10 +3,13 @@ package com.example.jetpackcompose.customview
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.Draw
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Canvas
 import androidx.ui.geometry.Offset
-import androidx.ui.graphics.*
+import androidx.ui.graphics.Color
+import androidx.ui.graphics.Paint
+import androidx.ui.graphics.PaintingStyle
 import androidx.ui.layout.Container
 import androidx.ui.layout.LayoutSize
 
@@ -25,24 +28,24 @@ fun CustomViewComponent() {
         style = PaintingStyle.fill
     }
     Container(modifier = LayoutSize.Fill) {
-        Draw { canvas, parentSize ->
+        Canvas(modifier = Modifier.None) {
             paint.color = Color.Red
-            canvas.drawCircle(
-                center = Offset(parentSize.width.value / 2, parentSize.height.value / 2),
+            drawCircle(
+                center = Offset(size.width.value / 2, size.height.value / 2),
                 radius = 300f,
                 paint = paint
             )
 
             paint.color = Color.Green
-            canvas.drawCircle(
-                center = Offset(parentSize.width.value / 2, parentSize.height.value / 2),
+            drawCircle(
+                center = Offset(size.width.value / 2, size.height.value / 2),
                 radius = 200f,
                 paint = paint
             )
 
             paint.color = Color.Blue
-            canvas.drawCircle(
-                center = Offset(parentSize.width.value / 2, parentSize.height.value / 2),
+            drawCircle(
+                center = Offset(size.width.value / 2, size.height.value / 2),
                 radius = 100f,
                 paint = paint
             )
