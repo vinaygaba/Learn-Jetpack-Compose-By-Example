@@ -1,6 +1,7 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
+import androidx.animation.FastOutLinearInEasing
 import androidx.animation.FloatPropKey
 import androidx.animation.Infinite
 import androidx.animation.LinearEasing
@@ -16,7 +17,6 @@ import androidx.ui.foundation.Canvas
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Paint
 import androidx.ui.layout.Center
-import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutSize
 import androidx.ui.unit.dp
 import androidx.ui.unit.toRect
@@ -86,7 +86,10 @@ private val rotationTransitionDefinition = transitionDefinition {
 
     transition(0 to 360) {
         rotation using repeatable {
-            animation = tween { duration = 3000 }
+            animation = tween {
+                duration = 3000
+                easing = FastOutLinearInEasing
+            }
             iterations = Infinite
         }
     }
