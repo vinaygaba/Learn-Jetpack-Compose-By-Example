@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jetpackcomposeplayground.R
+import com.example.jetpackcomposeplayground.animation.AnimationActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewActivity
 import com.example.jetpackcomposeplayground.customview.CustomViewPainActivity
 import com.example.jetpackcomposeplayground.image.ImageActivity
@@ -101,5 +102,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startBottomNavigationExample(view: View) {
         startActivity(Intent(this, BottomNavigationActivity::class.java))
+    }
+
+    fun startAnimationExample(view: View) {
+        startActivity(Intent(this, AnimationActivity::class.java))
     }
 }

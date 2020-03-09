@@ -19,6 +19,7 @@
     <string name="title_fab_example">Floating Action Button Example</string>
     <string name="title_constraint_layout_example">Constraint Layout Examples</string>
     <string name="title_bottom_navigation_example">Bottom Navigation Example</string>
+    <string name="title_animation_example">Animation Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -39,4 +40,5 @@
     <string name="tv_fab_example">Fixed Action Button Component</string>
     <string name="tv_constraint_layout_example">Constraint Layout Components</string>
     <string name="tv_bottom_navigation_example">Bottom Navigation Components</string>
+    <string name="tv_animation_example">Animation Components</string>
 </resources>
