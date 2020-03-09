@@ -17,7 +17,7 @@ class SimpleTextActivity : AppCompatActivity() {
         setContent {
             // Here, SimpleText is a Composable function which is going to describe the contents of
             // this activity that will be rendered on the screen.
-            SimpleText("This is the Jetpack Compose Playground")
+            SimpleText("This is the Learn Jetpack Compose By Example tutorial")
         }
     }
 }
@@ -44,5 +44,5 @@ fun SimpleText(displayText: String) {
 @Preview
 @Composable
 fun SimpleTextPreview() {
-    SimpleText("This is the Jetpack Compose Playground")
+    SimpleText("This is the Learn Jetpack Compose By Example tutorial")
 }
