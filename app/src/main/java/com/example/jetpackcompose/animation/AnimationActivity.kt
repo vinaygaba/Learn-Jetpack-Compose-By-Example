@@ -1,6 +1,8 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
+import androidx.animation.FloatPropKey
+import androidx.animation.Infinite
 import androidx.animation.LinearEasing
 import androidx.animation.transitionDefinition
 import androidx.appcompat.app.AppCompatActivity
@@ -10,14 +12,20 @@ import androidx.ui.animation.ColorPropKey
 import androidx.ui.animation.Transition
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
+import androidx.ui.foundation.Canvas
 import androidx.ui.graphics.Color
+import androidx.ui.graphics.Paint
+import androidx.ui.layout.Center
+import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutSize
+import androidx.ui.unit.dp
+import androidx.ui.unit.toRect
 
 class AnimationActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AnimateColorComponent()
+            RotatingSquareComponent()
         }
     }
 }
@@ -68,5 +76,38 @@ fun AnimateColorComponent() {
         }
     }) {
         Box(LayoutSize.Fill, backgroundColor = it[color])
+    }
+}
+
+private val rotation = FloatPropKey()
+private val rotationTransitionDefinition = transitionDefinition {
+    state(0){ this[rotation] = 0f }
+    state(360) { this[rotation] = 360f }
+
+    transition(0 to 360) {
+        rotation using repeatable {
+            animation = tween { duration = 3000 }
+            iterations = Infinite
+        }
+    }
+}
+
+@Composable
+fun RotatingSquareComponent() {
+    Center {
+        Transition(
+            definition = rotationTransitionDefinition,
+            initState = 0,
+            toState = 360
+        ) { state ->
+            Canvas(modifier = LayoutSize(200.dp)) {
+                save()
+                translate(size.width.value/2, size.height.value/2)
+                rotate(state[rotation])
+                translate(-size.width.value/2, -size.height.value/2)
+                drawRect(size.toRect(), Paint().apply { color = Color(255, 138, 128) })
+                restore()
+            }
+        }
     }
 }
