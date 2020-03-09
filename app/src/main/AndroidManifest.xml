@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jetpackcomposeplayground">
+    package="com.example.jetpackcompose">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".core.MainActivity">
+        <activity android:name="com.example.jetpackcompose.core.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,102 +19,102 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".text.SimpleTextActivity"
+            android:name="com.example.jetpackcompose.text.SimpleTextActivity"
             android:exported="true"
             android:label="@string/title_activity_compose"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".text.CustomTextActivity"
+            android:name="com.example.jetpackcompose.text.CustomTextActivity"
             android:exported="true"
             android:label="@string/title_activity_custom_text"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".scrollers.VerticalScrollableActivity"
+            android:name="com.example.jetpackcompose.scrollers.VerticalScrollableActivity"
             android:exported="true"
             android:label="@string/title_activity_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".scrollers.HorizontalScrollableActivity"
+            android:name="com.example.jetpackcompose.scrollers.HorizontalScrollableActivity"
             android:exported="true"
             android:label="@string/title_activity_horizontal_scrollable"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".scrollers.GridLayoutActivity"
+            android:name="com.example.jetpackcompose.scrollers.GridLayoutActivity"
             android:exported="true"
             android:label="@string/title_activity_grid_layout"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".image.ImageActivity"
+            android:name="com.example.jetpackcompose.image.ImageActivity"
             android:exported="true"
             android:label="@string/title_activity_image"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".material.AlertDialogActivity"
+            android:name="com.example.jetpackcompose.material.AlertDialogActivity"
             android:exported="true"
             android:label="@string/title_activity_clickable"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".material.DrawerAppActivity"
+            android:name="com.example.jetpackcompose.material.DrawerAppActivity"
             android:exported="true"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".material.ButtonActivity"
+            android:name="com.example.jetpackcompose.material.ButtonActivity"
             android:exported="true"
             android:label="@string/title_activity_button"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".state.StateActivity"
+            android:name="com.example.jetpackcompose.state.StateActivity"
             android:exported="true"
             android:label="@string/title_activity_state"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".customview.CustomViewActivity"
+            android:name="com.example.jetpackcompose.customview.CustomViewActivity"
             android:exported="true"
             android:label="@string/title_custom_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".customview.CustomViewPainActivity"
+            android:name="com.example.jetpackcompose.customview.CustomViewPainActivity"
             android:exported="true"
             android:label="@string/title_custom_view_paint"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".text.TextFieldActivity"
+            android:name="com.example.jetpackcompose.text.TextFieldActivity"
             android:exported="true"
             android:label="@string/title_text_input_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".stack.StackActivity"
+            android:name="com.example.jetpackcompose.stack.StackActivity"
             android:exported="true"
             android:label="@string/title_stack_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".layout.ViewLayoutConfigurationsActivity"
+            android:name="com.example.jetpackcompose.layout.ViewLayoutConfigurationsActivity"
             android:exported="true"
             android:label="@string/title_view_arrangement_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".material.MaterialActivity"
+            android:name="com.example.jetpackcompose.material.MaterialActivity"
             android:exported="true"
             android:label="@string/title_material_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".material.FixedActionButtonActivity"
+            android:name="com.example.jetpackcompose.material.FixedActionButtonActivity"
             android:exported="true"
             android:label="@string/title_fab_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".layout.ConstraintLayoutActivity"
+            android:name="com.example.jetpackcompose.layout.ConstraintLayoutActivity"
             android:exported="true"
             android:label="@string/title_constraint_layout_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".material.BottomNavigationActivity"
+            android:name="com.example.jetpackcompose.material.BottomNavigationActivity"
             android:exported="true"
             android:label="@string/title_bottom_navigation_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".animation.AnimationActivity"
+            android:name="com.example.jetpackcompose.animation.AnimationActivity"
             android:exported="true"
             android:label="@string/title_animation_example"
             android:theme="@style/AppTheme.NoActionBar" />
