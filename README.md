@@ -1,5 +1,7 @@
 # Learn Jetpack Compose By Example
 
+![Feature Image](screenshots/jetpack_compose_poster.png)
+
 Over the course of the last few years Android development has gone
 through significant changes in how we structure our apps, the language
 we use for development, the tooling & libraries that help us speed up
