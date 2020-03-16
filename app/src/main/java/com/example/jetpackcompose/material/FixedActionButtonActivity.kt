@@ -15,6 +15,7 @@ import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.material.surface.Card
 import androidx.ui.unit.dp
+import com.example.jetpackcompose.core.colors
 
 class FixedActionButtonActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,14 +25,6 @@ class FixedActionButtonActivity: AppCompatActivity() {
         }
     }
 }
-
-private val colors = listOf(
-    Color(0xFFffd7d7.toInt()),
-    Color(0xFFffe9d6.toInt()),
-    Color(0xFFfffbd0.toInt()),
-    Color(0xFFe3ffd9.toInt()),
-    Color(0xFFd0fff8.toInt())
-)
 
 @Composable
 fun ScaffoldWithBottomBarAndCutout() {

@@ -17,6 +17,7 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.Person
+import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -50,14 +51,14 @@ class HorizontalScrollableActivity : AppCompatActivity() {
 fun HorizontalScrollableComponent(personList: List<Person>) {
     HorizontalScroller {
         Row() {
-            for(person in personList) {
-                Card(shape = RoundedCornerShape(4.dp), color = Color.Black,
+            for((index, person) in personList.withIndex()) {
+                Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                     modifier = LayoutPadding(16.dp)
                 ) {
                     Text(person.name,
                         modifier = LayoutPadding(16.dp),
                         style = TextStyle(
-                            color = Color.White,
+                            color = Color.Black,
                             fontSize = 20.sp
                         ))
                 }
@@ -77,14 +78,14 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
         val screenWidth = displayMetrics.widthPixels / displayMetrics.density
         val spacing = 16.dp
         Row {
-            for(person in personList) {
-                Card(shape = RoundedCornerShape(4.dp), color = Color.Black,
+            for((index, person) in personList.withIndex()) {
+                Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                     modifier = LayoutPadding(16.dp)) {
                     Container(width = screenWidth.dp - (spacing * 2)) {
                         Text(person.name,
                             modifier = LayoutPadding(16.dp),
                             style = TextStyle(
-                                color = Color.White,
+                                color = Color.Black,
                                 fontSize = 20.sp
                             ))
                     }

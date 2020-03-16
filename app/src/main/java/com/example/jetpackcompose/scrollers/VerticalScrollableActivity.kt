@@ -17,6 +17,7 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.Person
+import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
 
 class VerticalScrollableActivity : AppCompatActivity() {
@@ -42,11 +43,14 @@ fun AdapterListingScrollableComponent(personList: List<Person>) {
     // visible items. This is very similar to what RecylerView tries to do as it's more optimized
     // than the VerticalScroller.
     AdapterList(data = personList) { person ->
+        // TODO(vinaygaba) Replace this with an index callback once its available.
+        val index = personList.indexOf(person)
         Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
-            Card(shape = RoundedCornerShape(4.dp), color = Color.Black, modifier = LayoutWidth.Fill) {
+            Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                modifier = LayoutWidth.Fill) {
                 Text(
                     person.name, style = TextStyle(
-                        color = Color.White,
+                        color = Color.Black,
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center
                     ), modifier = LayoutPadding(16.dp)
@@ -65,13 +69,13 @@ fun VerticalScrollableComponent(personList: List<Person>) {
     // which is supposed to be more efficient.
     VerticalScroller {
         Column {
-            for (person in personList) {
+            for ((index,person) in personList.withIndex()) {
                 Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
-                    Card(shape = RoundedCornerShape(4.dp), color = Color.Black,
+                    Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                         modifier = LayoutWidth.Fill) {
                         Text(
                             person.name, style = TextStyle(
-                                color = Color.White,
+                                color = Color.Black,
                                 fontSize = 20.sp,
                                 textAlign = TextAlign.Center
                             ), modifier = LayoutPadding(16.dp)

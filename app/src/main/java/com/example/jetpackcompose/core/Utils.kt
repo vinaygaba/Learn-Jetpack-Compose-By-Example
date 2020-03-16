@@ -3,6 +3,7 @@ package com.example.jetpackcompose.core
 import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import androidx.ui.graphics.Color
 
 // Models
 data class Person(
@@ -58,3 +59,11 @@ val LOREM_IPSUM_3 = "Sed velit dignissim sodales ut eu sem integer. Elit " +
         "malesuada nunc vel risus. In egestas erat imperdiet sed euismod nisi. Morbi tincidunt" +
         " augue interdum velit euismod in. Tempus egestas sed sed risus pretium quam vulputate " +
         "dignissim. Odio morbi quis commodo odio aenean sed. Vestibulum lectus mauris ultrices eros."
+
+val colors = listOf(
+Color(0xFFffd7d7.toInt()),
+Color(0xFFffe9d6.toInt()),
+Color(0xFFfffbd0.toInt()),
+Color(0xFFe3ffd9.toInt()),
+Color(0xFFd0fff8.toInt())
+)
