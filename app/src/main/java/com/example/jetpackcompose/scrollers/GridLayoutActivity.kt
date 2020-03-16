@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
+import androidx.ui.layout.LayoutAlign
+import androidx.ui.layout.LayoutHeight
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Table
@@ -17,6 +20,7 @@ import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.Person
+import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
 
 class GridLayoutActivity: AppCompatActivity() {
@@ -27,7 +31,9 @@ class GridLayoutActivity: AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            GridLayoutComponent(getPersonList())
+            VerticalScroller {
+                GridLayoutComponent(getPersonList())
+            }
         }
     }
 }
@@ -44,13 +50,13 @@ fun GridLayoutComponent(personList: List<Person>) {
         for (i in personList.indices step numberOfColumns) {
             tableRow {
                 for (j in 0 until numberOfColumns) {
-                    Card(shape = RoundedCornerShape(4.dp), color = Color.Black,
-                        modifier = LayoutPadding(16.dp) + LayoutWidth.Fill
+                    Card(shape = RoundedCornerShape(4.dp), color = colors[(i + j) % colors.size],
+                        modifier = LayoutPadding(16.dp) + LayoutWidth.Fill + LayoutHeight(100.dp)
                     ) {
                         Text(text = personList[i + j].name,
-                            modifier = LayoutPadding(16.dp),
+                            modifier = LayoutPadding(16.dp) + LayoutAlign.CenterVertically,
                             style = TextStyle(
-                                color = Color.White,
+                                color = Color.Black,
                                 fontSize = 20.sp,
                                 textAlign = TextAlign.Center
                             )
