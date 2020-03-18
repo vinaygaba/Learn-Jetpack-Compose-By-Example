@@ -59,8 +59,7 @@ sense.
 
 |Example|Preview|
 |-------|-------|
-|[How do I display a list in my app?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/scrollers/VerticalScrollableActivity.kt)|<img src ="screenshots/vertical_list.gif" width=214 height=400>|
-|[Is there a RecyclerView equivalent?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/scrollers/VerticalScrollableActivity.kt#L41)| |
+|[How do I display a list in my app?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/scrollers/VerticalScrollableActivity.kt)<br/> [Is there a RecyclerView equivalent?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/scrollers/VerticalScrollableActivity.kt#L41)|<img src ="screenshots/vertical_list.gif" width=214 height=400>|
 |[How can I have a grid layout?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/scrollers/GridLayoutActivity.kt)|<img src ="screenshots/grid_layout.gif" width=214 height=400> |
 |[How can I build a horizontally scrollable carousel?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/scrollers/HorizontalScrollableActivity.kt)| <img src ="screenshots/horizontal_list.gif" width=214 height=400>|
 
