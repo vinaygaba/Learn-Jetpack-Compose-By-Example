@@ -3,15 +3,15 @@ package com.example.jetpackcompose.image
 import android.graphics.Bitmap
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.ui.graphics.Image
-import androidx.ui.graphics.ImageConfig
-import androidx.ui.graphics.NativeImage
+import androidx.ui.graphics.ImageAsset
+import androidx.ui.graphics.ImageAssetConfig
+import androidx.ui.graphics.NativeImageAsset
 import androidx.ui.graphics.colorspace.ColorSpace
 import androidx.ui.graphics.colorspace.ColorSpaces
 
 // Copied from the Compose source code. This class is internal for the time being but the Compose
 // team has promised that this won't be the case for very long.
-class AndroidImage(val bitmap: Bitmap) : Image {
+class AndroidImageAsset(val bitmap: Bitmap) : ImageAsset {
 
     /**
      * @see Image.width
@@ -25,7 +25,7 @@ class AndroidImage(val bitmap: Bitmap) : Image {
     override val height: Int
         get() = bitmap.height
 
-    override val config: ImageConfig
+    override val config: ImageAssetConfig
         get() = bitmap.config.toImageConfig()
 
     /**
@@ -47,7 +47,7 @@ class AndroidImage(val bitmap: Bitmap) : Image {
     /**
      * @see Image.nativeImage
      */
-    override val nativeImage: NativeImage
+    override val nativeImage: NativeImageAsset
         get() = bitmap
 
     /**
@@ -58,24 +58,24 @@ class AndroidImage(val bitmap: Bitmap) : Image {
     }
 }
 
-internal fun Bitmap.Config.toImageConfig(): ImageConfig {
+internal fun Bitmap.Config.toImageConfig(): ImageAssetConfig {
     // Cannot utilize when statements with enums that may have different sets of supported
     // values between the compiled SDK and the platform version of the device.
     // As a workaround use if/else statements
     // See https://youtrack.jetbrains.com/issue/KT-30473 for details
     @Suppress("DEPRECATION")
     return if (this == Bitmap.Config.ALPHA_8) {
-        ImageConfig.Alpha8
+        ImageAssetConfig.Alpha8
     } else if (this == Bitmap.Config.RGB_565) {
-        ImageConfig.Rgb565
+        ImageAssetConfig.Rgb565
     } else if (this == Bitmap.Config.ARGB_4444) {
-        ImageConfig.Argb8888 // Always upgrade to Argb_8888
+        ImageAssetConfig.Argb8888 // Always upgrade to Argb_8888
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this == Bitmap.Config.RGBA_F16) {
-        ImageConfig.F16
+        ImageAssetConfig.F16
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this == Bitmap.Config.HARDWARE) {
-        ImageConfig.Gpu
+        ImageAssetConfig.Gpu
     } else {
-        ImageConfig.Argb8888
+        ImageAssetConfig.Argb8888
     }
 }
 

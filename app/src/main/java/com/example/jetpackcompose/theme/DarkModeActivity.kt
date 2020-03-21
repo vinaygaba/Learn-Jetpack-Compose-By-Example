@@ -16,10 +16,12 @@ import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.LayoutSize
 import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
+import androidx.ui.material.Card
 import androidx.ui.material.DrawerState
 import androidx.ui.material.IconButton
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ModalDrawerLayout
+import androidx.ui.material.Surface
 import androidx.ui.material.Switch
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.Typography
@@ -27,8 +29,6 @@ import androidx.ui.material.darkColorPalette
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Menu
 import androidx.ui.material.lightColorPalette
-import androidx.ui.material.surface.Card
-import androidx.ui.material.surface.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
@@ -194,7 +194,7 @@ fun ThemedScreen1Component(
                 )
             }
         }
-        Surface(modifier = LayoutFlexible(1f)) {
+        Surface(modifier = LayoutWeight(1f)) {
             Text(
                 text = LOREM_IPSUM_1, style = MaterialTheme.typography().body1,
                 modifier = LayoutPadding(16.dp)
@@ -227,7 +227,7 @@ fun ThemedScreen2Component(
                     modifier = LayoutPadding(start = 8.dp))
             }
         }
-        Surface(modifier = LayoutFlexible(1f)) {
+        Surface(modifier = LayoutWeight(1f)) {
             Text(text = LOREM_IPSUM_2, style = MaterialTheme.typography().body1,
                 modifier = LayoutPadding(16.dp)
             )
@@ -259,7 +259,7 @@ fun ThemedScreen3Component(
                     modifier = LayoutPadding(start = 8.dp))
             }
         }
-        Surface(modifier = LayoutFlexible(1f)) {
+        Surface(modifier = LayoutWeight(1f)) {
             Text(text = LOREM_IPSUM_3, style = MaterialTheme.typography().body1,
                 modifier = LayoutPadding(16.dp)
             )

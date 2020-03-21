@@ -19,7 +19,7 @@ import androidx.ui.input.KeyboardType
 import androidx.ui.input.PasswordVisualTransformation
 import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutPadding
-import androidx.ui.material.surface.Surface
+import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
 import androidx.ui.text.style.TextDecoration

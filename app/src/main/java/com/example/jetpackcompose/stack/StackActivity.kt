@@ -7,7 +7,7 @@ import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.graphics.Color
 import androidx.ui.layout.*
-import androidx.ui.material.surface.Surface
+import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight

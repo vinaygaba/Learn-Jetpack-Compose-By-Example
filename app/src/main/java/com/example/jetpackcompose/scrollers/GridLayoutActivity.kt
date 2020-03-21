@@ -13,7 +13,7 @@ import androidx.ui.layout.LayoutHeight
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Table
-import androidx.ui.material.surface.Card
+import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextAlign
 import androidx.ui.tooling.preview.Preview

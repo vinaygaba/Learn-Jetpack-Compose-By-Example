@@ -32,7 +32,7 @@ fun StateComponent() {
     TitleComponent("Example using state class to store state")
     Row(modifier = LayoutWidth.Fill) {
         Button(
-            modifier = LayoutPadding(16.dp) + LayoutFlexible(1f),
+            modifier = LayoutPadding(16.dp) + LayoutWeight(1f),
             elevation = 5.dp,
             onClick = {
                 counter++
@@ -41,7 +41,7 @@ fun StateComponent() {
         }
 
         Button(
-            modifier = LayoutPadding(16.dp) + LayoutFlexible(1f),
+            modifier = LayoutPadding(16.dp) + LayoutWeight(1f),
             elevation = 5.dp,
             onClick = {
                 counter = 0
@@ -58,7 +58,7 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
     TitleComponent("Example using Model class to store state")
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceEvenly) {
         Button(
-            modifier = LayoutPadding(16.dp) + LayoutFlexible(1f),
+            modifier = LayoutPadding(16.dp) + LayoutWeight(1f),
             elevation = 5.dp,
             onClick = {
                 counterState.counter++
@@ -67,7 +67,7 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
         }
 
         Button(
-            modifier = LayoutPadding(16.dp) + LayoutFlexible(1f),
+            modifier = LayoutPadding(16.dp) + LayoutWeight(1f),
             elevation = 5.dp,
             onClick = {
                 counterState.counter = 0

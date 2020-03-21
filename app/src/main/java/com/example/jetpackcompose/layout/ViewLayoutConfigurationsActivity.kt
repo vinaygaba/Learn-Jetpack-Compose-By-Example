@@ -58,12 +58,12 @@ class ViewLayoutConfigurationsActivity: AppCompatActivity() {
 @Composable
 fun RowEqualWeightComponent() {
     Row(modifier = LayoutWidth.Fill) {
-        Button(modifier = LayoutFlexible(1f) + LayoutPadding(4.dp)) {
+        Button(modifier = LayoutWeight(1f) + LayoutPadding(4.dp), onClick = {}) {
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button(modifier = LayoutFlexible(1f) + LayoutPadding(4.dp)) {
+        Button(modifier = LayoutWeight(1f) + LayoutPadding(4.dp), onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -73,12 +73,12 @@ fun RowEqualWeightComponent() {
 @Composable
 fun RowUnequalWeightComponent() {
     Row(modifier = LayoutWidth.Fill) {
-        Button(modifier = LayoutFlexible(0.66f) + LayoutPadding(4.dp)) {
+        Button(modifier = LayoutWeight(0.66f) + LayoutPadding(4.dp), onClick = {}) {
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button(modifier = LayoutFlexible(0.34f) + LayoutPadding(4.dp)) {
+        Button(modifier = LayoutWeight(0.34f) + LayoutPadding(4.dp), onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -88,12 +88,12 @@ fun RowUnequalWeightComponent() {
 @Composable
 fun RowAddSpaceBetweenViewsComponent() {
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceBetween) {
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -103,12 +103,12 @@ fun RowAddSpaceBetweenViewsComponent() {
 @Composable
 fun RowSpaceViewsEvenlyComponent() {
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceEvenly) {
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -118,12 +118,12 @@ fun RowSpaceViewsEvenlyComponent() {
 @Composable
 fun RowSpaceAroundViewsComponent() {
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceAround) {
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -133,12 +133,12 @@ fun RowSpaceAroundViewsComponent() {
 @Composable
 fun RowViewsCenteredComponent() {
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.Center) {
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -148,12 +148,12 @@ fun RowViewsCenteredComponent() {
 @Composable
 fun RowViewsArrangedInEndComponent() {
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.End) {
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button() {
+        Button(onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }

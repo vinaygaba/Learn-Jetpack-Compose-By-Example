@@ -14,10 +14,10 @@ import androidx.ui.layout.*
 import androidx.ui.material.DrawerState
 import androidx.ui.material.IconButton
 import androidx.ui.material.ModalDrawerLayout
+import androidx.ui.material.Surface
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Menu
-import androidx.ui.material.surface.Surface
 import androidx.ui.unit.dp
 
 class DrawerAppActivity: AppCompatActivity() {
@@ -116,7 +116,7 @@ fun Screen1Component(openDrawer: () -> Unit) {
                 }
             }
         )
-        Surface(color = Color(255, 222, 3), modifier = LayoutFlexible(1f)) {
+        Surface(color = Color(255, 222, 3), modifier = LayoutWeight(1f)) {
             Center {
                 Text(text = "Screen 1")
             }
@@ -135,7 +135,7 @@ fun Screen2Component(openDrawer: () -> Unit) {
                 }
             }
         )
-        Surface(color = Color(3, 54, 255), modifier = LayoutFlexible(1f)) {
+        Surface(color = Color(3, 54, 255), modifier = LayoutWeight(1f)) {
             Center {
                 Text(text = "Screen 2")
             }
@@ -154,7 +154,7 @@ fun Screen3Component(openDrawer: () -> Unit) {
                 }
             }
         )
-        Surface(color = Color(255, 2, 102), modifier = LayoutFlexible(1f)) {
+        Surface(color = Color(255, 2, 102), modifier = LayoutWeight(1f)) {
             Center {
                 Text(text = "Screen 3")
             }

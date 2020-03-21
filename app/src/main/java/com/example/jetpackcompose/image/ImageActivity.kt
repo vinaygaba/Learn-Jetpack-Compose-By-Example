@@ -11,15 +11,16 @@ import androidx.compose.state
 import androidx.ui.core.*
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
+import androidx.ui.foundation.Image
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.CornerSize
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.geometry.RRect
 import androidx.ui.geometry.Radius
 import androidx.ui.graphics.Canvas
-import androidx.ui.graphics.Image
 import androidx.ui.graphics.painter.ImagePainter
 import androidx.ui.layout.*
+import androidx.ui.material.Card
 import androidx.ui.res.loadImageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -68,8 +69,7 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     // be advisable to use the loadImageResource method as it loads the image asynchronously
     val image = loadImageResource(resId)
     image.resource.resource?.let {
-        Box(modifier = LayoutHeight.Max(200.dp) + ImagePainter(it)
-            .toModifier())
+        Image(image = it, modifier = LayoutHeight.Max(200.dp))
     }
 }
 
@@ -80,12 +80,10 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     val image = loadImageResource(resId)
     val shape = RoundedCornerShape(8.dp)
     image.resource.resource?.let {
-        Align(alignment = Alignment.Center) {
-            Box(modifier = LayoutHeight(200.dp) + LayoutWidth(200.dp)
-                    + RoundedCornerClipModifier(shape.topLeft, shape.topRight, shape.bottomLeft,
-                shape.bottomRight)
-                    + ImagePainter(it).toModifier(),
-                shape = shape)
+        Container(modifier = LayoutAlign.Center + LayoutHeight(200.dp) + LayoutWidth(200.dp)
+                + RoundedCornerClipModifier(shape.topLeft, shape.topRight, shape.bottomLeft,
+            shape.bottomRight)) {
+            Image(it)
         }
     }
 }
@@ -94,7 +92,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 fun NetworkImageComponentPicasso(url: String) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
-    var image by state<Image?> { null }
+    var image by state<AndroidImageAsset?> { null }
     var drawable by state<Drawable?> { null }
     onCommit(url) {
         val picasso = Picasso.get()
@@ -109,7 +107,7 @@ fun NetworkImageComponentPicasso(url: String) {
             }
 
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                image = bitmap?.let { AndroidImage(it) }
+                image = bitmap?.let { AndroidImageAsset(it) }
             }
         }
         picasso
@@ -126,9 +124,8 @@ fun NetworkImageComponentPicasso(url: String) {
     val theImage = image
     val theDrawable = drawable
     if (theImage != null) {
-        Container(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp) + ImagePainter(theImage)
-            .toModifier()) {
-
+        Container(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp)) {
+            Image(image = theImage)
         }
     } else if (theDrawable != null) {
         Canvas(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
@@ -145,7 +142,7 @@ fun NetworkImageComponentPicasso(url: String) {
  */
 @Composable
 fun NetworkImageComponentGlide(url: String) {
-    var image by state<Image?> { null }
+    var image by state<AndroidImageAsset?> { null }
     var drawable by state<Drawable?> { null }
     val context = ContextAmbient.current
     onCommit(url) {
@@ -157,7 +154,7 @@ fun NetworkImageComponentGlide(url: String) {
             }
 
             override fun onResourceReady(bitmap: Bitmap, transition: Transition<in Bitmap>?) {
-                image = AndroidImage(bitmap)
+                image = AndroidImageAsset(bitmap)
             }
         }
         glide
@@ -175,8 +172,9 @@ fun NetworkImageComponentGlide(url: String) {
     val theImage = image
     val theDrawable = drawable
     if (theImage != null) {
-        Box(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp) +
-                ImagePainter(theImage).toModifier())
+        Container(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp)) {
+            Image(image = theImage)
+        }
     } else if (theDrawable != null) {
         Canvas(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
             theDrawable.draw(this.nativeCanvas)

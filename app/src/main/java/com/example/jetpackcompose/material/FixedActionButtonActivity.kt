@@ -8,12 +8,10 @@ import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.*
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
 import androidx.ui.layout.*
 import androidx.ui.material.*
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Favorite
-import androidx.ui.material.surface.Card
 import androidx.ui.unit.dp
 import com.example.jetpackcompose.core.colors
 
@@ -40,6 +38,7 @@ fun ScaffoldWithBottomBarAndCutout() {
         },
         floatingActionButton = {
             FloatingActionButton(
+                onClick = {},
                 shape = fabShape,
                 color = MaterialTheme.colors().secondary
             ) {

@@ -12,9 +12,9 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.BottomNavigation
 import androidx.ui.material.BottomNavigationItem
+import androidx.ui.material.Card
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Favorite
-import androidx.ui.material.surface.Card
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent

@@ -11,7 +11,7 @@ import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.*
 import androidx.ui.layout.constraintlayout.ConstraintLayout
 import androidx.ui.layout.constraintlayout.ConstraintSet
-import androidx.ui.material.surface.Card
+import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight

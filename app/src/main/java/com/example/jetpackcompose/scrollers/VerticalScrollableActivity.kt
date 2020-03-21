@@ -10,7 +10,7 @@ import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.*
-import androidx.ui.material.surface.Card
+import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextAlign
 import androidx.ui.tooling.preview.Preview
@@ -42,10 +42,10 @@ fun AdapterListingScrollableComponent(personList: List<Person>) {
     // AdapterList is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecylerView tries to do as it's more optimized
     // than the VerticalScroller.
-    AdapterList(data = personList) { person ->
+    AdapterList(data = personList, modifier = LayoutHeight.Fill) { person ->
         // TODO(vinaygaba) Replace this with an index callback once its available.
         val index = personList.indexOf(person)
-        Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
+        Row(modifier = LayoutPadding(16.dp) + LayoutWidth.Fill) {
             Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                 modifier = LayoutWidth.Fill) {
                 Text(

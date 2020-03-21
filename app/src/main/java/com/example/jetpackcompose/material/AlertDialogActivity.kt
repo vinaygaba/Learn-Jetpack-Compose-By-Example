@@ -13,7 +13,7 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.AlertDialog
 import androidx.ui.material.Button
-import androidx.ui.material.surface.Card
+import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.unit.TextUnit

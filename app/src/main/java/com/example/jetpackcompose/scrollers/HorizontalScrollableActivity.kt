@@ -10,8 +10,9 @@ import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
 import androidx.ui.layout.Container
 import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
-import androidx.ui.material.surface.Card
+import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
@@ -49,8 +50,8 @@ class HorizontalScrollableActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions.
 @Composable
 fun HorizontalScrollableComponent(personList: List<Person>) {
-    HorizontalScroller {
-        Row() {
+    HorizontalScroller(modifier = LayoutWidth.Fill) {
+        Row {
             for((index, person) in personList.withIndex()) {
                 Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                     modifier = LayoutPadding(16.dp)

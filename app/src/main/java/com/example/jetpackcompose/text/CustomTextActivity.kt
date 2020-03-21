@@ -13,7 +13,7 @@ import androidx.ui.layout.LayoutPadding
 import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
 import androidx.ui.material.Divider
-import androidx.ui.material.surface.Surface
+import androidx.ui.material.Surface
 import androidx.ui.text.AnnotatedString
 import androidx.ui.text.SpanStyle
 import androidx.ui.text.TextStyle
@@ -180,7 +180,7 @@ fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: In
     Text(
         text = displayText,
         modifier = LayoutPadding(16.dp),
-        style = style,
+        style = style ?: TextStyle.Default,
         overflow = TextOverflow.Ellipsis,
         maxLines = maxLines ?: Int.MAX_VALUE
     )

@@ -11,6 +11,7 @@ import androidx.ui.graphics.Color
 import androidx.ui.graphics.SolidColor
 import androidx.ui.layout.Column
 import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.LayoutSize
 import androidx.ui.material.Button
 import androidx.ui.material.OutlinedButton
 import androidx.ui.material.TextButton
@@ -20,7 +21,7 @@ class ButtonActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column {
+            Column(modifier = LayoutSize.Fill) {
                 SimpleButtonComponent()
                 SimpleButtonWithBorderComponent()
                 RoundedCornerButtonComponent()
@@ -35,7 +36,8 @@ class ButtonActivity: AppCompatActivity() {
 fun SimpleButtonComponent() {
     Button(
         modifier = LayoutPadding(16.dp),
-        elevation = 5.dp) {
+        elevation = 5.dp,
+        onClick = {}) {
         Text(text = "Simple button", modifier = LayoutPadding(16.dp))
     }
 }
@@ -43,6 +45,7 @@ fun SimpleButtonComponent() {
 @Composable
 fun SimpleButtonWithBorderComponent() {
     Button(
+        onClick = {},
         modifier = LayoutPadding(16.dp),
         elevation = 5.dp,
         border = Border(size = 5.dp, brush = SolidColor(Color.Black))) {
@@ -53,6 +56,7 @@ fun SimpleButtonWithBorderComponent() {
 @Composable
 fun RoundedCornerButtonComponent() {
     Button(
+        onClick = {},
         modifier = LayoutPadding(16.dp),
         shape = RoundedCornerShape(16.dp),
         elevation = 5.dp) {
@@ -63,6 +67,7 @@ fun RoundedCornerButtonComponent() {
 @Composable
 fun OutlinedButtonComponent() {
     OutlinedButton(
+        onClick = {},
         modifier = LayoutPadding(16.dp)) {
         Text(text = "Outlined Button", modifier = LayoutPadding(16.dp))
     }
@@ -71,6 +76,7 @@ fun OutlinedButtonComponent() {
 @Composable
 fun TextButtonComponent() {
     TextButton(
+        onClick = {},
         modifier = LayoutPadding(16.dp)) {
         Text(text = "Text Button", modifier = LayoutPadding(16.dp))
     }
