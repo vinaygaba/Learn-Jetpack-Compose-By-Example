@@ -14,11 +14,13 @@ import androidx.ui.graphics.Color
 import androidx.ui.layout.*
 import androidx.ui.material.DrawerState
 import androidx.ui.material.IconButton
+import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ModalDrawerLayout
 import androidx.ui.material.Surface
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Menu
+import androidx.ui.text.TextStyle
 import androidx.ui.unit.dp
 
 class DrawerAppActivity: AppCompatActivity() {
@@ -69,7 +71,13 @@ fun DrawerContentComponent(
                 DrawerAppScreen.Screen1
             closeDrawer()
         }) {
-            Text(text = DrawerAppScreen.Screen1.name, modifier = LayoutPadding(16.dp))
+            Surface(modifier = LayoutWidth.Fill, color = if (currentScreen.value == DrawerAppScreen.Screen1) {
+                MaterialTheme.colors().secondary
+            } else {
+                MaterialTheme.colors().surface
+            }) {
+                Text(text = DrawerAppScreen.Screen1.name, modifier = LayoutPadding(16.dp))
+            }
         }
 
         Clickable(onClick = {
@@ -77,7 +85,14 @@ fun DrawerContentComponent(
                 DrawerAppScreen.Screen2
             closeDrawer()
         }) {
-            Text(text = DrawerAppScreen.Screen2.name, modifier = LayoutPadding(16.dp))
+            Surface(modifier = LayoutWidth.Fill, color = if (currentScreen.value ==
+                DrawerAppScreen.Screen2) {
+                MaterialTheme.colors().secondary
+            } else {
+                MaterialTheme.colors().surface
+            }) {
+                Text(text = DrawerAppScreen.Screen2.name, modifier = LayoutPadding(16.dp))
+            }
         }
 
         Clickable(onClick = {
@@ -85,7 +100,14 @@ fun DrawerContentComponent(
                 DrawerAppScreen.Screen3
             closeDrawer()
         }) {
-            Text(text = DrawerAppScreen.Screen3.name, modifier = LayoutPadding(16.dp))
+            Surface(modifier = LayoutWidth.Fill, color = if (currentScreen.value ==
+                DrawerAppScreen.Screen3) {
+                MaterialTheme.colors().secondary
+            } else {
+                MaterialTheme.colors().surface
+            }) {
+                Text(text = DrawerAppScreen.Screen3.name, modifier = LayoutPadding(16.dp))
+            }
         }
     }
 }
