@@ -7,6 +7,7 @@ import androidx.compose.MutableState
 import androidx.compose.state
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Icon
 import androidx.ui.graphics.Color
@@ -60,7 +61,9 @@ fun DrawerContentComponent(
     currentScreen: MutableState<DrawerAppScreen>,
     closeDrawer: () -> Unit
 ) {
-    Column(modifier = LayoutHeight.Fill) {
+    // Drawer content isn't taking into account the appbar so the first row was getting hidden
+    // behind the app bar in 0.1.0-dev07. So need to add an offset in the y direction.
+    Column(modifier = LayoutSize.Fill + LayoutOffset(y = 56.dp, x = 0.dp)) {
         Clickable(onClick = {
             currentScreen.value =
                 DrawerAppScreen.Screen1
@@ -116,7 +119,7 @@ fun Screen1Component(openDrawer: () -> Unit) {
                 }
             }
         )
-        Surface(color = Color(255, 222, 3), modifier = LayoutWeight(1f)) {
+        Surface(color = Color(0xFFffd7d7.toInt()), modifier = LayoutWeight(1f)) {
             Center {
                 Text(text = "Screen 1")
             }
@@ -135,7 +138,7 @@ fun Screen2Component(openDrawer: () -> Unit) {
                 }
             }
         )
-        Surface(color = Color(3, 54, 255), modifier = LayoutWeight(1f)) {
+        Surface(color = Color(0xFFffe9d6.toInt()), modifier = LayoutWeight(1f)) {
             Center {
                 Text(text = "Screen 2")
             }
@@ -154,7 +157,7 @@ fun Screen3Component(openDrawer: () -> Unit) {
                 }
             }
         )
-        Surface(color = Color(255, 2, 102), modifier = LayoutWeight(1f)) {
+        Surface(color = Color(0xFFfffbd0.toInt()), modifier = LayoutWeight(1f)) {
             Center {
                 Text(text = "Screen 3")
             }
