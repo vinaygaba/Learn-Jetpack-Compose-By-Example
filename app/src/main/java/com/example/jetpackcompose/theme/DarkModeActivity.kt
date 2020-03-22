@@ -184,7 +184,8 @@ fun ThemedScreen1Component(
             }
         )
         Card(
-            modifier = LayoutWidth.Fill
+            modifier = LayoutWidth.Fill,
+            color = MaterialTheme.colors().surface
         ) {
             Row(modifier = LayoutPadding(16.dp)) {
                 Switch(checked = overrideDarkMode, onCheckedChange = onCheckChanged)
@@ -219,7 +220,8 @@ fun ThemedScreen2Component(
             }
         )
         Card(
-            modifier = LayoutWidth.Fill
+            modifier = LayoutWidth.Fill,
+            color = MaterialTheme.colors().surface
         ) {
             Row(modifier = LayoutPadding(16.dp)) {
                 Switch(checked = overrideDarkMode, onCheckedChange = onCheckChanged)
@@ -251,7 +253,8 @@ fun ThemedScreen3Component(
             }
         )
         Card(
-            modifier = LayoutWidth.Fill
+            modifier = LayoutWidth.Fill,
+            color = MaterialTheme.colors().surface
         ) {
             Row(modifier = LayoutPadding(16.dp)) {
                 Switch(checked = overrideDarkMode, onCheckedChange = onCheckChanged)
