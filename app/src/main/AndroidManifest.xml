@@ -124,6 +124,12 @@
             android:exported="true"
             android:label="@string/title_theme_example"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.example.jetpackcompose.layout.LayoutModifierActivity"
+            android:exported="true"
+            android:label="@string/title_layout_modifier_examples"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

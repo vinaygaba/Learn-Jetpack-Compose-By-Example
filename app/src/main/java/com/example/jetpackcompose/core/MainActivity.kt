@@ -10,6 +10,7 @@ import com.example.jetpackcompose.customview.CustomViewActivity
 import com.example.jetpackcompose.customview.CustomViewPainActivity
 import com.example.jetpackcompose.image.ImageActivity
 import com.example.jetpackcompose.layout.ConstraintLayoutActivity
+import com.example.jetpackcompose.layout.LayoutModifierActivity
 import com.example.jetpackcompose.material.*
 import com.example.jetpackcompose.scrollers.GridLayoutActivity
 import com.example.jetpackcompose.scrollers.HorizontalScrollableActivity
@@ -111,5 +112,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startThemeExample(view: View) {
         startActivity(Intent(this, DarkModeActivity::class.java))
+    }
+
+    fun startLayoutModifierExample(view: View) {
+        startActivity(Intent(this, LayoutModifierActivity::class.java))
     }
 }
