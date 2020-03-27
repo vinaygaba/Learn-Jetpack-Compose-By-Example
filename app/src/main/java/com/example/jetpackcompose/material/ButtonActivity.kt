@@ -20,6 +20,10 @@ import androidx.ui.unit.dp
 class ButtonActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // This is an extension function of Activity that sets the @Composable function that's
+        // passed to it as the root view of the activity. This is meant to replace the .xml file
+        // that we would typically set using the setContent(R.id.xml_file) method. The setContent
+        // block defines the activity's layout.
         setContent {
             Column(modifier = LayoutSize.Fill) {
                 SimpleButtonComponent()
@@ -32,6 +36,8 @@ class ButtonActivity: AppCompatActivity() {
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions.
 @Composable
 fun SimpleButtonComponent() {
     Button(

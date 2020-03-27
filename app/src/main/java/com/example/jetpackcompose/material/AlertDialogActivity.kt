@@ -37,6 +37,8 @@ class AlertDialogActivity: AppCompatActivity() {
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions.
 @Composable
 fun ClickableText() {
     var showPopup by state { false }
