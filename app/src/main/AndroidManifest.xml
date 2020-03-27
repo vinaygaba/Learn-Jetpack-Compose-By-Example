@@ -114,7 +114,12 @@
             android:label="@string/title_bottom_navigation_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.jetpackcompose.animation.AnimationActivity"
+            android:name="com.example.jetpackcompose.animation.Animation1Activity"
+            android:exported="true"
+            android:label="@string/title_animation_example"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.jetpackcompose.animation.Animation2Activity"
             android:exported="true"
             android:label="@string/title_animation_example"
             android:theme="@style/AppTheme.NoActionBar" />

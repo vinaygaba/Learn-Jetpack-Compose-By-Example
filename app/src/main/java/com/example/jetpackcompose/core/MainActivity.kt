@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jetpackcompose.R
-import com.example.jetpackcompose.animation.AnimationActivity
+import com.example.jetpackcompose.animation.Animation1Activity
+import com.example.jetpackcompose.animation.Animation2Activity
 import com.example.jetpackcompose.customview.CustomViewActivity
 import com.example.jetpackcompose.customview.CustomViewPainActivity
 import com.example.jetpackcompose.image.ImageActivity
@@ -106,8 +107,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, BottomNavigationActivity::class.java))
     }
 
-    fun startAnimationExample(view: View) {
-        startActivity(Intent(this, AnimationActivity::class.java))
+    fun startAnimation1Example(view: View) {
+        startActivity(Intent(this, Animation1Activity::class.java))
+    }
+
+    fun startAnimation2Example(view: View) {
+        startActivity(Intent(this, Animation2Activity::class.java))
     }
 
     fun startThemeExample(view: View) {

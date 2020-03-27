@@ -42,7 +42,8 @@
     <string name="tv_fab_example">Fixed Action Button Component</string>
     <string name="tv_constraint_layout_example">Constraint Layout Components</string>
     <string name="tv_bottom_navigation_example">Bottom Navigation Components</string>
-    <string name="tv_animation_example">Animation Components</string>
+    <string name="tv_animation1_example">Rotation Animation Component</string>
+    <string name="tv_animation2_example">Changing Color Animation Component</string>
     <string name="tv_theme_example">Theme Component</string>
     <string name="tv_layout_modifier_example">Layout Modifier Components</string>
 </resources>
