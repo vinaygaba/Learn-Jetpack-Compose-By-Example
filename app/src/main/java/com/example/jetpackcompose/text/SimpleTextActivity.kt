@@ -16,7 +16,7 @@ class SimpleTextActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Center is a composable that centers all the child componsables that are passed to it.
+            // Center is a composable that centers all the child composables that are passed to it.
             // In this example, we pass a composable called SimpleText to the Center composable.
             Center {
                 // Here, SimpleText is a Composable function which is going to describe the contents of
@@ -39,13 +39,15 @@ fun SimpleText(displayText: String) {
 }
 
 
-// Android Studio lets you preview your composable functions within the IDE itself, instead of
-// needing to download the app to an Android device or emulator. This is a fantastic feature as you
-// can preview all your custom components(read composable functions) from the comforts of the IDE.
-// The main restriction is, the composable function must not take any parameters. If your composable
-// function requires a parameter, you can simply wrap your component inside another composable
-// function that doesn't take any parameters and call your composable function with the appropriate
-// params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+ */
 @Preview
 @Composable
 fun SimpleTextPreview() {

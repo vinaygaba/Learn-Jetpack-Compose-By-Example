@@ -29,7 +29,9 @@ class FixedActionButtonActivity: AppCompatActivity() {
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions.
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun ScaffoldWithBottomBarAndCutout() {
     val scaffoldState = remember { ScaffoldState() }
@@ -55,6 +57,8 @@ fun ScaffoldWithBottomBarAndCutout() {
         },
         floatingActionButtonPosition = Scaffold.FabPosition.CenterDocked,
         bodyContent = { modifier ->
+            // Vertical scroller is a composable that adds the ability to scroll through the
+            // child views
             VerticalScroller {
                 Column(modifier) {
                     repeat(100) {

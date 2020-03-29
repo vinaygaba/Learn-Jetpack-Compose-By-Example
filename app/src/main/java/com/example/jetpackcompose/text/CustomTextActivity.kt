@@ -38,8 +38,10 @@ class CustomTextActivity : AppCompatActivity() {
         // block defines the activity's layout.
         setContent {
             // Vertical scroller is a composable that adds the ability to scroll through the
-            // child views
+            // child views. We should think of composable functions to be similar to lego blocks -
+            // each composable function is in turn built up of smaller composable functions
             VerticalScroller {
+                // Column is a composable that places its children in a vertical sequence.
                 Column {
                     CustomStyledText(
                         "This is the default text style"
@@ -170,7 +172,9 @@ class CustomTextActivity : AppCompatActivity() {
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions.
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: Int? = null) {
     // We should think of composable functions to be similar to lego blocks - each composable
@@ -187,13 +191,15 @@ fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: In
     Divider(color = Color.Gray)
 }
 
-// Android Studio lets you preview your composable functions within the IDE itself, instead of
-// needing to download the app to an Android device or emulator. This is a fantastic feature as you
-// can preview all your custom components(read composable functions) from the comforts of the IDE.
-// The main restriction is, the composable function must not take any parameters. If your composable
-// function requires a parameter, you can simply wrap your component inside another composable
-// function that doesn't take any parameters and call your composable function with the appropriate
-// params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+ */
 @Preview
 @Composable
 fun CustomStyledTextPreview() {

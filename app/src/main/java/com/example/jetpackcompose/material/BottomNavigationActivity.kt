@@ -46,7 +46,9 @@ class BottomNavigationActivity: AppCompatActivity() {
 val listItems = listOf("Games", "Apps", "Movies", "Books")
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions.
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun BottomNavigationAlwaysShowLabelComponent() {
     var selectedIndex by state { 0 }

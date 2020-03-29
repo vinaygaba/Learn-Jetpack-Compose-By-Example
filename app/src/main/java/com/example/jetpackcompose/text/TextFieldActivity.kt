@@ -23,6 +23,7 @@ import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
 import androidx.ui.text.style.TextDecoration
+import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.TextUnit
 import androidx.ui.unit.dp
 import com.example.jetpackcompose.core.hideKeyboard
@@ -36,8 +37,15 @@ class TextFieldActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
+            // Vertical scroller is a composable that adds the ability to scroll through the
+            // child views. We should think of composable functions to be similar to lego blocks -
+            // each composable function is in turn built up of smaller composable functions
             VerticalScroller {
+                // Column is a composable that places its children in a vertical sequence. You
+                // can think of it similar to a LinearLayout with the vertical orientation.
                 Column {
+                    // Title Component is a custom composable that I created which is capable of
+                    // rendering text on the screen in a certain font style & text size.
                     TitleComponent("This is a Simple Text Input field")
                     SimpleTextInputComponent()
 
@@ -58,9 +66,28 @@ class TextFieldActivity : AppCompatActivity() {
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun SimpleTextInputComponent() {
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+        // TextField is a composable that is capable of accepting text user input. It renders the
+        // value that you pass to the "value" field. In order to update this as the user is
+        // typing a new string, we make use of the state delegate. Reacting to state changes is
+        // the core behavior of Compose. Any composable that reads the value of the textValue
+        // field will recompose whenever this value is changed. In this example, since the
+        // TextField is reading the value from the textValue value, and that's also the value
+        // that we update as the user types (through the onValueChange lambda), this composable
+        // is redrawn and updated with the latest value.
         var textValue by state { "Enter your text here" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
@@ -77,6 +104,9 @@ fun CustomStyleTextInputComponent() {
         var textValue by state { "Enter your text here" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
+            // You can also customize the appearance of the TextInput by passing a TextStyle
+            // configuration to the TextField composable. If you don't pass this, it's just going
+            // to use the default values for all the properties.
             textStyle = TextStyle(
                 color = Color.Blue,
                 fontSize = TextUnit.Companion.Sp(20),
@@ -96,6 +126,8 @@ fun NumberTextInputComponent() {
         var textValue by state { "123" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
+            // Setting the keyboard type allows you to configure what kind of data you can input
+            // in this TextInput. Some examples are number, phone, email, password, etc.
             keyboardType = KeyboardType.Number,
             onValueChange = {
                 textValue = it
@@ -112,6 +144,9 @@ fun SearchImeActionInputComponent() {
         var textValue by state { "Enter your search query here" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
+            // Changing the imeAction allows you to change the primary icon of the keyboard which
+            // is typically shown in the bottom right corner of the keyboard. Some examples of
+            // ImeActions are search, send, done, go, etc.
             imeAction = ImeAction.Search,
             onImeActionPerformed = {
                 hideKeyboard(context)
@@ -131,6 +166,12 @@ fun PasswordVisualTransformationInputComponent() {
             modifier = LayoutPadding(16.dp),
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
+            // Visual transformation is used to modify the visual output of the input field. In
+            // this example, I'm using an existing visual transformation - the
+            // PasswordVisualTransformation. All it does is that it transforms any input character
+            // into "•". The text itself isn't altered, just its visual appearance is. You can
+            // easily created you own visual transformations by implementing the
+            // VisualTransformation interface.
             visualTransformation = PasswordVisualTransformation(),
             onValueChange = {
                 textValue = it
@@ -172,3 +213,45 @@ fun AutoFillTextInputComponent() {
         )
     }
 }
+
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+*/
+@Preview
+@Composable
+fun SimpleTextInputComponentPreview() {
+    SimpleTextInputComponent()
+}
+
+@Preview
+@Composable
+fun CustomStyleTextInputComponentPreview() {
+    CustomStyleTextInputComponent()
+}
+
+@Preview
+@Composable
+fun NumberTextInputComponentPreview() {
+    NumberTextInputComponent()
+}
+
+@Preview
+@Composable
+fun SearchImeActionInputComponentPreview() {
+    SearchImeActionInputComponent()
+}
+
+@Preview
+@Composable
+fun PasswordVisualTransformationInputComponentPreview() {
+    PasswordVisualTransformationInputComponent()
+}
+
+
+

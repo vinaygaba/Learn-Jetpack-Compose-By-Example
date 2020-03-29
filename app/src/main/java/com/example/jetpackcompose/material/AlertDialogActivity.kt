@@ -28,9 +28,12 @@ class AlertDialogActivity: AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Here, ClickableText is a @Composable function which is going to describe the contents
-            // of this activity that will be rendered on the screen.
+            // Column is a composable that places its children in a vertical sequence. We should
+            // think of composable functions to be similar to lego blocks - each composable
+            // function is in turn built up of smaller composable functions
             Column {
+                // Here, ClickableText is a @Composable function which is going to describe the
+                // contents of this activity that will be rendered on the screen.
                 ClickableText()
             }
         }
@@ -38,7 +41,9 @@ class AlertDialogActivity: AppCompatActivity() {
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions.
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun ClickableText() {
     var showPopup by state { false }

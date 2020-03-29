@@ -26,7 +26,11 @@ class LayoutModifierActivity: AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
+            // Vertical scroller is a composable that adds the ability to scroll through the
+            // child views. We should think of composable functions to be similar to lego blocks -
+            // each composable function is in turn built up of smaller composable functions
             VerticalScroller {
+                // Column is a composable that places its children in a vertical sequence.
                 Column {
                     SamePaddingComponent()
                     CustomPaddingComponent()
@@ -39,7 +43,9 @@ class LayoutModifierActivity: AppCompatActivity() {
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions.
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun SamePaddingComponent() {
     Surface(color = colors[0]) {

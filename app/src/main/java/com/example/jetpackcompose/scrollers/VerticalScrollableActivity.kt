@@ -36,7 +36,9 @@ class VerticalScrollableActivity : AppCompatActivity() {
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions.
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun AdapterListingScrollableComponent(personList: List<Person>) {
     // AdapterList is a vertically scrolling list that only composes and lays out the currently
@@ -68,6 +70,7 @@ fun VerticalScrollableComponent(personList: List<Person>) {
     // replacement for [RecyclerView]. Instead look at the example below that uses AdapterList
     // which is supposed to be more efficient.
     VerticalScroller {
+        // Column is a composable that places its children in a vertical sequence.
         Column {
             for ((index,person) in personList.withIndex()) {
                 Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
