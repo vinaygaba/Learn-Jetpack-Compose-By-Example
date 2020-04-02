@@ -46,12 +46,19 @@ class AlertDialogActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun ClickableText() {
+    // Reacting to state changes is core to how Jetpack Compose works. This state variable "showPopup"
+    // is used to control whether the popup should be shown. The value is toggled every time the
+    // text "Click to see dialog" is clicked. Every time the value of this variable changes,
+    // the relevant sub-composables that use showPopup are automatically recomposed.
     var showPopup by state { false }
     // Clickable wraps the child composable and enables it to react to a click through the onClick
     // callback similar to the onClick listener that we are accustomed to on Android.
     // Here, we just change the value of showPopup to be true every time we click on the text that
     // says "Click to see Popup"
     Clickable(onClick = { showPopup = true }) {
+        // You can think of Modifiers as implementations of the decorators pattern that are used to
+        // modify the composable that its applied to. In the example below, we add a padding of
+        // 8dp to the Card composable and 16dp to the Text composable.
         Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp),
             color = Color.LightGray) {
             Text(text = "Click to see dialog", modifier = LayoutPadding(16.dp),
@@ -60,10 +67,18 @@ fun ClickableText() {
             )
         }
     }
-
+    
+    // A lambda that toggles the showPopup value to off. We pass it to the onDismiss equivalent
+    // callback of the AlertDialog.
     val onPopupDismissed = { showPopup = false }
 
+    // We want to show the popup only if the showPopup variable is toggled to true. Since Jetpack
+    // Compose uses the declarative way of programming, we can easily decide what needs to shows 
+    // vs hidden based on which branch of code is being executed. In this example, we display the
+    // AlertDialog only when the showPopup variable is set to true or else this branch is not 
+    // executed at all and thus the alert dialog remains hidden. 
     if (showPopup) {
+        // Predefined composable provided by the material implementations of Jetpack Compose.
         AlertDialog(
             onCloseRequest = onPopupDismissed,
             text = {

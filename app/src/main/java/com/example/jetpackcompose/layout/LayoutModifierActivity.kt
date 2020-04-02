@@ -48,9 +48,15 @@ class LayoutModifierActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun SamePaddingComponent() {
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
     Surface(color = colors[0]) {
         Text(
             text = "This text has equal padding of 16dp in all directions",
+            // You can think of Modifiers as implementations of the decorators pattern that are used to
+            // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+            // 16dp to the Text composable.
             modifier = LayoutPadding(16.dp),
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif)
         )
@@ -59,10 +65,16 @@ fun SamePaddingComponent() {
 
 @Composable
 fun CustomPaddingComponent() {
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
     Surface(color = colors[1]) {
         Text(
             text = "This text has 32dp start padding, 4dp end padding, 32dp top padding & 0dp " +
                     "bottom padding padding in each direction",
+            // You can think of Modifiers as implementations of the decorators pattern that are used to
+            // modify the composable that its applied to. In this example, we assign variable
+            // LayoutPadding to the Text composable.
             modifier = LayoutPadding(start = 32.dp, end = 4.dp, top = 32.dp, bottom = 0.dp),
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif)
         )
@@ -71,6 +83,14 @@ fun CustomPaddingComponent() {
 
 @Composable
 fun OffsetComponent() {
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we make use of the
+    // LayoutOffset modifier that allows the composable to be shifted along the x & y direction
+    // by the user specified amount.
     Surface(color = colors[2], modifier = LayoutOffset(x = 8.dp, y = 8.dp)) {
         Text(
             text = "This text is using an offset of 8 dp instead of padding. Padding also ends up" +
@@ -83,6 +103,13 @@ fun OffsetComponent() {
 
 @Composable
 fun AspectRatioComponent() {
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we make use of the
+    // LayoutAspectRatio modifier that attempts to size a layout to match a specified aspect ratio.
     Surface(color = colors[3], modifier = LayoutAspectRatio(16/9f) +
             LayoutPadding(top = 16.dp)) {
         Text(

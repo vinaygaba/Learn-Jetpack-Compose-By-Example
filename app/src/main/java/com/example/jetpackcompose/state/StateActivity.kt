@@ -10,6 +10,7 @@ import androidx.ui.core.setContent
 import androidx.ui.layout.*
 import androidx.ui.material.Button
 import androidx.ui.material.Divider
+import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -89,7 +90,7 @@ fun StateComponent() {
  * as a mechanism to allow efficient recomposition & hold state that allows other composables to
  * observe the state to recompose whenever the value is updated. You would want to use the @Model
  * annotation whenever your model class is trying to class multiple values and just use the state
- * composable like in the example above whenever you want to track a single value. 
+ * composable like in the example above whenever you want to track a single value.
  */
 @Composable
 fun ModelComponent(counterState: CounterState = CounterState()) {

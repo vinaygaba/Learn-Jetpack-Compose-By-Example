@@ -35,12 +35,29 @@ class StackActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun StackComponent() {
+    // Stack is a predefined component that is useful for drawing children that overlap. The
+    // children will always be drawn in the order they are specified in the body of the Stack. It
+    // works similar to the FrameLayout that we are used to using in the original UI toolkit.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are
+    // used to modify the composable that its applied to. In this example, we assign a
+    // ask the Stack to occupy the full available width using the LayoutWidth.Fill modifier and
+    // give it a height of 200 dp.
     Stack(modifier = LayoutWidth.Fill + LayoutHeight(200.dp)) {
+        // LocalResourceImageComponent is a composable that takes in an image resource id and
+        // display it on the screen. Take a look at its implementation to learn more.
         LocalResourceImageComponent(resId = R.drawable.lenna)
+        // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+        // Material Design specification. It's generally used to change the background color, add
+        // elevation, clip or add background shape to its children composables.
         Surface(color = Color.Gray) {
-            Text("Title", style = TextStyle(fontFamily = FontFamily.Monospace,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = LayoutPadding(16.dp)
-                    + LayoutWidth.Fill
+            // Text is a predefined composable that does exactly what you'd expect it to -
+            // display text on the screen. It allows you to customize its appearance using the
+            // style property.
+            Text("Title",
+                style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
+                    fontSize = 14.sp),
+                modifier = LayoutPadding(16.dp) + LayoutWidth.Fill
             )
         }
     }

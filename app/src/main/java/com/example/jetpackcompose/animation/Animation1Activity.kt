@@ -30,12 +30,40 @@ class Animation1Activity: AppCompatActivity() {
     }
 }
 
+/**
+ * PropKeys are used in Jetpack Compose animations to hold properties that are going to be
+ * updated by the animation transitions. In this example, we use a [FloatPropKey] to hold a float
+ * value that represents the value of rotation.
+ */
 private val rotation = FloatPropKey()
-private val rotationTransitionDefinition = transitionDefinition {
-    state(0){ this[rotation] = 0f }
-    state(360) { this[rotation] = 360f }
 
-    transition(0 to 360) {
+/**
+ * Animations in Jetpack Compose use the [Transition] composable. This transition API depends on
+ * transitions between states & changing values, similar to how ValueAnimators worked in the older
+ * Android UI Toolkit. Transition's do not care about the actual implementation itself, they just
+ * allow you to manipulate and transition between different states and also let you specify what
+ * the interpolation, duration & behavior of these transitions should be like. Read through the
+ * comments below to understand this better.
+ */
+private val rotationTransitionDefinition = transitionDefinition {
+    // We define a transitionDefinition that's meant to be an exhaustive list of all states &
+    // state transitions that are a part of your animation. Below, we define two states - state 0
+    // & state 360. For each state, we also define the value of the properties when they are in
+    // the respective state. For example - for state A, we assign the rotation prop the value 0f
+    // and for state B, we assign the rotation prop the value 360f.
+    state("A"){ this[rotation] = 0f }
+    state("B") { this[rotation] = 360f }
+
+    // Here we define the transition spec i.e what action do we need to do as we transition from
+    // one state to another. Below, we define a TransitionSpec for the transition
+    // state A -> state B.
+    transition("A" to "B") {
+        // For the transition from state A -> state B, we assign a AnimationBuilder to the
+        // rotation prop where we specify how we want to update the value of the rotation prop
+        // between state A & B, what the duration of this animation should be, what kind of
+        // interpolator to use for the animation & how many iterations of this animation are needed.
+        // Since we want the rotation to be continous, we use the repeatable AnimationBuilder and
+        // set the iterations to Infinite.
         rotation using repeatable {
             animation = tween {
                 duration = 3000
@@ -52,17 +80,37 @@ private val rotationTransitionDefinition = transitionDefinition {
 // built up of smaller composable functions.
 @Composable
 fun RotatingSquareComponent() {
+    // Center is a composable that centers all the child composables that are passed to it.
     Center {
+        // Transition composable creates a state-based transition using the animation configuration
+        // defined in [TransitionDefinition]. In the example below, we use the
+        // rotationTransitionDefinition that we discussed above and also specify the initial
+        // state of the animation & the state that we intend to transition to. The expectation is
+        // that the transitionDefinition allows for the transition from the "initialState" to the
+        // "toState".
         Transition(
             definition = rotationTransitionDefinition,
-            initState = 0,
-            toState = 360
+            initState = "A",
+            toState = "B"
         ) { state ->
+            // We use the Canvas composable that gives you access to a canvas that you can draw
+            // into.
             Canvas(modifier = LayoutSize(200.dp)) {
                 save()
+                // translate the canvas to the center of the screen so that we can rotate at the
+                // correct pivot point.
                 translate(size.width.value/2, size.height.value/2)
+                // As the Transition is changing the interpolating the value of your props based
+                // on the "from state" and the "to state", you get access to all the values
+                // including the intermediate values as they are being updated. We can use the
+                // state variable and access the relevant props/properties to update the relevant
+                // composables/layouts. Below, we use state[rotation] to get the latest value of
+                // rotation (it will be a value between 0 & 360 depending on where it is in the
+                // transition) and use it to rotate our canvas.
                 rotate(state[rotation])
+                // translate the same distance back as we are done rotating the canvas
                 translate(-size.width.value/2, -size.height.value/2)
+                // draw the rectangle on the screen.
                 drawRect(size.toRect(), Paint().apply { color = Color(255, 138, 128) })
                 restore()
             }
