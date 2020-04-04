@@ -34,20 +34,43 @@ class FixedActionButtonActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun ScaffoldWithBottomBarAndCutout() {
+    // remember is a composable that allows you to store values that survive recomposition. That
+    // means that the scaffoldState variable will continue to hold its value even if the
+    // ScaffoldWithBottomBarAndCutout is recomposed. The value is calculated only during
+    // the first composition and every subsequent recomposition returns the value produced by the
+    // original composition.
+
+    // ScaffoldState is a @Model class that holds basic screen state relevant to the Scaffold
+    // composable eg. drawerState i.e whether the drawer is open or closed.
     val scaffoldState = remember { ScaffoldState() }
+
     // Consider negative values to mean 'cut corner' and positive values to mean 'round corner'
     val fabShape = RoundedCornerShape(50)
 
+    // Scaffold is a pre-defined composable that implements the basic material design visual
+    // layout structure. It takes in child composables for all the common elements that you see
+    // in an app using material design - app bar, bottom app bar, floating action button, etc. It
+    // also takes care of laying out these child composables in the correct positions - eg bottom
+    // app bar is automatically placed at the bottom of the screen even though I didn't specify
+    // that explicitly.
     Scaffold(
         scaffoldState = scaffoldState,
         topAppBar = { TopAppBar(title = { Text("Scaffold Examples") }) },
         bottomAppBar = { fabConfiguration ->
+            // We specify the shape of the FAB bu passing a shape composable (fabShape) as a
+            // parameter to cutoutShape property of the BottomAppBar. It automatically creates a
+            // cutout in the BottomAppBar based on the shape of the Floating Action Button.
             BottomAppBar(fabConfiguration = fabConfiguration, cutoutShape = fabShape) {}
         },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {},
+                // We specify the same shape that we passed as the cutoutShape above.
                 shape = fabShape,
+                // We use the secondary color from the current theme. It uses the defaults when
+                // you don't specify a theme (this example doesn't specify a theme either hence
+                // it will just use defaults. Look at DarkModeActivity if you want to see an
+                // example of using themes.
                 color = MaterialTheme.colors().secondary
             ) {
                 IconButton(onClick = {}) {
@@ -60,8 +83,13 @@ fun ScaffoldWithBottomBarAndCutout() {
             // Vertical scroller is a composable that adds the ability to scroll through the
             // child views
             VerticalScroller {
+                // Column is a composable that places its children in a vertical sequence. You
+                // can think of it similar to a LinearLayout with the vertical orientation.
                 Column(modifier) {
                     repeat(100) {
+                        // Card composable is a predefined composable that is meant to represent
+                        // the card surface as specified by the Material Design specification. We
+                        // also configure it to have rounded corners and apply a modifier.
                         Card(color = colors[it % colors.size],
                             shape = RoundedCornerShape(8.dp),
                             modifier = LayoutPadding(8.dp)) {

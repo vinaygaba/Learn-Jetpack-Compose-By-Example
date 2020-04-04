@@ -462,10 +462,15 @@ fun MaterialRippleComponent() {
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the LayoutWidth.Fill modifier.
     Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
+        // Ripple is a pre-defined composable that creates a pressed state visual indicator when
+        // the child composables that its wrapping are pressed. It adheres to the Material Design
+        // specification.
         Ripple(bounded = true) {
             // Clickable wraps the child composable and enables it to react to a click through the
             // onClick callback similar to the onClick listener that we are accustomed to on Android.
             Clickable(onClick = {}) {
+                // Box is a predefined convenience composable that allows you to apply common
+                // draw & layout logic.
                 Box(backgroundColor = Color.LightGray, shape = RoundedCornerShape(4.dp)) {
                     // The Text composable is pre-defined by the Compose UI library; you can use this
                     // composable to render text on the screen
