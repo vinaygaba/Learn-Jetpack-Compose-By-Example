@@ -288,7 +288,9 @@ private fun Px.toRadius() = Radius.circular(this.value)
 @Preview("Load image stored in local resources folder")
 @Composable
 fun LocalResourceImageComponentPreview() {
-    LocalResourceImageComponent(R.drawable.lenna)
+    Column {
+        LocalResourceImageComponent(R.drawable.lenna)
+    }
 }
 
 @Preview("Load an image over the network using the Picasso library")

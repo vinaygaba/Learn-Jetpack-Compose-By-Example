@@ -91,6 +91,7 @@ fun SimpleTextInputComponent() {
         var textValue by state { "Enter your text here" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
+            // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
             }
@@ -105,7 +106,22 @@ fun SimpleTextInputComponent() {
 // built up of smaller composable functions.
 @Composable
 fun CustomStyleTextInputComponent() {
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+        // TextField is a composable that is capable of accepting text user input. It renders the
+        // value that you pass to the "value" field. In order to update this as the user is
+        // typing a new string, we make use of the state delegate. Reacting to state changes is
+        // the core behavior of Compose. Any composable that reads the value of the textValue
+        // field will recompose whenever this value is changed. In this example, since the
+        // TextField is reading the value from the textValue value, and that's also the value
+        // that we update as the user types (through the onValueChange lambda), this composable
+        // is redrawn and updated with the latest value.
         var textValue by state { "Enter your text here" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
@@ -118,6 +134,7 @@ fun CustomStyleTextInputComponent() {
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline
             ),
+            // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
             }
@@ -132,13 +149,29 @@ fun CustomStyleTextInputComponent() {
 // built up of smaller composable functions.
 @Composable
 fun NumberTextInputComponent() {
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+        // TextField is a composable that is capable of accepting text user input. It renders the
+        // value that you pass to the "value" field. In order to update this as the user is
+        // typing a new string, we make use of the state delegate. Reacting to state changes is
+        // the core behavior of Compose. Any composable that reads the value of the textValue
+        // field will recompose whenever this value is changed. In this example, since the
+        // TextField is reading the value from the textValue value, and that's also the value
+        // that we update as the user types (through the onValueChange lambda), this composable
+        // is redrawn and updated with the latest value.
         var textValue by state { "123" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
             // Setting the keyboard type allows you to configure what kind of data you can input
             // in this TextInput. Some examples are number, phone, email, password, etc.
             keyboardType = KeyboardType.Number,
+            // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
             }
@@ -153,9 +186,34 @@ fun NumberTextInputComponent() {
 // built up of smaller composable functions.
 @Composable
 fun SearchImeActionInputComponent() {
+    // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
+    // down the compose tree by passing them as parameters. This makes it easy to have fairly
+    // modular and reusable components that are easy to test as well. However, for certain types
+    // of data where multiple components need to use it, it makes sense to have an implicit way
+    // to access this data. For such scenarios, we use Ambients. In this example, we use the
+    // ContextAmbient to get hold of the Context object. In order to get access to the latest
+    // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
+    // exampels of common Ambient's are TextInputServiceAmbient, DensityAmbient,
+    // CoroutineContextAmbient, etc.
     val context = ContextAmbient.current
+
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp),
         shape = RoundedCornerShape(5.dp)) {
+        // TextField is a composable that is capable of accepting text user input. It renders the
+        // value that you pass to the "value" field. In order to update this as the user is
+        // typing a new string, we make use of the state delegate. Reacting to state changes is
+        // the core behavior of Compose. Any composable that reads the value of the textValue
+        // field will recompose whenever this value is changed. In this example, since the
+        // TextField is reading the value from the textValue value, and that's also the value
+        // that we update as the user types (through the onValueChange lambda), this composable
+        // is redrawn and updated with the latest value.
         var textValue by state { "Enter your search query here" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
@@ -166,6 +224,7 @@ fun SearchImeActionInputComponent() {
             onImeActionPerformed = {
                 hideKeyboard(context)
             },
+            // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
             }
@@ -180,7 +239,22 @@ fun SearchImeActionInputComponent() {
 // built up of smaller composable functions.
 @Composable
 fun PasswordVisualTransformationInputComponent() {
+    // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+    // Material Design specification. It's generally used to change the background color, add
+    // elevation, clip or add background shape to its children composables.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+        // TextField is a composable that is capable of accepting text user input. It renders the
+        // value that you pass to the "value" field. In order to update this as the user is
+        // typing a new string, we make use of the state delegate. Reacting to state changes is
+        // the core behavior of Compose. Any composable that reads the value of the textValue
+        // field will recompose whenever this value is changed. In this example, since the
+        // TextField is reading the value from the textValue value, and that's also the value
+        // that we update as the user types (through the onValueChange lambda), this composable
+        // is redrawn and updated with the latest value.
         var textValue by state { "Enter your password here" }
         TextField(value = textValue,
             modifier = LayoutPadding(16.dp),
@@ -193,6 +267,7 @@ fun PasswordVisualTransformationInputComponent() {
             // easily created you own visual transformations by implementing the
             // VisualTransformation interface.
             visualTransformation = PasswordVisualTransformation(),
+            // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
             }

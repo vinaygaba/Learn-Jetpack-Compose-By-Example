@@ -13,6 +13,7 @@ import androidx.ui.layout.LayoutPadding
 import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
+import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.colors
@@ -125,5 +126,46 @@ fun AspectRatioComponent() {
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif),
             modifier = LayoutPadding(16.dp)
         )
+    }
+}
+
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+ */
+@Preview("Example with same padding applied to a composable")
+@Composable
+fun SamePaddingComponentPreview() {
+    Column {
+        SamePaddingComponent()
+    }
+}
+
+@Preview("Example with custom padding in each direction applied to a composable")
+@Composable
+fun CustomPaddingComponentPreview() {
+    Column {
+        CustomPaddingComponent()
+    }
+}
+
+@Preview("Example using offsets to position the composable")
+@Composable
+fun OffsetComponentPreview() {
+    Column {
+        OffsetComponent()
+    }
+}
+
+@Preview("Example showing how a fixed aspect ration is applied a composable")
+@Composable
+fun AspectRatioComponentPreview() {
+    Column {
+        AspectRatioComponent()
     }
 }

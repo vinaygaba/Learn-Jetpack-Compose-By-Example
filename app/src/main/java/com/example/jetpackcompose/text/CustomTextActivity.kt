@@ -116,10 +116,12 @@ class CustomTextActivity : AppCompatActivity() {
                         )
                     )
 
-                    // You can think of Modifiers as implementations of the decorators pattern
-                    // that  are used to modify the composable that its applied to. In this example,
-                    // we configure the Row to occupify the entire available width using
-                    // LayoutWidth.Fill
+                    // Row is a composable that places its children in a horizontal sequence. You
+                    // can think of it similar to a LinearLayout with the horizontal orientation.
+                    // In addition, we pass a modifier to the Row composable. You can think of
+                    // Modifiers as implementations of the decorators pattern that  are used to
+                    // modify the composable that its applied to. In this example, we configure the
+                    // Row to occupify the entire available width using LayoutWidth.Fill
                     Row(modifier = LayoutWidth.Fill) {
                         // Text is a predefined composable that does exactly what you'd expect it to -
                         // display text on the screen. It allows you to customize its appearance using

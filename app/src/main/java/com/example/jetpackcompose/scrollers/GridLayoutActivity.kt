@@ -56,7 +56,6 @@ fun GridLayoutComponent(personList: List<Person>) {
             // This allows to to create a new row in the Table and specify the composables inside
             // this row
             tableRow {
-                //
                 for (j in 0 until numberOfColumns) {
                     // Card composable is a predefined composable that is meant to represent the
                     // card surface as specified by the Material Design specification. We also

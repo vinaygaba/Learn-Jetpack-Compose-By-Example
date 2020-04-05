@@ -68,6 +68,8 @@ fun StateComponent() {
             onClick = {
                 counter++
             }) {
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Increment", modifier = LayoutPadding(16.dp))
         }
 
@@ -115,6 +117,8 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
             onClick = {
                 counterState.counter++
             }) {
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Increment", modifier = LayoutPadding(16.dp))
         }
 

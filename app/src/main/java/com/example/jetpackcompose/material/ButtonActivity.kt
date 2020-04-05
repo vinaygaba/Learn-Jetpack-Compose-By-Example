@@ -15,6 +15,7 @@ import androidx.ui.layout.LayoutSize
 import androidx.ui.material.Button
 import androidx.ui.material.OutlinedButton
 import androidx.ui.material.TextButton
+import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 
 class ButtonActivity: AppCompatActivity() {
@@ -163,5 +164,54 @@ fun TextButtonComponent() {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(text = "Text Button", modifier = LayoutPadding(16.dp))
+    }
+}
+
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+ */
+@Preview("Example showing a simple button")
+@Composable
+fun SimpleButtonComponentPreview() {
+    Column {
+        SimpleButtonComponent()
+    }
+}
+
+@Preview("Example showing a button with border")
+@Composable
+fun SimpleButtonWithBorderComponentPreview() {
+    Column {
+        SimpleButtonWithBorderComponent()
+    }
+}
+
+@Preview("Example showing a button with corners")
+@Composable
+fun RoundedCornerButtonComponentPreview() {
+    Column {
+        RoundedCornerButtonComponent()
+    }
+}
+
+@Preview("Example showing a outline button")
+@Composable
+fun OutlinedButtonComponentPreview() {
+    Column {
+        OutlinedButtonComponent()
+    }
+}
+
+@Preview("Example showing a text button")
+@Composable
+fun TextButtonComponentPreview() {
+    Column {
+        TextButtonComponent()
     }
 }
