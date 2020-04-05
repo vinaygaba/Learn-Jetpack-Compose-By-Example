@@ -26,6 +26,8 @@ class StateActivity: AppCompatActivity() {
             // can think of it similar to a LinearLayout with the vertical orientation.
             Column(modifier = LayoutHeight.Fill) {
                 StateComponent()
+                // A pre-defined composable that renders a thin line on the screen that makes it
+                // easy to group contents
                 Divider()
                 ModelComponent()
             }
@@ -132,3 +134,28 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
 
 @Model
 class CounterState(var counter: Int = 0)
+
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+ */
+@Preview("Example using state delegate")
+@Composable
+fun StateComponentPreview() {
+    Column(modifier = LayoutHeight.Fill) {
+        StateComponent()
+    }
+}
+
+@Preview("Example using Model annotation")
+@Composable
+fun ModelComponentPreview() {
+    Column(modifier = LayoutHeight.Fill) {
+        ModelComponent()
+    }
+}

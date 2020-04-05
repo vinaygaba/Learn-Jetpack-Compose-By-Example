@@ -47,7 +47,13 @@ class ImageActivity : AppCompatActivity() {
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
             VerticalScroller {
-                Column(LayoutPadding(16.dp)) {
+                // Column is a composable that places its children in a vertical sequence. You
+                // can think of it similar to a LinearLayout with the vertical orientation.
+
+                // You can think of Modifiers as implementations of the decorators pattern that are
+                // used to modify the composable that its applied to. In this example, we assign a
+                // LayoutPadding of 16dp to the Column.
+                Column(modifier = LayoutPadding(16.dp)) {
                     DisplayImagesComponent()
                 }
             }
@@ -74,31 +80,57 @@ fun DisplayImagesComponent() {
     ImageWithRoundedCorners(R.drawable.lenna)
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
-    // be advisable to use the loadImageResource method as it loads the image asynchronously
+    // be advisable to use the loadImageResource method as it loads an image resource asynchronously
     val image = loadImageResource(resId)
     image.resource.resource?.let {
+        // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
+
+        // You can think of Modifiers as implementations of the decorators pattern that are
+        // used to modify the composable that its applied to. In this example, we configure the
+        // Image composable to have a height of 200 dp.
         Image(image = it, modifier = LayoutHeight.Max(200.dp))
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
-    // be advisable to use the loadImageResource method as it loads the image asynchronously
+    // be advisable to use the loadImageResource method as it loads an image resource asynchronously
     val image = loadImageResource(resId)
+    //
     val shape = RoundedCornerShape(8.dp)
     image.resource.resource?.let {
+        // Container is a predefined convenience composable that allows you to apply common
+        // layout properties like height, width, padding, constraints, etc.
+
+        // You can think of Modifiers as implementations of the decorators pattern that are
+        // used to modify the composable that its applied to. In this example, we configure the
+        // Container composable to have a height of 200dp, width of 200dp, alignment as center
+        // and a custom draw modifier to clip the corners of the image.
         Container(modifier = LayoutAlign.Center + LayoutHeight(200.dp) + LayoutWidth(200.dp)
                 + RoundedCornerClipModifier(shape.topLeft, shape.topRight, shape.bottomLeft,
             shape.bottomRight)) {
+            // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(it)
         }
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun NetworkImageComponentPicasso(url: String) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
@@ -135,7 +167,15 @@ fun NetworkImageComponentPicasso(url: String) {
     val theImage = image
     val theDrawable = drawable
     if (theImage != null) {
+        // Container is a predefined convenience composable that allows you to apply common
+        // layout properties like height, width, padding, constraints, etc.
+
+        // You can think of Modifiers as implementations of the decorators pattern that are
+        // used to modify the composable that its applied to. In this example, we configure the
+        // Container composable to have a max height of 200dp and fill out the entire available
+        // width.
         Container(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp)) {
+            // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(image = theImage)
         }
     } else if (theDrawable != null) {
@@ -183,7 +223,15 @@ fun NetworkImageComponentGlide(url: String) {
     val theImage = image
     val theDrawable = drawable
     if (theImage != null) {
+        // Container is a predefined convenience composable that allows you to apply common
+        // layout properties like height, width, padding, constraints, etc.
+
+        // You can think of Modifiers as implementations of the decorators pattern that are
+        // used to modify the composable that its applied to. In this example, we configure the
+        // Container composable to have a max height of 200dp and fill out the entire available
+        // width.
         Container(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp)) {
+            // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(image = theImage)
         }
     } else if (theDrawable != null) {
@@ -193,25 +241,20 @@ fun NetworkImageComponentGlide(url: String) {
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun TitleComponent(title: String) {
+    // Text is a predefined composable that does exactly what you'd expect it to - display text on
+    // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.
     Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
         fontSize = 14.sp), modifier = LayoutPadding(16.dp))
 }
 
-// Android Studio lets you preview your composable functions within the IDE itself, instead of
-// needing to download the app to an Android device or emulator. This is a fantastic feature as you
-// can preview all your custom components(read composable functions) from the comforts of the IDE.
-// The main restriction is, the composable function must not take any parameters. If your composable
-// function requires a parameter, you can simply wrap your component inside another composable
-// function that doesn't take any parameters and call your composable function with the appropriate
-// params. Also, don't forget to annotate it with @Preview & @Composable annotations.
-@Preview
-@Composable
-fun DisplayImagesComponentPreview() {
-    DisplayImagesComponent()
-}
-
+// RoundedCornerClipModifier is a custom DrawModifier that is responsible for clipping and
+// providing a rounder corner to the composable its applied to.
 private data class RoundedCornerClipModifier(val topLeftCornerSize: CornerSize,
                                              val topRightCornerSize: CornerSize,
                                              val bottomLeftCornerSize: CornerSize,
@@ -232,3 +275,36 @@ private data class RoundedCornerClipModifier(val topLeftCornerSize: CornerSize,
 }
 
 private fun Px.toRadius() = Radius.circular(this.value)
+
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+ */
+@Preview("Load image stored in local resources folder")
+@Composable
+fun LocalResourceImageComponentPreview() {
+    LocalResourceImageComponent(R.drawable.lenna)
+}
+
+@Preview("Load an image over the network using the Picasso library")
+@Composable
+fun NetworkImageComponentPicassoPreview() {
+    NetworkImageComponentPicasso("https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+}
+
+@Preview("Load an image over the network using the Glide library")
+@Composable
+fun NetworkImageComponentGlidePreview() {
+    NetworkImageComponentGlide("https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+}
+
+@Preview("Add round corners to an image")
+@Composable
+fun ImageWithRoundedCornersPreview() {
+    ImageWithRoundedCorners(R.drawable.lenna)
+}

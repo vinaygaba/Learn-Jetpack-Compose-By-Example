@@ -101,13 +101,15 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
     }
 }
 
-// Android Studio lets you preview your composable functions within the IDE itself, instead of
-// needing to download the app to an Android device or emulator. This is a fantastic feature as you
-// can preview all your custom components(read composable functions) from the comforts of the IDE.
-// The main restriction is, the composable function must not take any parameters. If your composable
-// function requires a parameter, you can simply wrap your component inside another composable
-// function that doesn't take any parameters and call your composable function with the appropriate
-// params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+ */
 @Preview
 @Composable
 fun HorizontalScrollableComponentPreview() {

@@ -44,7 +44,7 @@ class TextFieldActivity : AppCompatActivity() {
                 // Column is a composable that places its children in a vertical sequence. You
                 // can think of it similar to a LinearLayout with the vertical orientation.
                 Column {
-                    // Title Component is a custom composable that I created which is capable of
+                    // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.
                     TitleComponent("This is a Simple Text Input field")
                     SimpleTextInputComponent()
@@ -98,6 +98,11 @@ fun SimpleTextInputComponent() {
     }
 }
 
+
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun CustomStyleTextInputComponent() {
     Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
@@ -120,6 +125,11 @@ fun CustomStyleTextInputComponent() {
     }
 }
 
+
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun NumberTextInputComponent() {
     Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
@@ -136,6 +146,11 @@ fun NumberTextInputComponent() {
     }
 }
 
+
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun SearchImeActionInputComponent() {
     val context = ContextAmbient.current
@@ -158,6 +173,11 @@ fun SearchImeActionInputComponent() {
     }
 }
 
+
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun PasswordVisualTransformationInputComponent() {
     Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {

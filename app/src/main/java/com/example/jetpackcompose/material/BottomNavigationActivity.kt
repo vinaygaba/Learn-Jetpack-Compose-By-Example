@@ -30,7 +30,7 @@ class BottomNavigationActivity: AppCompatActivity() {
             // Column is a composable that places its children in a vertical sequence. You
             // can think of it similar to a LinearLayout with the vertical orientation.
             Column() {
-                // Title Component is a custom composable that I created which is capable of
+                // Title Component is a custom composable that we created which is capable of
                 // rendering text on the screen in a certain font style & text size.
                 TitleComponent("This is a simple bottom navigation bar that always shows label")
                 // Card composable is a predefined composable that is meant to represent

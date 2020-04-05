@@ -31,6 +31,8 @@ class ViewLayoutConfigurationsActivity: AppCompatActivity() {
             VerticalScroller {
                 // Column is a composable that places its children in a vertical sequence.
                 Column {
+                    // Title Component is a custom composable that we created which is capable of
+                    // rendering text on the screen in a certain font style & text size.
                     TitleComponent("Child views with equal weights")
                     RowEqualWeightComponent()
 
@@ -69,8 +71,24 @@ class ViewLayoutConfigurationsActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun RowEqualWeightComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
     Row(modifier = LayoutWidth.Fill) {
+        // Button is a pre-defined Material Design implementation of a contained button -
+        // https://material.io/design/components/buttons.html#contained-button.
+        // This Row consists of two buttons. We wanted to ensure that both these buttons occupy
+        // equal amount of width. We do that by using the LayoutWeight modifier and passing equal
+        // weight to both the buttons. This is similar to how we used layout_weight with
+        // LinearLayouts in the old Android UI Toolkit.
         Button(modifier = LayoutWeight(1f) + LayoutPadding(4.dp), onClick = {}) {
+            // The Button composable allows you to provide child composables that inherit this button
+            // functiionality.
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -84,8 +102,25 @@ fun RowEqualWeightComponent() {
 
 @Composable
 fun RowUnequalWeightComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
     Row(modifier = LayoutWidth.Fill) {
+        // Button is a pre-defined Material Design implementation of a contained button -
+        // https://material.io/design/components/buttons.html#contained-button.
+        // This Row consists of two buttons. We wanted to ensure that both the first button
+        // occupies 2/3rd of the screen and the other button occupies the remaining 1/3rd.
+        // We do this by using the LayoutWeight modifier and passing equal weight to both the
+        // buttons. This is similar to how we used layout_weight with LinearLayouts in the old
+        // Android UI Toolkit.
         Button(modifier = LayoutWeight(0.66f) + LayoutPadding(4.dp), onClick = {}) {
+            // The Button composable allows you to provide child composables that inherit this button
+            // functiionality.
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -99,8 +134,21 @@ fun RowUnequalWeightComponent() {
 
 @Composable
 fun RowAddSpaceBetweenViewsComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // We use Arrangement.SpaceBetween to place the children of the row such that they are spaced
+    // evenly across the main axis, without free space before the first child or after the last child.
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceBetween) {
+        // Button is a pre-defined Material Design implementation of a contained button -
+        // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
+            // The Button composable allows you to provide child composables that inherit this button
+            // functiionality.
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -114,8 +162,22 @@ fun RowAddSpaceBetweenViewsComponent() {
 
 @Composable
 fun RowSpaceViewsEvenlyComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // We use Arrangement.SpaceEvenly to place the children of the row such that they are
+    // spaced evenly across the main axis, including free space before the first child and after
+    // the last child.
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceEvenly) {
+        // Button is a pre-defined Material Design implementation of a contained button -
+        // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
+            // The Button composable allows you to provide child composables that inherit this button
+            // functiionality.
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -129,8 +191,22 @@ fun RowSpaceViewsEvenlyComponent() {
 
 @Composable
 fun RowSpaceAroundViewsComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // We use Arrangement.SpaceAround to place the children of the row such that they are spaced
+    // evenly across the main axis, including free space before the first child and after the
+    // last child, but half the amount of space existing otherwise between two consecutive children.
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceAround) {
+        // Button is a pre-defined Material Design implementation of a contained button -
+        // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
+            // The Button composable allows you to provide child composables that inherit this button
+            // functiionality.
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -144,8 +220,21 @@ fun RowSpaceAroundViewsComponent() {
 
 @Composable
 fun RowViewsCenteredComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // We use Arrangement.Center to place the children of the row such that they are as close as
+    // possible to the middle of the main axis.
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.Center) {
+        // Button is a pre-defined Material Design implementation of a contained button -
+        // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
+            // The Button composable allows you to provide child composables that inherit this button
+            // functiionality.
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -159,8 +248,21 @@ fun RowViewsCenteredComponent() {
 
 @Composable
 fun RowViewsArrangedInEndComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // We use Arrangement.End to place the children of the row such that they are as close as
+    // possible to the end of the main axis.
     Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.End) {
+        // Button is a pre-defined Material Design implementation of a contained button -
+        // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
+            // The Button composable allows you to provide child composables that inherit this button
+            // functiionality.
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Button 1",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -174,7 +276,17 @@ fun RowViewsArrangedInEndComponent() {
 
 @Composable
 fun RowBaselineAlignComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
     Row(modifier = LayoutWidth.Fill) {
+        // The Button composable allows you to provide child composables that inherit this button
+        // functiionality.
+        // The Text composable is pre-defined by the Compose UI library; you can use this
+        // composable to render text on the screen
         Text(text = "Text 1",
             style = TextStyle(fontSize = TextUnit.Companion.Sp(20), fontStyle = FontStyle.Italic),
             modifier = LayoutGravity.RelativeToSiblings(alignmentLine = FirstBaseline))
@@ -187,7 +299,17 @@ fun RowBaselineAlignComponent() {
 
 @Composable
 fun RowBaselineUnalignedComponent() {
+    // Row is a composable that places its children in a horizontal sequence. You can think of it
+    // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
+    // to the Row composable. You can think of Modifiers as implementations of the decorators
+    // pattern that are used to modify the composable that its applied to. In this example, we
+    // assign add a modifier to the Row and ask it to extend the full width available to it.
+    // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
     Row(modifier = LayoutWidth.Fill) {
+        // The Button composable allows you to provide child composables that inherit this button
+        // functiionality.
+        // The Text composable is pre-defined by the Compose UI library; you can use this
+        // composable to render text on the screen
         Text(text = "Text 1",
             style = TextStyle(fontSize = TextUnit.Companion.Sp(20), fontStyle = FontStyle.Italic))
         Text(text = "Text 2",
@@ -196,13 +318,15 @@ fun RowBaselineUnalignedComponent() {
     }
 }
 
-// Android Studio lets you preview your composable functions within the IDE itself, instead of
-// needing to download the app to an Android device or emulator. This is a fantastic feature as you
-// can preview all your custom components(read composable functions) from the comforts of the IDE.
-// The main restriction is, the composable function must not take any parameters. If your composable
-// function requires a parameter, you can simply wrap your component inside another composable
-// function that doesn't take any parameters and call your composable function with the appropriate
-// params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+/**
+ * Android Studio lets you preview your composable functions within the IDE itself, instead of
+ * needing to download the app to an Android device or emulator. This is a fantastic feature as you
+ * can preview all your custom components(read composable functions) from the comforts of the IDE.
+ * The main restriction is, the composable function must not take any parameters. If your composable
+ * function requires a parameter, you can simply wrap your component inside another composable
+ * function that doesn't take any parameters and call your composable function with the appropriate
+ * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
+ */
 @Preview("Child views with equal weights")
 @Composable
 fun RowEqualWeightComponentPreview() {

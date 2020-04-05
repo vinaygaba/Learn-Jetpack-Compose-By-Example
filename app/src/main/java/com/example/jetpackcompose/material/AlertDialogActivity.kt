@@ -61,6 +61,8 @@ fun ClickableText() {
         // 8dp to the Card composable and 16dp to the Text composable.
         Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp),
             color = Color.LightGray) {
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             Text(text = "Click to see dialog", modifier = LayoutPadding(16.dp),
                 style = TextStyle(fontSize = TextUnit.Sp(16),
                     fontFamily = FontFamily.Serif)
@@ -78,16 +80,24 @@ fun ClickableText() {
     // AlertDialog only when the showPopup variable is set to true or else this branch is not 
     // executed at all and thus the alert dialog remains hidden. 
     if (showPopup) {
-        // Predefined composable provided by the material implementations of Jetpack Compose.
+        // Predefined composable provided by the material implementations of Jetpack Compose. It
+        // shows a simple alert dialog on the screen if this code path is executed (i.e showPopup
+        // variable is true)
         AlertDialog(
             onCloseRequest = onPopupDismissed,
             text = {
                 Text("Congratulations! You just clicked the text successfully")
             },
             confirmButton = {
+                // Button is a pre-defined Material Design implementation of a contained button -
+                // https://material.io/design/components/buttons.html#contained-button.
                 Button(
                     onClick = onPopupDismissed
                 ) {
+                    // The Button composable allows you to provide child composables that inherit
+                    // this button functiionality.
+                    // The Text composable is pre-defined by the Compose UI library; you can use this
+                    // composable to render text on the screen
                     Text(text = "Ok")
                 }
             })

@@ -52,6 +52,8 @@ fun SamePaddingComponent() {
     // Material Design specification. It's generally used to change the background color, add
     // elevation, clip or add background shape to its children composables.
     Surface(color = colors[0]) {
+        // The Text composable is pre-defined by the Compose UI library; you can use this
+        // composable to render text on the screen
         Text(
             text = "This text has equal padding of 16dp in all directions",
             // You can think of Modifiers as implementations of the decorators pattern that are used to
@@ -69,6 +71,8 @@ fun CustomPaddingComponent() {
     // Material Design specification. It's generally used to change the background color, add
     // elevation, clip or add background shape to its children composables.
     Surface(color = colors[1]) {
+        // The Text composable is pre-defined by the Compose UI library; you can use this
+        // composable to render text on the screen
         Text(
             text = "This text has 32dp start padding, 4dp end padding, 32dp top padding & 0dp " +
                     "bottom padding padding in each direction",
@@ -92,6 +96,8 @@ fun OffsetComponent() {
     // LayoutOffset modifier that allows the composable to be shifted along the x & y direction
     // by the user specified amount.
     Surface(color = colors[2], modifier = LayoutOffset(x = 8.dp, y = 8.dp)) {
+        // The Text composable is pre-defined by the Compose UI library; you can use this
+        // composable to render text on the screen
         Text(
             text = "This text is using an offset of 8 dp instead of padding. Padding also ends up" +
                     " modifying the size of the layout. Using offset instead ensures that the " +
@@ -112,6 +118,8 @@ fun AspectRatioComponent() {
     // LayoutAspectRatio modifier that attempts to size a layout to match a specified aspect ratio.
     Surface(color = colors[3], modifier = LayoutAspectRatio(16/9f) +
             LayoutPadding(top = 16.dp)) {
+        // The Text composable is pre-defined by the Compose UI library; you can use this
+        // composable to render text on the screen
         Text(
             text = "This text is wrapped in a layout that has a fixed aspect ratio of 16/9",
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif),

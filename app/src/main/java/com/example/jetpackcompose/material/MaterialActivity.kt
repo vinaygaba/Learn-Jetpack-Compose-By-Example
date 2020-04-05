@@ -42,7 +42,7 @@ class MaterialActivity : AppCompatActivity() {
             VerticalScroller {
                 // Column is a composable that places its children in a vertical sequence.
                 Column {
-                    // Title Component is a custom composable that I created which is capable of
+                    // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.
                     TitleComponent("This is a simple Material card")
                     MaterialCardComponent()

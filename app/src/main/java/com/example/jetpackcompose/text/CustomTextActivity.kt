@@ -43,12 +43,16 @@ class CustomTextActivity : AppCompatActivity() {
             VerticalScroller {
                 // Column is a composable that places its children in a vertical sequence.
                 Column {
+                    // This is a custom composable declared in this file. It allows us to
+                    // configure the text to be rendered on the screen.x
                     CustomStyledText(
                         "This is the default text style"
                     )
 
                     CustomStyledText(
                         "This text is blue in color",
+                        // TextStyle allows you to specify styling configuration for a `Text`
+                        // composable
                         style = TextStyle(
                             color = Color.Blue
                         )
@@ -112,15 +116,23 @@ class CustomTextActivity : AppCompatActivity() {
                         )
                     )
 
+                    // You can think of Modifiers as implementations of the decorators pattern
+                    // that  are used to modify the composable that its applied to. In this example,
+                    // we configure the Row to occupify the entire available width using
+                    // LayoutWidth.Fill
                     Row(modifier = LayoutWidth.Fill) {
-                            Text(text = "This text is center aligned",
-                                style = TextStyle(
-                                    textAlign = TextAlign.Center
-                                ),
-                                modifier = LayoutPadding(16.dp)
-                            )
+                        // Text is a predefined composable that does exactly what you'd expect it to -
+                        // display text on the screen. It allows you to customize its appearance using
+                        // the style property.
+                        Text(text = "This text is center aligned",
+                            style = TextStyle(
+                                textAlign = TextAlign.Center
+                            ),
+                            modifier = LayoutPadding(16.dp)
+                        )
                     }
-
+                    // A pre-defined composable that renders a thin line on the screen that makes it
+                    // easy to group contents
                     Divider(color = Color.Gray)
 
                     CustomStyledText(
@@ -160,8 +172,14 @@ class CustomTextActivity : AppCompatActivity() {
                         addStyle(style = SpanStyle(color = Color.Blue), start = 22, end = 27)
                     }
                     Text(annotatedString, modifier = LayoutPadding(16.dp))
+                    // A pre-defined composable that renders a thin line on the screen that makes it
+                    // easy to group contents
                     Divider(color = Color.Gray)
 
+                    // Surface is a composable provided to fulfill the needs of the "Surface"
+                    // metaphor from the Material Design specification. It's generally used to
+                    // change the background color, add elevation, clip or add background shape
+                    // to its children composables.
                     Surface(color = Color.Yellow) {
                         Text(text = "This text has a background color", modifier = LayoutPadding(16.dp))
                     }
@@ -179,7 +197,7 @@ class CustomTextActivity : AppCompatActivity() {
 fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: Int? = null) {
     // We should think of composable functions to be similar to lego blocks - each composable
     // function is in turn built up of smaller composable functions. Here, the Text() function is
-    // pre-defined by the Compose UI library; you call that function to declare a text element
+    // pre-defined by the Compose UI library; you call that function to declare and render text
     // in your app.
     Text(
         text = displayText,
@@ -188,6 +206,8 @@ fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: In
         overflow = TextOverflow.Ellipsis,
         maxLines = maxLines ?: Int.MAX_VALUE
     )
+    // A pre-defined composable that renders a thin line on the screen that makes it easy to
+    // group contents
     Divider(color = Color.Gray)
 }
 
