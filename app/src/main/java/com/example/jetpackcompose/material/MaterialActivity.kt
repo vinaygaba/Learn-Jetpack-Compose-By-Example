@@ -138,10 +138,10 @@ fun MaterialCardComponent() {
 fun MaterialCheckboxComponent() {
     // Reacting to state changes is the core behavior of Compose. We use the state composable
     // that is used for holding a state value in this composable for representing the current
-    // value of the counter. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // value of whether the checkbox is checked. Any composable that reads the value of "checked"
+    // will be recomposed any time the value changes. This ensures that only the composables that
+    // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
+    // is a performance optimization. It is inspired from existing frameworks like React.
     var checked by state { false}
 
     // Card composable is a predefined composable that is meant to represent the card surface as
@@ -221,10 +221,11 @@ fun MaterialTriStateCheckboxComponent() {
 fun MaterialRadioButtonGroupComponent() {
     // Reacting to state changes is the core behavior of Compose. We use the state composable
     // that is used for holding a state value in this composable for representing the current
-    // value of the counter. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // value of whether a radio button is selected. Any composable that reads the value of
+    // "selected" variable will be recomposed any time the value changes. This ensures that only the
+    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
+    // efficiency and is a performance optimization. It is inspired from existing frameworks like
+    // React.
     var selected by state { "Android"}
 
     val radioGroupOptions = listOf<String>("Android", "iOS", "Windows")
@@ -414,10 +415,11 @@ fun MaterialDiscreteSliderComponent() {
 fun MaterialSwitchComponent() {
     // Reacting to state changes is the core behavior of Compose. We use the state composable
     // that is used for holding a state value in this composable for representing the current
-    // value of the counter. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // value of whether the checkbox is checked. Any composable that reads the value of "checked"
+    // variable will be recomposed any time the value changes. This ensures that only the
+    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
+    // efficiency and is a performance optimization. It is inspired from existing frameworks like
+    // React.
     var checked by state { false}
 
     // Card composable is a predefined composable that is meant to represent the card surface as
