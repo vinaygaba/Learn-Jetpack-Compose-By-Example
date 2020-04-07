@@ -113,21 +113,41 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable()()
     MaterialTheme(colors = colors, children = children, typography = typography)
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
+    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // that is used for holding a state value in this composable for representing the current
+    // value of the drawerState. Any composable that reads the value of drawerState will be recomposed
+    // any time the value changes. This ensures that only the composables that depend on this
+    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
+    // performance optimization. It is inspired from existing frameworks like React.
     val (drawerState, onDrawerStateChange) = state { DrawerState.Closed }
+    // State composable used to hold the value of the current active screen
     val currentScreen = state { ThemedDrawerAppScreen.Screen1 }
+
+    // ModalDrawerLayout is a pre-defined composable used to provide access to destinations in
+    // the app. It's a common pattern used across multiple apps where you see a drawer on the
+    // left of the screen.
     ModalDrawerLayout(
+        // Drawer state to denote whether the drawer should be open or closed.
         drawerState = drawerState,
         onStateChange = onDrawerStateChange,
         gesturesEnabled = drawerState == DrawerState.Opened,
         drawerContent = {
+            //drawerContent takes a composable to represent the view/layout to display when the
+            // drawer is open.
             ThemedDrawerContentComponent(
                 currentScreen = currentScreen,
                 closeDrawer = { onDrawerStateChange(DrawerState.Closed) }
             )
         },
         bodyContent = {
+            // bodyContent takes a composable to represent the view/layout to display on the
+            // screen. We select the appropriate screen based on the value stored in currentScreen.
             ThemedBodyContentComponent(
                 currentScreen = currentScreen.value,
                 enableDarkMode = enableDarkMode,
@@ -144,9 +164,28 @@ fun ThemedDrawerContentComponent(
     currentScreen: MutableState<ThemedDrawerAppScreen>,
     closeDrawer: () -> Unit
 ) {
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. In addition, we
+    // also provide the column with a modifier.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we configure the Column to
+    // occupy the entire available width & height using the LayoutSize.Fill modifier.
+
+    // In addition, we use the LayoutOffset modifier to take into account the appbar that sits on
+    // top of the drawer content. So we add an offset in the y direction. Alternatively, we can
+    // use the Scaffold composable that takes care of placing the drawer content in the correct
+    // position. Look at [FixedActionButtonActivity] to see an example.
     Column(modifier = LayoutHeight.Fill) {
+        // Clickable wraps the child composable and enables it to react to a click through the onClick
+        // callback similar to the onClick listener that we are accustomed to on Android.
+        // Here, we just update the currentScreen variable to hold the appropriate value based on
+        // the row that is clicked i.e if the first row is clicked, we set the value of
+        // currentScreen to DrawerAppScreen.Screen1, when second row is clicked we set it to
+        // DrawerAppScreen.Screen2 and so on and so forth.
         Clickable(onClick = {
             currentScreen.value = ThemedDrawerAppScreen.Screen1
+            // We also close the drawer when an option from the drawer is selected.
             closeDrawer()
         }) {
             Text(text = ThemedDrawerAppScreen.Screen1.name, modifier = LayoutPadding(16.dp))
@@ -168,6 +207,9 @@ fun ThemedDrawerContentComponent(
     }
 }
 
+/**
+ * Passed the corresponding screen composable based on the current screen that's active.
+ */
 @Composable
 fun ThemedBodyContentComponent(
     currentScreen: ThemedDrawerAppScreen,
@@ -196,14 +238,29 @@ fun ThemedBodyContentComponent(
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun ThemedScreen1Component(
     enableDarkMode: Boolean,
     openDrawer: () -> Unit,
     onCheckChanged: (Boolean) -> Unit
 ) {
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. In addition, we
+    // also provide the column with a modifier.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we configure the Column to
+    // occupy the entire available width & height using the LayoutSize.Fill modifier.
     Column(modifier = LayoutSize.Fill) {
+        // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
+        // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             title = { Text("Screen 1") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
@@ -211,11 +268,18 @@ fun ThemedScreen1Component(
                 }
             }
         )
+        // Card composable is a predefined composable that is meant to represent the card surface as
+        // specified by the Material Design specification. We also configure it to have rounded
+        // corners and apply a modifier.
         Card(
             modifier = LayoutWidth.Fill,
             color = MaterialTheme.colors().surface
         ) {
+            // Row is a composable that places its children in a horizontal sequence. You
+            // can think of it similar to a LinearLayout with the horizontal orientation.
             Row(modifier = LayoutPadding(16.dp)) {
+                // A pre-defined composable that's capable of rendering a switch. It honors the Material
+                // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
                 Text(
                     text = "Enable Dark Mode", style = MaterialTheme.typography().body1,
@@ -223,6 +287,9 @@ fun ThemedScreen1Component(
                 )
             }
         }
+        // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+        // Material Design specification. It's generally used to change the background color, add
+        // elevation, clip or add background shape to its children composables.
         Surface(modifier = LayoutWeight(1f)) {
             Text(
                 text = LOREM_IPSUM_1, style = MaterialTheme.typography().body1,
@@ -232,14 +299,29 @@ fun ThemedScreen1Component(
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun ThemedScreen2Component(
     enableDarkMode: Boolean,
     openDrawer: () -> Unit,
     onCheckChanged: (Boolean) -> Unit
 ) {
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. In addition, we
+    // also provide the column with a modifier.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we configure the Column to
+    // occupy the entire available width & height using the LayoutSize.Fill modifier.
     Column(modifier = LayoutSize.Fill) {
+        // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
+        // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             title = { Text("Screen 2") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
@@ -247,16 +329,26 @@ fun ThemedScreen2Component(
                 }
             }
         )
+        // Card composable is a predefined composable that is meant to represent the card surface as
+        // specified by the Material Design specification. We also configure it to have rounded
+        // corners and apply a modifier.
         Card(
             modifier = LayoutWidth.Fill,
             color = MaterialTheme.colors().surface
         ) {
+            // Row is a composable that places its children in a horizontal sequence. You
+            // can think of it similar to a LinearLayout with the horizontal orientation.
             Row(modifier = LayoutPadding(16.dp)) {
+                // A pre-defined composable that's capable of rendering a switch. It honors the Material
+                // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
                 Text(text = "Enable Dark Mode", style = MaterialTheme.typography().body1,
                     modifier = LayoutPadding(start = 8.dp))
             }
         }
+        // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+        // Material Design specification. It's generally used to change the background color, add
+        // elevation, clip or add background shape to its children composables.
         Surface(modifier = LayoutWeight(1f)) {
             Text(text = LOREM_IPSUM_2, style = MaterialTheme.typography().body1,
                 modifier = LayoutPadding(16.dp)
@@ -265,14 +357,29 @@ fun ThemedScreen2Component(
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should
+// think of composable functions to be similar to lego blocks - each composable function is in turn
+// built up of smaller composable functions.
 @Composable
 fun ThemedScreen3Component(
     enableDarkMode: Boolean,
     openDrawer: () -> Unit,
     onCheckChanged: (Boolean) -> Unit
 ) {
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. In addition, we
+    // also provide the column with a modifier.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, we configure the Column to
+    // occupy the entire available width & height using the LayoutSize.Fill modifier.
     Column(modifier = LayoutSize.Fill) {
+        // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
+        // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
             title = { Text("Screen 3") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
@@ -280,16 +387,26 @@ fun ThemedScreen3Component(
                 }
             }
         )
+        // Card composable is a predefined composable that is meant to represent the card surface as
+        // specified by the Material Design specification. We also configure it to have rounded
+        // corners and apply a modifier.
         Card(
             modifier = LayoutWidth.Fill,
             color = MaterialTheme.colors().surface
         ) {
+            // Row is a composable that places its children in a horizontal sequence. You
+            // can think of it similar to a LinearLayout with the horizontal orientation.
             Row(modifier = LayoutPadding(16.dp)) {
+                // A pre-defined composable that's capable of rendering a switch. It honors the Material
+                // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
                 Text(text = "Enable Dark Mode", style = MaterialTheme.typography().body1,
                     modifier = LayoutPadding(start = 8.dp))
             }
         }
+        // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
+        // Material Design specification. It's generally used to change the background color, add
+        // elevation, clip or add background shape to its children composables.
         Surface(modifier = LayoutWeight(1f)) {
             Text(text = LOREM_IPSUM_3, style = MaterialTheme.typography().body1,
                 modifier = LayoutPadding(16.dp)
