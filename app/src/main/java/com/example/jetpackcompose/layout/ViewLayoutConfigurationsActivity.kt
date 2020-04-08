@@ -118,7 +118,7 @@ fun RowUnequalWeightComponent() {
         // Android UI Toolkit.
         Button(modifier = LayoutWeight(0.66f) + LayoutPadding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
-            // functiionality.
+            // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
             Text(text = "Button 1",
