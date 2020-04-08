@@ -11,8 +11,8 @@ import androidx.ui.geometry.Offset
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Shadow
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.material.Divider
 import androidx.ui.material.Surface
@@ -123,8 +123,8 @@ class CustomTextActivity : AppCompatActivity() {
                     // In addition, we pass a modifier to the Row composable. You can think of
                     // Modifiers as implementations of the decorators pattern that  are used to
                     // modify the composable that its applied to. In this example, we configure the
-                    // Row to occupify the entire available width using LayoutWidth.Fill
-                    Row(modifier = LayoutWidth.Fill) {
+                    // Row to occupify the entire available width using Modifier.fillMaxWidth()
+                    Row(modifier = Modifier.fillMaxWidth()) {
                         // Text is a predefined composable that does exactly what you'd expect it to -
                         // display text on the screen. It allows you to customize its appearance using
                         // the style property.

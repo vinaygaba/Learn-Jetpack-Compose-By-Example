@@ -11,7 +11,7 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.SolidColor
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutSize
+import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.padding
 import androidx.ui.material.Button
 import androidx.ui.material.OutlinedButton
@@ -32,9 +32,9 @@ class ButtonActivity: AppCompatActivity() {
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In the example below, we configure the
-            // column to occupy the entire available height & width  sing the LayoutSize.Fill
+            // column to occupy the entire available height & width using the Modifier.fillMaxSize()
             // modifier.
-            Column(modifier = LayoutSize.Fill) {
+            Column(modifier = Modifier.fillMaxSize()) {
                 SimpleButtonComponent()
                 SimpleButtonWithBorderComponent()
                 RoundedCornerButtonComponent()
@@ -55,7 +55,7 @@ fun SimpleButtonComponent() {
     // https://material.io/design/components/buttons.html#contained-button.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Button.
     Button(
         modifier = Modifier.padding(16.dp),
@@ -79,7 +79,7 @@ fun SimpleButtonWithBorderComponent() {
     // https://material.io/design/components/buttons.html#contained-button.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Button.
     Button(
         onClick = {},
@@ -105,7 +105,7 @@ fun RoundedCornerButtonComponent() {
     // https://material.io/design/components/buttons.html#contained-button.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Button.
     Button(
         onClick = {},
@@ -132,7 +132,7 @@ fun OutlinedButtonComponent() {
     // https://material.io/design/components/buttons.html#outlined-button.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Button.
     OutlinedButton(
         onClick = {},
@@ -156,7 +156,7 @@ fun TextButtonComponent() {
     // https://material.io/design/components/buttons.html#text-button.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Button.
     TextButton(
         onClick = {},

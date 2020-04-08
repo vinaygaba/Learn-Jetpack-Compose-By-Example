@@ -243,12 +243,12 @@ fun NetworkImageComponentGlide(url: String) {
     val theImage = image
     val theDrawable = drawable
     if (theImage != null) {
-        // Container is a predefined convenience composable that allows you to apply common
-        // layout properties like height, width, padding, constraints, etc.
+        // Box is a predefined convenience composable that allows you to apply common draw & layout
+        // logic. In addition we also pass a few modifiers to it.
 
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
-        // Container composable to have a max height of 200dp and fill out the entire available
+        // Box composable to have a max height of 200dp and fill out the entire available
         // width.
         Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp)) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].

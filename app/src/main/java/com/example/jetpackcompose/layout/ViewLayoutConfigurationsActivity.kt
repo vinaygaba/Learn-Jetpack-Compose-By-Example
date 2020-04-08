@@ -289,7 +289,8 @@ fun RowBaselineAlignComponent() {
     // to the Row composable. You can think of Modifiers as implementations of the decorators
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
-    // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
+    // Alternatively, we could've assigned a fixed width to this row using
+    // Modifier.preferredWidth(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // The Button composable allows you to provide child composables that inherit this button
         // functiionality.
@@ -317,7 +318,8 @@ fun RowBaselineUnalignedComponent() {
     // to the Row composable. You can think of Modifiers as implementations of the decorators
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
-    // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
+    // Alternatively, we could've assigned a fixed width to this row using
+    // Modifier.preferredWidth(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // The Button composable allows you to provide child composables that inherit this button
         // functiionality.

@@ -59,7 +59,7 @@ fun SamePaddingComponent() {
         Text(
             text = "This text has equal padding of 16dp in all directions",
             // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+            // modify the composable that its applied to. In this example, we assign a padding of
             // 16dp to the Text composable.
             modifier = Modifier.padding(16.dp),
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif)
@@ -80,7 +80,7 @@ fun CustomPaddingComponent() {
                     "bottom padding padding in each direction",
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In this example, we assign variable
-            // LayoutPadding to the Text composable.
+            // padding to the Text composable.
             modifier = Modifier.padding(start = 32.dp, end = 4.dp, top = 32.dp, bottom = 0.dp),
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif)
         )

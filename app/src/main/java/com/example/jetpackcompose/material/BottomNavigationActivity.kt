@@ -40,7 +40,7 @@ class BottomNavigationActivity: AppCompatActivity() {
 
                 // You can think of Modifiers as implementations of the decorators pattern that
                 // are used to modify the composable that its applied to. In this example, we assign
-                // a LayoutPadding of 8dp to the Card.
+                // a padding of 8dp to the Card.
                 Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
                     BottomNavigationAlwaysShowLabelComponent()
                 }

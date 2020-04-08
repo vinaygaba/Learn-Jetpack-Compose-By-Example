@@ -18,7 +18,6 @@ import androidx.ui.graphics.Color
 import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.Column
 import androidx.ui.layout.Row
-import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeight
@@ -39,11 +38,9 @@ import androidx.ui.material.TriStateCheckbox
 import androidx.ui.material.ripple.ripple
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.TextUnit
 import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -171,7 +168,7 @@ fun MaterialCheckboxComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
+    // width using the Modifier.fillMaxWidth() modifier.
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -212,7 +209,7 @@ fun MaterialTriStateCheckboxComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
+    // width using the Modifier.fillMaxWidth() modifier.
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -256,7 +253,7 @@ fun MaterialRadioButtonGroupComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
+    // width using the Modifier.fillMaxWidth() modifier.
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // A pre-defined composable that's capable of rendering a radio group. It honors the
         // Material Design specification.
@@ -279,7 +276,7 @@ fun MaterialLinearProgressIndicatorComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
+    // width using the Modifier.fillMaxWidth() modifier.
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -449,7 +446,7 @@ fun MaterialSwitchComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
+    // width using the Modifier.fillMaxWidth() modifier.
     Card(shape = RoundedCornerShape(4.dp),
         modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth(),
         color = Color(249, 249, 249)) {

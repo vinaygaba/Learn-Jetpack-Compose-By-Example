@@ -78,7 +78,7 @@ fun SimpleTextInputComponent() {
     // elevation, clip or add background shape to its children composables.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the
@@ -112,7 +112,7 @@ fun CustomStyleTextInputComponent() {
     // elevation, clip or add background shape to its children composables.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the
@@ -155,7 +155,7 @@ fun NumberTextInputComponent() {
     // elevation, clip or add background shape to its children composables.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the
@@ -203,7 +203,7 @@ fun SearchImeActionInputComponent() {
     // elevation, clip or add background shape to its children composables.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp),
         shape = RoundedCornerShape(5.dp)) {
@@ -245,7 +245,7 @@ fun PasswordVisualTransformationInputComponent() {
     // elevation, clip or add background shape to its children composables.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+    // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the

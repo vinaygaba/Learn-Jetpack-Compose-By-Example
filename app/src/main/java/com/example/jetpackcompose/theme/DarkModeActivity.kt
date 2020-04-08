@@ -171,7 +171,7 @@ fun ThemedDrawerContentComponent(
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we configure the Column to
-    // occupy the entire available width & height using the LayoutSize.Fill modifier.
+    // occupy the entire available height using the Modifier.fillMaxHeight() modifier.
 
     // In addition, we use the LayoutOffset modifier to take into account the appbar that sits on
     // top of the drawer content. So we add an offset in the y direction. Alternatively, we can

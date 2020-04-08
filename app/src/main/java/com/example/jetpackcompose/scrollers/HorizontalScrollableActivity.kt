@@ -81,7 +81,7 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
 
                 // You can think of Modifiers as implementations of the decorators pattern that are
                 // used to modify the composable that its applied to. In this example, we assign a
-                // LayoutPadding of 16dp to the Card.
+                // padding of 16dp to the Card.
                 Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                     modifier = Modifier.padding(16.dp)
                 ) {
@@ -135,7 +135,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
 
                 // You can think of Modifiers as implementations of the decorators pattern that are
                 // used to modify the composable that its applied to. In this example, we assign a
-                // LayoutPadding of 16dp to the Card.
+                // padding of 16dp to the Card.
                 Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                     modifier = Modifier.padding(16.dp)
                 ) {
@@ -143,7 +143,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                     // draw & layout logic. In addition we also pass a few modifiers to it.
 
                     // To ensure that the item occupies the entire screen, we make sure that the
-                    // width of the container is equal to the computed screenWidth. We subtract
+                    // width of the box is equal to the computed screenWidth. We subtract
                     // some spacing to make the other item slightly visible.
                     Box(modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2)),
                         gravity = ContentGravity.Center) {
