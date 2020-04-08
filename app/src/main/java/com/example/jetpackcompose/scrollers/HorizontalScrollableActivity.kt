@@ -7,6 +7,7 @@ import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
+import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.HorizontalScroller
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
@@ -19,6 +20,7 @@ import androidx.ui.layout.padding
 import androidx.ui.layout.preferredWidth
 import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
+import androidx.ui.text.style.TextAlign
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
@@ -135,7 +137,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                 // used to modify the composable that its applied to. In this example, we assign a
                 // LayoutPadding of 16dp to the Card.
                 Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
-                    modifier = Modifier.padding(16.dp) + Modifier.gravity(RowAlign.Center)
+                    modifier = Modifier.padding(16.dp)
                 ) {
                     // Box is a predefined convenience composable that allows you to apply common
                     // draw & layout logic. In addition we also pass a few modifiers to it.
@@ -143,12 +145,13 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                     // To ensure that the item occupies the entire screen, we make sure that the
                     // width of the container is equal to the computed screenWidth. We subtract
                     // some spacing to make the other item slightly visible.
-                    Box(modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2))) {
+                    Box(modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2)),
+                        gravity = ContentGravity.Center) {
                         // The Text composable is pre-defined by the Compose UI library; you can use
                         // this composable to render text on the screen
                         Text(
                             text = person.name,
-                            modifier = Modifier.padding(16.dp) ,
+                            modifier = Modifier.padding(16.dp),
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 20.sp

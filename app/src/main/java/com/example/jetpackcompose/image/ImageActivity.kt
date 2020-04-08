@@ -31,6 +31,7 @@ import androidx.ui.layout.preferredHeight
 import androidx.ui.layout.preferredHeightIn
 import androidx.ui.layout.preferredWidth
 import androidx.ui.layout.wrapContentSize
+import androidx.ui.material.Surface
 import androidx.ui.res.loadImageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -268,9 +269,16 @@ fun NetworkImageComponentGlide(url: String) {
 fun TitleComponent(title: String) {
     // Text is a predefined composable that does exactly what you'd expect it to - display text on
     // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.
-    Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
-        fontSize = 14.sp, color = Color.Black), modifier = Modifier.padding(16.dp)
-    )
+    
+    // Surface is added as a temporary workaround for an issue that causes the text to not be 
+    // visible if its next to a Card(or any surface with elevation). The fix will be available in
+    // dev09. More info here - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1585774380042500
+    Surface(elevation = 1.dp) {
+        Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
+            fontSize = 14.sp, color = Color.Black), modifier = Modifier.padding(16.dp) +
+                Modifier.fillMaxWidth()
+        )
+    }
 }
 
 // RoundedCornerClipModifier is a custom DrawModifier that is responsible for clipping and

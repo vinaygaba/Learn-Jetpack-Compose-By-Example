@@ -18,10 +18,12 @@ import androidx.ui.graphics.Color
 import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.Column
 import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeight
 import androidx.ui.layout.preferredWidth
+import androidx.ui.layout.wrapContentWidth
 import androidx.ui.material.Card
 import androidx.ui.material.Checkbox
 import androidx.ui.material.CircularProgressIndicator
@@ -37,9 +39,11 @@ import androidx.ui.material.TriStateCheckbox
 import androidx.ui.material.ripple.ripple
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
+import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.TextUnit
 import androidx.ui.unit.dp
+import androidx.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -117,7 +121,7 @@ fun MaterialCardComponent() {
     // to access this data. For such scenarios, we use Ambients. In this example, we use the
     // ContextAmbient to get hold of the Context object. In order to get access to the latest
     // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
-    // exampels of common Ambient's are TextInputServiceAmbient, DensityAmbient,
+    // examples of common Ambient's are TextInputServiceAmbient, DensityAmbient,
     // CoroutineContextAmbient, etc.
     val resources = ContextAmbient.current.resources
 
@@ -331,7 +335,7 @@ fun MaterialCircularProgressIndicatorComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
-        CircularProgressIndicator()
+        CircularProgressIndicator(modifier = Modifier.wrapContentWidth())
     }
 }
 
@@ -352,7 +356,7 @@ fun MaterialDeterminateCircularProgressIndicatorComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
-        CircularProgressIndicator(progress = 0.5f)
+        CircularProgressIndicator(progress = 0.5f, modifier = Modifier.wrapContentWidth())
     }
 }
 
