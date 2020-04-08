@@ -5,16 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.state
 import androidx.ui.core.Modifier
-import androidx.ui.core.gesture.PressGestureDetector
+import androidx.ui.core.gesture.PressIndicatorGestureDetector
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Paint
 import androidx.ui.graphics.PaintingStyle
 import androidx.ui.graphics.Path
 import androidx.ui.graphics.StrokeJoin
-import androidx.ui.layout.Container
-import androidx.ui.layout.LayoutSize
+import androidx.ui.layout.fillMaxSize
 
 class CustomViewPainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +41,8 @@ fun CustomDrawableViewComponent() {
         strokeJoin = StrokeJoin.round
     }
 
-    var paths by state<List<Paths>> { emptyList() }
-
-    PressGestureDetector(onPress = {
-        paths = paths + Paths(it.x.value, it.y.value)
-    }, onRelease = {
-    }) {
-        DrawingBoardComposable(paths, paint)
-    }
+    val paths by state<MutableList<Paths>> { mutableListOf() }
+//    DrawingBoardComposable(paths, paint)
 }
 
 data class Paths(
@@ -56,16 +50,18 @@ data class Paths(
     val y: Float
 )
 
-@Composable
-fun DrawingBoardComposable(paths: List<Paths>, paint: Paint) {
-    Container(modifier = LayoutSize.Fill) {
-        Canvas(modifier = Modifier.None) {
-            val p = Path()
-            for (path in paths) {
-                p.lineTo(path.x, path.y)
-                p.moveTo(path.x, path.y)
-            }
-            drawPath(p, paint)
-        }
-    }
-}
+//@Composable
+//fun DrawingBoardComposable(paths: List<Paths>, paint: Paint) {
+//    Box(modifier = Modifier.fillMaxSize() + PressIndicatorGestureDetector(onStart = {
+//        paths = paths + Paths(it.x.value, it.y.value)
+//    }, onStop = {})) {
+//        Canvas(modifier = Modifier.None) {
+//            val p = Path()
+//            for (path in paths) {
+//                p.lineTo(path.x, path.y)
+//                p.moveTo(path.x, path.y)
+//            }
+//            drawPath(p, paint)
+//        }
+//    }
+//}

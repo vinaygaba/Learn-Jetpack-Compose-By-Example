@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.geometry.Offset
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Paint
 import androidx.ui.graphics.PaintingStyle
-import androidx.ui.layout.Container
-import androidx.ui.layout.LayoutSize
+import androidx.ui.layout.fillMaxSize
 import androidx.ui.tooling.preview.Preview
 
 class CustomViewActivity : AppCompatActivity() {
@@ -36,7 +36,7 @@ fun CustomViewComponent() {
     val paint = Paint().apply {
         style = PaintingStyle.fill
     }
-    Container(modifier = LayoutSize.Fill) {
+    Box(modifier = Modifier.fillMaxSize()) {
         Canvas(modifier = Modifier.None) {
             paint.color = Color.Red
             drawCircle(

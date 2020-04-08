@@ -4,12 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.state
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Icon
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.padding
 import androidx.ui.material.BottomNavigation
 import androidx.ui.material.BottomNavigationItem
 import androidx.ui.material.Card
@@ -40,12 +41,12 @@ class BottomNavigationActivity: AppCompatActivity() {
                 // You can think of Modifiers as implementations of the decorators pattern that
                 // are used to modify the composable that its applied to. In this example, we assign
                 // a LayoutPadding of 8dp to the Card.
-                Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
+                Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
                     BottomNavigationAlwaysShowLabelComponent()
                 }
                 TitleComponent("This is a bottom navigation bar that only shows label for " +
                         "selected item")
-                Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
+                Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
                     BottomNavigationOnlySelectedLabelComponent()
                 }
             }
@@ -70,7 +71,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
     var selectedIndex by state { 0 }
     // BottomNavigation is a component placed at the bottom of the screen that represents primary
     // destinations in your application.
-    BottomNavigation(modifier = LayoutPadding(16.dp)) {
+    BottomNavigation(modifier = Modifier.padding(16.dp)) {
         listItems.forEachIndexed { index, label ->
             // A composable typically used as part of BottomNavigation. Since BottomNavigation
             // is usually used to represent primary destinations in your application,
@@ -79,7 +80,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
                 icon = {
                     // Simple composable that allows you to draw an icon on the screen. It
                     // accepts a vector asset as the icon.
-                    Icon(icon = Icons.Filled.Favorite)
+                    Icon(asset = Icons.Filled.Favorite)
                 },
                 text = {
                     // Text is a predefined composable that does exactly what you'd expect it to -
@@ -106,7 +107,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
     var selectedIndex by state { 0 }
     // BottomNavigation is a component placed at the bottom of the screen that represents primary
     // destinations in your application.
-    BottomNavigation(modifier = LayoutPadding(16.dp)) {
+    BottomNavigation(modifier = Modifier.padding(16.dp)) {
         listItems.forEachIndexed { index, label ->
             // A composable typically used as part of BottomNavigation. Since BottomNavigation
             // is usually used to represent primary destinations in your application,
@@ -115,7 +116,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 icon = {
                     // Simple composable that allows you to draw an icon on the screen. It
                     // accepts a vector asset as the icon.
-                    Icon(icon = Icons.Filled.Favorite)
+                    Icon(asset = Icons.Filled.Favorite)
                 },
                 text = {
                     // Text is a predefined composable that does exactly what you'd expect it to -

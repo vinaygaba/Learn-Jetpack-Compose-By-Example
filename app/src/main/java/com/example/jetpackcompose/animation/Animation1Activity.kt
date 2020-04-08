@@ -8,12 +8,13 @@ import androidx.animation.transitionDefinition
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.animation.Transition
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Canvas
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Paint
 import androidx.ui.layout.Center
-import androidx.ui.layout.LayoutSize
+import androidx.ui.layout.preferredSize
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.toRect
@@ -95,10 +96,14 @@ fun RotatingSquareComponent() {
             toState = "B"
         ) { state ->
             // We use the Canvas composable that gives you access to a canvas that you can draw
-            // into.
-            Canvas(modifier = LayoutSize(200.dp)) {
+            // into. We also pass it a modifier.
+
+            // You can think of Modifiers as implementations of the decorators pattern that are used
+            // to modify the composable that its applied to. In this example, we assign a size
+            // of 200dp to the Canvas using Modifier.preferredSize(200.dp).
+            Canvas(modifier = Modifier.preferredSize(200.dp)) {
                 save()
-                // translate the canvas to the center of the screen so that we can rotate at the
+                // Translate the canvas to the center of the screen so that we can rotate at the
                 // correct pivot point.
                 translate(size.width.value/2, size.height.value/2)
                 // As the Transition is changing the interpolating the value of your props based

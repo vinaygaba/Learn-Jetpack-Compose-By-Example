@@ -8,25 +8,40 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.onCommit
 import androidx.compose.state
-import androidx.ui.core.*
+import androidx.ui.core.Alignment
+import androidx.ui.core.ContextAmbient
+import androidx.ui.core.DrawModifier
+import androidx.ui.core.Modifier
+import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.foundation.Image
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.CornerSize
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.geometry.RRect
 import androidx.ui.geometry.Radius
 import androidx.ui.graphics.Canvas
-import androidx.ui.graphics.painter.ImagePainter
-import androidx.ui.layout.*
-import androidx.ui.material.Card
+import androidx.ui.graphics.Color
+import androidx.ui.layout.Column
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredHeight
+import androidx.ui.layout.preferredHeightIn
+import androidx.ui.layout.preferredWidth
+import androidx.ui.layout.wrapContentSize
 import androidx.ui.res.loadImageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.*
+import androidx.ui.unit.Density
+import androidx.ui.unit.Px
+import androidx.ui.unit.PxSize
+import androidx.ui.unit.dp
+import androidx.ui.unit.sp
+import androidx.ui.unit.toRect
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -52,8 +67,8 @@ class ImageActivity : AppCompatActivity() {
 
                 // You can think of Modifiers as implementations of the decorators pattern that are
                 // used to modify the composable that its applied to. In this example, we assign a
-                // LayoutPadding of 16dp to the Column.
-                Column(modifier = LayoutPadding(16.dp)) {
+                // padding of 16dp to the Column.
+                Column(modifier = Modifier.padding(16.dp)) {
                     DisplayImagesComponent()
                 }
             }
@@ -95,7 +110,7 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
         // Image composable to have a height of 200 dp.
-        Image(image = it, modifier = LayoutHeight.Max(200.dp))
+        Image(asset = it, modifier = Modifier.preferredHeightIn(maxHeight = 200.dp))
     }
 }
 
@@ -111,16 +126,20 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     //
     val shape = RoundedCornerShape(8.dp)
     image.resource.resource?.let {
-        // Container is a predefined convenience composable that allows you to apply common
-        // layout properties like height, width, padding, constraints, etc.
+        // Box is a predefined convenience composable that allows you to apply common draw & layout
+        // logic. In addition we also pass a few modifiers to it.
 
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
-        // Container composable to have a height of 200dp, width of 200dp, alignment as center
+        // Box composable to have a height of 200dp, width of 200dp, alignment as center
         // and a custom draw modifier to clip the corners of the image.
-        Container(modifier = LayoutAlign.Center + LayoutHeight(200.dp) + LayoutWidth(200.dp)
-                + RoundedCornerClipModifier(shape.topLeft, shape.topRight, shape.bottomLeft,
-            shape.bottomRight)) {
+        Box(
+            modifier = Modifier.wrapContentSize(Alignment.Center) +
+                    Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp)
+                    + RoundedCornerClipModifier(
+                shape.topLeft, shape.topRight, shape.bottomLeft, shape.bottomRight
+            )
+        ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(it)
         }
@@ -167,19 +186,19 @@ fun NetworkImageComponentPicasso(url: String) {
     val theImage = image
     val theDrawable = drawable
     if (theImage != null) {
-        // Container is a predefined convenience composable that allows you to apply common
-        // layout properties like height, width, padding, constraints, etc.
+        // Box is a predefined convenience composable that allows you to apply common draw & layout
+        // logic. In addition we also pass a few modifiers to it.
 
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
-        // Container composable to have a max height of 200dp and fill out the entire available
+        // Box composable to have a max height of 200dp and fill out the entire available
         // width.
-        Container(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp)) {
+        Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp)) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
-            Image(image = theImage)
+            Image(asset = theImage)
         }
     } else if (theDrawable != null) {
-        Canvas(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
+        Canvas(modifier = Modifier.preferredHeight(200.dp) + Modifier.fillMaxWidth()) {
             theDrawable.draw(this.nativeCanvas)
         }
     }
@@ -230,12 +249,12 @@ fun NetworkImageComponentGlide(url: String) {
         // used to modify the composable that its applied to. In this example, we configure the
         // Container composable to have a max height of 200dp and fill out the entire available
         // width.
-        Container(modifier = LayoutWidth.Fill + LayoutHeight.Max(200.dp)) {
+        Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp)) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
-            Image(image = theImage)
+            Image(asset = theImage)
         }
     } else if (theDrawable != null) {
-        Canvas(modifier = LayoutHeight(200.dp) + LayoutWidth.Fill) {
+        Canvas(modifier = Modifier.preferredHeight(200.dp) + Modifier.fillMaxWidth()) {
             theDrawable.draw(this.nativeCanvas)
         }
     }
@@ -250,7 +269,8 @@ fun TitleComponent(title: String) {
     // Text is a predefined composable that does exactly what you'd expect it to - display text on
     // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.
     Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
-        fontSize = 14.sp), modifier = LayoutPadding(16.dp))
+        fontSize = 14.sp, color = Color.Black), modifier = Modifier.padding(16.dp)
+    )
 }
 
 // RoundedCornerClipModifier is a custom DrawModifier that is responsible for clipping and

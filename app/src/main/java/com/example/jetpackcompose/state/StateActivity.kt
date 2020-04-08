@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.Model
 import androidx.compose.state
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.layout.*
+import androidx.ui.foundation.Text
+import androidx.ui.layout.Column
+import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxHeight
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
 import androidx.ui.material.Button
 import androidx.ui.material.Divider
 import androidx.ui.tooling.preview.Preview
@@ -24,7 +29,7 @@ class StateActivity: AppCompatActivity() {
         setContent {
             // Column is a composable that places its children in a vertical sequence. You
             // can think of it similar to a LinearLayout with the vertical orientation.
-            Column(modifier = LayoutHeight.Fill) {
+            Column(modifier = Modifier.fillMaxWidth()) {
                 StateComponent()
                 // A pre-defined composable that renders a thin line on the screen that makes it
                 // easy to group contents
@@ -53,16 +58,16 @@ fun StateComponent() {
     // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
     // to the Row composable. You can think of Modifiers as implementations of the decorators
     // pattern that are used to modify the composable that its applied to. In this example, we
-    // assign add a modifier to the Row and ask it to extend the full width available to it.
-    // Alternatively, we could've assigned a fixed width to this row using
-    // LayoutWidth(val width: Dp).
-    Row(modifier = LayoutWidth.Fill) {
+    // assign add a modifier(Modifier.fillMaxWidth()) to the Row and ask it to extend the
+    // full width available to it. Alternatively, we could've assigned a fixed width to this row
+    // using Modifier.preferredWidth(val width: Dp).
+    Row(modifier = Modifier.fillMaxWidth()) {
         // This Row consists of two buttons. We wanted to ensure that both these buttons occupy
         // equal amount of width. We do that by using the LayoutWeight modifier and passing equal
         // weight to both the buttons. This is similar to how we used layout_weight with
         // LinearLayouts in the old Android UI Toolkit.
         Button(
-            modifier = LayoutPadding(16.dp) + LayoutWeight(1f),
+            modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
             elevation = 5.dp,
             // We increment the counter every time this button is clicked.
             onClick = {
@@ -70,21 +75,21 @@ fun StateComponent() {
             }) {
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Increment", modifier = LayoutPadding(16.dp))
+            Text(text = "Increment", modifier = Modifier.padding(16.dp))
         }
 
         Button(
-            modifier = LayoutPadding(16.dp) + LayoutWeight(1f),
+            modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
             elevation = 5.dp,
             onClick = {
                 counter = 0
             }) {
-            Text(text = "Reset", modifier = LayoutPadding(16.dp))
+            Text(text = "Reset", modifier = Modifier.padding(16.dp))
         }
     }
 
     // This text composable is just used to display the current value of the counter.
-    Text(text = "Counter value is $counter", modifier = LayoutPadding(16.dp))
+    Text(text = "Counter value is $counter", modifier = Modifier.padding(16.dp))
 }
 
 /**
@@ -105,35 +110,35 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using
-    // LayoutWidth(val width: Dp).
-    Row(modifier = LayoutWidth.Fill) {
+    // Modifier.preferredWidth(val width: Dp).
+    Row(modifier = Modifier.fillMaxWidth()) {
         // This Row consists of two buttons. We wanted to ensure that both these buttons occupy
         // equal amount of width. We do that by using the LayoutWeight modifier and passing equal
         // weight to both the buttons. This is similar to how we used layout_weight with
         // LinearLayouts in the old Android UI Toolkit.
         Button(
-            modifier = LayoutPadding(16.dp) + LayoutWeight(1f),
+            modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
             elevation = 5.dp,
             onClick = {
                 counterState.counter++
             }) {
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Increment", modifier = LayoutPadding(16.dp))
+            Text(text = "Increment", modifier = Modifier.padding(16.dp))
         }
 
         Button(
-            modifier = LayoutPadding(16.dp) + LayoutWeight(1f),
+            modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
             elevation = 5.dp,
             onClick = {
                 counterState.counter = 0
             }) {
-            Text(text = "Reset", modifier = LayoutPadding(16.dp))
+            Text(text = "Reset", modifier = Modifier.padding(16.dp))
         }
     }
 
     // This text composable is just used to display the current value of the counter.
-    Text(text = "Counter value is ${counterState.counter}", modifier = LayoutPadding(16.dp))
+    Text(text = "Counter value is ${counterState.counter}", modifier = Modifier.padding(16.dp))
 }
 
 @Model
@@ -151,7 +156,7 @@ class CounterState(var counter: Int = 0)
 @Preview("Example using state delegate")
 @Composable
 fun StateComponentPreview() {
-    Column(modifier = LayoutHeight.Fill) {
+    Column(modifier = Modifier.fillMaxHeight()) {
         StateComponent()
     }
 }
@@ -159,7 +164,7 @@ fun StateComponentPreview() {
 @Preview("Example using Model annotation")
 @Composable
 fun ModelComponentPreview() {
-    Column(modifier = LayoutHeight.Fill) {
+    Column(modifier = Modifier.fillMaxHeight()) {
         ModelComponent()
     }
 }

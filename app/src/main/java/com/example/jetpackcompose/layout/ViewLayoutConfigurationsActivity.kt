@@ -4,10 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.FirstBaseline
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
-import androidx.ui.layout.*
+import androidx.ui.layout.Arrangement
+import androidx.ui.layout.Column
+import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
 import androidx.ui.material.Button
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontStyle
@@ -76,15 +81,16 @@ fun RowEqualWeightComponent() {
     // to the Row composable. You can think of Modifiers as implementations of the decorators
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
-    // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
-    Row(modifier = LayoutWidth.Fill) {
+    // Alternatively, we could've assigned a fixed width to this row using
+    // Modifier.preferredWidth(val width: Dp).
+    Row(modifier = Modifier.fillMaxWidth()) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
         // This Row consists of two buttons. We wanted to ensure that both these buttons occupy
-        // equal amount of width. We do that by using the LayoutWeight modifier and passing equal
+        // equal amount of width. We do that by using the Modifier.weight modifier and passing equal
         // weight to both the buttons. This is similar to how we used layout_weight with
         // LinearLayouts in the old Android UI Toolkit.
-        Button(modifier = LayoutWeight(1f) + LayoutPadding(4.dp), onClick = {}) {
+        Button(modifier = Modifier.weight(1f) + Modifier.padding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
             // functiionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -93,7 +99,7 @@ fun RowEqualWeightComponent() {
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button(modifier = LayoutWeight(1f) + LayoutPadding(4.dp), onClick = {}) {
+        Button(modifier = Modifier.weight(1f) + Modifier.padding(4.dp), onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -107,16 +113,17 @@ fun RowUnequalWeightComponent() {
     // to the Row composable. You can think of Modifiers as implementations of the decorators
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
-    // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
-    Row(modifier = LayoutWidth.Fill) {
+    // Alternatively, we could've assigned a fixed width to this row using
+    // Modifier.preferredWidth(val width: Dp).
+    Row(modifier = Modifier.fillMaxWidth()) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
         // This Row consists of two buttons. We wanted to ensure that both the first button
         // occupies 2/3rd of the screen and the other button occupies the remaining 1/3rd.
-        // We do this by using the LayoutWeight modifier and passing equal weight to both the
+        // We do this by using the Modifier.weight modifier and passing equal weight to both the
         // buttons. This is similar to how we used layout_weight with LinearLayouts in the old
         // Android UI Toolkit.
-        Button(modifier = LayoutWeight(0.66f) + LayoutPadding(4.dp), onClick = {}) {
+        Button(modifier = Modifier.weight(0.66f) + Modifier.padding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
             // functiionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -125,7 +132,7 @@ fun RowUnequalWeightComponent() {
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button(modifier = LayoutWeight(0.34f) + LayoutPadding(4.dp), onClick = {}) {
+        Button(modifier = Modifier.weight(0.34f) + Modifier.padding(4.dp), onClick = {}) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -141,7 +148,8 @@ fun RowAddSpaceBetweenViewsComponent() {
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // We use Arrangement.SpaceBetween to place the children of the row such that they are spaced
     // evenly across the main axis, without free space before the first child or after the last child.
-    Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceBetween) {
+    Row(modifier = Modifier.fillMaxWidth() + Modifier.padding(4.dp), arrangement = Arrangement
+        .SpaceBetween) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
@@ -170,7 +178,7 @@ fun RowSpaceViewsEvenlyComponent() {
     // We use Arrangement.SpaceEvenly to place the children of the row such that they are
     // spaced evenly across the main axis, including free space before the first child and after
     // the last child.
-    Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceEvenly) {
+    Row(modifier = Modifier.fillMaxWidth(), arrangement = Arrangement.SpaceEvenly) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
@@ -199,7 +207,7 @@ fun RowSpaceAroundViewsComponent() {
     // We use Arrangement.SpaceAround to place the children of the row such that they are spaced
     // evenly across the main axis, including free space before the first child and after the
     // last child, but half the amount of space existing otherwise between two consecutive children.
-    Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.SpaceAround) {
+    Row(modifier = Modifier.fillMaxWidth(), arrangement = Arrangement.SpaceAround) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
@@ -227,10 +235,10 @@ fun RowViewsCenteredComponent() {
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // We use Arrangement.Center to place the children of the row such that they are as close as
     // possible to the middle of the main axis.
-    Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.Center) {
+    Row(modifier = Modifier.fillMaxWidth(), arrangement = Arrangement.Center) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
-        Button(onClick = {}) {
+        Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
             // The Button composable allows you to provide child composables that inherit this button
             // functiionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -239,7 +247,7 @@ fun RowViewsCenteredComponent() {
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button(onClick = {}) {
+        Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -255,10 +263,10 @@ fun RowViewsArrangedInEndComponent() {
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // We use Arrangement.End to place the children of the row such that they are as close as
     // possible to the end of the main axis.
-    Row(modifier = LayoutWidth.Fill, arrangement = Arrangement.End) {
+    Row(modifier = Modifier.fillMaxWidth(), arrangement = Arrangement.End) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
-        Button(onClick = {}) {
+        Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
             // The Button composable allows you to provide child composables that inherit this button
             // functiionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -267,7 +275,7 @@ fun RowViewsArrangedInEndComponent() {
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
 
-        Button(onClick = {}) {
+        Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
             Text(text = "Button 2",
                 style = TextStyle(fontSize = TextUnit.Companion.Sp(20)))
         }
@@ -282,18 +290,23 @@ fun RowBaselineAlignComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
-    Row(modifier = LayoutWidth.Fill) {
+    Row(modifier = Modifier.fillMaxWidth()) {
         // The Button composable allows you to provide child composables that inherit this button
         // functiionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
+        // In order to align the baseline of both the text composables, we use the
+        // Modifier.alignWithSiblings(FirstBaseline) modifier. FirstBaseline here means that we
+        // align the baseline of the first line of the Text Composable.
         Text(text = "Text 1",
             style = TextStyle(fontSize = TextUnit.Companion.Sp(20), fontStyle = FontStyle.Italic),
-            modifier = LayoutGravity.RelativeToSiblings(alignmentLine = FirstBaseline))
+            modifier = Modifier.alignWithSiblings(alignmentLine = FirstBaseline)
+        )
         Text(text = "Text 2",
             style = TextStyle(fontSize = TextUnit.Companion.Sp(40), fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.Bold),
-            modifier = LayoutGravity.RelativeToSiblings(alignmentLine = FirstBaseline))
+            modifier = Modifier.alignWithSiblings(alignmentLine = FirstBaseline)
+        )
     }
 }
 
@@ -305,7 +318,7 @@ fun RowBaselineUnalignedComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using LayoutWidth(val width: Dp).
-    Row(modifier = LayoutWidth.Fill) {
+    Row(modifier = Modifier.fillMaxWidth()) {
         // The Button composable allows you to provide child composables that inherit this button
         // functiionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this

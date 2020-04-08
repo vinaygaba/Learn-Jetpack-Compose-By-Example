@@ -9,8 +9,9 @@ import androidx.ui.autofill.AutofillNode
 import androidx.ui.autofill.AutofillType
 import androidx.ui.core.AutofillAmbient
 import androidx.ui.core.ContextAmbient
-import androidx.ui.core.TextField
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.TextField
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
@@ -18,7 +19,7 @@ import androidx.ui.input.ImeAction
 import androidx.ui.input.KeyboardType
 import androidx.ui.input.PasswordVisualTransformation
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.padding
 import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
@@ -79,7 +80,7 @@ fun SimpleTextInputComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we assign a LayoutPadding of
     // 16dp to the Surface.
-    Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+    Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
@@ -90,7 +91,7 @@ fun SimpleTextInputComponent() {
         // is redrawn and updated with the latest value.
         var textValue by state { "Enter your text here" }
         TextField(value = textValue,
-            modifier = LayoutPadding(16.dp),
+            modifier = Modifier.padding(16.dp),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
@@ -113,7 +114,7 @@ fun CustomStyleTextInputComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we assign a LayoutPadding of
     // 16dp to the Surface.
-    Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+    Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
@@ -124,7 +125,7 @@ fun CustomStyleTextInputComponent() {
         // is redrawn and updated with the latest value.
         var textValue by state { "Enter your text here" }
         TextField(value = textValue,
-            modifier = LayoutPadding(16.dp),
+            modifier = Modifier.padding(16.dp),
             // You can also customize the appearance of the TextInput by passing a TextStyle
             // configuration to the TextField composable. If you don't pass this, it's just going
             // to use the default values for all the properties.
@@ -156,7 +157,7 @@ fun NumberTextInputComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we assign a LayoutPadding of
     // 16dp to the Surface.
-    Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+    Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
@@ -167,7 +168,7 @@ fun NumberTextInputComponent() {
         // is redrawn and updated with the latest value.
         var textValue by state { "123" }
         TextField(value = textValue,
-            modifier = LayoutPadding(16.dp),
+            modifier = Modifier.padding(16.dp),
             // Setting the keyboard type allows you to configure what kind of data you can input
             // in this TextInput. Some examples are number, phone, email, password, etc.
             keyboardType = KeyboardType.Number,
@@ -204,7 +205,7 @@ fun SearchImeActionInputComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we assign a LayoutPadding of
     // 16dp to the Surface.
-    Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp),
+    Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp),
         shape = RoundedCornerShape(5.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
@@ -216,7 +217,7 @@ fun SearchImeActionInputComponent() {
         // is redrawn and updated with the latest value.
         var textValue by state { "Enter your search query here" }
         TextField(value = textValue,
-            modifier = LayoutPadding(16.dp),
+            modifier = Modifier.padding(16.dp),
             // Changing the imeAction allows you to change the primary icon of the keyboard which
             // is typically shown in the bottom right corner of the keyboard. Some examples of
             // ImeActions are search, send, done, go, etc.
@@ -246,7 +247,7 @@ fun PasswordVisualTransformationInputComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we assign a LayoutPadding of
     // 16dp to the Surface.
-    Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+    Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // TextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
@@ -257,7 +258,7 @@ fun PasswordVisualTransformationInputComponent() {
         // is redrawn and updated with the latest value.
         var textValue by state { "Enter your password here" }
         TextField(value = textValue,
-            modifier = LayoutPadding(16.dp),
+            modifier = Modifier.padding(16.dp),
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
             // Visual transformation is used to modify the visual output of the input field. In
@@ -279,10 +280,10 @@ fun PasswordVisualTransformationInputComponent() {
 @Composable
 fun AutoFillTextInputComponent() {
     val autofillAmbient = AutofillAmbient.current
-    Surface(color = Color.LightGray, modifier = LayoutPadding(16.dp)) {
+    Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         var textValue by state { "" }
         TextField(value = textValue,
-            modifier = LayoutPadding(16.dp),
+            modifier = Modifier.padding(16.dp),
             keyboardType = KeyboardType.Email,
             onFocus = {
                 autofillAmbient?.requestAutofillForNode(

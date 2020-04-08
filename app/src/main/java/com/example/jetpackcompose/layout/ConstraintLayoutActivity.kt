@@ -3,14 +3,23 @@ package com.example.jetpackcompose.layout
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.*
+import androidx.ui.core.ContextAmbient
+import androidx.ui.core.Modifier
+import androidx.ui.core.setContent
+import androidx.ui.core.tag
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Image
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.imageFromResource
-import androidx.ui.layout.*
-import androidx.ui.layout.constraintlayout.ConstraintLayout
-import androidx.ui.layout.constraintlayout.ConstraintSet
+import androidx.ui.layout.Column
+import androidx.ui.layout.ConstraintLayout
+import androidx.ui.layout.ConstraintSet
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredHeight
+import androidx.ui.layout.preferredWidth
 import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -67,7 +76,7 @@ fun SimpleConstraintLayoutComponent() {
     // to access this data. For such scenarios, we use Ambients. In this example, we use the
     // ContextAmbient to get hold of the Context object. In order to get access to the latest
     // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
-    // exampels of common Ambient's are TextInputServiceAmbient, DensityAmbient,
+    // examples of common Ambient's are TextInputServiceAmbient, DensityAmbient,
     // CoroutineContextAmbient, etc.
     val resources = ContextAmbient.current.resources
 
@@ -79,7 +88,7 @@ fun SimpleConstraintLayoutComponent() {
     // modify the composable that its applied to. In the example below, we configure the Card
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
-    Card(modifier = LayoutHeight(120.dp) + LayoutWidth.Fill + LayoutPadding(8.dp),
+    Card(modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
         shape = RoundedCornerShape(4.dp)) {
         // ConstraintLayout is a composable that positions its children based on the constraints
         // we specify in its scope. We specify constraints using ConstraintSet
@@ -87,7 +96,7 @@ fun SimpleConstraintLayoutComponent() {
             // In order to specify constraints, we use tags and assign constraints to the tags.
             // In order to apply these constraints to a composable(view/layout), we reference
             // these tags to impose the respective constraint on that composable. Look at how
-            // each of these tags are being reference below using the LayoutTag modifier.
+            // each of these tags are being reference below using the Modifier.tag modifier.
             val title = tag("title")
             val subtitle = tag("subtitle")
             val image = tag("image")
@@ -128,18 +137,20 @@ fun SimpleConstraintLayoutComponent() {
             // style property.
 
             // In order to apply the constraints that we defined above, we make use of the
-            // LayoutTag modifier and use the same key that we passed when creating the tags to
+            // Modifier.tag modifier and use the same key that we passed when creating the tags to
             // reference the appropriate constraint. This way, the corresponding constraints are
             // applied to the composable referencing it.
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. Some examples of composables are
-            // LayoutTag, LayoutPadding, LayoutHeight, LayoutWidth, etc
+            // modify the composable that its applied to. Some examples of modifiers are
+            // Modifier.tag, Modifier.padding, Modifier.preferredHeight, Modifier.preferredWidth,
+            // etc
             Text("Title", style = TextStyle(fontFamily = FontFamily.Serif, fontWeight =
-            FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("title"))
+            FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("title"))
             Text("Subtitle", style = TextStyle(fontFamily = FontFamily.Serif, fontWeight =
-            FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("subtitle"))
-            Container(width = 72.dp, height = 72.dp, modifier = LayoutTag("image")) {
+            FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("subtitle"))
+            Box(modifier = Modifier.tag("image") + Modifier.preferredHeight(72.dp) +
+                    Modifier.preferredWidth(72.dp)) {
                 Image(imageFromResource(resources, R.drawable.lenna))
             }
         }
@@ -156,7 +167,8 @@ fun GuidelineConstraintLayoutComponent() {
     // modify the composable that its applied to. In the example below, we configure the Card
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
-    Card(modifier = LayoutHeight(120.dp) + LayoutWidth.Fill + LayoutPadding(8.dp),
+    Card(modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() +
+            Modifier.padding(8.dp),
         shape = RoundedCornerShape(4.dp)) {
         // ConstraintLayout is a composable that positions its children based on the constraints
         // we specify in its scope. We specify constraints using ConstraintSet
@@ -164,7 +176,7 @@ fun GuidelineConstraintLayoutComponent() {
             // In order to specify constraints, we use tags and assign constraints to the tags.
             // In order to apply these constraints to a composable(view/layout), we reference
             // these tags to impose the respective constraint on that composable. Look at how
-            // each of these tags are being reference below using the LayoutTag modifier.
+            // each of these tags are being reference below using the Modifier.tag modifier.
             val text1 = tag("quarter")
             val text2 = tag("half")
 
@@ -198,17 +210,18 @@ fun GuidelineConstraintLayoutComponent() {
             // style property.
 
             // In order to apply the constraints that we defined above, we make use of the
-            // LayoutTag modifier and use the same key that we passed when creating the tags to
+            // Modifier.tag modifier and use the same key that we passed when creating the tags to
             // reference the appropriate constraint. This way, the corresponding constraints are
             // applied to the composable referencing it.
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. Some examples of composables are
-            // LayoutTag, LayoutPadding, LayoutHeight, LayoutWidth, etc
+            // modify the composable that its applied to. Some examples of modifiers are
+            // Modifier.tag, Modifier.padding, Modifier.preferredHeight, Modifier.preferredWidth,
+            // etc
             Text("Quarter", style = TextStyle(fontFamily = FontFamily.Serif, fontWeight =
-            FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("quarter"))
+            FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("quarter"))
             Text("Half", style = TextStyle(fontFamily = FontFamily.Serif, fontWeight =
-            FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("half"))
+            FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("half"))
         }
     }
 }
@@ -223,7 +236,7 @@ fun BarrierConstraintLayoutComponent() {
     // modify the composable that its applied to. In the example below, we configure the Card
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
-    Card(modifier = LayoutHeight(120.dp) + LayoutWidth.Fill + LayoutPadding(8.dp),
+    Card(modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
         shape = RoundedCornerShape(4.dp)) {
         // ConstraintLayout is a composable that positions its children based on the constraints
         // we specify in its scope. We specify constraints using ConstraintSet
@@ -231,7 +244,7 @@ fun BarrierConstraintLayoutComponent() {
             // In order to specify constraints, we use tags and assign constraints to the tags.
             // In order to apply these constraints to a composable(view/layout), we reference
             // these tags to impose the respective constraint on that composable. Look at how
-            // each of these tags are being reference below using the LayoutTag modifier.
+            // each of these tags are being reference below using the Modifier.tag modifier.
             val text1 = tag("text1")
             val text2 = tag("text2")
             val text3 = tag("text3")
@@ -280,19 +293,20 @@ fun BarrierConstraintLayoutComponent() {
             // style property.
 
             // In order to apply the constraints that we defined above, we make use of the
-            // LayoutTag modifier and use the same key that we passed when creating the tags to
+            // Modifier.tag modifier and use the same key that we passed when creating the tags to
             // reference the appropriate constraint. This way, the corresponding constraints are
             // applied to the composable referencing it.
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. Some examples of composables are
-            // LayoutTag, LayoutPadding, LayoutHeight, LayoutWidth, etc
+            // modify the composable that its applied to. Some examples of modifiers are
+            // Modifier.tag, Modifier.padding, Modifier.preferredHeight, Modifier.preferredWidth,
+            // etc
             Text("Short text", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("text1"))
+                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text1"))
             Text("This is a long text", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("text2"))
+                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text2"))
             Text("Barrier Text", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("text3"))
+                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text3"))
         }
     }
 }
@@ -307,7 +321,7 @@ fun BiasConstraintLayoutComponent() {
     // modify the composable that its applied to. In the example below, we configure the Card
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
-    Card(modifier = LayoutHeight(120.dp) + LayoutWidth.Fill + LayoutPadding(8.dp),
+    Card(modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
         shape = RoundedCornerShape(4.dp)) {
         // ConstraintLayout is a composable that positions its children based on the constraints
         // we specify in its scope. We specify constraints using ConstraintSet
@@ -315,7 +329,7 @@ fun BiasConstraintLayoutComponent() {
             // In order to specify constraints, we use tags and assign constraints to the tags.
             // In order to apply these constraints to a composable(view/layout), we reference
             // these tags to impose the respective constraint on that composable. Look at how
-            // each of these tags are being reference below using the LayoutTag modifier.
+            // each of these tags are being reference below using the Modifier.tag modifier.
             val text1 = tag("text1")
             val text2 = tag("text2")
 
@@ -347,17 +361,18 @@ fun BiasConstraintLayoutComponent() {
             // style property.
 
             // In order to apply the constraints that we defined above, we make use of the
-            // LayoutTag modifier and use the same key that we passed when creating the tags to
+            // Modifier.tag modifier and use the same key that we passed when creating the tags to
             // reference the appropriate constraint. This way, the corresponding constraints are
             // applied to the composable referencing it.
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. Some examples of composables are
-            // LayoutTag, LayoutPadding, LayoutHeight, LayoutWidth, etc
+            // modify the composable that its applied to. Some examples of modifiers are
+            // Modifier.tag, Modifier.padding, Modifier.preferredHeight, Modifier.preferredWidth,
+            // etc
             Text("Left", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("text1"))
+                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text1"))
             Text("Right", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = LayoutTag("text2"))
+                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text2"))
         }
     }
 }
