@@ -194,7 +194,7 @@ fun SearchImeActionInputComponent() {
     // to access this data. For such scenarios, we use Ambients. In this example, we use the
     // ContextAmbient to get hold of the Context object. In order to get access to the latest
     // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
-    // exampels of common Ambient's are TextInputServiceAmbient, DensityAmbient,
+    // examples of common Ambient's are TextInputServiceAmbient, DensityAmbient,
     // CoroutineContextAmbient, etc.
     val context = ContextAmbient.current
 
