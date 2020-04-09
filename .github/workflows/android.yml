@@ -21,8 +21,8 @@ jobs:
       with:
         path: ~/.gradle/caches
         # Key inspired from here -
-        # https://github.com/zach-klippenstein/compose-backstack/blob/master/.github/workflows/android.yml
-        key: gradle-${{ runner.os }}-${{ hashFiles('buildSrc/**') }}-${{ hashFiles('**/*.gradle*') }}
+        # https://medium.com/@ychescale9/running-android-instrumented-tests-on-ci-from-bitrise-io-to-github-actions-a611e57ce71f
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
         restore-keys: ${{ runner.os }}-gradle-
     - name: Build with Gradle
       run: ./gradlew build
