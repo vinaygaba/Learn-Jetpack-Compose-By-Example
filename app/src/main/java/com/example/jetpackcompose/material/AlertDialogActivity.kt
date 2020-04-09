@@ -4,13 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.state
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.padding
 import androidx.ui.material.AlertDialog
 import androidx.ui.material.Button
 import androidx.ui.material.Card
@@ -60,11 +61,11 @@ fun ClickableText() {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to. In the example below, we add a padding of
         // 8dp to the Card composable and 16dp to the Text composable.
-        Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp),
+        Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp),
             color = Color.LightGray) {
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Click to see dialog", modifier = LayoutPadding(16.dp),
+            Text(text = "Click to see dialog", modifier = Modifier.padding(16.dp),
                 style = TextStyle(fontSize = TextUnit.Sp(16),
                     fontFamily = FontFamily.Serif)
             )

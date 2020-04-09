@@ -8,10 +8,11 @@ import androidx.compose.Composable
 import androidx.compose.state
 import androidx.ui.animation.ColorPropKey
 import androidx.ui.animation.Transition
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.graphics.Color
-import androidx.ui.layout.LayoutSize
+import androidx.ui.layout.fillMaxSize
 import androidx.ui.tooling.preview.Preview
 
 class Animation2Activity: AppCompatActivity() {
@@ -27,7 +28,11 @@ class Animation2Activity: AppCompatActivity() {
     }
 }
 
-//
+/**
+ * PropKeys are used in Jetpack Compose animations to hold properties that are going to be
+ * updated by the animation transitions. In this example, we use a [ColorPropKey] to hold a Color
+ * value that represents the value of color on screen.
+ */
 private val color = ColorPropKey()
 
 /**
@@ -122,7 +127,7 @@ fun AnimateColorComponent() {
         // state variable and access the relevant props/properties to update the relevant
         // composables/layouts. Below, we use state[color] to get get the latest value of color
         // and use it to paint the screen by setting it as the backgroundColor of the screen.
-        Box(LayoutSize.Fill, backgroundColor = state[color])
+        Box(modifier = Modifier.fillMaxSize(), backgroundColor = state[color])
     }
 }
 

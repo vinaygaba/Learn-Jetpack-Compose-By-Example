@@ -3,19 +3,26 @@ package com.example.jetpackcompose.customview
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.frames.ModelList
+import androidx.compose.frames.modelListOf
 import androidx.compose.state
 import androidx.ui.core.Modifier
-import androidx.ui.core.gesture.PressGestureDetector
+import androidx.ui.core.gesture.DragGestureDetector
+import androidx.ui.core.gesture.DragObserver
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Paint
 import androidx.ui.graphics.PaintingStyle
 import androidx.ui.graphics.Path
 import androidx.ui.graphics.StrokeJoin
-import androidx.ui.layout.Container
-import androidx.ui.layout.LayoutSize
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.unit.PxPosition
 
+/**
+ * This example needs some more work.
+ */
 class CustomViewPainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,15 +47,7 @@ fun CustomDrawableViewComponent() {
         style = PaintingStyle.stroke
         strokeJoin = StrokeJoin.round
     }
-
-    var paths by state<List<Paths>> { emptyList() }
-
-    PressGestureDetector(onPress = {
-        paths = paths + Paths(it.x.value, it.y.value)
-    }, onRelease = {
-    }) {
-        DrawingBoardComposable(paths, paint)
-    }
+    DrawingBoardComposable(paint)
 }
 
 data class Paths(
@@ -57,8 +56,16 @@ data class Paths(
 )
 
 @Composable
-fun DrawingBoardComposable(paths: List<Paths>, paint: Paint) {
-    Container(modifier = LayoutSize.Fill) {
+fun DrawingBoardComposable(paint: Paint) {
+    val paths by state<ModelList<Paths>> { modelListOf() }
+    Box(modifier = Modifier.fillMaxSize() + DragGestureDetector(
+        startDragImmediately = true,
+        dragObserver = object: DragObserver {
+            override fun onStart(downPosition: PxPosition) {
+                super.onStart(downPosition)
+                paths += Paths(downPosition.x.value, downPosition.y.value)
+            }
+        })) {
         Canvas(modifier = Modifier.None) {
             val p = Path()
             for (path in paths) {
