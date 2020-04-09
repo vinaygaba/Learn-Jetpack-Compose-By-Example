@@ -20,8 +20,10 @@ jobs:
     - uses: actions/cache@v1
       with:
         path: ~/.gradle/caches
-        key: gradle-${{ runner.os }}-${{ hashFiles('buildSrc/**') }}-${{ hashFiles('**/*.gradle*') }}
-        restore-keys: gradle-${{ runner.os }}-
+        # Key inspired from here -
+        # https://medium.com/@ychescale9/running-android-instrumented-tests-on-ci-from-bitrise-io-to-github-actions-a611e57ce71f
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+        restore-keys: ${{ runner.os }}-gradle-
     - name: Build with Gradle
       run: ./gradlew build
     - name: Run Unit tests
