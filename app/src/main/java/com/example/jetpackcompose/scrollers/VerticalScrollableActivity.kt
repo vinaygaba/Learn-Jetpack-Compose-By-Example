@@ -3,13 +3,18 @@ package com.example.jetpackcompose.scrollers
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.AdapterList
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.*
+import androidx.ui.layout.Column
+import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxHeight
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
 import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextAlign
@@ -44,18 +49,31 @@ fun AdapterListingScrollableComponent(personList: List<Person>) {
     // AdapterList is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecylerView tries to do as it's more optimized
     // than the VerticalScroller.
-    AdapterList(data = personList, modifier = LayoutHeight.Fill) { person ->
+    AdapterList(data = personList, modifier = Modifier.fillMaxHeight()) { person ->
         // TODO(vinaygaba) Replace this with an index callback once its available.
         val index = personList.indexOf(person)
-        Row(modifier = LayoutPadding(16.dp) + LayoutWidth.Fill) {
+        // Row is a composable that places its children in a horizontal sequence. You
+        // can think of it similar to a LinearLayout with the horizontal orientation.
+        // In addition, we pass a modifier to the Row composable. You can think of
+        // Modifiers as implementations of the decorators pattern that  are used to
+        // modify the composable that its applied to. In this example, we configure the
+        // Row to occupify the entire available width using Modifier.fillMaxWidth() and also give
+        // it a padding of 16dp.
+        Row(modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth()) {
+            // Card composable is a predefined composable that is meant to represent the card surface as
+            // specified by the Material Design specification. We also configure it to have rounded
+            // corners and apply a modifier.
             Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
-                modifier = LayoutWidth.Fill) {
+                modifier = Modifier.fillMaxWidth()) {
+                // Text is a predefined composable that does exactly what you'd expect it to -
+                // display text on the screen. It allows you to customize its appearance using
+                // the style property.
                 Text(
                     person.name, style = TextStyle(
                         color = Color.Black,
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center
-                    ), modifier = LayoutPadding(16.dp)
+                    ), modifier = Modifier.padding(16.dp)
                 )
             }
         }
@@ -73,15 +91,28 @@ fun VerticalScrollableComponent(personList: List<Person>) {
         // Column is a composable that places its children in a vertical sequence.
         Column {
             for ((index,person) in personList.withIndex()) {
-                Row(modifier = LayoutWidth.Fill + LayoutPadding(16.dp)) {
+                // Row is a composable that places its children in a horizontal sequence. You
+                // can think of it similar to a LinearLayout with the horizontal orientation.
+                // In addition, we pass a modifier to the Row composable. You can think of
+                // Modifiers as implementations of the decorators pattern that  are used to
+                // modify the composable that its applied to. In this example, we configure the
+                // Row to occupify the entire available width using Modifier.fillMaxWidth() and also
+                // give it a padding of 16dp.
+                Row(modifier = Modifier.fillMaxWidth() + Modifier.padding(16.dp)) {
+                    // Card composable is a predefined composable that is meant to represent the card surface as
+                    // specified by the Material Design specification. We also configure it to have rounded
+                    // corners and apply a modifier.
                     Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
-                        modifier = LayoutWidth.Fill) {
+                        modifier = Modifier.fillMaxWidth()) {
+                        // Text is a predefined composable that does exactly what you'd expect it to
+                        // display text on the screen. It allows you to customize its appearance
+                        // using the style property.
                         Text(
                             person.name, style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 20.sp,
                                 textAlign = TextAlign.Center
-                            ), modifier = LayoutPadding(16.dp)
+                            ), modifier = Modifier.padding(16.dp)
                         )
                     }
                 }

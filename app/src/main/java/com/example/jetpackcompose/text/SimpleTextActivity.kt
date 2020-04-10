@@ -3,9 +3,12 @@ package com.example.jetpackcompose.text
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.layout.Center
+import androidx.ui.foundation.Box
+import androidx.ui.foundation.ContentGravity
+import androidx.ui.foundation.Text
+import androidx.ui.layout.fillMaxSize
 import androidx.ui.tooling.preview.Preview
 
 class SimpleTextActivity : AppCompatActivity() {
@@ -18,11 +21,11 @@ class SimpleTextActivity : AppCompatActivity() {
         setContent {
             // Center is a composable that centers all the child composables that are passed to it.
             // In this example, we pass a composable called SimpleText to the Center composable.
-            Center {
+            Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
                 // Here, SimpleText is a Composable function which is going to describe the contents of
                 // this activity that will be rendered on the screen.
                 SimpleText("This is the Learn Jetpack Compose By Example tutorial")
-            }
+            })
         }
     }
 }

@@ -5,13 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.MutableState
 import androidx.compose.state
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Icon
+import androidx.ui.foundation.Text
 import androidx.ui.graphics.Color
-import androidx.ui.layout.*
+import androidx.ui.layout.Column
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.offset
+import androidx.ui.layout.padding
 import androidx.ui.material.DrawerState
 import androidx.ui.material.IconButton
 import androidx.ui.material.MaterialTheme
@@ -20,7 +26,6 @@ import androidx.ui.material.Surface
 import androidx.ui.material.TopAppBar
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Menu
-import androidx.ui.text.TextStyle
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 
@@ -96,13 +101,8 @@ fun DrawerContentComponent(
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we configure the Column to
-    // occupy the entire available width & height using the LayoutSize.Fill modifier.
-
-    // In addition, we use the LayoutOffset modifier to take into account the appbar that sits on
-    // top of the drawer content. So we add an offset in the y direction. Alternatively, we can
-    // use the Scaffold composable that takes care of placing the drawer content in the correct
-    // position. Look at [FixedActionButtonActivity] to see an example.
-    Column(modifier = LayoutSize.Fill + LayoutOffset(y = 56.dp, x = 0.dp)) {
+    // occupy the entire available width & height using the Modifier.fillMaxSize() modifier.
+    Column(modifier = Modifier.fillMaxSize()) {
         // We want to have 3 rows in this column to represent the 3 screens in this activity.
         for (index in DrawerAppScreen.values().indices) {
             // Clickable wraps the child composable and enables it to react to a click through the onClick
@@ -121,18 +121,18 @@ fun DrawerContentComponent(
                 // the Material Design specification. It's generally used to change the background
                 // color, add elevation, clip or add background shape to its children composables.
                 Surface(
-                    modifier = LayoutWidth.Fill,
+                    modifier = Modifier.fillMaxWidth(),
                     // We set the color of the row based on whether that row represents the current
                     // screen that's selected. We only want to highlight the row that's selected.
                     color = if (currentScreen.value == screen) {
-                        MaterialTheme.colors().secondary
+                        MaterialTheme.colors.secondary
                     } else {
-                        MaterialTheme.colors().surface
+                        MaterialTheme.colors.surface
                     }
                 ) {
                     // The Text composable is pre-defined by the Compose UI library; you can use this
                     // composable to render text on the screen
-                    Text(text = screen.name, modifier = LayoutPadding(16.dp))
+                    Text(text = screen.name, modifier = Modifier.padding(16.dp))
                 }
             }
         }
@@ -178,7 +178,7 @@ fun BodyContentComponent(
 fun Screen1Component(openDrawer: () -> Unit) {
     // Column is a composable that places its children in a vertical sequence. You
     // can think of it similar to a LinearLayout with the vertical orientation.
-    Column(modifier = LayoutSize.Fill) {
+    Column(modifier = Modifier.fillMaxSize()) {
         // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
         // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
@@ -187,7 +187,7 @@ fun Screen1Component(openDrawer: () -> Unit) {
             title = { Text("Screen 1 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(icon = Icons.Filled.Menu)
+                    Icon(asset = Icons.Filled.Menu)
                 }
             }
         )
@@ -195,17 +195,16 @@ fun Screen1Component(openDrawer: () -> Unit) {
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables. Since we want the
         // surface to occupy the entire available width after the TopAppBar has been laid out at
-        // the top, we make use of the LayoutWeight modifier and pass the weight  as 1 (which
+        // the top, we make use of the Modifier.weight modifier and pass the weight  as 1 (which
         // represents entire available weight).
 
         // You can think of Modifiers as implementations of the decorators pattern that are used to
-        // modify the composable that its applied to. In this example, we assign a LayoutPadding of
-        // 16dp to the Surface.
-        Surface(color = Color(0xFFffd7d7.toInt()), modifier = LayoutWeight(1f)) {
+        // modify the composable that its applied to.
+        Surface(color = Color(0xFFffd7d7.toInt()), modifier = Modifier.weight(1f)) {
             // Center is a composable that centers all the child composables that are passed to it.
-            Center {
+            Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
                 Text(text = "Screen 1")
-            }
+            })
         }
     }
 }
@@ -218,7 +217,7 @@ fun Screen1Component(openDrawer: () -> Unit) {
 fun Screen2Component(openDrawer: () -> Unit) {
     // Column is a composable that places its children in a vertical sequence. You
     // can think of it similar to a LinearLayout with the vertical orientation.
-    Column(modifier = LayoutSize.Fill) {
+    Column(modifier = Modifier.fillMaxSize()) {
         // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
         // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
@@ -227,7 +226,7 @@ fun Screen2Component(openDrawer: () -> Unit) {
             title = { Text("Screen 2 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(icon = Icons.Filled.Menu)
+                    Icon(asset = Icons.Filled.Menu)
                 }
             }
         )
@@ -235,17 +234,16 @@ fun Screen2Component(openDrawer: () -> Unit) {
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables. Since we want the
         // surface to occupy the entire available width after the TopAppBar has been laid out at
-        // the top, we make use of the LayoutWeight modifier and pass the weight  as 1 (which
+        // the top, we make use of the Modifier.weight modifier and pass the weight  as 1 (which
         // represents entire available weight).
 
         // You can think of Modifiers as implementations of the decorators pattern that are used to
-        // modify the composable that its applied to. In this example, we assign a LayoutPadding of
-        // 16dp to the Surface.
-        Surface(color = Color(0xFFffe9d6.toInt()), modifier = LayoutWeight(1f)) {
+        // modify the composable that its applied to.
+        Surface(color = Color(0xFFffe9d6.toInt()), modifier = Modifier.weight(1f)) {
             // Center is a composable that centers all the child composables that are passed to it.
-            Center {
+            Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
                 Text(text = "Screen 2")
-            }
+            })
         }
     }
 }
@@ -258,7 +256,7 @@ fun Screen2Component(openDrawer: () -> Unit) {
 fun Screen3Component(openDrawer: () -> Unit) {
     // Column is a composable that places its children in a vertical sequence. You
     // can think of it similar to a LinearLayout with the vertical orientation.
-    Column(modifier = LayoutSize.Fill) {
+    Column(modifier = Modifier.fillMaxSize()) {
         // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
         // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
@@ -267,7 +265,7 @@ fun Screen3Component(openDrawer: () -> Unit) {
             title = { Text("Screen 3 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(icon = Icons.Filled.Menu)
+                    Icon(asset = Icons.Filled.Menu)
                 }
             }
         )
@@ -275,17 +273,16 @@ fun Screen3Component(openDrawer: () -> Unit) {
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables. Since we want the
         // surface to occupy the entire available width after the TopAppBar has been laid out at
-        // the top, we make use of the LayoutWeight modifier and pass the weight  as 1 (which
+        // the top, we make use of the Modifier.weight modifier and pass the weight  as 1 (which
         // represents entire available weight).
 
         // You can think of Modifiers as implementations of the decorators pattern that are used to
-        // modify the composable that its applied to. In this example, we assign a LayoutPadding of
-        // 16dp to the Surface.
-        Surface(color = Color(0xFFfffbd0.toInt()), modifier = LayoutWeight(1f)) {
+        // modify the composable that its applied to.
+        Surface(color = Color(0xFFfffbd0.toInt()), modifier = Modifier.weight(1f)) {
             // Center is a composable that centers all the child composables that are passed to it.
-            Center {
+            Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
                 Text(text = "Screen 3")
-            }
+            })
         }
     }
 }

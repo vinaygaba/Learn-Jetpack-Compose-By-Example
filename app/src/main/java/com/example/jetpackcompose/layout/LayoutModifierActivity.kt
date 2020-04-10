@@ -3,13 +3,14 @@ package com.example.jetpackcompose.layout
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutAspectRatio
-import androidx.ui.layout.LayoutOffset
-import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.aspectRatio
+import androidx.ui.layout.offset
+import androidx.ui.layout.padding
 import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -58,9 +59,9 @@ fun SamePaddingComponent() {
         Text(
             text = "This text has equal padding of 16dp in all directions",
             // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. In this example, we assign a LayoutPadding of
+            // modify the composable that its applied to. In this example, we assign a padding of
             // 16dp to the Text composable.
-            modifier = LayoutPadding(16.dp),
+            modifier = Modifier.padding(16.dp),
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif)
         )
     }
@@ -79,8 +80,8 @@ fun CustomPaddingComponent() {
                     "bottom padding padding in each direction",
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In this example, we assign variable
-            // LayoutPadding to the Text composable.
-            modifier = LayoutPadding(start = 32.dp, end = 4.dp, top = 32.dp, bottom = 0.dp),
+            // padding to the Text composable.
+            modifier = Modifier.padding(start = 32.dp, end = 4.dp, top = 32.dp, bottom = 0.dp),
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif)
         )
     }
@@ -94,9 +95,9 @@ fun OffsetComponent() {
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we make use of the
-    // LayoutOffset modifier that allows the composable to be shifted along the x & y direction
+    // Modifier.offset modifier that allows the composable to be shifted along the x & y direction
     // by the user specified amount.
-    Surface(color = colors[2], modifier = LayoutOffset(x = 8.dp, y = 8.dp)) {
+    Surface(color = colors[2], modifier = Modifier.offset(x = 8.dp, y = 8.dp)) {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(
@@ -116,15 +117,15 @@ fun AspectRatioComponent() {
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we make use of the
-    // LayoutAspectRatio modifier that attempts to size a layout to match a specified aspect ratio.
-    Surface(color = colors[3], modifier = LayoutAspectRatio(16/9f) +
-            LayoutPadding(top = 16.dp)) {
+    // Modifier.aspectRatio modifier that attempts to size a layout to match a specified aspect ratio.
+    Surface(color = colors[3], modifier = Modifier.aspectRatio(16/9f) +
+            Modifier.padding(top = 16.dp)) {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(
             text = "This text is wrapped in a layout that has a fixed aspect ratio of 16/9",
             style = TextStyle(fontSize = 20.sp, fontFamily = FontFamily.Serif),
-            modifier = LayoutPadding(16.dp)
+            modifier = Modifier.padding(16.dp)
         )
     }
 }

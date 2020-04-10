@@ -135,6 +135,12 @@
             android:exported="true"
             android:label="@string/title_layout_modifier_examples"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.example.jetpackcompose.state.ProcessDeathActivity"
+            android:exported="true"
+            android:label="@string/title_process_death_examples"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

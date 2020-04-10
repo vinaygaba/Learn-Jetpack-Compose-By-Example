@@ -4,12 +4,25 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.remember
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.foundation.*
+import androidx.ui.foundation.Icon
+import androidx.ui.foundation.Text
+import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.*
-import androidx.ui.material.*
+import androidx.ui.layout.Column
+import androidx.ui.layout.Spacer
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredHeight
+import androidx.ui.material.BottomAppBar
+import androidx.ui.material.Card
+import androidx.ui.material.FloatingActionButton
+import androidx.ui.material.IconButton
+import androidx.ui.material.MaterialTheme
+import androidx.ui.material.Scaffold
+import androidx.ui.material.ScaffoldState
+import androidx.ui.material.TopAppBar
 import androidx.ui.material.icons.Icons
 import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.tooling.preview.Preview
@@ -72,10 +85,10 @@ fun ScaffoldWithBottomBarAndCutout() {
                 // you don't specify a theme (this example doesn't specify a theme either hence
                 // it will just use defaults. Look at DarkModeActivity if you want to see an
                 // example of using themes.
-                color = MaterialTheme.colors().secondary
+                backgroundColor = MaterialTheme.colors.secondary
             ) {
                 IconButton(onClick = {}) {
-                    Icon(icon = Icons.Filled.Favorite)
+                    Icon(asset = Icons.Filled.Favorite)
                 }
             }
         },
@@ -93,8 +106,9 @@ fun ScaffoldWithBottomBarAndCutout() {
                         // also configure it to have rounded corners and apply a modifier.
                         Card(color = colors[it % colors.size],
                             shape = RoundedCornerShape(8.dp),
-                            modifier = LayoutPadding(8.dp)) {
-                            Spacer(modifier = LayoutWidth.Fill + LayoutHeight(200.dp))
+                            modifier = Modifier.padding(8.dp)
+                        ) {
+                            Spacer(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeight(200.dp))
                         }
                     }
                 }

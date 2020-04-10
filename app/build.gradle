@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.example.jetpackcomposeplayground"
@@ -62,6 +62,7 @@ dependencies {
     implementation deps.compose.tooling
     implementation deps.compose.layout
     implementation deps.compose.material
+    implementation deps.compose.savedInstanceState
 
     // Image loading
     implementation deps.imageLoading.picasso

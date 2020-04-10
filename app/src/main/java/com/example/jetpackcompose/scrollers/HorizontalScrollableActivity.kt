@@ -3,17 +3,24 @@ package com.example.jetpackcompose.scrollers
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.*
+import androidx.ui.core.ContextAmbient
+import androidx.ui.core.Modifier
+import androidx.ui.core.setContent
+import androidx.ui.foundation.Box
+import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.HorizontalScroller
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
-import androidx.ui.layout.Container
-import androidx.ui.layout.LayoutPadding
-import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
+import androidx.ui.layout.RowAlign
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredWidth
 import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
+import androidx.ui.text.style.TextAlign
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
@@ -61,7 +68,7 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we ask the HorizontalScroller
     // to occupy the entire available width.
-    HorizontalScroller(modifier = LayoutWidth.Fill) {
+    HorizontalScroller(modifier = Modifier.fillMaxWidth()) {
         // Row is a composable that places its children in a horizontal sequence. You
         // can think of it similar to a LinearLayout with the horizontal orientation.
         Row {
@@ -74,14 +81,14 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
 
                 // You can think of Modifiers as implementations of the decorators pattern that are
                 // used to modify the composable that its applied to. In this example, we assign a
-                // LayoutPadding of 16dp to the Card.
+                // padding of 16dp to the Card.
                 Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
-                    modifier = LayoutPadding(16.dp)
+                    modifier = Modifier.padding(16.dp)
                 ) {
                     // The Text composable is pre-defined by the Compose UI library; you can use this
                     // composable to render text on the screen
                     Text(person.name,
-                        modifier = LayoutPadding(16.dp),
+                        modifier = Modifier.padding(16.dp),
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 20.sp
@@ -100,7 +107,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
     // composables that are declared inside it in the horizontal direction. One caveat here is that
     // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
     // be thought of as a replacement for [RecyclerView].
-    HorizontalScroller {
+    HorizontalScroller(modifier = Modifier.fillMaxWidth()) {
         // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
         // down the compose tree by passing them as parameters. This makes it easy to have fairly
         // modular and reusable components that are easy to test as well. However, for certain types
@@ -108,7 +115,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
         // to access this data. For such scenarios, we use Ambients. In this example, we use the
         // ContextAmbient to get hold of the Context object. In order to get access to the latest
         // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
-        // exampels of common Ambient's are TextInputServiceAmbient, DensityAmbient,
+        // examples of common Ambient's are TextInputServiceAmbient, DensityAmbient,
         // CoroutineContextAmbient, etc.
         val context = ContextAmbient.current
         val resources = context.resources
@@ -128,21 +135,23 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
 
                 // You can think of Modifiers as implementations of the decorators pattern that are
                 // used to modify the composable that its applied to. In this example, we assign a
-                // LayoutPadding of 16dp to the Card.
+                // padding of 16dp to the Card.
                 Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
-                    modifier = LayoutPadding(16.dp)) {
-                    // Container is a predefined convenience composable that allows you to apply common
-                    // layout properties like height, width, padding, constraints, etc.
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    // Box is a predefined convenience composable that allows you to apply common
+                    // draw & layout logic. In addition we also pass a few modifiers to it.
 
                     // To ensure that the item occupies the entire screen, we make sure that the
-                    // width of the container is equal to the computed screenWidth. We subtract
+                    // width of the box is equal to the computed screenWidth. We subtract
                     // some spacing to make the other item slightly visible.
-                    Container(width = screenWidth.dp - (spacing * 2)) {
-                        // The Text composable is pre-defined by the Compose UI library; you can use this
-                        // composable to render text on the screen
+                    Box(modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2)),
+                        gravity = ContentGravity.Center) {
+                        // The Text composable is pre-defined by the Compose UI library; you can use
+                        // this composable to render text on the screen
                         Text(
                             text = person.name,
-                            modifier = LayoutPadding(16.dp),
+                            modifier = Modifier.padding(16.dp),
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 20.sp

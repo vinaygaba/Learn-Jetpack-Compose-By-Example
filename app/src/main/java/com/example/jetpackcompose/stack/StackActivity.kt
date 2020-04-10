@@ -3,10 +3,14 @@ package com.example.jetpackcompose.stack
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Text
 import androidx.ui.graphics.Color
-import androidx.ui.layout.*
+import androidx.ui.layout.Stack
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredHeight
 import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -42,9 +46,9 @@ fun StackComponent() {
 
     // You can think of Modifiers as implementations of the decorators pattern that are
     // used to modify the composable that its applied to. In this example, we assign a
-    // ask the Stack to occupy the full available width using the LayoutWidth.Fill modifier and
-    // give it a height of 200 dp.
-    Stack(modifier = LayoutWidth.Fill + LayoutHeight(200.dp)) {
+    // ask the Stack to occupy the full available width using the Modifier.fillMaxWidth() modifier
+    // and give it a height of 200 dp.
+    Stack(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeight(200.dp)) {
         // LocalResourceImageComponent is a composable that takes in an image resource id and
         // display it on the screen. Take a look at its implementation to learn more.
         LocalResourceImageComponent(resId = R.drawable.lenna)
@@ -58,7 +62,7 @@ fun StackComponent() {
             Text("Title",
                 style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
                     fontSize = 14.sp),
-                modifier = LayoutPadding(16.dp) + LayoutWidth.Fill
+                modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth()
             )
         }
     }

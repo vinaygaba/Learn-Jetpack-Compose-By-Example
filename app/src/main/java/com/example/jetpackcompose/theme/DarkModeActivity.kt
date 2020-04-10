@@ -5,17 +5,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.MutableState
 import androidx.compose.state
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Icon
+import androidx.ui.foundation.Text
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutHeight
-import androidx.ui.layout.LayoutPadding
-import androidx.ui.layout.LayoutSize
-import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxHeight
+import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
 import androidx.ui.material.Card
 import androidx.ui.material.DrawerState
 import androidx.ui.material.IconButton
@@ -170,13 +171,13 @@ fun ThemedDrawerContentComponent(
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we configure the Column to
-    // occupy the entire available width & height using the LayoutSize.Fill modifier.
+    // occupy the entire available height using the Modifier.fillMaxHeight() modifier.
 
     // In addition, we use the LayoutOffset modifier to take into account the appbar that sits on
     // top of the drawer content. So we add an offset in the y direction. Alternatively, we can
     // use the Scaffold composable that takes care of placing the drawer content in the correct
     // position. Look at [FixedActionButtonActivity] to see an example.
-    Column(modifier = LayoutHeight.Fill) {
+    Column(modifier = Modifier.fillMaxHeight()) {
         // Clickable wraps the child composable and enables it to react to a click through the onClick
         // callback similar to the onClick listener that we are accustomed to on Android.
         // Here, we just update the currentScreen variable to hold the appropriate value based on
@@ -188,21 +189,24 @@ fun ThemedDrawerContentComponent(
             // We also close the drawer when an option from the drawer is selected.
             closeDrawer()
         }) {
-            Text(text = ThemedDrawerAppScreen.Screen1.name, modifier = LayoutPadding(16.dp))
+            // Text is a predefined composable that does exactly what you'd expect it to -
+            // display text on the screen. It allows you to customize its appearance using
+            // the style property.
+            Text(text = ThemedDrawerAppScreen.Screen1.name, modifier = Modifier.padding(16.dp))
         }
 
         Clickable(onClick = {
             currentScreen.value = ThemedDrawerAppScreen.Screen2
             closeDrawer()
         }) {
-            Text(text = ThemedDrawerAppScreen.Screen2.name, modifier = LayoutPadding(16.dp))
+            Text(text = ThemedDrawerAppScreen.Screen2.name, modifier = Modifier.padding(16.dp))
         }
 
         Clickable(onClick = {
             currentScreen.value = ThemedDrawerAppScreen.Screen3
             closeDrawer()
         }) {
-            Text(text = ThemedDrawerAppScreen.Screen3.name, modifier = LayoutPadding(16.dp))
+            Text(text = ThemedDrawerAppScreen.Screen3.name, modifier = Modifier.padding(16.dp))
         }
     }
 }
@@ -254,8 +258,8 @@ fun ThemedScreen1Component(
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we configure the Column to
-    // occupy the entire available width & height using the LayoutSize.Fill modifier.
-    Column(modifier = LayoutSize.Fill) {
+    // occupy the entire available width & height using the Modifier.fillMaxSize() modifier.
+    Column(modifier = Modifier.fillMaxSize()) {
         // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
         // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
@@ -264,7 +268,7 @@ fun ThemedScreen1Component(
             title = { Text("Screen 1") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(icon = Icons.Filled.Menu)
+                    Icon(asset = Icons.Filled.Menu)
                 }
             }
         )
@@ -272,28 +276,30 @@ fun ThemedScreen1Component(
         // specified by the Material Design specification. We also configure it to have rounded
         // corners and apply a modifier.
         Card(
-            modifier = LayoutWidth.Fill,
-            color = MaterialTheme.colors().surface
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colors.surface
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
-            Row(modifier = LayoutPadding(16.dp)) {
+            Row(modifier = Modifier.padding(16.dp)) {
                 // A pre-defined composable that's capable of rendering a switch. It honors the Material
                 // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
                 Text(
-                    text = "Enable Dark Mode", style = MaterialTheme.typography().body1,
-                    modifier = LayoutPadding(start = 8.dp)
+                    text = "Enable Dark Mode",
+                    style = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onSurface),
+                    modifier = Modifier.padding(start = 8.dp)
                 )
             }
         }
         // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables.
-        Surface(modifier = LayoutWeight(1f)) {
+        Surface(modifier = Modifier.weight(1f), color = MaterialTheme.colors.surface) {
             Text(
-                text = LOREM_IPSUM_1, style = MaterialTheme.typography().body1,
-                modifier = LayoutPadding(16.dp)
+                text = LOREM_IPSUM_1,
+                style = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onSurface),
+                modifier = Modifier.padding(16.dp)
             )
         }
     }
@@ -315,8 +321,8 @@ fun ThemedScreen2Component(
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we configure the Column to
-    // occupy the entire available width & height using the LayoutSize.Fill modifier.
-    Column(modifier = LayoutSize.Fill) {
+    // occupy the entire available width & height using the Modifier.fillMaxSize() modifier.
+    Column(modifier = Modifier.fillMaxSize()) {
         // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
         // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
@@ -325,7 +331,7 @@ fun ThemedScreen2Component(
             title = { Text("Screen 2") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(icon = Icons.Filled.Menu)
+                    Icon(asset = Icons.Filled.Menu)
                 }
             }
         )
@@ -333,25 +339,26 @@ fun ThemedScreen2Component(
         // specified by the Material Design specification. We also configure it to have rounded
         // corners and apply a modifier.
         Card(
-            modifier = LayoutWidth.Fill,
-            color = MaterialTheme.colors().surface
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colors.surface
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
-            Row(modifier = LayoutPadding(16.dp)) {
+            Row(modifier = Modifier.padding(16.dp)) {
                 // A pre-defined composable that's capable of rendering a switch. It honors the Material
                 // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
-                Text(text = "Enable Dark Mode", style = MaterialTheme.typography().body1,
-                    modifier = LayoutPadding(start = 8.dp))
+                Text(text = "Enable Dark Mode", style = MaterialTheme.typography.body1,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
             }
         }
         // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables.
-        Surface(modifier = LayoutWeight(1f)) {
-            Text(text = LOREM_IPSUM_2, style = MaterialTheme.typography().body1,
-                modifier = LayoutPadding(16.dp)
+        Surface(modifier = Modifier.weight(1f)) {
+            Text(text = LOREM_IPSUM_2, style = MaterialTheme.typography.body1,
+                modifier = Modifier.padding(16.dp)
             )
         }
     }
@@ -373,8 +380,8 @@ fun ThemedScreen3Component(
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we configure the Column to
-    // occupy the entire available width & height using the LayoutSize.Fill modifier.
-    Column(modifier = LayoutSize.Fill) {
+    // occupy the entire available width & height using the Modifier.fillMaxSize() modifier.
+    Column(modifier = Modifier.fillMaxSize()) {
         // TopAppBar is a pre-defined composable that's placed at the top of the screen. It has
         // slots for a title, navigation icon, and actions. Also known as the action bar.
         TopAppBar(
@@ -383,7 +390,7 @@ fun ThemedScreen3Component(
             title = { Text("Screen 3") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(icon = Icons.Filled.Menu)
+                    Icon(asset = Icons.Filled.Menu)
                 }
             }
         )
@@ -391,25 +398,26 @@ fun ThemedScreen3Component(
         // specified by the Material Design specification. We also configure it to have rounded
         // corners and apply a modifier.
         Card(
-            modifier = LayoutWidth.Fill,
-            color = MaterialTheme.colors().surface
+            modifier = Modifier.fillMaxWidth(),
+            color = MaterialTheme.colors.surface
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
-            Row(modifier = LayoutPadding(16.dp)) {
+            Row(modifier = Modifier.padding(16.dp)) {
                 // A pre-defined composable that's capable of rendering a switch. It honors the Material
                 // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
-                Text(text = "Enable Dark Mode", style = MaterialTheme.typography().body1,
-                    modifier = LayoutPadding(start = 8.dp))
+                Text(text = "Enable Dark Mode", style = MaterialTheme.typography.body1,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
             }
         }
         // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables.
-        Surface(modifier = LayoutWeight(1f)) {
-            Text(text = LOREM_IPSUM_3, style = MaterialTheme.typography().body1,
-                modifier = LayoutPadding(16.dp)
+        Surface(modifier = Modifier.weight(1f)) {
+            Text(text = LOREM_IPSUM_3, style = MaterialTheme.typography.body1,
+                modifier = Modifier.padding(16.dp)
             )
         }
     }
@@ -435,7 +443,7 @@ enum class ThemedDrawerAppScreen {
 fun CustomThemeLightPreview() {
     CustomTheme(enableDarkMode = state { false }) {
         Card {
-            Text("Preview Text", modifier = LayoutPadding(32.dp))
+            Text("Preview Text", modifier = Modifier.padding(32.dp))
         }
     }
 }
@@ -445,7 +453,7 @@ fun CustomThemeLightPreview() {
 fun CustomThemeDarkPreview() {
     CustomTheme(enableDarkMode = state { true }) {
         Card {
-            Text("Preview Text", modifier = LayoutPadding(32.dp))
+            Text("Preview Text", modifier = Modifier.padding(32.dp))
         }
     }
 }

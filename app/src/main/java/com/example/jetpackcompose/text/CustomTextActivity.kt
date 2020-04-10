@@ -3,15 +3,17 @@ package com.example.jetpackcompose.text
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.*
+import androidx.ui.core.Modifier
+import androidx.ui.core.setContent
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.geometry.Offset
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Shadow
 import androidx.ui.layout.Column
-import androidx.ui.layout.LayoutPadding
-import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
 import androidx.ui.material.Divider
 import androidx.ui.material.Surface
 import androidx.ui.text.AnnotatedString
@@ -121,8 +123,8 @@ class CustomTextActivity : AppCompatActivity() {
                     // In addition, we pass a modifier to the Row composable. You can think of
                     // Modifiers as implementations of the decorators pattern that  are used to
                     // modify the composable that its applied to. In this example, we configure the
-                    // Row to occupify the entire available width using LayoutWidth.Fill
-                    Row(modifier = LayoutWidth.Fill) {
+                    // Row to occupify the entire available width using Modifier.fillMaxWidth()
+                    Row(modifier = Modifier.fillMaxWidth()) {
                         // Text is a predefined composable that does exactly what you'd expect it to -
                         // display text on the screen. It allows you to customize its appearance using
                         // the style property.
@@ -130,7 +132,7 @@ class CustomTextActivity : AppCompatActivity() {
                             style = TextStyle(
                                 textAlign = TextAlign.Center
                             ),
-                            modifier = LayoutPadding(16.dp)
+                            modifier = Modifier.padding(16.dp)
                         )
                     }
                     // A pre-defined composable that renders a thin line on the screen that makes it
@@ -173,7 +175,7 @@ class CustomTextActivity : AppCompatActivity() {
                         addStyle(style = SpanStyle(color = Color.Green), start = 5, end = 21)
                         addStyle(style = SpanStyle(color = Color.Blue), start = 22, end = 27)
                     }
-                    Text(annotatedString, modifier = LayoutPadding(16.dp))
+                    Text(annotatedString, modifier = Modifier.padding(16.dp))
                     // A pre-defined composable that renders a thin line on the screen that makes it
                     // easy to group contents
                     Divider(color = Color.Gray)
@@ -183,7 +185,10 @@ class CustomTextActivity : AppCompatActivity() {
                     // change the background color, add elevation, clip or add background shape
                     // to its children composables.
                     Surface(color = Color.Yellow) {
-                        Text(text = "This text has a background color", modifier = LayoutPadding(16.dp))
+                        Text(
+                            text = "This text has a background color",
+                            modifier = Modifier.padding(16.dp)
+                        )
                     }
                 }
             }
@@ -203,7 +208,7 @@ fun CustomStyledText(displayText: String, style: TextStyle? = null, maxLines: In
     // in your app.
     Text(
         text = displayText,
-        modifier = LayoutPadding(16.dp),
+        modifier = Modifier.padding(16.dp),
         style = style ?: TextStyle.Default,
         overflow = TextOverflow.Ellipsis,
         maxLines = maxLines ?: Int.MAX_VALUE

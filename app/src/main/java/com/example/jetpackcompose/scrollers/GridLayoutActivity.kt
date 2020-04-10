@@ -3,16 +3,17 @@ package com.example.jetpackcompose.scrollers
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.LayoutAlign
-import androidx.ui.layout.LayoutHeight
-import androidx.ui.layout.LayoutPadding
-import androidx.ui.layout.LayoutWidth
 import androidx.ui.layout.Table
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredHeight
 import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextAlign
@@ -64,14 +65,15 @@ fun GridLayoutComponent(personList: List<Person>) {
                     // You can think of Modifiers as implementations of the decorators pattern that
                     // are used to modify the composable that its applied to. In the example below,
                     // we add a padding of 16dp, specify it to occupy the entire available width
-                    // using LayoutWidth.Fill & give it a height of 100dp.
+                    // using Modifier.fillMaxWidth() & give it a height of 100dp.
                     Card(shape = RoundedCornerShape(4.dp), color = colors[(i + j) % colors.size],
-                        modifier = LayoutPadding(16.dp) + LayoutWidth.Fill + LayoutHeight(100.dp)
+                        modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth() +
+                                Modifier.preferredHeight(100.dp)
                     ) {
                         // The Text composable is pre-defined by the Compose UI library; you can use
                         // this composable to render text on the screen
                         Text(text = personList[i + j].name,
-                            modifier = LayoutPadding(16.dp) + LayoutAlign.CenterVertically,
+                            modifier = Modifier.padding(16.dp) + LayoutAlign.CenterVertically,
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 20.sp,
