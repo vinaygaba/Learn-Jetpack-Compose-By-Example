@@ -22,6 +22,7 @@
     <string name="title_animation_example">Animation Example</string>
     <string name="title_theme_example">Theme Example</string>
     <string name="title_layout_modifier_examples">Layout Modifier Examples</string>
+    <string name="title_process_death_examples">Save State In Process Death Examples</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -46,4 +47,5 @@
     <string name="tv_animation2_example">Changing Color Animation Component</string>
     <string name="tv_theme_example">Theme Component</string>
     <string name="tv_layout_modifier_example">Layout Modifier Components</string>
+    <string name="tv_process_death_example">Save State During Process Death</string>
 </resources>
