@@ -92,7 +92,7 @@ fun RowEqualWeightComponent() {
         // LinearLayouts in the old Android UI Toolkit.
         Button(modifier = Modifier.weight(1f) + Modifier.padding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
-            // functiionality.
+            // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
             Text(text = "Button 1",
@@ -125,7 +125,7 @@ fun RowUnequalWeightComponent() {
         // Android UI Toolkit.
         Button(modifier = Modifier.weight(0.66f) + Modifier.padding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
-            // functiionality.
+            // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
             Text(text = "Button 1",
@@ -154,7 +154,7 @@ fun RowAddSpaceBetweenViewsComponent() {
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
-            // functiionality.
+            // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
             Text(text = "Button 1",
@@ -183,7 +183,7 @@ fun RowSpaceViewsEvenlyComponent() {
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
-            // functiionality.
+            // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
             Text(text = "Button 1",
@@ -212,7 +212,7 @@ fun RowSpaceAroundViewsComponent() {
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
-            // functiionality.
+            // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
             Text(text = "Button 1",
@@ -240,7 +240,7 @@ fun RowViewsCenteredComponent() {
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
             // The Button composable allows you to provide child composables that inherit this button
-            // functiionality.
+            // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
             Text(text = "Button 1",
@@ -268,7 +268,7 @@ fun RowViewsArrangedInEndComponent() {
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
             // The Button composable allows you to provide child composables that inherit this button
-            // functiionality.
+            // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
             Text(text = "Button 1",
@@ -293,7 +293,7 @@ fun RowBaselineAlignComponent() {
     // Modifier.preferredWidth(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // The Button composable allows you to provide child composables that inherit this button
-        // functiionality.
+        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         // In order to align the baseline of both the text composables, we use the
@@ -322,7 +322,7 @@ fun RowBaselineUnalignedComponent() {
     // Modifier.preferredWidth(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // The Button composable allows you to provide child composables that inherit this button
-        // functiionality.
+        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(text = "Text 1",

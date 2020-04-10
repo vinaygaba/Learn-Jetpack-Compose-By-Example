@@ -97,7 +97,7 @@ fun ClickableText() {
                     onClick = onPopupDismissed
                 ) {
                     // The Button composable allows you to provide child composables that inherit
-                    // this button functiionality.
+                    // this button functionality.
                     // The Text composable is pre-defined by the Compose UI library; you can use this
                     // composable to render text on the screen
                     Text(text = "Ok")
