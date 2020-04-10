@@ -62,7 +62,7 @@ fun SimpleButtonComponent() {
         elevation = 5.dp,
         onClick = {}) {
         // The Button composable allows you to provide child composables that inherit this button
-        // functiionality.
+        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(text = "Simple button", modifier = Modifier.padding(16.dp))
@@ -88,7 +88,7 @@ fun SimpleButtonWithBorderComponent() {
         // Provide a border for this button
         border = Border(size = 5.dp, brush = SolidColor(Color.Black))) {
         // The Button composable allows you to provide child composables that inherit this button
-        // functiionality.
+        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(text = "Simple button with border", modifier = Modifier.padding(16.dp))
@@ -115,7 +115,7 @@ fun RoundedCornerButtonComponent() {
         shape = RoundedCornerShape(16.dp),
         elevation = 5.dp) {
         // The Button composable allows you to provide child composables that inherit this button
-        // functiionality.
+        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(text = "Button with rounded corners", modifier = Modifier.padding(16.dp))
@@ -139,7 +139,7 @@ fun OutlinedButtonComponent() {
         modifier = Modifier.padding(16.dp)
     ) {
         // The Button composable allows you to provide child composables that inherit this button
-        // functiionality.
+        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(text = "Outlined Button", modifier = Modifier.padding(16.dp))
@@ -163,7 +163,7 @@ fun TextButtonComponent() {
         modifier = Modifier.padding(16.dp)
     ) {
         // The Button composable allows you to provide child composables that inherit this button
-        // functiionality.
+        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(text = "Text Button", modifier = Modifier.padding(16.dp))
