@@ -22,6 +22,7 @@ import com.example.jetpackcompose.text.TextFieldActivity
 import com.example.jetpackcompose.text.CustomTextActivity
 import com.example.jetpackcompose.text.SimpleTextActivity
 import com.example.jetpackcompose.layout.ViewLayoutConfigurationsActivity
+import com.example.jetpackcompose.state.ProcessDeathActivity
 import com.example.jetpackcompose.theme.DarkModeActivity
 
 class MainActivity : AppCompatActivity() {
@@ -121,5 +122,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startLayoutModifierExample(view: View) {
         startActivity(Intent(this, LayoutModifierActivity::class.java))
+    }
+
+    fun startProcessDeathExample(view: View) {
+        startActivity(Intent(this, ProcessDeathActivity::class.java))
     }
 }
