@@ -87,10 +87,14 @@ fun DisplayImagesComponent() {
     LocalResourceImageComponent(R.drawable.lenna)
 
     TitleComponent("Load image from url using Picasso")
-    NetworkImageComponentPicasso(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+    NetworkImageComponentPicasso(
+        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
+    )
 
     TitleComponent("Load image from url using Glide")
-    NetworkImageComponentGlide(url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png")
+    NetworkImageComponentGlide(
+        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
+    )
 
     TitleComponent("Image with rounded corners")
     ImageWithRoundedCorners(R.drawable.lenna)

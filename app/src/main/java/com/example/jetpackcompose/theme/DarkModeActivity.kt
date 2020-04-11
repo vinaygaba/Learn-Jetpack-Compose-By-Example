@@ -450,7 +450,7 @@ fun CustomThemeLightPreview() {
 
 @Preview
 @Composable
-fun CustomThemeDarkPreview() {
+fun CustomThemeDarkPreview() { 
     CustomTheme(enableDarkMode = state { true }) {
         Card {
             Text("Preview Text", modifier = Modifier.padding(32.dp))
