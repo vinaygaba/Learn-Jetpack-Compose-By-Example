@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <Blacklist></Blacklist>
+  <Whitelist>
+    <ID>ComplexMethod:AndroidImageAsset.kt$toComposeColorSpace</ID>
+    <ID>LongMethod:CustomTextActivity.kt$CustomTextActivity$onCreate</ID>
+    <ID>MatchingDeclarationName:Utils.kt$Person</ID>
+  </Whitelist>
+</SmellBaseline>

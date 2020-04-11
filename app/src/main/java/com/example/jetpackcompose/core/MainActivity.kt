@@ -12,7 +12,6 @@ import com.example.jetpackcompose.customview.CustomViewPainActivity
 import com.example.jetpackcompose.image.ImageActivity
 import com.example.jetpackcompose.layout.ConstraintLayoutActivity
 import com.example.jetpackcompose.layout.LayoutModifierActivity
-import com.example.jetpackcompose.material.*
 import com.example.jetpackcompose.scrollers.GridLayoutActivity
 import com.example.jetpackcompose.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcompose.scrollers.VerticalScrollableActivity
@@ -22,6 +21,12 @@ import com.example.jetpackcompose.text.TextFieldActivity
 import com.example.jetpackcompose.text.CustomTextActivity
 import com.example.jetpackcompose.text.SimpleTextActivity
 import com.example.jetpackcompose.layout.ViewLayoutConfigurationsActivity
+import com.example.jetpackcompose.material.AlertDialogActivity
+import com.example.jetpackcompose.material.BottomNavigationActivity
+import com.example.jetpackcompose.material.ButtonActivity
+import com.example.jetpackcompose.material.DrawerAppActivity
+import com.example.jetpackcompose.material.FixedActionButtonActivity
+import com.example.jetpackcompose.material.MaterialActivity
 import com.example.jetpackcompose.state.ProcessDeathActivity
 import com.example.jetpackcompose.theme.DarkModeActivity
 

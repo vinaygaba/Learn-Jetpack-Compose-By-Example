@@ -33,7 +33,7 @@ fun hideKeyboard(context: Context) {
 }
 
 // Constants
-val LOREM_IPSUM_1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
+const val LOREM_IPSUM_1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " +
         "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Velit ut tortor pretium " +
         "viverra suspendisse potenti nullam ac tortor. Cras semper auctor neque vitae tempus quam " +
         "pellentesque nec nam. Volutpat maecenas volutpat blandit aliquam etiam erat. Sed velit " +
@@ -45,14 +45,14 @@ val LOREM_IPSUM_1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " 
         "Egestas diam in arcu cursus euismod quis. Adipiscing elit duis tristique sollicitudin nibh " +
         "sit amet commodo nulla. Erat nam at lectus urna duis. Praesent elementum facilisis leo vel. " +
         "Facilisis gravida neque convallis a cras."
-val LOREM_IPSUM_2 = "Rhoncus mattis rhoncus urna neque viverra. Pharetra " +
+const val LOREM_IPSUM_2 = "Rhoncus mattis rhoncus urna neque viverra. Pharetra " +
         "convallis posuere morbi leo urna. Facilisis gravida neque convallis a. Vitae semper quis " +
         "lectus nulla at volutpat. Laoreet sit amet cursus sit amet dictum sit amet. Pellentesque " +
         "dignissim enim sit amet venenatis urna. Ipsum suspendisse ultrices gravida dictum fusce. " +
         "Lorem mollis aliquam ut porttitor. Hac habitasse platea dictumst quisque sagittis. " +
         "Sed risus ultricies tristique nulla. Mauris commodo quis imperdiet massa tincidunt nunc. " +
         "Quisque non tellus orci ac auctor."
-val LOREM_IPSUM_3 = "Sed velit dignissim sodales ut eu sem integer. Elit " +
+const val LOREM_IPSUM_3 = "Sed velit dignissim sodales ut eu sem integer. Elit " +
         "scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique. " +
         "Interdum consectetur libero id faucibus nisl tincidunt. Suspendisse sed nisi lacus sed " +
         "viverra. Egestas pretium aenean pharetra magna. Mauris vitae ultricies leo integer " +
@@ -61,9 +61,9 @@ val LOREM_IPSUM_3 = "Sed velit dignissim sodales ut eu sem integer. Elit " +
         "dignissim. Odio morbi quis commodo odio aenean sed. Vestibulum lectus mauris ultrices eros."
 
 val colors = listOf(
-Color(0xFFffd7d7.toInt()),
-Color(0xFFffe9d6.toInt()),
-Color(0xFFfffbd0.toInt()),
-Color(0xFFe3ffd9.toInt()),
-Color(0xFFd0fff8.toInt())
+    Color(0xFFffd7d7.toInt()),
+    Color(0xFFffe9d6.toInt()),
+    Color(0xFFfffbd0.toInt()),
+    Color(0xFFe3ffd9.toInt()),
+    Color(0xFFd0fff8.toInt())
 )
