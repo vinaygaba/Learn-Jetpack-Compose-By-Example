@@ -3,7 +3,9 @@ package com.example.jetpackcompose.scrollers
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
+import androidx.ui.core.Modifier.Companion
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
@@ -14,6 +16,7 @@ import androidx.ui.layout.Table
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeight
+import androidx.ui.layout.wrapContentHeight
 import androidx.ui.material.Card
 import androidx.ui.text.TextStyle
 import androidx.ui.text.style.TextAlign
@@ -73,7 +76,9 @@ fun GridLayoutComponent(personList: List<Person>) {
                         // The Text composable is pre-defined by the Compose UI library; you can use
                         // this composable to render text on the screen
                         Text(text = personList[i + j].name,
-                            modifier = Modifier.padding(16.dp) + LayoutAlign.CenterVertically,
+                            modifier = Modifier.padding(16.dp) + Modifier.wrapContentHeight(
+                                Alignment.Center
+                            ),
                             style = TextStyle(
                                 color = Color.Black,
                                 fontSize = 20.sp,
