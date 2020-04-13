@@ -37,99 +37,99 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun startSimpleTextExample(view: View) {
+    fun startSimpleTextExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, SimpleTextActivity::class.java))
     }
 
-    fun startCustomTextExample(view: View) {
+    fun startCustomTextExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, CustomTextActivity::class.java))
     }
 
-    fun startVerticalScrollableExample(view: View) {
+    fun startVerticalScrollableExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, VerticalScrollableActivity::class.java))
     }
 
-    fun startHorizontalScrollableExample(view: View) {
+    fun startHorizontalScrollableExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, HorizontalScrollableActivity::class.java))
     }
 
-    fun starLoadImageExample(view: View) {
+    fun starLoadImageExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, ImageActivity::class.java))
     }
 
-    fun startGridExample(view: View) {
+    fun startGridExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, GridLayoutActivity::class.java))
     }
 
-    fun startAlertDialogExample(view: View) {
+    fun startAlertDialogExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, AlertDialogActivity::class.java))
     }
 
-    fun startDrawerExample(view: View) {
+    fun startDrawerExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, DrawerAppActivity::class.java))
     }
 
-    fun startButtonsExample(view: View) {
+    fun startButtonsExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, ButtonActivity::class.java))
     }
 
-    fun startStateExample(view: View) {
+    fun startStateExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, StateActivity::class.java))
     }
 
-    fun startCustomViewExample(view: View) {
+    fun startCustomViewExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, CustomViewActivity::class.java))
     }
 
-    fun startCustomViewPaintExample(view: View) {
+    fun startCustomViewPaintExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, CustomViewPainActivity::class.java))
     }
 
-    fun startAutofillTextExample(view: View) {
+    fun startAutofillTextExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, TextFieldActivity::class.java))
     }
 
-    fun startStackExample(view: View) {
+    fun startStackExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, StackActivity::class.java))
     }
 
-    fun startViewAlignExample(view: View) {
+    fun startViewAlignExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, ViewLayoutConfigurationsActivity::class.java))
     }
 
-    fun startMaterialDesignExample(view: View) {
+    fun startMaterialDesignExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, MaterialActivity::class.java))
     }
 
-    fun startFixedActionButtonExample(view: View) {
+    fun startFixedActionButtonExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, FixedActionButtonActivity::class.java))
     }
 
-    fun startConstraintLayoutExample(view: View) {
+    fun startConstraintLayoutExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, ConstraintLayoutActivity::class.java))
     }
 
-    fun startBottomNavigationExample(view: View) {
+    fun startBottomNavigationExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, BottomNavigationActivity::class.java))
     }
 
-    fun startAnimation1Example(view: View) {
+    fun startAnimation1Example(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, Animation1Activity::class.java))
     }
 
-    fun startAnimation2Example(view: View) {
+    fun startAnimation2Example(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, Animation2Activity::class.java))
     }
 
-    fun startThemeExample(view: View) {
+    fun startThemeExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, DarkModeActivity::class.java))
     }
 
-    fun startLayoutModifierExample(view: View) {
+    fun startLayoutModifierExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, LayoutModifierActivity::class.java))
     }
 
-    fun startProcessDeathExample(view: View) {
+    fun startProcessDeathExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, ProcessDeathActivity::class.java))
     }
 }
