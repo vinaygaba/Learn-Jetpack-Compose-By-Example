@@ -87,7 +87,13 @@ private val rotationTransitionDefinition = transitionDefinition {
 // built up of smaller composable functions.
 @Composable
 fun RotatingSquareComponent() {
-    // Center is a composable that centers all the child composables that are passed to it.
+    // Box is a predefined convenience composable that allows you to apply common draw & layout
+    // logic. We give it a ContentGravity of Center to ensure the children of this composable
+    // are placed in its center. In addition we also pass a few modifiers to it.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, as the Box composable to
+    // occupy the entire available height & width using Modifier.fillMaxSize().
     Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
         // Transition composable creates a state-based transition using the animation configuration
         // defined in [TransitionDefinition]. In the example below, we use the
