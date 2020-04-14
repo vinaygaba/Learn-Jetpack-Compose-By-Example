@@ -16,6 +16,14 @@ we know it.
 This repository aims to show the Jetpack Compose way of building common
 Android UI that we are accustomed to building.
 
+Setup
+-----
+To try out this sample app, you need to at least use the Canary version
+of Android Studio 4.0.
+[You can download it here](https://developer.android.com/studio/preview).
+In general, Jetpack Compose requires you to use the Canary version of
+Android Studio.
+
 Examples
 -----------------
 
