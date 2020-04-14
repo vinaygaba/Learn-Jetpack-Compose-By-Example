@@ -15,6 +15,7 @@ import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.material.Button
 import androidx.ui.material.Divider
+import androidx.ui.material.Surface
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
@@ -88,8 +89,14 @@ fun StateComponent() {
         }
     }
 
-    // This text composable is just used to display the current value of the counter.
-    Text(text = "Counter value is $counter", modifier = Modifier.padding(16.dp))
+    // Surface is added as a temporary workaround for an issue that causes the text to not
+    // be visible if its next to a Card(or any surface with elevation). The fix will be
+    // available in dev09. More info here -
+    // https://kotlinlang.slack.com/archives/CJLTWPH7S/p1585774380042500
+    Surface(elevation = 1.dp, modifier = Modifier.fillMaxWidth()) {
+        // This text composable is just used to display the current value of the counter.
+        Text(text = "Counter value is $counter", modifier = Modifier.padding(16.dp))
+    }
 }
 
 /**
@@ -137,8 +144,14 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
         }
     }
 
-    // This text composable is just used to display the current value of the counter.
-    Text(text = "Counter value is ${counterState.counter}", modifier = Modifier.padding(16.dp))
+    // Surface is added as a temporary workaround for an issue that causes the text to not
+    // be visible if its next to a Card(or any surface with elevation). The fix will be
+    // available in dev09. More info here -
+    // https://kotlinlang.slack.com/archives/CJLTWPH7S/p1585774380042500
+    Surface(elevation = 1.dp, modifier = Modifier.fillMaxWidth()) {
+        // This text composable is just used to display the current value of the counter.
+        Text(text = "Counter value is ${counterState.counter}", modifier = Modifier.padding(16.dp))
+    }
 }
 
 @Model
