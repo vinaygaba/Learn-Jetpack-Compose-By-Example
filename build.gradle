@@ -27,7 +27,8 @@ buildscript {
                     'tooling': "androidx.ui:ui-tooling:${versions.compose}",
                     'layout': "androidx.ui:ui-layout:${versions.compose}",
                     'material': "androidx.ui:ui-material:${versions.compose}",
-                    'savedInstanceState': "androidx.ui:ui-saved-instance-state:${versions.compose}"
+                    'savedInstanceState': "androidx.ui:ui-saved-instance-state:${versions.compose}",
+                    'uiTest': "androidx.ui:ui-test:${versions.compose}"
             ],
             'constraintLayout': "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
             'kotlinStdLib': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
