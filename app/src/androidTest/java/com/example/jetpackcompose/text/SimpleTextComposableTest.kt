@@ -19,7 +19,7 @@ class SimpleTextComposableTest {
 
     // Note: One last thing that we need to do in order to use the default compose rule is that we
     // need to add the blank activity that it uses to the AndroidManifest.xml. Search for
-    // android.app.Activity in the AndroidManifest.xml
+    // androidx.activity.ComponentActivity in the AndroidManifest.xml
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -36,7 +36,7 @@ class SimpleTextComposableTest {
     }
 
     @Test
-    fun app_launches() {
+    fun check_if_app_launched_and_displayed_text() {
         // findByText is a helper method that looks for a composable component that contains the
         // text passed to it. It returns a SemanticsNodeInteraction, which allows us to do a
         // bunch of checks(isDisplayed, isToggelable, etc) and interactions(like click, scroll, etc)

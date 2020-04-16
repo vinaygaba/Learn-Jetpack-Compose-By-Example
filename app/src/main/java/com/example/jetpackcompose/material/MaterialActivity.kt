@@ -3,7 +3,10 @@ package com.example.jetpackcompose.material
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.compose.Composable
+import androidx.compose.getValue
+import androidx.compose.setValue
 import androidx.compose.state
+import androidx.ui.core.Alignment
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
@@ -31,7 +34,6 @@ import androidx.ui.material.ListItem
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.RadioGroup
 import androidx.ui.material.Slider
-import androidx.ui.material.SliderPosition
 import androidx.ui.material.Snackbar
 import androidx.ui.material.Switch
 import androidx.ui.material.TriStateCheckbox
@@ -332,7 +334,7 @@ fun MaterialCircularProgressIndicatorComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
-        CircularProgressIndicator(modifier = Modifier.wrapContentWidth())
+        CircularProgressIndicator(modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
 }
 
@@ -353,7 +355,7 @@ fun MaterialDeterminateCircularProgressIndicatorComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
-        CircularProgressIndicator(progress = 0.5f, modifier = Modifier.wrapContentWidth())
+        CircularProgressIndicator(progress = 0.5f, modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
 }
 
@@ -390,6 +392,15 @@ fun MaterialSnackbarComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialContinousSliderComponent() {
+    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // that is used for holding a state value in this composable for representing the current
+    // value of the slider. Any composable that reads the value of "sliderValue"
+    // variable will be recomposed any time the value changes. This ensures that only the
+    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
+    // efficiency and is a performance optimization. It is inspired from existing frameworks like
+    // React.
+    var sliderValue by state { 0f }
+
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
     // corners and apply a modifier.
@@ -400,7 +411,9 @@ fun MaterialContinousSliderComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // A pre-defined composable that's capable of rendering a slider. It
         // honors the Material Design specification.
-        Slider(position = SliderPosition(0.2f))
+        Slider(value = sliderValue, onValueChange = { newValue ->
+            sliderValue = newValue
+        })
     }
 }
 
@@ -410,6 +423,15 @@ fun MaterialContinousSliderComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialDiscreteSliderComponent() {
+    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // that is used for holding a state value in this composable for representing the current
+    // value of the slider. Any composable that reads the value of "sliderValue"
+    // variable will be recomposed any time the value changes. This ensures that only the
+    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
+    // efficiency and is a performance optimization. It is inspired from existing frameworks like
+    // React.
+    var sliderValue by state { 0f }
+
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
     // corners and apply a modifier.
@@ -420,7 +442,7 @@ fun MaterialDiscreteSliderComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // A pre-defined composable that's capable of rendering a slider. It honors the Material
         // Design specification. In this example, we create a discrete slider with fixed steps.
-        Slider(position = SliderPosition(initial = 0f, valueRange = 0f..10f, steps = 5))
+        Slider(value = sliderValue, valueRange = 0f..10f, steps = 5, onValueChange = { sliderValue = it })
     }
 }
 
@@ -437,7 +459,7 @@ fun MaterialSwitchComponent() {
     // composables that depend on this will be redraw while the rest remain unchanged. This ensures
     // efficiency and is a performance optimization. It is inspired from existing frameworks like
     // React.
-    var checked by state { false}
+    var checked by state { false }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded

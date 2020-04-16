@@ -5,32 +5,23 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.ui.graphics.ImageAsset
 import androidx.ui.graphics.ImageAssetConfig
-import androidx.ui.graphics.NativeImageAsset
+import androidx.ui.graphics.asAndroidBitmap
 import androidx.ui.graphics.colorspace.ColorSpace
 import androidx.ui.graphics.colorspace.ColorSpaces
 
 // Copied from the Compose source code. This class is internal for the time being but the Compose
 // team has promised that this won't be the case for very long.
-class AndroidImageAsset(val bitmap: Bitmap) : ImageAsset {
+class AndroidImageAsset(private val bitmap: Bitmap) : ImageAsset {
 
-    /**
-     * @see Image.width
-     */
     override val width: Int
         get() = bitmap.width
 
-    /**
-     * @see Image.height
-     */
     override val height: Int
         get() = bitmap.height
 
     override val config: ImageAssetConfig
         get() = bitmap.config.toImageConfig()
 
-    /**
-     * @see Image.colorSpace
-     */
     override val colorSpace: ColorSpace
         get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             bitmap.colorSpace?.toComposeColorSpace() ?: ColorSpaces.Srgb
@@ -38,21 +29,54 @@ class AndroidImageAsset(val bitmap: Bitmap) : ImageAsset {
             ColorSpaces.Srgb
         }
 
-    /**
-     * @see Image.hasAlpha
-     */
+    override fun readPixels(
+        buffer: IntArray,
+        startX: Int,
+        startY: Int,
+        width: Int,
+        height: Int,
+        bufferOffset: Int,
+        stride: Int
+    ) {
+        // Internal Android implementation that copies the pixels from the underlying
+        // android.graphics.Bitmap if the configuration supports it
+        val androidBitmap = asAndroidBitmap()
+        var recycleTarget = false
+        val targetBitmap =
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O ||
+                androidBitmap.config != Bitmap.Config.HARDWARE
+            ) {
+                androidBitmap
+            } else {
+                // Because we are creating a copy for the purposes of reading pixels out of it
+                // be sure to recycle this temporary bitmap when we are finished with it.
+                recycleTarget = true
+
+                // Pixels of a hardware bitmap cannot be queried directly so make a copy
+                // of it into a configuration that can be queried
+                // Passing in false for the isMutable parameter as we only intend to read pixel
+                // information from the bitmap
+                androidBitmap.copy(Bitmap.Config.ARGB_8888, false)
+            }
+
+        targetBitmap.getPixels(
+            buffer,
+            bufferOffset,
+            stride,
+            startX,
+            startY,
+            width,
+            height
+        )
+        // Recycle the target if we are done with it
+        if (recycleTarget) {
+            targetBitmap.recycle()
+        }
+    }
+
     override val hasAlpha: Boolean
         get() = bitmap.hasAlpha()
 
-    /**
-     * @see Image.nativeImage
-     */
-    override val nativeImage: NativeImageAsset
-        get() = bitmap
-
-    /**
-     * @see
-     */
     override fun prepareToDraw() {
         bitmap.prepareToDraw()
     }
