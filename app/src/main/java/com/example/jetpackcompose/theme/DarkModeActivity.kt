@@ -111,7 +111,7 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable()()
 
     // A MaterialTheme comprises of colors, typography and the child composables that are going
     // to make use of this styling.
-    MaterialTheme(colors = colors, children = children, typography = typography)
+    MaterialTheme(colors = colors, content = children, typography = typography)
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable

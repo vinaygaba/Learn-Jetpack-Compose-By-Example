@@ -4,6 +4,8 @@ import android.graphics.Rect
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.getValue
+import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.autofill.AutofillNode
 import androidx.ui.autofill.AutofillType
@@ -12,6 +14,7 @@ import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.TextField
+import androidx.ui.foundation.TextFieldValue
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
@@ -19,6 +22,7 @@ import androidx.ui.input.ImeAction
 import androidx.ui.input.KeyboardType
 import androidx.ui.input.PasswordVisualTransformation
 import androidx.ui.layout.Column
+import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
@@ -89,9 +93,9 @@ fun SimpleTextInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { "Enter your text here" }
+        var textValue by state { TextFieldValue("Enter your text here") }
         TextField(value = textValue,
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
@@ -123,9 +127,9 @@ fun CustomStyleTextInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { "Enter your text here" }
+        var textValue by state { TextFieldValue("Enter your text here") }
         TextField(value = textValue,
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
             // You can also customize the appearance of the TextInput by passing a TextStyle
             // configuration to the TextField composable. If you don't pass this, it's just going
             // to use the default values for all the properties.
@@ -166,9 +170,9 @@ fun NumberTextInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { "123" }
+        var textValue by state { TextFieldValue("123") }
         TextField(value = textValue,
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
             // Setting the keyboard type allows you to configure what kind of data you can input
             // in this TextInput. Some examples are number, phone, email, password, etc.
             keyboardType = KeyboardType.Number,
@@ -215,9 +219,9 @@ fun SearchImeActionInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { "Enter your search query here" }
+        var textValue by state { TextFieldValue("Enter your search query here") }
         TextField(value = textValue,
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
             // Changing the imeAction allows you to change the primary icon of the keyboard which
             // is typically shown in the bottom right corner of the keyboard. Some examples of
             // ImeActions are search, send, done, go, etc.
@@ -256,9 +260,9 @@ fun PasswordVisualTransformationInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { "Enter your password here" }
+        var textValue by state { TextFieldValue("Enter your password here") }
         TextField(value = textValue,
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
             // Visual transformation is used to modify the visual output of the input field. In
@@ -281,7 +285,7 @@ fun PasswordVisualTransformationInputComponent() {
 fun AutoFillTextInputComponent() {
     val autofillAmbient = AutofillAmbient.current
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        var textValue by state { "" }
+        var textValue by state { TextFieldValue("") }
         TextField(value = textValue,
             modifier = Modifier.padding(16.dp),
             keyboardType = KeyboardType.Email,
@@ -291,7 +295,7 @@ fun AutoFillTextInputComponent() {
                         autofillTypes = listOf(AutofillType.EmailAddress),
                         boundingBox = Rect(0, 0, 400, 400),
                         onFill = {
-                            textValue = it
+                            textValue = TextFieldValue(it)
                         }
                     )
                 )

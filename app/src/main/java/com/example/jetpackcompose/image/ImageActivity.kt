@@ -6,9 +6,12 @@ import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.getValue
 import androidx.compose.onCommit
+import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.core.Alignment
+import androidx.ui.core.ContentDrawScope
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.DrawModifier
 import androidx.ui.core.Modifier
@@ -86,16 +89,21 @@ fun DisplayImagesComponent() {
     TitleComponent("Load image from the resource folder")
     LocalResourceImageComponent(R.drawable.lenna)
 
-    TitleComponent("Load image from url using Picasso")
-    NetworkImageComponentPicasso(
-        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
-    )
+    // Commented out as dev09 breaks those composables. This is happening due to the check that
+    // was added in dev09 - https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:ui/ui-graphics/src/main/java/androidx/ui/graphics/AndroidImageAsset.kt;l=86.
+    // It checks for an internal class and I was relying on the same copy pasted class as its not
+    // exposed @see AndroidImageAsset. Hence the check fails and it throws an exception.
 
-    TitleComponent("Load image from url using Glide")
-    NetworkImageComponentGlide(
-        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
-    )
-
+//    TitleComponent("Load image from url using Picasso")
+//    NetworkImageComponentPicasso(
+//        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
+//    )
+//
+//    TitleComponent("Load image from url using Glide")
+//    NetworkImageComponentGlide(
+//        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
+//    )
+//
     TitleComponent("Image with rounded corners")
     ImageWithRoundedCorners(R.drawable.lenna)
 }
@@ -273,16 +281,10 @@ fun NetworkImageComponentGlide(url: String) {
 fun TitleComponent(title: String) {
     // Text is a predefined composable that does exactly what you'd expect it to - display text on
     // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.
-    
-    // Surface is added as a temporary workaround for an issue that causes the text to not be 
-    // visible if its next to a Card(or any surface with elevation). The fix will be available in
-    // dev09. More info here - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1585774380042500
-    Surface(elevation = 1.dp) {
-        Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
-            fontSize = 14.sp, color = Color.Black), modifier = Modifier.padding(16.dp) +
-                Modifier.fillMaxWidth()
-        )
-    }
+    Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
+        fontSize = 14.sp, color = Color.Black), modifier = Modifier.padding(16.dp) +
+            Modifier.fillMaxWidth()
+    )
 }
 
 // RoundedCornerClipModifier is a custom DrawModifier that is responsible for clipping and
@@ -291,13 +293,13 @@ private data class RoundedCornerClipModifier(val topLeftCornerSize: CornerSize,
                                              val topRightCornerSize: CornerSize,
                                              val bottomLeftCornerSize: CornerSize,
                                              val bottomRightCornerSize:CornerSize) : DrawModifier {
-    override fun draw(density: Density, drawContent: () -> Unit, canvas: Canvas, size: PxSize) {
-        canvas.save()
-        val topLeft =  topLeftCornerSize.toPx(size, density)
-        val topRight =  topRightCornerSize.toPx(size, density)
-        val bottomLeft =  bottomLeftCornerSize.toPx(size, density)
-        val bottomRight =  bottomRightCornerSize.toPx(size, density)
-        canvas.clipRRect(RRect(rect = size.toRect(),
+    override fun ContentDrawScope.draw() {
+        save()
+        val topLeft =  topLeftCornerSize.toPx(size, Density(density))
+        val topRight =  topRightCornerSize.toPx(size, Density(density))
+        val bottomLeft =  bottomLeftCornerSize.toPx(size, Density(density))
+        val bottomRight =  bottomRightCornerSize.toPx(size, Density(density))
+        clipRRect(RRect(rect = size.toRect(),
             topLeft = topLeft.toRadius(),
             topRight = topRight.toRadius(),
             bottomLeft = bottomLeft.toRadius(),

@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.getValue
+import androidx.compose.setValue
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.TextField
+import androidx.ui.foundation.TextFieldValue
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.input.KeyboardType
@@ -82,7 +85,7 @@ fun ProcessDeathComponent() {
             // We use Arrangement.SpaceBetween to place the children of the column such that they
             // are spaced evenly across the main axis, without free space before the first child or
             // after the last child.
-            Column(arrangement = Arrangement.SpaceBetween) {
+            Column(verticalArrangement = Arrangement.SpaceBetween) {
                 // TextField is a composable that is capable of accepting text user input. It renders the
                 // value that you pass to the "value" field. In order to update this as the user is
                 // typing a new string, we make use of the state delegate. However, the state delegate we
@@ -107,7 +110,7 @@ fun ProcessDeathComponent() {
                 // (https://stackoverflow .com/questions/8552514/is-there-any-limit-of-bundle-in-android)
                 // Thus you should be careful about what data you store inside.
                 var textValue by savedInstanceState { "1234567812345678" }
-                TextField(value = textValue,
+                TextField(value = TextFieldValue(textValue),
                     modifier = Modifier.padding(16.dp),
                     textStyle = TextStyle(color = Color.White, fontFamily = FontFamily.Serif,
                         fontSize = 25.sp, fontWeight = FontWeight.Bold),
@@ -122,7 +125,7 @@ fun ProcessDeathComponent() {
                     visualTransformation = CreditCardVisualTransformation(),
                     // Update value of textValue with the latest value of the text field
                     onValueChange = { newTextValue ->
-                        textValue = newTextValue
+                        textValue = newTextValue.text
                     }
                 )
                 // Text is a predefined composable that does exactly what you'd expect it to -
