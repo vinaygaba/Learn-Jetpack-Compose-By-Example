@@ -177,4 +177,3 @@ fun LiveDataComponentListPreview() {
 fun LiveDataLoadingComponentPreview() {
     LiveDataLoadingComponent()
 }
-
