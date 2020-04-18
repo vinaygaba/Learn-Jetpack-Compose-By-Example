@@ -159,7 +159,9 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun NetworkImageComponentPicasso(url: String) {
+fun NetworkImageComponentPicasso(url: String,
+                                 modifier: Modifier = Modifier.fillMaxWidth() +
+                                         Modifier.preferredHeightIn(maxHeight = 200.dp)) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
     var image by state<ImageAsset?> { null }
@@ -201,14 +203,14 @@ fun NetworkImageComponentPicasso(url: String) {
         // used to modify the composable that its applied to. In this example, we configure the
         // Box composable to have a max height of 200dp and fill out the entire available
         // width.
-        Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp),
+        Box(modifier = modifier,
             gravity = ContentGravity.Center
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(asset = theImage)
         }
     } else if (theDrawable != null) {
-        Canvas(modifier = Modifier.preferredHeight(200.dp) + Modifier.fillMaxWidth()) {
+        Canvas(modifier = modifier) {
             theDrawable.draw(this.nativeCanvas)
         }
     }

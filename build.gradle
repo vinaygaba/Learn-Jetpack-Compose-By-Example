@@ -12,7 +12,10 @@ buildscript {
             'junitImplementation' : '1.1.1',
             'kotlin': '1.3.60-eap-25',
             'ktx': '1.1.0',
+            'lifecycle':'2.2.0',
             'picasso': '2.71828',
+            'rxjava': '2.0.2',
+            'rxandroid': '2.1.1',
             'supportLibrary': '1.1.0',
             'testRunner': '1.2.0',
     ]
@@ -28,7 +31,8 @@ buildscript {
                     'layout': "androidx.ui:ui-layout:${versions.compose}",
                     'material': "androidx.ui:ui-material:${versions.compose}",
                     'savedInstanceState': "androidx.ui:ui-saved-instance-state:${versions.compose}",
-                    'uiTest': "androidx.ui:ui-test:${versions.compose}"
+                    'uiTest': "androidx.ui:ui-test:${versions.compose}",
+                    'uiLiveData': "androidx.ui:ui-livedata:${versions.compose}"
             ],
             'constraintLayout': "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
             'kotlinStdLib': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
@@ -37,9 +41,14 @@ buildscript {
                     'glideCore': "com.github.bumptech.glide:glide:${versions.glide}",
                     'glideCompiler': "com.github.bumptech.glide:compiler:${versions.glide}"
             ],
+            'rx': [
+                    'core': "io.reactivex.rxjava2:rxjava:${versions.rxjava}",
+                    'android': "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}"
+            ],
             'support': [
                     'appCompat': "androidx.appcompat:appcompat:${versions.supportLibrary}",
-                    'ktx': "androidx.core:core-ktx:${versions.supportLibrary}"
+                    'ktx': "androidx.core:core-ktx:${versions.supportLibrary}",
+                    'lifecycleExtensions': "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
             ],
             'test': [
                     'junit': "junit:junit:${versions.junit}",
