@@ -13,9 +13,11 @@ import androidx.ui.core.AutofillAmbient
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.TextField
 import androidx.ui.foundation.TextFieldValue
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.currentTextStyle
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.input.ImeAction
@@ -24,6 +26,7 @@ import androidx.ui.input.PasswordVisualTransformation
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
+import androidx.ui.material.FilledTextField
 import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
@@ -65,6 +68,9 @@ class TextFieldActivity : AppCompatActivity() {
 
                     TitleComponent("This is a TextInput that uses a Password Visual Transformation")
                     PasswordVisualTransformationInputComponent()
+
+                    TitleComponent("This is a filled TextInput field based on Material Design")
+                    FilledTextInputComponent()
                 }
             }
         }
@@ -280,6 +286,40 @@ fun PasswordVisualTransformationInputComponent() {
     }
 }
 
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should 
+// think of composable functions to be similar to lego blocks - each composable function is in turn 
+// built up of smaller composable functions.
+@Composable
+fun FilledTextInputComponent() {
+    var textValue by state { TextFieldValue("") }
+
+    // TextField is a composable that is capable of accepting text user input. It renders the
+    // value that you pass to the "value" field. In order to update this as the user is
+    // typing a new string, we make use of the state delegate. Reacting to state changes is
+    // the core behavior of Compose. Any composable that reads the value of the textValue
+    // field will recompose whenever this value is changed. In this example, since the
+    // TextField is reading the value from the textValue value, and that's also the value
+    // that we update as the user types (through the onValueChange lambda), this composable
+    // is redrawn and updated with the latest value.
+
+    // In particular, the FilledTextField is a Material Design implementation of the
+    // Material Filled TextField - https://material.io/components/text-fields/#filled-text-field
+    // It also gives us the ability to provide some placeholder text.
+
+    // We also pass it a modifier. You can think of Modifiers as implementations of the decorators 
+    // pattern that are used to modify the composable that its applied to. In this example, we 
+    // assign a padding of 16dp and ask the FilledTextField composable to occupy the entire 
+    // available width.
+    FilledTextField(
+        value = textValue,
+        onValueChange = { textValue = it },
+        label = { Text("Enter Your Name") },
+        placeholder = { Text(text = "John Doe") },
+        modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth()
+    )
+}
+
 // Not working yet for some reason
 @Composable
 fun AutoFillTextInputComponent() {
@@ -351,6 +391,12 @@ fun SearchImeActionInputComponentPreview() {
 @Composable
 fun PasswordVisualTransformationInputComponentPreview() {
     PasswordVisualTransformationInputComponent()
+}
+
+@Preview
+@Composable
+fun FilledTextInputComponentPreview() {
+    FilledTextInputComponent()
 }
 
 
