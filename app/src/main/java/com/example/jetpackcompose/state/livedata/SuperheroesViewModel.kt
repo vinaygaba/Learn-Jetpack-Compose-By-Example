@@ -9,7 +9,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
-class SuperheroesViewModel: ViewModel() {
+class SuperheroesViewModel : ViewModel() {
     private val superheroes = MutableLiveData<List<Person>>()
 
     init {
