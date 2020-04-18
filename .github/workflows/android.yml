@@ -28,3 +28,28 @@ jobs:
       run: ./gradlew build
     - name: Run Unit tests
       run: ./gradlew test --stacktrace
+
+  ui-testing:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level: [21, 23, 29]
+        target: [default, google_apis]
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          # Key inspired from here -
+          # https://medium.com/@ychescale9/running-android-instrumented-tests-on-ci-from-bitrise-io-to-github-actions-a611e57ce71f
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Run UI Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: x86_64
+          script: ./gradlew connectedCheck --no-daemon --stacktrace

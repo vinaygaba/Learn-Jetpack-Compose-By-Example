@@ -6,15 +6,19 @@ import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.getValue
 import androidx.compose.onCommit
+import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.core.Alignment
+import androidx.ui.core.ContentDrawScope
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.DrawModifier
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
+import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
@@ -22,8 +26,9 @@ import androidx.ui.foundation.shape.corner.CornerSize
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.geometry.RRect
 import androidx.ui.geometry.Radius
-import androidx.ui.graphics.Canvas
 import androidx.ui.graphics.Color
+import androidx.ui.graphics.ImageAsset
+import androidx.ui.graphics.asImageAsset
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
@@ -31,7 +36,6 @@ import androidx.ui.layout.preferredHeight
 import androidx.ui.layout.preferredHeightIn
 import androidx.ui.layout.preferredWidth
 import androidx.ui.layout.wrapContentSize
-import androidx.ui.material.Surface
 import androidx.ui.res.loadImageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -39,7 +43,6 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.Density
 import androidx.ui.unit.Px
-import androidx.ui.unit.PxSize
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import androidx.ui.unit.toRect
@@ -159,7 +162,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 fun NetworkImageComponentPicasso(url: String) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
-    var image by state<AndroidImageAsset?> { null }
+    var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
     onCommit(url) {
         val picasso = Picasso.get()
@@ -174,7 +177,7 @@ fun NetworkImageComponentPicasso(url: String) {
             }
 
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                image = bitmap?.let { AndroidImageAsset(it) }
+                image = bitmap?.asImageAsset()
             }
         }
         picasso
@@ -198,7 +201,9 @@ fun NetworkImageComponentPicasso(url: String) {
         // used to modify the composable that its applied to. In this example, we configure the
         // Box composable to have a max height of 200dp and fill out the entire available
         // width.
-        Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp)) {
+        Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp),
+            gravity = ContentGravity.Center
+        ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(asset = theImage)
         }
@@ -217,7 +222,7 @@ fun NetworkImageComponentPicasso(url: String) {
  */
 @Composable
 fun NetworkImageComponentGlide(url: String) {
-    var image by state<AndroidImageAsset?> { null }
+    var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
     val context = ContextAmbient.current
     onCommit(url) {
@@ -229,7 +234,7 @@ fun NetworkImageComponentGlide(url: String) {
             }
 
             override fun onResourceReady(bitmap: Bitmap, transition: Transition<in Bitmap>?) {
-                image = AndroidImageAsset(bitmap)
+                image = bitmap.asImageAsset()
             }
         }
         glide
@@ -254,7 +259,8 @@ fun NetworkImageComponentGlide(url: String) {
         // used to modify the composable that its applied to. In this example, we configure the
         // Box composable to have a max height of 200dp and fill out the entire available
         // width.
-        Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp)) {
+        Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp),
+            gravity = ContentGravity.Center) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(asset = theImage)
         }
@@ -273,16 +279,10 @@ fun NetworkImageComponentGlide(url: String) {
 fun TitleComponent(title: String) {
     // Text is a predefined composable that does exactly what you'd expect it to - display text on
     // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.
-    
-    // Surface is added as a temporary workaround for an issue that causes the text to not be 
-    // visible if its next to a Card(or any surface with elevation). The fix will be available in
-    // dev09. More info here - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1585774380042500
-    Surface(elevation = 1.dp) {
-        Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
-            fontSize = 14.sp, color = Color.Black), modifier = Modifier.padding(16.dp) +
-                Modifier.fillMaxWidth()
-        )
-    }
+    Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
+        fontSize = 14.sp, color = Color.Black), modifier = Modifier.padding(16.dp) +
+            Modifier.fillMaxWidth()
+    )
 }
 
 // RoundedCornerClipModifier is a custom DrawModifier that is responsible for clipping and
@@ -291,13 +291,13 @@ private data class RoundedCornerClipModifier(val topLeftCornerSize: CornerSize,
                                              val topRightCornerSize: CornerSize,
                                              val bottomLeftCornerSize: CornerSize,
                                              val bottomRightCornerSize:CornerSize) : DrawModifier {
-    override fun draw(density: Density, drawContent: () -> Unit, canvas: Canvas, size: PxSize) {
-        canvas.save()
-        val topLeft =  topLeftCornerSize.toPx(size, density)
-        val topRight =  topRightCornerSize.toPx(size, density)
-        val bottomLeft =  bottomLeftCornerSize.toPx(size, density)
-        val bottomRight =  bottomRightCornerSize.toPx(size, density)
-        canvas.clipRRect(RRect(rect = size.toRect(),
+    override fun ContentDrawScope.draw() {
+        save()
+        val topLeft =  topLeftCornerSize.toPx(size, Density(density))
+        val topRight =  topRightCornerSize.toPx(size, Density(density))
+        val bottomLeft =  bottomLeftCornerSize.toPx(size, Density(density))
+        val bottomRight =  bottomRightCornerSize.toPx(size, Density(density))
+        clipRRect(RRect(rect = size.toRect(),
             topLeft = topLeft.toRadius(),
             topRight = topRight.toRadius(),
             bottomLeft = bottomLeft.toRadius(),

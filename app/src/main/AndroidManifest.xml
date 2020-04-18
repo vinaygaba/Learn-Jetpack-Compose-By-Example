@@ -18,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="androidx.activity.ComponentActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.example.jetpackcompose.text.SimpleTextActivity"
             android:exported="true"

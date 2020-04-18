@@ -63,6 +63,7 @@ dependencies {
     implementation deps.compose.layout
     implementation deps.compose.material
     implementation deps.compose.savedInstanceState
+    androidTestImplementation deps.compose.uiTest
 
     // Image loading
     implementation deps.imageLoading.picasso

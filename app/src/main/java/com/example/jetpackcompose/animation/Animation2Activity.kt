@@ -5,6 +5,8 @@ import androidx.animation.LinearEasing
 import androidx.animation.transitionDefinition
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.getValue
+import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.animation.ColorPropKey
 import androidx.ui.animation.Transition

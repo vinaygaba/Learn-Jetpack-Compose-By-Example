@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.frames.ModelList
 import androidx.compose.frames.modelListOf
+import androidx.compose.getValue
 import androidx.compose.state
 import androidx.ui.core.Modifier
-import androidx.ui.core.gesture.DragGestureDetector
+import androidx.ui.core.Modifier.Companion
 import androidx.ui.core.gesture.DragObserver
+import androidx.ui.core.gesture.dragGestureFilter
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
@@ -58,7 +60,7 @@ data class Paths(
 @Composable
 fun DrawingBoardComposable(paint: Paint) {
     val paths by state<ModelList<Paths>> { modelListOf() }
-    Box(modifier = Modifier.fillMaxSize() + DragGestureDetector(
+    Box(modifier = Modifier.fillMaxSize() + Modifier.dragGestureFilter(
         startDragImmediately = true,
         dragObserver = object: DragObserver {
             override fun onStart(downPosition: PxPosition) {
@@ -66,7 +68,7 @@ fun DrawingBoardComposable(paint: Paint) {
                 paths += Paths(downPosition.x.value, downPosition.y.value)
             }
         })) {
-        Canvas(modifier = Modifier.None) {
+        Canvas(modifier = Modifier) {
             val p = Path()
             for (path in paths) {
                 p.lineTo(path.x, path.y)
