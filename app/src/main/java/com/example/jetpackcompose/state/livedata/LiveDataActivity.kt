@@ -59,6 +59,15 @@ class LiveDataActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun LiveDataComponent(personListLiveData: LiveData<List<Person>>) {
+    // Here we access the live data object and convert it to a form that Jetpack Compose 
+    // understands using the observeAsState method. 
+
+    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // that is used for holding a state value in this composable for representing the current
+    // value of the selectedIndex. Any composable that reads the value of counter will be recomposed
+    // any time the value changes. This ensures that only the composables that depend on this
+    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
+    // performance optimization. It is inspired from existing frameworks like React.
     val personList by personListLiveData.observeAsState(initial = emptyList())
     // Since Jetpack Compose uses the declarative way of programming, we can easily decide what
     // needs to shows vs hidden based on which branch of code is being executed. In this example,
