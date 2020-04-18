@@ -28,6 +28,7 @@ import com.example.jetpackcompose.material.DrawerAppActivity
 import com.example.jetpackcompose.material.FixedActionButtonActivity
 import com.example.jetpackcompose.material.MaterialActivity
 import com.example.jetpackcompose.state.ProcessDeathActivity
+import com.example.jetpackcompose.state.livedata.LiveDataActivity
 import com.example.jetpackcompose.theme.DarkModeActivity
 
 class MainActivity : AppCompatActivity() {
@@ -131,5 +132,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startProcessDeathExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, ProcessDeathActivity::class.java))
+    }
+
+    fun startLiveDataExample(@Suppress("UNUSED_PARAMETER")view: View) {
+        startActivity(Intent(this, LiveDataActivity::class.java))
     }
 }

@@ -47,6 +47,7 @@ dependencies {
     // Support Libraries
     implementation deps.support.appCompat
     implementation deps.support.ktx
+    implementation deps.support.lifecycleExtensions
 
     // CardView
     implementation deps.cardView
@@ -63,11 +64,16 @@ dependencies {
     implementation deps.compose.layout
     implementation deps.compose.material
     implementation deps.compose.savedInstanceState
+    implementation deps.compose.uiLiveData
     androidTestImplementation deps.compose.uiTest
 
     // Image loading
     implementation deps.imageLoading.picasso
     implementation deps.imageLoading.glideCore
+
+    // RxJava
+    implementation deps.rx.core
+    implementation deps.rx.android
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

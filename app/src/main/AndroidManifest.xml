@@ -142,6 +142,12 @@
             android:exported="true"
             android:label="@string/title_process_death_examples"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.example.jetpackcompose.state.livedata.LiveDataActivity"
+            android:exported="true"
+            android:label="@string/title_live_data_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
