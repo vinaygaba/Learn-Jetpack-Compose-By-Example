@@ -50,6 +50,15 @@ sense.
 |How do I do animation in Jetpack Compose? <br/>[Example: Rotation Animation](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/animation/Animation1Activity.kt) <br/> [Example: Color Change Animation](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/animation/Animation2Activity.kt) |<img src ="screenshots/animation_rotation.gif" width=214 height=400> <br/> <br/> <img src ="screenshots/color_animation.gif" width=214 height=400>|
 |[How do styles & themes work in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/theme/DarkModeActivity.kt) <br/> [How do I add dark mode capability to my app?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/theme/DarkModeActivity.kt)|<img src ="screenshots/dark_mode.gif" width=214 height=400> |
 
+
+### State Management
+|Example|Preview|
+|-------|-------|
+|[How do I store state information in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/StateActivity.kt)|<img src ="screenshots/state_example.gif" width=214 height=400> |
+|[How do I retain state across process death & activity recreation(like orientation changes)?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/ProcessDeathActivity.kt) | <img src ="screenshots/process_death.gif" width=214 height=400> |
+|[How do I use LiveData/ViewModels with Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/livedata/LiveDataActivity.kt) | <img src ="screenshots/live_data.gif" width=214 height=400> |
+
+
 ### Material Design
 
 |Example|Preview|
@@ -98,13 +107,6 @@ sense.
 |[How do I draw using a canvas?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/customview/CustomViewActivity.kt)|<img src ="screenshots/custom_view.png" width=214 height=400>|
 |[How do I detect touch events in a custom view?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/customview/CustomViewPainActivity.kt)| |
 
-
-### State Management
-|Example|Preview|
-|-------|-------|
-|[How do I store state information in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/StateActivity.kt)|<img src ="screenshots/state_example.gif" width=214 height=400> |
-|[How do I retain state across process death & activity recreation(like orientation changes)?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/ProcessDeathActivity.kt) | <img src ="screenshots/process_death.gif" width=214 height=400> |
-|[How do I use LiveData/ViewModels with Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/livedata/LiveDataActivity.kt) | <img src ="screenshots/live_data.gif" width=214 height=400> |
 
 ### Testing
 |Example|Preview|
