@@ -82,6 +82,7 @@
         <activity
             android:name="com.example.jetpackcompose.text.TextFieldActivity"
             android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:label="@string/title_text_input_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -140,6 +141,7 @@
         <activity
             android:name="com.example.jetpackcompose.state.ProcessDeathActivity"
             android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:label="@string/title_process_death_examples"
             android:theme="@style/AppTheme.NoActionBar" />
 
