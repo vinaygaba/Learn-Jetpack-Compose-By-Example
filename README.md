@@ -70,6 +70,7 @@ sense.
 |[How do I add Ripple effect to a view?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/MaterialActivity.kt#L495) | <img src ="screenshots/ripple.gif" width=214> |
 |[How do I add a Button to my screen?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/ButtonActivity.kt)|<img src ="screenshots/buttons.png" width=214 height=400>|
 |[How do I display an alert dialog/popup modal?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/AlertDialogActivity.kt)|<img src ="screenshots/alert_dialog.gif" width=214 height=400>|
+|[How do I make Material Filter Chips that overflow to multiple rows?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/FlowRowActivity.kt) |<img src ="screenshots/filter_chips.gif" width=214 height=400>|
 
 
 ### Text

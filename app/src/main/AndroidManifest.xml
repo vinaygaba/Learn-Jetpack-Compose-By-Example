@@ -150,6 +150,12 @@
             android:exported="true"
             android:label="@string/title_live_data_example"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.example.jetpackcompose.material.FlowRowActivity"
+            android:exported="true"
+            android:label="@string/title_filter_chips_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
