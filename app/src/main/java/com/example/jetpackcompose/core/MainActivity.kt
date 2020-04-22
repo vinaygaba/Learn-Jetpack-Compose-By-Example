@@ -26,6 +26,7 @@ import com.example.jetpackcompose.material.BottomNavigationActivity
 import com.example.jetpackcompose.material.ButtonActivity
 import com.example.jetpackcompose.material.DrawerAppActivity
 import com.example.jetpackcompose.material.FixedActionButtonActivity
+import com.example.jetpackcompose.material.FlowRowActivity
 import com.example.jetpackcompose.material.MaterialActivity
 import com.example.jetpackcompose.state.ProcessDeathActivity
 import com.example.jetpackcompose.state.livedata.LiveDataActivity
@@ -136,5 +137,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startLiveDataExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, LiveDataActivity::class.java))
+    }
+
+    fun startFlowRowExample(@Suppress("UNUSED_PARAMETER")view: View) {
+        startActivity(Intent(this, FlowRowActivity::class.java))
     }
 }

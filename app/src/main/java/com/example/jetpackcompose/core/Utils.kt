@@ -12,6 +12,11 @@ data class Person(
     val profilePictureUrl: String? = null
 )
 
+data class Amenity(
+    val name: String,
+    val iconUrl: String
+)
+
 // Methods
 fun getPersonList() = listOf<Person>(
     Person("Grace Hopper", 25),
@@ -38,6 +43,19 @@ fun getSuperheroList() = listOf(
     Person("Rogue", 28, "https://i.annihil.us/u/prod/marvel/i/mg/3/10/5112d84e2166c.jpg"),
     Person("Groot", 4, "https://i.annihil.us/u/prod/marvel/i/mg/3/10/526033c8b474a.jpg"),
     Person("Professor X", 55, "https://i.annihil.us/u/prod/marvel/i/mg/3/e0/528d3378de525.jpg")
+)
+
+fun getAmenityList() = listOf(
+    Amenity("Elevator", ""),
+    Amenity("Washer/Dryer", ""),
+    Amenity("Wheelchair Access", ""),
+    Amenity("Dogs Ok", ""),
+    Amenity("Smoke Detector", ""),
+    Amenity("Wifi", ""),
+    Amenity("Television", ""),
+    Amenity("Coffee Maker", ""),
+    Amenity("Hair Dryer", ""),
+    Amenity("Iron", "")
 )
 
 fun hideKeyboard(context: Context) {
