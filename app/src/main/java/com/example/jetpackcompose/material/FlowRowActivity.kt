@@ -66,6 +66,13 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
     // Box to occupy the entire available width using the Modifier.fillMaxSize() modifier and 
     // also give it a padding of 4 dp.
     Box(modifier = Modifier.padding(4.dp) + Modifier.fillMaxSize() + Modifier) {
+        // FlowRow is a pre-defined composable that places its children in a horizontal flow 
+        // similar to the Row composable. However, its different from the Row composable in that if 
+        // the horizontal space is not sufficient for all the children in one row, it 
+        // overflows to more rows. 
+        // mainAxisAlignment is the alignment in the horizontal direction
+        // crossAxisSpacing is the spacing between rows in the vertical direction
+        // mainAxisSpacing is the spacing between the children in the same row
         FlowRow(
             mainAxisAlignment = MainAxisAlignment.Center,
             crossAxisSpacing = 16.dp,
