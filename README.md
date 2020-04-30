@@ -1,4 +1,4 @@
-# Learn Jetpack Compose By Example ![Android CI](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/workflows/Android%20CI/badge.svg) ![Compose Version](https://img.shields.io/badge/Compose-0.1.0--dev09-brightgreen)
+# Learn Jetpack Compose By Example ![Android CI](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/workflows/Android%20CI/badge.svg) ![Compose Version](https://img.shields.io/badge/Compose-0.1.0--dev10-brightgreen)
 
 ![Feature Image](screenshots/jetpack_compose_poster.png)
 
@@ -19,7 +19,7 @@ Android UI that we are accustomed to building.
 Setup
 -----
 To try out this sample app, you need to at least use the Canary version
-of Android Studio 4.1.
+of Android Studio 4.1. Specifically Android Studio 4.1 Canary 8
 [You can download it here](https://developer.android.com/studio/preview).
 In general, Jetpack Compose requires you to use the Canary version of
 Android Studio.
