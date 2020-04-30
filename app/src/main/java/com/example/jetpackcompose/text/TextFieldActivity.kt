@@ -329,22 +329,23 @@ fun AutoFillTextInputComponent() {
         TextField(value = textValue,
             modifier = Modifier.padding(16.dp),
             keyboardType = KeyboardType.Email,
-            onFocus = {
-                autofillAmbient?.requestAutofillForNode(
-                    autofillNode = AutofillNode(
-                        autofillTypes = listOf(AutofillType.EmailAddress),
-                        boundingBox = Rect(0, 0, 400, 400),
-                        onFill = {
-                            textValue = TextFieldValue(it)
-                        }
+            onFocusChange = {
+                if(it){
+                    autofillAmbient?.requestAutofillForNode(
+                        autofillNode = AutofillNode(
+                            autofillTypes = listOf(AutofillType.EmailAddress),
+                            boundingBox = Rect(0, 0, 400, 400),
+                            onFill = {
+                                textValue = TextFieldValue(it)
+                            }
+                        )
                     )
-                )
-            },
-            onBlur = {
-                autofillAmbient?.cancelAutofillForNode(autofillNode = AutofillNode(
-                    autofillTypes = listOf(AutofillType.EmailAddress),
-                    onFill = {}
-                ))
+                }else{
+                    autofillAmbient?.cancelAutofillForNode(autofillNode = AutofillNode(
+                        autofillTypes = listOf(AutofillType.EmailAddress),
+                        onFill = {}
+                    ))
+                }
             },
             imeAction = ImeAction.Done,
             onValueChange = {
