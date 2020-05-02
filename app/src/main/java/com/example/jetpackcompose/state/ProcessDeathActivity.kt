@@ -109,6 +109,7 @@ fun ProcessDeathComponent() {
                 // is meant to only support data with a size less than 500kb
                 // (https://stackoverflow .com/questions/8552514/is-there-any-limit-of-bundle-in-android)
                 // Thus you should be careful about what data you store inside.
+                // Discussion - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1586187000148500?thread_ts=1586186224.146600&cid=CJLTWPH7S
                 var textValue by savedInstanceState { "1234567812345678" }
                 TextField(value = TextFieldValue(textValue),
                     modifier = Modifier.padding(16.dp),
