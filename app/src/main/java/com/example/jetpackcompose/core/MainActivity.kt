@@ -59,9 +59,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, ImageActivity::class.java))
     }
 
-    fun startGridExample(@Suppress("UNUSED_PARAMETER")view: View) {
-        startActivity(Intent(this, GridLayoutActivity::class.java))
-    }
+    // The Table API has been removed in dev11 update. Removing this example until there is a 
+    // better alternative available
+//    fun startGridExample(@Suppress("UNUSED_PARAMETER")view: View) {
+//        startActivity(Intent(this, GridLayoutActivity::class.java))
+//    }
 
     fun startAlertDialogExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, AlertDialogActivity::class.java))

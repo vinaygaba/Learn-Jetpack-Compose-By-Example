@@ -59,7 +59,6 @@ dependencies {
     implementation deps.compose.composeRuntime
     implementation deps.compose.core
     implementation deps.compose.foundation
-    implementation deps.compose.framework
     implementation deps.compose.tooling
     implementation deps.compose.layout
     implementation deps.compose.material
