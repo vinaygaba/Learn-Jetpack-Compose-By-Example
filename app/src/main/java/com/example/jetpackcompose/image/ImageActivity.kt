@@ -15,6 +15,11 @@ import androidx.ui.core.ContentDrawScope
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.DrawModifier
 import androidx.ui.core.Modifier
+import androidx.ui.core.clip
+import androidx.ui.core.composed
+import androidx.ui.core.drawClip
+import androidx.ui.core.drawLayer
+import androidx.ui.core.drawWithContent
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
@@ -26,9 +31,12 @@ import androidx.ui.foundation.shape.corner.CornerSize
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.geometry.RRect
 import androidx.ui.geometry.Radius
+import androidx.ui.geometry.toRect
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.ImageAsset
 import androidx.ui.graphics.asImageAsset
+import androidx.ui.graphics.painter.clipRect
+import androidx.ui.graphics.painter.drawCanvas
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
@@ -42,8 +50,11 @@ import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.Density
+import androidx.ui.unit.Dp
 import androidx.ui.unit.Px
+import androidx.ui.unit.PxSize
 import androidx.ui.unit.dp
+import androidx.ui.unit.px
 import androidx.ui.unit.sp
 import androidx.ui.unit.toRect
 import com.bumptech.glide.Glide
@@ -131,8 +142,6 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
     // be advisable to use the loadImageResource method as it loads an image resource asynchronously
     val image = loadImageResource(resId)
-    //
-    val shape = RoundedCornerShape(8.dp)
     image.resource.resource?.let {
         // Box is a predefined convenience composable that allows you to apply common draw & layout
         // logic. In addition we also pass a few modifiers to it.
@@ -142,11 +151,9 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
         // Box composable to have a height of 200dp, width of 200dp, alignment as center
         // and a custom draw modifier to clip the corners of the image.
         Box(
-            modifier = Modifier.wrapContentSize(Alignment.Center) +
+            modifier = 
                     Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp)
-                    + RoundedCornerClipModifier(
-                shape.topLeft, shape.topRight, shape.bottomLeft, shape.bottomRight
-            )
+                    + Modifier.RoundedCornerClipModifier(8.dp)
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(it)
@@ -211,7 +218,9 @@ fun NetworkImageComponentPicasso(url: String,
         }
     } else if (theDrawable != null) {
         Canvas(modifier = modifier) {
-            theDrawable.draw(this.nativeCanvas)
+            drawCanvas { canvas, pxSize ->  
+                theDrawable.draw(canvas.nativeCanvas)
+            }
         }
     }
 }
@@ -223,7 +232,8 @@ fun NetworkImageComponentPicasso(url: String,
  * dependency(or any other kapt related dependency for that matter), the app won't even compile.
  */
 @Composable
-fun NetworkImageComponentGlide(url: String) {
+fun NetworkImageComponentGlide(url: String, modifier: Modifier = Modifier.fillMaxWidth() +
+        Modifier.preferredHeightIn(maxHeight = 200.dp)) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
     val context = ContextAmbient.current
@@ -261,14 +271,16 @@ fun NetworkImageComponentGlide(url: String) {
         // used to modify the composable that its applied to. In this example, we configure the
         // Box composable to have a max height of 200dp and fill out the entire available
         // width.
-        Box(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeightIn(maxHeight = 200.dp),
+        Box(modifier = modifier,
             gravity = ContentGravity.Center) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(asset = theImage)
         }
     } else if (theDrawable != null) {
-        Canvas(modifier = Modifier.preferredHeight(200.dp) + Modifier.fillMaxWidth()) {
-            theDrawable.draw(this.nativeCanvas)
+        Canvas(modifier = modifier) {
+            drawCanvas { canvas, pxSize ->
+                theDrawable.draw(canvas.nativeCanvas)
+            }
         }
     }
 }
@@ -287,25 +299,14 @@ fun TitleComponent(title: String) {
     )
 }
 
-// RoundedCornerClipModifier is a custom DrawModifier that is responsible for clipping and
+// RoundedCornerClipModifier is a custom Modifier that is responsible for clipping and
 // providing a rounder corner to the composable its applied to.
-private data class RoundedCornerClipModifier(val topLeftCornerSize: CornerSize,
-                                             val topRightCornerSize: CornerSize,
-                                             val bottomLeftCornerSize: CornerSize,
-                                             val bottomRightCornerSize:CornerSize) : DrawModifier {
-    override fun ContentDrawScope.draw() {
-        save()
-        val topLeft =  topLeftCornerSize.toPx(size, Density(density))
-        val topRight =  topRightCornerSize.toPx(size, Density(density))
-        val bottomLeft =  bottomLeftCornerSize.toPx(size, Density(density))
-        val bottomRight =  bottomRightCornerSize.toPx(size, Density(density))
-        clipRRect(RRect(rect = size.toRect(),
-            topLeft = topLeft.toRadius(),
-            topRight = topRight.toRadius(),
-            bottomLeft = bottomLeft.toRadius(),
-            bottomRight = bottomRight.toRadius()))
-        drawContent()
-    }
+// Recommendation from -
+// https://kotlinlang.slack .com/archives/CJLTWPH7S/p1589826323481600?thread_ts=1589821110.478100&cid=CJLTWPH7S
+// TODO(vinaygaba) Add some more comments here
+fun Modifier.RoundedCornerClipModifier(size :Dp): Modifier = composed {
+    val shape = RoundedCornerShape(size)
+    clip(shape)
 }
 
 private fun Px.toRadius() = Radius.circular(this.value)

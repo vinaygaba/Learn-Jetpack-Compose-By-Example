@@ -19,6 +19,8 @@ import androidx.ui.graphics.Paint
 import androidx.ui.graphics.PaintingStyle
 import androidx.ui.graphics.Path
 import androidx.ui.graphics.StrokeJoin
+import androidx.ui.graphics.painter.Fill
+import androidx.ui.graphics.painter.Stroke
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.unit.PxPosition
 
@@ -44,12 +46,7 @@ class CustomViewPainActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun CustomDrawableViewComponent() {
-    val paint = Paint().apply {
-        color = Color.Black
-        style = PaintingStyle.stroke
-        strokeJoin = StrokeJoin.round
-    }
-    DrawingBoardComposable(paint)
+    DrawingBoardComposable()
 }
 
 data class Paths(
@@ -58,7 +55,7 @@ data class Paths(
 )
 
 @Composable
-fun DrawingBoardComposable(paint: Paint) {
+fun DrawingBoardComposable() {
     val paths by state<ModelList<Paths>> { modelListOf() }
     Box(modifier = Modifier.fillMaxSize() + Modifier.dragGestureFilter(
         startDragImmediately = true,
@@ -74,7 +71,7 @@ fun DrawingBoardComposable(paint: Paint) {
                 p.lineTo(path.x, path.y)
                 p.moveTo(path.x, path.y)
             }
-            drawPath(p, paint)
+            drawPath(p, color = Color.Black, style = Stroke(width = 3f, join = StrokeJoin.round))
         }
     }
 }

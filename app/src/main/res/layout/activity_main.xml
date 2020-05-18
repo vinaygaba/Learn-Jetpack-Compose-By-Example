@@ -105,24 +105,26 @@
                 />
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/load_grid_example"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/cardview_height"
-            app:cardBackgroundColor="@color/colorPrimary"
-            android:padding="@dimen/default_padding"
-            android:onClick="startGridExample"
-            android:layout_marginTop="@dimen/default_padding"
-            app:cardCornerRadius="@dimen/card_corner_radius">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_grid_example"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
-        </androidx.cardview.widget.CardView>
+        <!-- The Table API was removed in dev11 so disabling this example until an alternative is
+         added back -->
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/load_grid_example"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/cardview_height"-->
+<!--            app:cardBackgroundColor="@color/colorPrimary"-->
+<!--            android:padding="@dimen/default_padding"-->
+<!--            android:onClick="startGridExample"-->
+<!--            android:layout_marginTop="@dimen/default_padding"-->
+<!--            app:cardCornerRadius="@dimen/card_corner_radius">-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/tv_grid_example"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:fontFamily="monospace"-->
+<!--                />-->
+<!--        </androidx.cardview.widget.CardView>-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/load_clickable_example"

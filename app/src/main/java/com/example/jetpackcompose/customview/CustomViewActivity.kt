@@ -1,14 +1,11 @@
 package com.example.jetpackcompose.customview
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
-import androidx.ui.geometry.Offset
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Paint
 import androidx.ui.graphics.PaintingStyle
@@ -34,30 +31,20 @@ class CustomViewActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun CustomViewComponent() {
-    val paint = Paint().apply {
-        style = PaintingStyle.fill
-    }
     Canvas(modifier = Modifier.fillMaxSize()) {
-        paint.color = Color.Red
-        Log.e("size", size.width.toString() + "|" + size.height)
         drawCircle(
-            center = Offset(size.width.value / 2, size.height.value / 2),
-            radius = 300f,
-            paint = paint
+            color = Color.Red,
+            radius = 300f
         )
 
-        paint.color = Color.Green
         drawCircle(
-            center = Offset(size.width.value / 2, size.height.value / 2),
-            radius = 200f,
-            paint = paint
+            color = Color.Green,
+            radius = 200f
         )
 
-        paint.color = Color.Blue
         drawCircle(
-            center = Offset(size.width.value / 2, size.height.value / 2),
-            radius = 100f,
-            paint = paint
+            color = Color.Blue,
+            radius = 100f
         )
     }
 }
