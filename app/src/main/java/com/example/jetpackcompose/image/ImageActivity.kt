@@ -16,6 +16,7 @@ import androidx.ui.core.ContextAmbient
 import androidx.ui.core.DrawModifier
 import androidx.ui.core.Modifier
 import androidx.ui.core.clip
+import androidx.ui.core.composed
 import androidx.ui.core.drawClip
 import androidx.ui.core.drawLayer
 import androidx.ui.core.drawWithContent
@@ -49,6 +50,7 @@ import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.Density
+import androidx.ui.unit.Dp
 import androidx.ui.unit.Px
 import androidx.ui.unit.PxSize
 import androidx.ui.unit.dp
@@ -140,8 +142,6 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
     // be advisable to use the loadImageResource method as it loads an image resource asynchronously
     val image = loadImageResource(resId)
-    //
-    val shape = RoundedCornerShape(8.dp)
     image.resource.resource?.let {
         // Box is a predefined convenience composable that allows you to apply common draw & layout
         // logic. In addition we also pass a few modifiers to it.
@@ -153,9 +153,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
         Box(
             modifier = 
                     Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp)
-                    + RoundedCornerClipModifier(
-                shape.topLeft, shape.topRight, shape.bottomLeft, shape.bottomRight
-            )
+                    + Modifier.RoundedCornerClipModifier(8.dp)
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(it)
@@ -301,19 +299,12 @@ fun TitleComponent(title: String) {
     )
 }
 
-// RoundedCornerClipModifier is a custom DrawModifier that is responsible for clipping and
+// RoundedCornerClipModifier is a custom Modifier that is responsible for clipping and
 // providing a rounder corner to the composable its applied to.
-// TODO(vinaygaba) Not seeing round corners here after updating to dev11. Needs to be updated.
-private data class RoundedCornerClipModifier(val topLeftCornerSize: CornerSize,
-                                             val topRightCornerSize: CornerSize,
-                                             val bottomLeftCornerSize: CornerSize,
-                                             val bottomRightCornerSize:CornerSize) : DrawModifier {
-    
-    override fun ContentDrawScope.draw() {
-        val shape = RoundedCornerShape(20.dp)
-        clip(shape)
-        drawContent()
-    }
+// TODO(vinaygaba) Add some more comments here
+fun Modifier.RoundedCornerClipModifier(size :Dp): Modifier = composed {
+    val shape = RoundedCornerShape(size)
+    clip(shape)
 }
 
 private fun Px.toRadius() = Radius.circular(this.value)
