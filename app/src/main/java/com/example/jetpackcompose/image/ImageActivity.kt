@@ -301,6 +301,8 @@ fun TitleComponent(title: String) {
 
 // RoundedCornerClipModifier is a custom Modifier that is responsible for clipping and
 // providing a rounder corner to the composable its applied to.
+// Recommendation from -
+// https://kotlinlang.slack .com/archives/CJLTWPH7S/p1589826323481600?thread_ts=1589821110.478100&cid=CJLTWPH7S
 // TODO(vinaygaba) Add some more comments here
 fun Modifier.RoundedCornerClipModifier(size :Dp): Modifier = composed {
     val shape = RoundedCornerShape(size)
