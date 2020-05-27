@@ -5,6 +5,7 @@ buildscript {
             'cardView': '1.0.0',
             'compose': '0.1.0-dev11',
             'constraintLayout' : '1.1.3',
+            'coroutine': '1.3.7',
             'espresso': '3.2.0',
             'glide': '4.10.0',
             'gradle': '4.1.0-alpha09',
@@ -34,6 +35,9 @@ buildscript {
                     'uiLiveData': "androidx.ui:ui-livedata:${versions.compose}"
             ],
             'constraintLayout': "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+            'coroutine': [
+                    'core': "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutine}",
+            ],
             'kotlinStdLib': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
             'imageLoading': [
                     'picasso': "com.squareup.picasso:picasso:${versions.picasso}",

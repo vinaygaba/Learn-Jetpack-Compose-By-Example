@@ -162,6 +162,12 @@
             android:exported="true"
             android:label="@string/title_shadow_example"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.example.jetpackcompose.state.coroutine.CoroutineFlowActivity"
+            android:exported="true"
+            android:label="@string/title_coroutine_flow_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
