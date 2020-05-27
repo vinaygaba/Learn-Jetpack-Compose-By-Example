@@ -9,10 +9,10 @@ import com.example.jetpackcompose.animation.Animation1Activity
 import com.example.jetpackcompose.animation.Animation2Activity
 import com.example.jetpackcompose.customview.CustomViewActivity
 import com.example.jetpackcompose.customview.CustomViewPainActivity
+import com.example.jetpackcompose.material.ShadowActivity
 import com.example.jetpackcompose.image.ImageActivity
 import com.example.jetpackcompose.layout.ConstraintLayoutActivity
 import com.example.jetpackcompose.layout.LayoutModifierActivity
-import com.example.jetpackcompose.scrollers.GridLayoutActivity
 import com.example.jetpackcompose.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcompose.scrollers.VerticalScrollableActivity
 import com.example.jetpackcompose.stack.StackActivity
@@ -143,5 +143,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startFlowRowExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, FlowRowActivity::class.java))
+    }
+    
+    fun startShadowExample(@Suppress("UNUSED_PARAMETER")view: View) {
+        startActivity(Intent(this, ShadowActivity::class.java))
     }
 }
