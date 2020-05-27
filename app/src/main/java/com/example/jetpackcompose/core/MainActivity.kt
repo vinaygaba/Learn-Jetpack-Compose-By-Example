@@ -29,6 +29,7 @@ import com.example.jetpackcompose.material.FixedActionButtonActivity
 import com.example.jetpackcompose.material.FlowRowActivity
 import com.example.jetpackcompose.material.MaterialActivity
 import com.example.jetpackcompose.state.ProcessDeathActivity
+import com.example.jetpackcompose.state.coroutine.CoroutineFlowActivity
 import com.example.jetpackcompose.state.livedata.LiveDataActivity
 import com.example.jetpackcompose.theme.DarkModeActivity
 
@@ -147,5 +148,9 @@ class MainActivity : AppCompatActivity() {
     
     fun startShadowExample(@Suppress("UNUSED_PARAMETER")view: View) {
         startActivity(Intent(this, ShadowActivity::class.java))
+    }
+
+    fun startCoroutineFlowExample(@Suppress("UNUSED_PARAMETER")view: View) {
+        startActivity(Intent(this, CoroutineFlowActivity::class.java))
     }
 }

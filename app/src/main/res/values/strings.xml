@@ -26,6 +26,7 @@
     <string name="title_live_data_example">Live Data Example</string>
     <string name="title_filter_chips_example">Filter Chips Example</string>
     <string name="title_shadow_example">Shadow Example</string>
+    <string name="title_coroutine_flow_example">Coroutine Flow Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -54,4 +55,5 @@
     <string name="tv_live_data_example">Live Data Component</string>
     <string name="tv_filter_chips_example">Filter Chips Component</string>
     <string name="tv_shadow_example">Shadow Component</string>
+    <string name="tv_coroutine_flow_example">Coroutine Flow Component</string>
 </resources>
