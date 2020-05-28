@@ -20,6 +20,7 @@
     <string name="title_constraint_layout_example">Constraint Layout Examples</string>
     <string name="title_bottom_navigation_example">Bottom Navigation Example</string>
     <string name="title_animation_example">Animation Example</string>
+    <string name="title_text_inline_content_example">Text Inline Content Example</string>
     <string name="title_theme_example">Theme Example</string>
     <string name="title_layout_modifier_examples">Layout Modifier Examples</string>
     <string name="title_process_death_examples">Save State In Process Death Examples</string>
@@ -49,6 +50,7 @@
     <string name="tv_bottom_navigation_example">Bottom Navigation Components</string>
     <string name="tv_animation1_example">Rotation Animation Component</string>
     <string name="tv_animation2_example">Changing Color Animation Component</string>
+    <string name="tv_text_inline_content_example">Text Inline Content Component</string>
     <string name="tv_theme_example">Theme Component</string>
     <string name="tv_layout_modifier_example">Layout Modifier Components</string>
     <string name="tv_process_death_example">Save State During Process Death</string>
