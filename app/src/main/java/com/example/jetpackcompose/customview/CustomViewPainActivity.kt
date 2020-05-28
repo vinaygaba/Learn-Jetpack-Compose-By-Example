@@ -8,19 +8,15 @@ import androidx.compose.frames.modelListOf
 import androidx.compose.getValue
 import androidx.compose.state
 import androidx.ui.core.Modifier
-import androidx.ui.core.Modifier.Companion
 import androidx.ui.core.gesture.DragObserver
 import androidx.ui.core.gesture.dragGestureFilter
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.graphics.Color
-import androidx.ui.graphics.Paint
-import androidx.ui.graphics.PaintingStyle
 import androidx.ui.graphics.Path
 import androidx.ui.graphics.StrokeJoin
-import androidx.ui.graphics.painter.Fill
-import androidx.ui.graphics.painter.Stroke
+import androidx.ui.graphics.drawscope.Stroke
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.unit.PxPosition
 

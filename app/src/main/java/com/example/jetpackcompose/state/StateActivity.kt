@@ -96,16 +96,20 @@ fun StateComponent() {
 }
 
 /**
- * In this example, we are making use of a data class called [CounterState] that's annotated with
- * the [Model] class. We use this instead of using the state delegate composable that we saw in the
- * example above. Both the state composable & the Model annotation do the same thing - they work
- * as a mechanism to allow efficient recomposition & hold state that allows other composables to
- * observe the state to recompose whenever the value is updated. You would want to use the @Model
- * annotation whenever your model class is trying to class multiple values and just use the state
- * composable like in the example above whenever you want to track a single value.
+ * In this example, we are making use of a data class called [CounterState] to hold the state 
+ * that we want our composables to observe. This example is very similar to the previous example 
+ * with the only difference that it uses a data class to hold the value of our state. In 
+ * addition, we use the copy() method of a data class to mutate the values of the data class.
  */
 @Composable
-fun ModelComponent(counterState: CounterState = CounterState()) {
+fun ModelComponent() {
+    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // that is used for holding a state value in this composable for representing the current
+    // value of the counter. Any composable that reads the value of counter will be recomposed
+    // any time the value changes. This ensures that only the composables that depend on this
+    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
+    // performance optimization. It is inspired from existing frameworks like React.
+    var counterState by state { CounterState() }
     TitleComponent("Example using Model class to store state")
     // Row is a composable that places its children in a horizontal sequence. You can think of it
     // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -123,7 +127,7 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
             modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
             elevation = 5.dp,
             onClick = {
-                counterState.counter++
+                counterState = counterState.copy(counter = counterState.counter + 1)
             }) {
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
@@ -134,7 +138,7 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
             modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
             elevation = 5.dp,
             onClick = {
-                counterState.counter = 0
+                counterState = counterState.copy(counter = 0)
             }) {
             Text(text = "Reset", modifier = Modifier.padding(16.dp))
         }
@@ -143,8 +147,7 @@ fun ModelComponent(counterState: CounterState = CounterState()) {
     Text(text = "Counter value is ${counterState.counter}", modifier = Modifier.padding(16.dp))
 }
 
-@Model
-class CounterState(var counter: Int = 0)
+data class CounterState(val counter: Int = 0)
 
 /**
  * Android Studio lets you preview your composable functions within the IDE itself, instead of

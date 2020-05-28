@@ -60,7 +60,6 @@ fun ShadowComponent() {
                     // to any modifier without much hassle. It's that simple! 
                     Modifier.drawShadow(
                         elevation = 3.dp,
-                        clipToOutline = true,
                         shape = RoundedCornerShape(8.dp)
                     ),
             gravity = ContentGravity.Center,
