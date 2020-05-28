@@ -9,22 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.animation.Transition
 import androidx.ui.core.Modifier
-import androidx.ui.core.drawWithContent
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.foundation.ContentGravity
-import androidx.ui.geometry.Offset
-import androidx.ui.geometry.toRect
 import androidx.ui.graphics.Color
-import androidx.ui.graphics.Paint
-import androidx.ui.graphics.painter.rotate
-import androidx.ui.graphics.painter.translate
+import androidx.ui.graphics.drawscope.rotate
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.preferredSize
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
-import androidx.ui.unit.toRect
 
 class Animation1Activity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +60,7 @@ private val rotationTransitionDefinition = transitionDefinition {
     // Here we define the transition spec i.e what action do we need to do as we transition from
     // one state to another. Below, we define a TransitionSpec for the transition
     // state A -> state B.
-    transition("A" to "B") {
+    transition(fromState = "A", toState =  "B") {
         // For the transition from state A -> state B, we assign a AnimationBuilder to the
         // rotation prop where we specify how we want to update the value of the rotation prop
         // between state A & B, what the duration of this animation should be, what kind of

@@ -112,7 +112,7 @@ class CustomTextActivity : AppCompatActivity() {
                         "This text has a shadow",
                         style = TextStyle(
                             shadow = Shadow(
-                                color = Color.Black, blurRadius = 10.px,
+                                color = Color.Black, blurRadius = 10f,
                                 offset = Offset(2f, 2f)
                             )
                         )
