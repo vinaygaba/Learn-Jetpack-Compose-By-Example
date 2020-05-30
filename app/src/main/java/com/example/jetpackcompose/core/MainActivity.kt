@@ -13,6 +13,7 @@ import com.example.jetpackcompose.customview.CustomViewActivity
 import com.example.jetpackcompose.customview.CustomViewPainActivity
 import com.example.jetpackcompose.material.ShadowActivity
 import com.example.jetpackcompose.image.ImageActivity
+import com.example.jetpackcompose.interop.ComposeInLegacyAndroidActivity
 import com.example.jetpackcompose.layout.ConstraintLayoutActivity
 import com.example.jetpackcompose.layout.LayoutModifierActivity
 import com.example.jetpackcompose.scrollers.HorizontalScrollableActivity
@@ -158,5 +159,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startCoroutineFlowExample(view: View) {
         startActivity(Intent(this, CoroutineFlowActivity::class.java))
+    }
+    
+    fun startComposeLegacyExample(view: View) {
+        startActivity(Intent(this, ComposeInLegacyAndroidActivity::class.java))
     }
 }
