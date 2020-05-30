@@ -34,7 +34,8 @@ class ComposeInLegacyAndroidActivity : AppCompatActivity() {
         // We make use of the setContent extension function that's available for all view groups.
         // This allows us to render a @Composable function inside a view group. This allows us to
         // render composables inside legacy views. In the example below, we use the frame layout 
-        // called containerLayout and pass a 
+        // called containerLayout and pass the composable called CardComponentWithMessage to 
+        // render inside it.
         containerLayout.setContent(Recomposer.current()) {
             CardComponentWithMessage()
         }
