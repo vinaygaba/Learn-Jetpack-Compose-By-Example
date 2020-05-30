@@ -104,8 +104,8 @@ complexity:
     active: true
     excludes: '**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt'
     # (Vinay) Updated this threshold as a lot of functions are just Preview functions
-    thresholdInFiles: 30
-    thresholdInClasses: 30
+    thresholdInFiles: 50
+    thresholdInClasses: 50
     thresholdInInterfaces: 11
     thresholdInObjects: 11
     thresholdInEnums: 11
