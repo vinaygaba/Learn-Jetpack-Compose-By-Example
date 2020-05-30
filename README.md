@@ -110,6 +110,10 @@ sense.
 |[How do I draw using a canvas?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/customview/CustomViewActivity.kt)|<img src ="screenshots/custom_view.png" width=214 height=400>|
 |[How do I detect touch events in a custom view?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/customview/CustomViewPainActivity.kt)| |
 
+### Interoperability
+|Example|Preview|
+|-------|-------|
+|[How can I use Jetpack Compose components inside existing screens?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/androidTest/java/com/example/jetpackcompose/interop/ComposeInLegacyAndroidActivity.kt) | <img src ="screenshots/interop.png" width=214 height=400>|
 
 ### Testing
 |Example|Preview|
