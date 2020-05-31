@@ -11,6 +11,7 @@ import com.example.jetpackcompose.animation.Animation2Activity
 import com.example.jetpackcompose.animation.TextAnimationActivity
 import com.example.jetpackcompose.customview.CustomViewActivity
 import com.example.jetpackcompose.customview.CustomViewPainActivity
+import com.example.jetpackcompose.customview.MeasuringScaleActivity
 import com.example.jetpackcompose.material.ShadowActivity
 import com.example.jetpackcompose.image.ImageActivity
 import com.example.jetpackcompose.interop.ComposeInLegacyAndroidActivity
@@ -163,5 +164,9 @@ class MainActivity : AppCompatActivity() {
     
     fun startComposeLegacyExample(view: View) {
         startActivity(Intent(this, ComposeInLegacyAndroidActivity::class.java))
+    }
+    
+    fun startMeasuringScaleExample(view: View) {
+        startActivity(Intent(this, MeasuringScaleActivity::class.java))
     }
 }

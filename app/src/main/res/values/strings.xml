@@ -29,6 +29,7 @@
     <string name="title_shadow_example">Shadow Example</string>
     <string name="title_coroutine_flow_example">Coroutine Flow Example</string>
     <string name="title_compose_legacy_example">Compose In Legacy Android Example</string>
+    <string name="title_measuring_scale_example">Measuring Scale Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -60,4 +61,5 @@
     <string name="tv_shadow_example">Shadow Component</string>
     <string name="tv_coroutine_flow_example">Coroutine Flow Component</string>
     <string name="tv_compose_legacy_example">Compose In Legacy Android Component</string>
+    <string name="tv_measuring_scale_example">Measuring Scale Component</string>
 </resources>

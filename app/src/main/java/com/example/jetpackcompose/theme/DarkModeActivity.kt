@@ -91,7 +91,7 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable()()
         onError = Color(0xFFFFFFFF)
     )
 
-    // lightColorPalette is a default implementation of dark mode ColorPalette from the
+    // darkColorPalette is a default implementation of dark mode ColorPalette from the
     // Material Design specification
     // https://material.io/design/color/the-color-system.html#color-theme-creation.
     val darkColors = darkColorPalette()
