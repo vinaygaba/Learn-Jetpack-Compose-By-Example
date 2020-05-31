@@ -173,6 +173,11 @@
             android:exported="true"
             android:label="@string/title_compose_legacy_example"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".customview.MeasuringScaleActivity"
+            android:exported="true"
+            android:label="@string/title_measuring_scale_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
