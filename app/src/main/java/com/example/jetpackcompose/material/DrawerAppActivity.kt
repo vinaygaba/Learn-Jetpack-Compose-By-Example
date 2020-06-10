@@ -201,7 +201,12 @@ fun Screen1Component(openDrawer: () -> Unit) {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to.
         Surface(color = Color(0xFFffd7d7.toInt()), modifier = Modifier.weight(1f)) {
-            // Center is a composable that centers all the child composables that are passed to it.
+            // Box is a predefined convenience composable that allows you to apply common draw & layout
+            // logic. In addition we also pass a few modifiers to it.
+
+            // You can think of Modifiers as implementations of the decorators pattern that are used to
+            // modify the composable that its applied to. In the example below, we configure the
+            // Box to occupy the entire available height & width using Modifier.fillMaxSize().
             Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
                 Text(text = "Screen 1")
             })
@@ -240,7 +245,12 @@ fun Screen2Component(openDrawer: () -> Unit) {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to.
         Surface(color = Color(0xFFffe9d6.toInt()), modifier = Modifier.weight(1f)) {
-            // Center is a composable that centers all the child composables that are passed to it.
+            // Box is a predefined convenience composable that allows you to apply common draw & layout
+            // logic. In addition we also pass a few modifiers to it.
+
+            // You can think of Modifiers as implementations of the decorators pattern that are used to
+            // modify the composable that its applied to. In the example below, we configure the
+            // Box to occupy the entire available height & width using Modifier.fillMaxSize().
             Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
                 Text(text = "Screen 2")
             })
@@ -279,7 +289,12 @@ fun Screen3Component(openDrawer: () -> Unit) {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to.
         Surface(color = Color(0xFFfffbd0.toInt()), modifier = Modifier.weight(1f)) {
-            // Center is a composable that centers all the child composables that are passed to it.
+            // Box is a predefined convenience composable that allows you to apply common draw & layout
+            // logic. In addition we also pass a few modifiers to it.
+
+            // You can think of Modifiers as implementations of the decorators pattern that are used to
+            // modify the composable that its applied to. In the example below, we configure the
+            // Box to occupy the entire available height & width using Modifier.fillMaxSize().
             Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
                 Text(text = "Screen 3")
             })

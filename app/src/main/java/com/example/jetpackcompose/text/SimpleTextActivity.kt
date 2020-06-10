@@ -19,8 +19,12 @@ class SimpleTextActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Center is a composable that centers all the child composables that are passed to it.
-            // In this example, we pass a composable called SimpleText to the Center composable.
+            // Box is a predefined convenience composable that allows you to apply common draw & layout
+            // logic. In addition we also pass a few modifiers to it.
+
+            // You can think of Modifiers as implementations of the decorators pattern that are used to
+            // modify the composable that its applied to. In the example below, we configure the
+            // Box to occupy the entire available height & width using Modifier.fillMaxSize().
             Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
                 // Here, SimpleText is a Composable function which is going to describe the contents of
                 // this activity that will be rendered on the screen.
