@@ -47,6 +47,8 @@ dependencies {
     // Support Libraries
     implementation deps.support.appCompat
     implementation deps.support.ktx
+    implementation deps.support.ktxViewModel
+    implementation deps.support.ktxLiveData
     implementation deps.support.lifecycleExtensions
 
     // CardView
@@ -72,10 +74,6 @@ dependencies {
     // Image loading
     implementation deps.imageLoading.picasso
     implementation deps.imageLoading.glideCore
-
-    // RxJava
-    implementation deps.rx.core
-    implementation deps.rx.android
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
