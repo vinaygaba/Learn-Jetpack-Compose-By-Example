@@ -3,7 +3,12 @@ package com.example.jetpackcompose.state.livedata
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.frames.ModelList
+import androidx.compose.frames.modelListOf
 import androidx.compose.getValue
+import androidx.compose.launchInComposition
+import androidx.compose.setValue
+import androidx.compose.state
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.ui.core.Alignment.Companion.CenterHorizontally
@@ -48,7 +53,7 @@ class LiveDataActivity: AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            LiveDataComponent(viewModel.getSuperheroes())
+            LiveDataComponent(viewModel.superheroes)
         }
     }
 }
@@ -155,6 +160,43 @@ fun LiveDataLoadingComponent() {
         // honors the Material Design specification.
         CircularProgressIndicator(modifier = Modifier.wrapContentWidth(CenterHorizontally))
     }
+}
+
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions. We should 
+// think of composable functions to be similar to lego blocks - each composable function is in turn 
+// built up of smaller composable functions.
+@Composable
+fun LaunchInCompositionComponent(viewModel: SuperheroesViewModel) {
+    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // that is used for holding a state value in this composable for representing the current
+    // value of whether the checkbox is checked. Any composable that reads the value of "personList"
+    // will be recomposed any time the value changes. This ensures that only the composables that
+    // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
+    // is a performance optimization. It is inspired from existing frameworks like React.
+    var personList by state<ModelList<Person>> { modelListOf() }
+    
+    // launchInComposition allows you to launch a suspendable function as soon as this composable
+    // is first committed i.e this tree node is first allowed to be rendered on the screen. It 
+    // also takes care of automatically cancelling it when it is no longer in the composition. 
+    launchInComposition {
+        // This view model merely calls a suspendable function "loadSuperheroes" to get a list of 
+        // "Person" objects
+        val list = viewModel.loadSuperheroes()
+        // We add it to our state object
+        personList.addAll(list)
+    }
+   
+    // If the list is empty, it means that our coroutine has not completed yet and we just want 
+    // to show our loading component and nothing else. So we return early. 
+    if (personList.isEmpty()) {
+        LiveDataLoadingComponent()
+        return
+    }
+    
+    // If the personList is available, we will go ahead and show the list of superheroes. We 
+    // reuse the same component that we created above to save time & space :) 
+    LiveDataComponentList(personList)
 }
 
 /**
