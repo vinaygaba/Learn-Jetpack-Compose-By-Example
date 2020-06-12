@@ -24,17 +24,17 @@ import androidx.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.core.colors
 
-class ComposeInLegacyAndroidActivity : AppCompatActivity() {
+class ComposeInClassicAndroidActivity : AppCompatActivity() {
     private lateinit var containerLayout: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_compose_in_legacy_android)
+        setContentView(R.layout.activity_compose_in_classic_android)
         containerLayout = findViewById(R.id.frame_container)
         // We make use of the setContent extension function that's available for all view groups.
         // This allows us to render a @Composable function inside a view group. This allows us to
-        // render composables inside legacy views. In the example below, we use the frame layout 
-        // called containerLayout and pass the composable called CardComponentWithMessage to 
+        // render composables inside classic android views. In the example below, we use the frame 
+        // layout called containerLayout and pass the composable called CardComponentWithMessage to 
         // render inside it.
         containerLayout.setContent(Recomposer.current()) {
             CardComponentWithMessage()
@@ -70,7 +70,8 @@ fun CardComponentWithMessage() {
         ) {
             // Text is a predefined composable that does exactly what you'd expect it to - display text on
             // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.
-            Text("This is an example of a Jetpack Compose composable inside a legacy Android view", 
+            Text("This is an example of a Jetpack Compose composable inside a classic Android " +
+                    "view", 
                 style = TextStyle(
                     fontFamily = FontFamily.Monospace, 
                     fontWeight = FontWeight.W900, 

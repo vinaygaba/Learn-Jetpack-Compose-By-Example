@@ -169,9 +169,9 @@
             android:label="@string/title_animation_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity 
-            android:name=".interop.ComposeInLegacyAndroidActivity"
+            android:name=".interop.ComposeInClassicAndroidActivity"
             android:exported="true"
-            android:label="@string/title_compose_legacy_example"
+            android:label="@string/title_compose_classic_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".customview.MeasuringScaleActivity"
