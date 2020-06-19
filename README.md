@@ -20,7 +20,7 @@ Android UI that we are accustomed to building.
 Setup
 -----
 To try out this sample app, you need to at least use the Canary version
-of Android Studio 4.2, specifically Android Studio 4.2 Canary 1.
+of Android Studio 4.2, specifically Android Studio 4.2 Canary 2.
 [You can download it here](https://developer.android.com/studio/preview).
 In general, Jetpack Compose requires you to use the Canary version of
 Android Studio.
