@@ -116,7 +116,7 @@ sense.
 ### Interoperability
 |Example|Preview|
 |-------|-------|
-|[How can I use Jetpack Compose components inside existing screens?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/androidTest/java/com/example/jetpackcompose/interop/ComposeInClassicAndroidActivity.kt) | <img src ="screenshots/interop.png" width=214 height=400>|
+|[How can I use Jetpack Compose components inside existing screens?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/interop/ComposeInClassicAndroidActivity.kt) | <img src ="screenshots/interop.png" width=214 height=400>|
 
 ### Testing
 |Example|Preview|
