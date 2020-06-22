@@ -9,8 +9,8 @@ import androidx.compose.state
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
-import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Text
+import androidx.ui.foundation.clickable
 import androidx.ui.foundation.drawBackground
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.Column
@@ -80,13 +80,14 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
             mainAxisSize = SizeMode.Expand
         ) {
             amenityList.forEachIndexed { index, amenity ->
-                // Clickable wraps the child composable and enables it to react to a click through 
-                // the onClick callback similar to the onClick listener that we are accustomed to on 
-                // Android. Here, we just add the current index to the selectedIndices set every
+                // Box with clickable modifier wraps the child composable and enables it to react to
+                // a click through the onClick callback similar to the onClick listener that we are
+                // accustomed to on Android.
+                // Here, we just add the current index to the selectedIndices set every
                 // time a user taps on it.
-                Clickable(onClick = { selectedIndices.add(index) }) {
-                    // Text is a predefined composable that does exactly what you'd expect it to - 
-                    // display text on the screen. It allows you to customize its appearance using 
+                Box(Modifier.clickable(onClick = { selectedIndices.add(index) }), children = {
+                    // Text is a predefined composable that does exactly what you'd expect it to -
+                    // display text on the screen. It allows you to customize its appearance using
                     // style, fontWeight, fontSize, etc.
                     Text(
                         text = if (selectedIndices.contains(index)) "✓ ${amenity.name}" else amenity.name,
@@ -95,7 +96,7 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
                             color = colors[index % colors.size], shape = RoundedCornerShape(15.dp)) +
                                 Modifier.padding(8.dp)
                     )
-                }
+                })
             }
         }
     }

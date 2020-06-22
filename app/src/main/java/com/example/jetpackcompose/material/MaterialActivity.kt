@@ -11,10 +11,10 @@ import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
-import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.clickable
 import androidx.ui.foundation.selection.ToggleableState
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
@@ -503,11 +503,12 @@ fun MaterialRippleComponent() {
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
-        // Clickable wraps the child composable and enables it to react to a click through the
-        // onClick callback similar to the onClick listener that we are accustomed to on Android.
+        // Box with clickable modifier wraps the child composable and enables it to react to a click
+        // through the onClick callback similar to the onClick listener that we are accustomed to
+        // on Android.
         // In order to show a ripple effect, we make use of the Modifier.ripple modifier with the
         // default values.
-        Clickable(onClick = {}, modifier = Modifier.ripple(bounded = true)) {
+        Box(modifier = Modifier.ripple(bounded = true) + Modifier.clickable(onClick = {}), children = {
             // Box is a predefined convenience composable that allows you to apply common
             // draw & layout logic.
             Box(backgroundColor = Color.LightGray, shape = RoundedCornerShape(4.dp)) {
@@ -518,7 +519,7 @@ fun MaterialRippleComponent() {
                 ))
             }
 
-        }
+        })
     }
 }
 

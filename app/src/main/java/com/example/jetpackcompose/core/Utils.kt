@@ -18,7 +18,7 @@ data class Amenity(
 )
 
 // Methods
-fun getPersonList() = listOf<Person>(
+fun getPersonList() = listOf(
     Person("Grace Hopper", 25),
     Person("Ada Lovelace", 29),
     Person("John Smith", 28),

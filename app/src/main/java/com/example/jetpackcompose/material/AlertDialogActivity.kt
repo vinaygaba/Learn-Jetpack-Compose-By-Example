@@ -8,8 +8,9 @@ import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.Box
 import androidx.ui.foundation.Text
+import androidx.ui.foundation.clickable
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
@@ -55,11 +56,12 @@ fun ClickableText() {
     // text "Click to see dialog" is clicked. Every time the value of this variable changes,
     // the relevant sub-composables that use showPopup are automatically recomposed.
     var showPopup by state { false }
-    // Clickable wraps the child composable and enables it to react to a click through the onClick
-    // callback similar to the onClick listener that we are accustomed to on Android.
+    // Box with clickable modifier wraps the child composable and enables it to react to a click
+    // through the onClick callback similar to the onClick listener that we are accustomed to
+    // on Android.
     // Here, we just change the value of showPopup to be true every time we click on the text that
     // says "Click to see Popup"
-    Clickable(onClick = { showPopup = true }) {
+    Box(Modifier.clickable(onClick = { showPopup = true }), children = {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to. In the example below, we add a padding of
         // 8dp to the Card composable and 16dp to the Text composable.
@@ -72,7 +74,7 @@ fun ClickableText() {
                     fontFamily = FontFamily.Serif)
             )
         }
-    }
+    })
     
     // A lambda that toggles the showPopup value to off. We pass it to the onDismiss equivalent
     // callback of the AlertDialog.
