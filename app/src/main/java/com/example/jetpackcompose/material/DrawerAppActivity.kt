@@ -8,15 +8,14 @@ import androidx.compose.state
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
-import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Text
+import androidx.ui.foundation.clickable
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.offset
 import androidx.ui.layout.padding
 import androidx.ui.material.DrawerState
 import androidx.ui.material.IconButton
@@ -105,18 +104,19 @@ fun DrawerContentComponent(
     Column(modifier = Modifier.fillMaxSize()) {
         // We want to have 3 rows in this column to represent the 3 screens in this activity.
         for (index in DrawerAppScreen.values().indices) {
-            // Clickable wraps the child composable and enables it to react to a click through the onClick
-            // callback similar to the onClick listener that we are accustomed to on Android.
+            // Box with clickable modifier wraps the child composable and enables it to react to a
+            // click through the onClick callback similar to the onClick listener that we are
+            // accustomed to on Android.
             // Here, we just update the currentScreen variable to hold the appropriate value based on
             // the row that is clicked i.e if the first row is clicked, we set the value of
             // currentScreen to DrawerAppScreen.Screen1, when second row is clicked we set it to
             // DrawerAppScreen.Screen2 and so on and so forth.
             val screen = getScreenBasedOnIndex(index)
-            Clickable(onClick = {
+            Box(Modifier.clickable(onClick = {
                 currentScreen.value = screen
                 // We also close the drawer when an option from the drawer is selected.
                 closeDrawer()
-            }) {
+            }), children = {
                 // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from
                 // the Material Design specification. It's generally used to change the background
                 // color, add elevation, clip or add background shape to its children composables.
@@ -134,7 +134,7 @@ fun DrawerContentComponent(
                     // composable to render text on the screen
                     Text(text = screen.name, modifier = Modifier.padding(16.dp))
                 }
-            }
+            })
         }
     }
 }
