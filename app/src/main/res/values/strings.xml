@@ -30,6 +30,7 @@
     <string name="title_coroutine_flow_example">Coroutine Flow Example</string>
     <string name="title_compose_classic_example">Compose In Classic Android Example</string>
     <string name="title_measuring_scale_example">Measuring Scale Example</string>
+    <string name="title_back_press_example">Back Press Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -62,4 +63,5 @@
     <string name="tv_coroutine_flow_example">Coroutine Flow Component</string>
     <string name="tv_compose_classic_example">Compose In Classic Android Component</string>
     <string name="tv_measuring_scale_example">Measuring Scale Component</string>
+    <string name="tv_back_press_example">Back Press Component</string>
 </resources>

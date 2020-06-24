@@ -33,6 +33,7 @@ import com.example.jetpackcompose.material.FixedActionButtonActivity
 import com.example.jetpackcompose.material.FlowRowActivity
 import com.example.jetpackcompose.material.MaterialActivity
 import com.example.jetpackcompose.state.ProcessDeathActivity
+import com.example.jetpackcompose.state.backpress.BackPressActivity
 import com.example.jetpackcompose.state.coroutine.CoroutineFlowActivity
 import com.example.jetpackcompose.state.livedata.LiveDataActivity
 import com.example.jetpackcompose.theme.DarkModeActivity
@@ -168,5 +169,9 @@ class MainActivity : AppCompatActivity() {
     
     fun startMeasuringScaleExample(view: View) {
         startActivity(Intent(this, MeasuringScaleActivity::class.java))
+    }
+
+    fun startBackPressExample(view: View) {
+        startActivity(Intent(this, BackPressActivity::class.java))
     }
 }

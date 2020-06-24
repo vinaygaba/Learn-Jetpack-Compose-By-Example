@@ -178,6 +178,11 @@
             android:exported="true"
             android:label="@string/title_measuring_scale_example"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".state.backpress.BackPressActivity"
+            android:exported="true"
+            android:label="@string/title_back_press_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
