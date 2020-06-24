@@ -92,7 +92,11 @@ fun Screen1(appState: AppState) {
         }
         TitleComponent(title = "Press back to exit this activity")
     }
-    
+
+    // BackButtonHandler is a custom composable we created to handle back press based on the 
+    // context of our app. Since we are currently in Screen 1, pressing back should finish the 
+    // acitivity. So that's exactly what we do in the lambda that we pass to the BackButtonHandler
+    // composable. Take a look at it to understand how that is implemented.
     BackButtonHandler {
         activity.finish()
     }
@@ -129,6 +133,10 @@ fun Screen2(appState: AppState) {
         }
         TitleComponent(title = "Press back to go to Screen 1")
     }
+    // BackButtonHandler is a custom composable we created to handle back press based on the 
+    // context of our app. Since we are currently in Screen 2, pressing back should take you to 
+    // Screen 1. So that's exactly what we do in the lambda that we pass to the BackButtonHandler
+    // composable. Take a look at it to understand how that is implemented.
     BackButtonHandler {
         appState.currentScreen = CurrentScreen.SCREEN1
     }
@@ -158,6 +166,10 @@ fun Screen3(appState: AppState) {
         // text on the screen. 
         TitleComponent(title = "You can only go back from here. Press back to go to Screen 2.")
     }
+    // BackButtonHandler is a custom composable we created to handle back press based on the 
+    // context of our app. Since we are currently in Screen 3, pressing back should take you to 
+    // Screen 2. So that's exactly what we do in the lambda that we pass to the BackButtonHandler
+    // composable. Take a look at it to understand how that is implemented.
     BackButtonHandler {
         appState.currentScreen = CurrentScreen.SCREEN2
     }
