@@ -92,7 +92,7 @@ fun ScaffoldWithBottomBarAndCutout() {
                 }
             }
         },
-        floatingActionButtonPosition = Scaffold.FabPosition.Center,
+        floatingActionButtonPosition = Scaffold.FabPosition.End,
         bodyContent = { padding ->
             // Vertical scroller is a composable that adds the ability to scroll through the
             // child views
