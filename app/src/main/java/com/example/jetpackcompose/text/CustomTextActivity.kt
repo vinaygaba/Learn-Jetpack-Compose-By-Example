@@ -16,9 +16,9 @@ import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.material.Divider
 import androidx.ui.material.Surface
-import androidx.ui.text.AnnotatedString
 import androidx.ui.text.SpanStyle
 import androidx.ui.text.TextStyle
+import androidx.ui.text.annotatedString
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontStyle
 import androidx.ui.text.font.FontWeight
@@ -28,7 +28,6 @@ import androidx.ui.text.style.TextIndent
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
-import androidx.ui.unit.px
 import androidx.ui.unit.sp
 
 class CustomTextActivity : AppCompatActivity() {
@@ -169,7 +168,7 @@ class CustomTextActivity : AppCompatActivity() {
                         )
                     )
 
-                    val annotatedString = AnnotatedString {
+                    val annotatedString = annotatedString {
                         append("This string has style spans")
                         addStyle(style = SpanStyle(color = Color.Red), start = 0, end = 4)
                         addStyle(style = SpanStyle(color = Color.Green), start = 5, end = 21)

@@ -3,7 +3,6 @@ package com.example.jetpackcompose.state
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.compose.Model
 import androidx.compose.getValue
 import androidx.compose.setValue
 import androidx.compose.state
@@ -17,7 +16,6 @@ import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.material.Button
 import androidx.ui.material.Divider
-import androidx.ui.material.Surface
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent

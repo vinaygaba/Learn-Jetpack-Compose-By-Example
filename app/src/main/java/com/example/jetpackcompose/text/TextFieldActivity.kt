@@ -1,6 +1,5 @@
 package com.example.jetpackcompose.text
 
-import android.graphics.Rect
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
@@ -15,14 +14,13 @@ import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.TextField
-import androidx.ui.foundation.TextFieldValue
 import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.currentTextStyle
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.input.ImeAction
 import androidx.ui.input.KeyboardType
 import androidx.ui.input.PasswordVisualTransformation
+import androidx.ui.input.TextFieldValue
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
@@ -334,7 +332,7 @@ fun AutoFillTextInputComponent() {
                     autofillAmbient?.requestAutofillForNode(
                         autofillNode = AutofillNode(
                             autofillTypes = listOf(AutofillType.EmailAddress),
-                            boundingBox = Rect(0, 0, 400, 400),
+                            boundingBox = androidx.ui.geometry.Rect(0f, 0f, 400f, 400f),
                             onFill = {
                                 textValue = TextFieldValue(it)
                             }

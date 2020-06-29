@@ -6,7 +6,6 @@ import androidx.compose.Composable
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.core.tag
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
@@ -15,7 +14,6 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.Column
 import androidx.ui.layout.ConstraintLayout
-import androidx.ui.layout.ConstraintSet
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeight
@@ -30,7 +28,7 @@ import androidx.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
-class ConstraintLayoutActivity: AppCompatActivity() {
+class ConstraintLayoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -88,69 +86,69 @@ fun SimpleConstraintLayoutComponent() {
     // modify the composable that its applied to. In the example below, we configure the Card
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
-    Card(modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
-        shape = RoundedCornerShape(4.dp)) {
+    Card(
+        modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
+        shape = RoundedCornerShape(4.dp)
+    ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
-        // we specify in its scope. We specify constraints using ConstraintSet
-        ConstraintLayout(ConstraintSet {
-            // In order to specify constraints, we use tags and assign constraints to the tags.
-            // In order to apply these constraints to a composable(view/layout), we reference
-            // these tags to impose the respective constraint on that composable. Look at how
-            // each of these tags are being reference below using the Modifier.tag modifier.
-            val title = tag("title")
-            val subtitle = tag("subtitle")
-            val image = tag("image")
-
-            // We apply the constraints to tags using ConstraintLayout related helper functions.
-            image.apply {
-                // We want to vertically center the image tag
-                centerVertically()
-                // Constraint the left edge of image tag to the left edge of the parent
-                left constrainTo parent.left
-                // Add a margin of 16 dp to the left edge of image tag
-                left.margin = 16.dp
-            }
-
-            title.apply {
-                // Constraint the left edge of the title to the right edge of the image
-                left constrainTo image.right
-                // Add a margin of 16 dp to the left edge
-                left.margin = 16.dp
-                // Constraint the top edge of the title to the top edge of the image
-                top constrainTo image.top
-            }
-
-            subtitle.apply {
-                // Constraint the bottom edge of the subtitle to the bottom edge of the image
-                bottom constrainTo image.bottom
-                // Constraint the left edge of the subtitle to the right edge of the image
-                left constrainTo image.right
-                // Add a margin of 16 dp to the left edge
-                left.margin = 16.dp
-            }
-
-        }) {
+        // we specify in its scope.
+        ConstraintLayout {
             // This is where we specify the children of the ConstraintLayout composable.
 
+            // In order to specify constraints, we use the helper function called createRefs. 
+            // This function helps us create ConstrainedLayoutReference, which we will assign to 
+            // our composable layouts. In order to apply these constraints to a 
+            // composable(view/layout), we reference these references to impose the respective 
+            // constraint on that composable. Look at how each of these references are being 
+            // reference below using the Modifier.contrainAs modifier.
+            val (title, subtitle, image) = createRefs()
+
             // Text is a predefined composable that does exactly what you'd expect it to -
-            // display text on the screen. It allows you to customize its appearance using the
-            // style property.
-
-            // In order to apply the constraints that we defined above, we make use of the
-            // Modifier.tag modifier and use the same key that we passed when creating the tags to
-            // reference the appropriate constraint. This way, the corresponding constraints are
-            // applied to the composable referencing it.
-
-            // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. Some examples of modifiers are
-            // Modifier.tag, Modifier.padding, Modifier.preferredHeight, Modifier.preferredWidth,
-            // etc
-            Text("Title", style = TextStyle(fontFamily = FontFamily.Serif, fontWeight =
-            FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("title"))
-            Text("Subtitle", style = TextStyle(fontFamily = FontFamily.Serif, fontWeight =
-            FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("subtitle"))
-            Box(modifier = Modifier.tag("image") + Modifier.preferredHeight(72.dp) +
-                    Modifier.preferredWidth(72.dp)) {
+            // display text on the screen. It allows you to customize its appearance using
+            // the style property. We also pass a modifier to it.
+            
+            // You can think of Modifiers as implementations of the decorators pattern that are used 
+            // to modify the composable that its applied to. In the example below, we configure the
+            // Box to occupy the entire available height & width using Modifier.fillMaxSize().
+            Text(
+                "Title", style = TextStyle(
+                    fontFamily = FontFamily.Serif, fontWeight =
+                    FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(title) {
+                    // Constraint the left edge of title to the right edge of the image 
+                    // and add a margin of 16dp
+                    start.linkTo(image.end, margin = 16.dp)
+                    // Constraint the top edge of title to the top edge of the image 
+                    top.linkTo(image.top)
+                }
+            )
+            Text(
+                "Subtitle", style = TextStyle(
+                    fontFamily = FontFamily.Serif, fontWeight =
+                    FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(subtitle) {
+                    // Constraint the bottom edge of subtitle to the bottom edge of the image 
+                    bottom.linkTo(image.bottom)
+                    // Constraint the start/left edge of subtitle to the right/end edge of the 
+                    // image and add a margin on 16.dp
+                    start.linkTo(image.end, margin = 16.dp)
+                }
+            )
+            // Box is a predefined convenience composable that allows you to apply common draw & layout
+            // logic. We give it a ContentGravity of Center to ensure the children of this composable
+            // are placed in its center. 
+            Box(
+                modifier = Modifier.preferredHeight(72.dp) +
+                        Modifier.preferredWidth(72.dp) +
+                        Modifier.constrainAs(image) {
+                            // We want to vertically center the image tag
+                            centerVerticallyTo(parent)
+                            // Constraint the left edge of image to the left edge of the parent 
+                            // and add a margin of 16dp
+                            start.linkTo(parent.start, margin = 16.dp)
+                        }
+            ) {
+                // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
                 Image(imageFromResource(resources, R.drawable.lenna))
             }
         }
@@ -167,61 +165,63 @@ fun GuidelineConstraintLayoutComponent() {
     // modify the composable that its applied to. In the example below, we configure the Card
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
-    Card(modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() +
-            Modifier.padding(8.dp),
-        shape = RoundedCornerShape(4.dp)) {
+    Card(
+        modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() +
+                Modifier.padding(8.dp),
+        shape = RoundedCornerShape(4.dp)
+    ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
-        // we specify in its scope. We specify constraints using ConstraintSet
-        ConstraintLayout(constraintSet = ConstraintSet {
-            // In order to specify constraints, we use tags and assign constraints to the tags.
-            // In order to apply these constraints to a composable(view/layout), we reference
-            // these tags to impose the respective constraint on that composable. Look at how
-            // each of these tags are being reference below using the Modifier.tag modifier.
-            val text1 = tag("quarter")
-            val text2 = tag("half")
+        // we specify in its scope.
+        ConstraintLayout {
+            // This is where we specify the children of the ConstraintLayout composable.
+
+            // In order to specify constraints, we use the helper function called createRefs. 
+            // This function helps us create ConstrainedLayoutReference, which we will assign to 
+            // our composable layouts. In order to apply these constraints to a 
+            // composable(view/layout), we reference these references to impose the respective 
+            // constraint on that composable. Look at how each of these references are being 
+            // reference below using the Modifier.contrainAs modifier.
+            val (text1, text2) = createRefs()
 
             // Create a guideline that's placed at a 25% width percentage from the left of the
             // ConstraintLayout. To learn more about guideline, see -
             // https://developer.android.com/reference/android/support/constraint/Guideline
-            val quarter = createGuidelineFromLeft(percent = 0.25f)
+            val quarter = createGuidelineFromStart(0.25f)
+
             // Create a guideline that's placed at a 50% width percentage from the left of the
             // ConstraintLayout
-            val half = createGuidelineFromLeft(percent = 0.5f)
-
-            // We apply the constraints to tags using ConstraintLayout related helper functions.
-            text1.apply {
-                // Constraint the right edge of text1 to the quarter guideline
-                right constrainTo quarter
-                // We want to vertically center the text1 tag
-                centerVertically()
-            }
-
-            text2.apply {
-                // Constraint the left edge of text2 to the half guideline
-                left constrainTo half
-                // We want to vertically center the text2 tag
-                centerVertically()
-            }
-        }) {
-            // This is where we specify the children of the ConstraintLayout composable.
+            val half = createGuidelineFromStart(0.5f)
 
             // Text is a predefined composable that does exactly what you'd expect it to -
             // display text on the screen. It allows you to customize its appearance using the
             // style property.
 
-            // In order to apply the constraints that we defined above, we make use of the
-            // Modifier.tag modifier and use the same key that we passed when creating the tags to
-            // reference the appropriate constraint. This way, the corresponding constraints are
-            // applied to the composable referencing it.
-
-            // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. Some examples of modifiers are
-            // Modifier.tag, Modifier.padding, Modifier.preferredHeight, Modifier.preferredWidth,
-            // etc
-            Text("Quarter", style = TextStyle(fontFamily = FontFamily.Serif, fontWeight =
-            FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("quarter"))
-            Text("Half", style = TextStyle(fontFamily = FontFamily.Serif, fontWeight =
-            FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("half"))
+            // In order to apply the constraints to the references that we created above, we make 
+            // use of the Modifier.constrainAs modifier and pass the reference to it in order to 
+            // create a mapping between the composable/layout and the reference. We then add 
+            // contraints to the references inside the lambda passed to the constrainAs modifier.
+            Text(
+                "Quarter", style = TextStyle(
+                    fontFamily = FontFamily.Serif, fontWeight =
+                    FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(text1) {
+                    // We want to vertically center text1
+                    centerVerticallyTo(parent)
+                    // Constraint the right edge of text1 to the quarter guideline
+                    end.linkTo(quarter)
+                }
+            )
+            Text(
+                "Half", style = TextStyle(
+                    fontFamily = FontFamily.Serif, fontWeight =
+                    FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(text2) {
+                    // We want to vertically center text2
+                    centerVerticallyTo(parent)
+                    // Constraint the left edge of text2 to the half guideline
+                    start.linkTo(half)
+                }
+            )
         }
     }
 }
@@ -236,77 +236,76 @@ fun BarrierConstraintLayoutComponent() {
     // modify the composable that its applied to. In the example below, we configure the Card
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
-    Card(modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
-        shape = RoundedCornerShape(4.dp)) {
+    Card(
+        modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
+        shape = RoundedCornerShape(4.dp)
+    ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
-        // we specify in its scope. We specify constraints using ConstraintSet
-        ConstraintLayout(constraintSet = ConstraintSet {
-            // In order to specify constraints, we use tags and assign constraints to the tags.
-            // In order to apply these constraints to a composable(view/layout), we reference
-            // these tags to impose the respective constraint on that composable. Look at how
-            // each of these tags are being reference below using the Modifier.tag modifier.
-            val text1 = tag("text1")
-            val text2 = tag("text2")
-            val text3 = tag("text3")
+        // we specify in its scope.
+        ConstraintLayout {
+            // This is where we specify the children of the ConstraintLayout composable.
 
-            // We apply the constraints to tags using ConstraintLayout related helper functions.
-            text1.apply {
-                // Constraint the left edge of the text1 to the left edge of the parent
-                left constrainTo parent.left
-                // Add a margin of 16 dp to the left edge
-                left.margin = 16.dp
-                // We want to vertically center the text1 tag
-                centerVertically()
-            }
-
-            text2.apply {
-                // Constraint the left edge of the text2 to the left edge of the parent
-                left constrainTo parent.left
-                // Add a margin of 16 dp to the left edge
-                left.margin = 16.dp
-                // Constraint the top edge of the text2 to the bottom edge of text1
-                top constrainTo text1.bottom
-                // Add a margin of 16 dp to the top edge of text2
-                top.margin = 16.dp
-                // Add a margin of 16 dp to the bottom edge of text2
-                bottom.margin = 16.dp
-            }
+            // In order to specify constraints, we use the helper function called createRefs. 
+            // This function helps us create ConstrainedLayoutReference, which we will assign to 
+            // our composable layouts. In order to apply these constraints to a 
+            // composable(view/layout), we reference these references to impose the respective 
+            // constraint on that composable. Look at how each of these references are being 
+            // reference below using the Modifier.contrainAs modifier.
+            val (text1, text2, text3) = createRefs()
+            
 
             // Create a barrier to the right of text1 & text2. To learn more about barriers in
             // constraint layout, see -
             // https://developer.android.com/reference/android/support/constraint/Barrier
-            val barrier = createRightBarrier(text1, text2)
-            // Add a margin of 16dp to the barrier
-            barrier.margin = 16.dp
-
-            text3.apply {
-                // Constraint the left edge of the text3 to the barrier we created above
-                left constrainTo barrier
-                // We want to vertically center the text3 tag
-                centerVertically()
-            }
-        }) {
-            // This is where we specify the children of the ConstraintLayout composable.
-
+            // Also added a margin of 16dp to the barrier
+            val barrier = createEndBarrier(text1, text2, margin = 16.dp)
+            
             // Text is a predefined composable that does exactly what you'd expect it to -
             // display text on the screen. It allows you to customize its appearance using the
             // style property.
 
-            // In order to apply the constraints that we defined above, we make use of the
-            // Modifier.tag modifier and use the same key that we passed when creating the tags to
-            // reference the appropriate constraint. This way, the corresponding constraints are
-            // applied to the composable referencing it.
-
-            // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. Some examples of modifiers are
-            // Modifier.tag, Modifier.padding, Modifier.preferredHeight, Modifier.preferredWidth,
-            // etc
-            Text("Short text", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text1"))
-            Text("This is a long text", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text2"))
-            Text("Barrier Text", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text3"))
+            // In order to apply the constraints to the references that we created above, we make 
+            // use of the Modifier.constrainAs modifier and pass the reference to it in order to 
+            // create a mapping between the composable/layout and the reference. We then add 
+            // contraints to the references inside the lambda passed to the constrainAs modifier.
+            Text(
+                "Short text", style = TextStyle(
+                    fontFamily = FontFamily.Serif,
+                    fontWeight = FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(text1) {
+                    // Constraint the left edge of the text1 to the left edge of the parent
+                    // and add a margin of 16 dp to the left edge
+                    start.linkTo(parent.start, margin = 16.dp)
+                    // We want to vertically center text1
+                    centerVerticallyTo(parent)
+                }
+            )
+            Text(
+                "This is a long text", style = TextStyle(
+                    fontFamily = FontFamily.Serif,
+                    fontWeight = FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(text2) {
+                    // Constraint the left edge of the text2 to the left edge of the parent
+                    // and added a margin of 16 dp to the left edge
+                    start.linkTo(parent.start, margin = 16.dp)
+                    
+                    // Constraint the top edge of the text2 to the bottom edge of text1
+                    top.linkTo(text1.bottom, margin = 16.dp)
+                    
+                    bottom.linkTo(parent.bottom, margin = 16.dp)
+                }
+            )
+            Text(
+                "Barrier Text", style = TextStyle(
+                    fontFamily = FontFamily.Serif,
+                    fontWeight = FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(text3) {
+                    // Constraint the left edge of the text3 to the barrier we created above
+                    start.linkTo(barrier)
+                    // We want to vertically center the text3
+                    centerVerticallyTo(parent)
+                }
+            )
         }
     }
 }
@@ -321,58 +320,57 @@ fun BiasConstraintLayoutComponent() {
     // modify the composable that its applied to. In the example below, we configure the Card
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
-    Card(modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
-        shape = RoundedCornerShape(4.dp)) {
+    Card(
+        modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
+        shape = RoundedCornerShape(4.dp)
+    ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
-        // we specify in its scope. We specify constraints using ConstraintSet
-        ConstraintLayout(constraintSet = ConstraintSet {
-            // In order to specify constraints, we use tags and assign constraints to the tags.
-            // In order to apply these constraints to a composable(view/layout), we reference
-            // these tags to impose the respective constraint on that composable. Look at how
-            // each of these tags are being reference below using the Modifier.tag modifier.
-            val text1 = tag("text1")
-            val text2 = tag("text2")
-
-            // We apply the constraints to tags using ConstraintLayout related helper functions.
-            text1.apply {
-                // We want to horizontally center the text1 tag
-                centerHorizontally()
-                // We want to vertically center the text1 tag
-                centerVertically()
-                // Add a horizontal bias of 0.1g to text1. To learn more about bias, see -
-                // https://developer.android.com/reference/android/support/constraint/ConstraintLayout#Bias
-                horizontalBias = 0.1f
-            }
-
-            text2.apply {
-                // We want to horizontally center the text1 tag
-                centerHorizontally()
-                // We want to vertically center the text1 tag
-                centerVertically()
-                // Add a horizontal bias of 0.9 to text2. To learn more about bias, see -
-                // https://developer.android.com/reference/android/support/constraint/ConstraintLayout#Bias
-                horizontalBias = 0.9f
-            }
-        }) {
+        // we specify in its scope. 
+        ConstraintLayout {
             // This is where we specify the children of the ConstraintLayout composable.
+
+            // In order to specify constraints, we use the helper function called createRefs. 
+            // This function helps us create ConstrainedLayoutReference, which we will assign to 
+            // our composable layouts. In order to apply these constraints to a 
+            // composable(view/layout), we reference these references to impose the respective 
+            // constraint on that composable. Look at how each of these references are being 
+            // reference below using the Modifier.contrainAs modifier.
+            val (text1, text2) = createRefs()
 
             // Text is a predefined composable that does exactly what you'd expect it to -
             // display text on the screen. It allows you to customize its appearance using the
             // style property.
 
-            // In order to apply the constraints that we defined above, we make use of the
-            // Modifier.tag modifier and use the same key that we passed when creating the tags to
-            // reference the appropriate constraint. This way, the corresponding constraints are
-            // applied to the composable referencing it.
-
-            // You can think of Modifiers as implementations of the decorators pattern that are used to
-            // modify the composable that its applied to. Some examples of modifiers are
-            // Modifier.tag, Modifier.padding, Modifier.preferredHeight, Modifier.preferredWidth,
-            // etc
-            Text("Left", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text1"))
-            Text("Right", style = TextStyle(fontFamily = FontFamily.Serif,
-                fontWeight = FontWeight.W900, fontSize = 14.sp), modifier = Modifier.tag("text2"))
+            // In order to apply the constraints to the references that we created above, we make 
+            // use of the Modifier.constrainAs modifier and pass the reference to it in order to 
+            // create a mapping between the composable/layout and the reference. We then add 
+            // contraints to the references inside the lambda passed to the constrainAs modifier.
+            Text(
+                "Left", style = TextStyle(
+                    fontFamily = FontFamily.Serif,
+                    fontWeight = FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(text1) {
+                    // We want to vertically center the text1 
+                    centerVerticallyTo(parent)
+                    // Add a horizontal bias of 0.1g to text1. To learn more about bias, see -
+                    // https://developer.android.com/reference/android/support/constraint/ConstraintLayout#Bias
+                    linkTo(parent.start, parent.end, bias = 0.1f)
+                }
+            )
+            Text(
+                "Right", style = TextStyle(
+                    fontFamily = FontFamily.Serif,
+                    fontWeight = FontWeight.W900, fontSize = 14.sp
+                ), modifier = Modifier.constrainAs(text2) {
+                    // We want to horizontally center the text1
+                    centerHorizontallyTo(parent)
+                    // We want to vertically center the text1
+                    centerVerticallyTo(parent)
+                    // Add a horizontal bias of 0.9 to text2. To learn more about bias, see -
+                    // https://developer.android.com/reference/android/support/constraint/ConstraintLayout#Bias
+                    linkTo(parent.start, parent.end, bias = 0.9f)
+                }
+            )
         }
     }
 }

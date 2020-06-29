@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.lazy.LazyColumnItems
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
@@ -33,7 +33,7 @@ class VerticalScrollableActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            AdapterListingScrollableComponent(
+            LazyColumnItemsScrollableComponent(
                 getPersonList()
             )
         }
@@ -45,11 +45,11 @@ class VerticalScrollableActivity : AppCompatActivity() {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun AdapterListingScrollableComponent(personList: List<Person>) {
-    // AdapterList is a vertically scrolling list that only composes and lays out the currently
+fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
+    // LazyColumnItems is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecylerView tries to do as it's more optimized
     // than the VerticalScroller.
-    AdapterList(data = personList, modifier = Modifier.fillMaxHeight()) { person ->
+    LazyColumnItems(items = personList, modifier = Modifier.fillMaxHeight()) { person ->
         // TODO(vinaygaba) Replace this with an index callback once its available.
         val index = personList.indexOf(person)
         // Row is a composable that places its children in a horizontal sequence. You
@@ -85,7 +85,7 @@ fun VerticalScrollableComponent(personList: List<Person>) {
     // Vertical scroller is a composable that adds the ability to scroll through the
     // child composables that are declared inside it. One caveat here is that this is not optimized
     // to recycle the views. It is more similar to [ScrollView] and should not be thought of as a
-    // replacement for [RecyclerView]. Instead look at the example below that uses AdapterList
+    // replacement for [RecyclerView]. Instead look at the example below that uses LazyColumnItems
     // which is supposed to be more efficient.
     VerticalScroller {
         // Column is a composable that places its children in a vertical sequence.
@@ -132,8 +132,8 @@ fun VerticalScrollableComponent(personList: List<Person>) {
  */
 @Preview
 @Composable
-fun AdapterListingScrollableComponentPreview() {
-    AdapterListingScrollableComponent(
+fun LazyColumnItemsScrollableComponentPreview() {
+    LazyColumnItemsScrollableComponent(
         getPersonList()
     )
 }
