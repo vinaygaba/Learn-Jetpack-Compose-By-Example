@@ -105,9 +105,9 @@ fun ScaleLineComponent(index: Int) {
             // Allows you to draw a line between two points (p1 & p2) on the canvas.
             drawLine(
                 color = onSurfaceColor,
-                p1 = Offset(0f, 0f),
-                p2 = Offset(0f, if (isDivisibleBy10) size.height else size.height * 0.2f),
-                stroke = Stroke(width = if (isDivisibleBy10) size.width else size.width * 0.3f)
+                start = Offset(0f, 0f),
+                end = Offset(0f, if (isDivisibleBy10) size.height else size.height * 0.2f),
+                strokeWidth = if (isDivisibleBy10) size.width else size.width * 0.3f
             )
         }
         // Text is a predefined composable that does exactly what you'd expect it to - display text 
@@ -150,9 +150,9 @@ fun ScaleCenterPointer() {
             // Allows you to draw a line between two points (p1 & p2) on the canvas.
             drawLine(
                 color = primaryColor,
-                p1 = Offset(0f, 0f),
-                p2 = Offset(0f, size.height),
-                stroke = Stroke(width = size.width)
+                start = Offset(0f, 0f),
+                end = Offset(0f, size.height),
+                strokeWidth = size.width
             )
         }
     }

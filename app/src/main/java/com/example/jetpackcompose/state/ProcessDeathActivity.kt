@@ -1,7 +1,6 @@
 package com.example.jetpackcompose.state
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.getValue
@@ -12,11 +11,11 @@ import androidx.ui.foundation.Box
 import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.TextField
-import androidx.ui.foundation.TextFieldValue
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.input.KeyboardType
 import androidx.ui.input.OffsetMap
+import androidx.ui.input.TextFieldValue
 import androidx.ui.input.TransformedText
 import androidx.ui.input.VisualTransformation
 import androidx.ui.layout.Arrangement
@@ -24,11 +23,8 @@ import androidx.ui.layout.Column
 import androidx.ui.layout.aspectRatio
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
 import androidx.ui.layout.preferredWidth
 import androidx.ui.material.Card
-import androidx.ui.material.Surface
-import androidx.ui.savedinstancestate.rememberSavedInstanceState
 import androidx.ui.savedinstancestate.savedInstanceState
 import androidx.ui.text.AnnotatedString
 import androidx.ui.text.TextStyle

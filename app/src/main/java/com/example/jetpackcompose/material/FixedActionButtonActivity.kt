@@ -69,12 +69,12 @@ fun ScaffoldWithBottomBarAndCutout() {
     // that explicitly.
     Scaffold(
         scaffoldState = scaffoldState,
-        topAppBar = { TopAppBar(title = { Text("Scaffold Examples") }) },
-        bottomAppBar = { fabConfiguration ->
+        topBar = { TopAppBar(title = { Text("Scaffold Examples") }) },
+        bottomBar = {
             // We specify the shape of the FAB bu passing a shape composable (fabShape) as a
             // parameter to cutoutShape property of the BottomAppBar. It automatically creates a
             // cutout in the BottomAppBar based on the shape of the Floating Action Button.
-            BottomAppBar(fabConfiguration = fabConfiguration, cutoutShape = fabShape) {}
+            BottomAppBar(cutoutShape = fabShape) {}
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -92,14 +92,14 @@ fun ScaffoldWithBottomBarAndCutout() {
                 }
             }
         },
-        floatingActionButtonPosition = Scaffold.FabPosition.CenterDocked,
-        bodyContent = { modifier ->
+        floatingActionButtonPosition = Scaffold.FabPosition.Center,
+        bodyContent = { padding ->
             // Vertical scroller is a composable that adds the ability to scroll through the
             // child views
             VerticalScroller {
                 // Column is a composable that places its children in a vertical sequence. You
                 // can think of it similar to a LinearLayout with the vertical orientation.
-                Column(modifier) {
+                Column(Modifier.padding(padding)) {
                     repeat(100) {
                         // Card composable is a predefined composable that is meant to represent
                         // the card surface as specified by the Material Design specification. We

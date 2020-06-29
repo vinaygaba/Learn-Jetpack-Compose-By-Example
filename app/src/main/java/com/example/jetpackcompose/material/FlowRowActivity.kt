@@ -14,6 +14,7 @@ import androidx.ui.foundation.clickable
 import androidx.ui.foundation.drawBackground
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.Column
+import androidx.ui.layout.ExperimentalLayout
 import androidx.ui.layout.FlowRow
 import androidx.ui.layout.MainAxisAlignment
 import androidx.ui.layout.SizeMode
@@ -73,32 +74,36 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
         // mainAxisAlignment is the alignment in the horizontal direction
         // crossAxisSpacing is the spacing between rows in the vertical direction
         // mainAxisSpacing is the spacing between the children in the same row
-        FlowRow(
-            mainAxisAlignment = MainAxisAlignment.Center,
-            crossAxisSpacing = 16.dp,
-            mainAxisSpacing = 16.dp,
-            mainAxisSize = SizeMode.Expand
-        ) {
-            amenityList.forEachIndexed { index, amenity ->
-                // Box with clickable modifier wraps the child composable and enables it to react to
-                // a click through the onClick callback similar to the onClick listener that we are
-                // accustomed to on Android.
-                // Here, we just add the current index to the selectedIndices set every
-                // time a user taps on it.
-                Box(Modifier.clickable(onClick = { selectedIndices.add(index) }), children = {
-                    // Text is a predefined composable that does exactly what you'd expect it to -
-                    // display text on the screen. It allows you to customize its appearance using
-                    // style, fontWeight, fontSize, etc.
-                    Text(
-                        text = if (selectedIndices.contains(index)) "✓ ${amenity.name}" else amenity.name,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.drawBackground(
-                            color = colors[index % colors.size], shape = RoundedCornerShape(15.dp)) +
-                                Modifier.padding(8.dp)
-                    )
-                })
-            }
-        }
+        
+        // FlowRow was labeled as an experimental API that required explicit opt-in starting 
+        // dev14 version of compose. Commenting it out so that we can compile the repo without 
+        // using additional compiler flags.
+//        FlowRow(
+//            mainAxisAlignment = MainAxisAlignment.Center,
+//            crossAxisSpacing = 16.dp,
+//            mainAxisSpacing = 16.dp,
+//            mainAxisSize = SizeMode.Expand
+//        ) {
+//            amenityList.forEachIndexed { index, amenity ->
+//                // Box with clickable modifier wraps the child composable and enables it to react to
+//                // a click through the onClick callback similar to the onClick listener that we are
+//                // accustomed to on Android.
+//                // Here, we just add the current index to the selectedIndices set every
+//                // time a user taps on it.
+//                Box(Modifier.clickable(onClick = { selectedIndices.add(index) }), children = {
+//                    // Text is a predefined composable that does exactly what you'd expect it to -
+//                    // display text on the screen. It allows you to customize its appearance using
+//                    // style, fontWeight, fontSize, etc.
+//                    Text(
+//                        text = if (selectedIndices.contains(index)) "✓ ${amenity.name}" else amenity.name,
+//                        overflow = TextOverflow.Ellipsis,
+//                        modifier = Modifier.drawBackground(
+//                            color = colors[index % colors.size], shape = RoundedCornerShape(15.dp)) +
+//                                Modifier.padding(8.dp)
+//                    )
+//                })
+//            }
+//        }
     }
 }
 

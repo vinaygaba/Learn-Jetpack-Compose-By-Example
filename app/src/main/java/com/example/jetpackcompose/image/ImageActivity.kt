@@ -39,7 +39,6 @@ import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.Dp
-import androidx.ui.unit.Px
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.bumptech.glide.Glide
@@ -203,7 +202,7 @@ fun NetworkImageComponentPicasso(url: String,
         }
     } else if (theDrawable != null) {
         Canvas(modifier = modifier) {
-            drawCanvas { canvas, pxSize ->  
+            drawCanvas { canvas, _ ->  
                 theDrawable.draw(canvas.nativeCanvas)
             }
         }
@@ -263,7 +262,7 @@ fun NetworkImageComponentGlide(url: String, modifier: Modifier = Modifier.fillMa
         }
     } else if (theDrawable != null) {
         Canvas(modifier = modifier) {
-            drawCanvas { canvas, pxSize ->
+            drawCanvas { canvas, _ ->
                 theDrawable.draw(canvas.nativeCanvas)
             }
         }
@@ -293,8 +292,6 @@ fun Modifier.RoundedCornerClipModifier(size :Dp): Modifier = composed {
     val shape = RoundedCornerShape(size)
     clip(shape)
 }
-
-private fun Px.toRadius() = Radius.circular(this.value)
 
 /**
  * Android Studio lets you preview your composable functions within the IDE itself, instead of

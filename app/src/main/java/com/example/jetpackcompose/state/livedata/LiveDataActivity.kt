@@ -14,10 +14,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.ui.core.Alignment.Companion.CenterHorizontally
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.foundation.AdapterList
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Text
+import androidx.ui.foundation.lazy.LazyColumnItems
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.fillMaxSize
@@ -92,10 +92,10 @@ fun LiveDataComponent(personListLiveData: LiveData<List<Person>>) {
 // built up of smaller composable functions.
 @Composable
 fun LiveDataComponentList(personList: List<Person>) {
-    // AdapterList is a vertically scrolling list that only composes and lays out the currently
+    // LazyColumnItems is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecylerView tries to do as it's more optimized
     // than the VerticalScroller.
-    AdapterList(data = personList) { person ->
+    LazyColumnItems(items = personList) { person ->
         // Card composable is a predefined composable that is meant to represent the
         // card surface as specified by the Material Design specification. We also
         // configure it to have rounded corners and apply a modifier.

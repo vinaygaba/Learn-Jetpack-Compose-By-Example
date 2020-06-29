@@ -13,12 +13,12 @@ import androidx.ui.core.gesture.dragGestureFilter
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
+import androidx.ui.geometry.Offset
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.Path
 import androidx.ui.graphics.StrokeJoin
 import androidx.ui.graphics.drawscope.Stroke
 import androidx.ui.layout.fillMaxSize
-import androidx.ui.unit.PxPosition
 
 /**
  * This example needs some more work.
@@ -56,9 +56,9 @@ fun DrawingBoardComposable() {
     Box(modifier = Modifier.fillMaxSize() + Modifier.dragGestureFilter(
         startDragImmediately = true,
         dragObserver = object: DragObserver {
-            override fun onStart(downPosition: PxPosition) {
+            override fun onStart(downPosition: Offset) {
                 super.onStart(downPosition)
-                paths += Paths(downPosition.x.value, downPosition.y.value)
+                paths += Paths(downPosition.x, downPosition.y)
             }
         })) {
         Canvas(modifier = Modifier) {

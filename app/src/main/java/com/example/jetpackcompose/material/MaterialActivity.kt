@@ -508,7 +508,7 @@ fun MaterialRippleComponent() {
         // on Android.
         // In order to show a ripple effect, we make use of the Modifier.ripple modifier with the
         // default values.
-        Box(modifier = Modifier.ripple(bounded = true) + Modifier.clickable(onClick = {}), children = {
+        Box(modifier = Modifier.clickable(onClick = {}), children = {
             // Box is a predefined convenience composable that allows you to apply common
             // draw & layout logic.
             Box(backgroundColor = Color.LightGray, shape = RoundedCornerShape(4.dp)) {
