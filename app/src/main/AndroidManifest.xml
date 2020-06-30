@@ -77,7 +77,7 @@
             android:label="@string/title_custom_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".customview.CustomViewPainActivity"
+            android:name=".customview.CustomViewPaintActivity"
             android:exported="true"
             android:label="@string/title_custom_view_paint"
             android:theme="@style/AppTheme.NoActionBar" />

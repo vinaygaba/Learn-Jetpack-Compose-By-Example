@@ -10,7 +10,7 @@ import com.example.jetpackcompose.animation.Animation1Activity
 import com.example.jetpackcompose.animation.Animation2Activity
 import com.example.jetpackcompose.animation.TextAnimationActivity
 import com.example.jetpackcompose.customview.CustomViewActivity
-import com.example.jetpackcompose.customview.CustomViewPainActivity
+import com.example.jetpackcompose.customview.CustomViewPaintActivity
 import com.example.jetpackcompose.customview.MeasuringScaleActivity
 import com.example.jetpackcompose.material.ShadowActivity
 import com.example.jetpackcompose.image.ImageActivity
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startCustomViewPaintExample(view: View) {
-        startActivity(Intent(this, CustomViewPainActivity::class.java))
+        startActivity(Intent(this, CustomViewPaintActivity::class.java))
     }
 
     fun startAutofillTextExample(view: View) {
