@@ -23,7 +23,7 @@ import androidx.ui.layout.fillMaxSize
 /**
  * This example needs some more work.
  */
-class CustomViewPainActivity: AppCompatActivity() {
+class CustomViewPaintActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
