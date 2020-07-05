@@ -12,6 +12,7 @@ import com.example.jetpackcompose.animation.TextAnimationActivity
 import com.example.jetpackcompose.customview.CustomViewActivity
 import com.example.jetpackcompose.customview.CustomViewPaintActivity
 import com.example.jetpackcompose.customview.MeasuringScaleActivity
+import com.example.jetpackcompose.customview.ZoomableActivity
 import com.example.jetpackcompose.material.ShadowActivity
 import com.example.jetpackcompose.image.ImageActivity
 import com.example.jetpackcompose.interop.ComposeInClassicAndroidActivity
@@ -173,5 +174,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startBackPressExample(view: View) {
         startActivity(Intent(this, BackPressActivity::class.java))
+    }
+    
+    fun startZoomableExample(view: View) {
+        startActivity(Intent(this, ZoomableActivity::class.java))
     }
 }

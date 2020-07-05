@@ -183,6 +183,11 @@
             android:exported="true"
             android:label="@string/title_back_press_example"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".customview.ZoomableActivity"
+            android:exported="true"
+            android:label="@string/title_zoomable_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
