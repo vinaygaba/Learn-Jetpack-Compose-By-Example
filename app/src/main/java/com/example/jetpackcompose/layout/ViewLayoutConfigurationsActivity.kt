@@ -292,8 +292,6 @@ fun RowBaselineAlignComponent() {
     // Alternatively, we could've assigned a fixed width to this row using
     // Modifier.preferredWidth(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
-        // The Button composable allows you to provide child composables that inherit this button
-        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         // In order to align the baseline of both the text composables, we use the
@@ -321,8 +319,6 @@ fun RowBaselineUnalignedComponent() {
     // Alternatively, we could've assigned a fixed width to this row using
     // Modifier.preferredWidth(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
-        // The Button composable allows you to provide child composables that inherit this button
-        // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(text = "Text 1",

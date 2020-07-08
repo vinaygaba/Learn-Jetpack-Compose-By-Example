@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.material
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.setValue
@@ -37,7 +37,7 @@ import androidx.ui.material.Slider
 import androidx.ui.material.Snackbar
 import androidx.ui.material.Switch
 import androidx.ui.material.TriStateCheckbox
-import androidx.ui.material.ripple.ripple
+import androidx.ui.material.ripple.RippleIndication
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.tooling.preview.Preview
@@ -442,8 +442,12 @@ fun MaterialDiscreteSliderComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // A pre-defined composable that's capable of rendering a slider. It honors the Material
         // Design specification. In this example, we create a discrete slider with fixed steps.
-        Slider(value = sliderValue, valueRange = 0f..10f, steps = 5, onValueChange = { sliderValue = it })
+        Slider(value = sliderValue, valueRange = 0f..10f, steps = 4, onValueChange = { sliderValue = it })
     }
+
+    Text(text = "Slider value is %.1f".format(sliderValue),
+        modifier = Modifier.padding(8.dp)
+    )
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -506,20 +510,18 @@ fun MaterialRippleComponent() {
         // Box with clickable modifier wraps the child composable and enables it to react to a click
         // through the onClick callback similar to the onClick listener that we are accustomed to
         // on Android.
-        // In order to show a ripple effect, we make use of the Modifier.ripple modifier with the
-        // default values.
-        Box(modifier = Modifier.clickable(onClick = {}), children = {
-            // Box is a predefined convenience composable that allows you to apply common
-            // draw & layout logic.
-            Box(backgroundColor = Color.LightGray, shape = RoundedCornerShape(4.dp)) {
+        // In order to show a ripple effect, we set indication of Modifier.clickable with
+        // a RippleIndication.
+        Box(modifier = Modifier.clickable(onClick = {}, indication = RippleIndication()),
+            backgroundColor = Color.LightGray,
+            shape = RoundedCornerShape(4.dp)) {
                 // The Text composable is pre-defined by the Compose UI library; you can use this
                 // composable to render text on the screen
-                Text(text = "Click Me", modifier = Modifier.padding(16.dp), style = TextStyle(
-                    fontSize = TextUnit.Companion.Sp(12), fontFamily = FontFamily.Serif
-                ))
-            }
-
-        })
+                Text(text = "Click Me",
+                    modifier = Modifier.padding(16.dp),
+                    style = TextStyle(fontSize = TextUnit.Sp(12), fontFamily = FontFamily.Serif)
+                )
+        }
     }
 }
 
