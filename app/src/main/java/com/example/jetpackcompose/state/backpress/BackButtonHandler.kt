@@ -19,7 +19,7 @@ import androidx.ui.core.LifecycleOwnerAmbient
 // Classic Android and we will make use of this dispatcher to power our back press handling. 
 
 // What are Ambients?
-// In Compose, we typicall pass data through the composition tree explicitly through means of 
+// In Compose, we typically pass data through the composition tree explicitly through means of
 // parameters to composable functions. This is inline with the principles of unidirection 
 // data flow that Compose heavily recommends using. There are situations where this won't 
 // always be possible. For these cases, [Ambient]s can be used as an implicit way to have 
@@ -87,7 +87,7 @@ internal fun BackButtonHandler(onBackPressed: () -> Unit) {
     // represented by Ambients. 
 
     // What are Ambients?
-    // In Compose, we typicall pass data through the composition tree explicitly through means of 
+    // In Compose, we typically pass data through the composition tree explicitly through means of
     // parameters to composable functions. This is inline with the principles of unidirection 
     // data flow that Compose heavily recommends using. There are situations where this won't 
     // always be possible. For these cases, [Ambient]s can be used as an implicit way to have 
