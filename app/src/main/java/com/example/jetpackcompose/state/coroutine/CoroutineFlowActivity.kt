@@ -97,11 +97,9 @@ fun CountdownText(text: String, color: Color = Color.Black) {
 // version of RxJava's observables/flowables. If you aren't familiar with RxJava either, think of
 // them as an open stream that notifies its observers when the value changes. 
 fun countdownFlow() = flow<Int> {
-    coroutineScope {
-        for (i in 9 downTo 0) {
-            delay(1000L)
-            emit(i)
-        }
+    for (i in 9 downTo 0) {
+        delay(1000L)
+        emit(i)
     }
 }
 
