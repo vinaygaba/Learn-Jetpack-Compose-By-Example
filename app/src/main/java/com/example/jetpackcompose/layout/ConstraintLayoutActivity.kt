@@ -6,10 +6,7 @@ import androidx.compose.Composable
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.*
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.Column
@@ -36,10 +33,10 @@ class ConstraintLayoutActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Vertical scroller is a composable that adds the ability to scroll through the
+            // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            VerticalScroller {
+            ScrollableColumn {
                 // Column is a composable that places its children in a vertical sequence.
                 Column {
                     // Title Component is a custom composable that we created which is capable of

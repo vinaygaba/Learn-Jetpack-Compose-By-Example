@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.ScrollableColumn
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.lazy.LazyColumnItems
@@ -82,12 +83,12 @@ fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
 
 @Composable
 fun VerticalScrollableComponent(personList: List<Person>) {
-    // Vertical scroller is a composable that adds the ability to scroll through the
+    // ScrollableColumn is a composable that adds the ability to scroll through the
     // child composables that are declared inside it. One caveat here is that this is not optimized
     // to recycle the views. It is more similar to [ScrollView] and should not be thought of as a
     // replacement for [RecyclerView]. Instead look at the example below that uses LazyColumnItems
     // which is supposed to be more efficient.
-    VerticalScroller {
+    ScrollableColumn {
         // Column is a composable that places its children in a vertical sequence.
         Column {
             for ((index,person) in personList.withIndex()) {

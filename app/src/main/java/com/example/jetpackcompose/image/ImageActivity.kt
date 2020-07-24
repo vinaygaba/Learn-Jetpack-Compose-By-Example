@@ -15,14 +15,8 @@ import androidx.ui.core.Modifier
 import androidx.ui.core.clip
 import androidx.ui.core.composed
 import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Canvas
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.*
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.geometry.Radius
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.ImageAsset
 import androidx.ui.graphics.asImageAsset
@@ -57,10 +51,10 @@ class ImageActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Vertical scroller is a composable that adds the ability to scroll through the
+            // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            VerticalScroller {
+            ScrollableColumn {
                 // Column is a composable that places its children in a vertical sequence. You
                 // can think of it similar to a LinearLayout with the vertical orientation.
 
@@ -135,7 +129,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
         // Box composable to have a height of 200dp, width of 200dp, alignment as center
         // and a custom draw modifier to clip the corners of the image.
         Box(
-            modifier = 
+            modifier =
                     Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp)
                     + Modifier.RoundedCornerClipModifier(8.dp)
         ) {
@@ -202,7 +196,7 @@ fun NetworkImageComponentPicasso(url: String,
         }
     } else if (theDrawable != null) {
         Canvas(modifier = modifier) {
-            drawCanvas { canvas, _ ->  
+            drawCanvas { canvas, _ ->
                 theDrawable.draw(canvas.nativeCanvas)
             }
         }
