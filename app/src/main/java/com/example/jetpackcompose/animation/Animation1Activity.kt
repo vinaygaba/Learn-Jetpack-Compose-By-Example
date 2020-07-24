@@ -1,13 +1,15 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
+import androidx.animation.AnimationConstants.Infinite
 import androidx.animation.FastOutLinearInEasing
 import androidx.animation.FloatPropKey
-import androidx.animation.Infinite
+import androidx.animation.repeatable
 import androidx.animation.transitionDefinition
+import androidx.animation.tween
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
-import androidx.ui.animation.Transition
+import androidx.ui.animation.transition
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
@@ -67,13 +69,13 @@ private val rotationTransitionDefinition = transitionDefinition {
         // interpolator to use for the animation & how many iterations of this animation are needed.
         // Since we want the rotation to be continous, we use the repeatable AnimationBuilder and
         // set the iterations to Infinite.
-        rotation using repeatable {
-            animation = tween {
-                duration = 3000
+        rotation using repeatable(
+            animation = tween<Float>(
+                durationMillis = 3000,
                 easing = FastOutLinearInEasing
-            }
+            ),
             iterations = Infinite
-        }
+        )
     }
 }
 
@@ -97,28 +99,27 @@ fun RotatingSquareComponent() {
         // state of the animation & the state that we intend to transition to. The expectation is
         // that the transitionDefinition allows for the transition from the "initialState" to the
         // "toState".
-        Transition(
+        val state = transition(
             definition = rotationTransitionDefinition,
             initState = "A",
             toState = "B"
-        ) { state ->
-            // We use the Canvas composable that gives you access to a canvas that you can draw
-            // into. We also pass it a modifier.
+        )
+        // We use the Canvas composable that gives you access to a canvas that you can draw
+        // into. We also pass it a modifier.
 
-            // You can think of Modifiers as implementations of the decorators pattern that are used
-            // to modify the composable that its applied to. In this example, we assign a size
-            // of 200dp to the Canvas using Modifier.preferredSize(200.dp).
-            Canvas(modifier = Modifier.preferredSize(200.dp)) {
-                // As the Transition is changing the interpolating the value of your props based
-                // on the "from state" and the "to state", you get access to all the values
-                // including the intermediate values as they are being updated. We can use the
-                // state variable and access the relevant props/properties to update the relevant
-                // composables/layouts. Below, we use state[rotation] to get the latest value of
-                // rotation (it will be a value between 0 & 360 depending on where it is in the
-                // transition) and use it to rotate our canvas.
-                rotate(state[rotation]) {
-                    drawRect(color = Color(255, 138, 128))
-                }
+        // You can think of Modifiers as implementations of the decorators pattern that are used
+        // to modify the composable that its applied to. In this example, we assign a size
+        // of 200dp to the Canvas using Modifier.preferredSize(200.dp).
+        Canvas(modifier = Modifier.preferredSize(200.dp)) {
+            // As the Transition is changing the interpolating the value of your props based
+            // on the "from state" and the "to state", you get access to all the values
+            // including the intermediate values as they are being updated. We can use the
+            // state variable and access the relevant props/properties to update the relevant
+            // composables/layouts. Below, we use state[rotation] to get the latest value of
+            // rotation (it will be a value between 0 & 360 depending on where it is in the
+            // transition) and use it to rotate our canvas.
+            rotate(state[rotation]) {
+                drawRect(color = Color(255, 138, 128))
             }
         }
     })

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.frames.modelListOf
 import androidx.compose.getValue
+import androidx.compose.mutableStateListOf
 import androidx.compose.state
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
@@ -46,6 +47,10 @@ class FlowRowActivity: AppCompatActivity() {
     }
 }
 
+// NOTE: FlowRow was labeled as an experimental API that required explicit opt-in starting 
+// dev14 version of compose. Commenting it out so that we can compile the repo without 
+// using additional compiler flags.
+
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
 // functions can only be called from within the scope of other composable functions. We should 
 // think of composable functions to be similar to lego blocks - each composable function is in turn 
@@ -58,7 +63,7 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
     // will be recomposed any time the value changes. This ensures that only the composables that
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
-    val selectedIndices by state { modelListOf<Int>() }
+    val selectedIndices = mutableStateListOf<Int>()
     // Box is a predefined convenience composable that allows you to apply common draw & layout
     // logic. In addition we also pass a few modifiers to it.
 
@@ -75,9 +80,6 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
         // crossAxisSpacing is the spacing between rows in the vertical direction
         // mainAxisSpacing is the spacing between the children in the same row
         
-        // FlowRow was labeled as an experimental API that required explicit opt-in starting 
-        // dev14 version of compose. Commenting it out so that we can compile the repo without 
-        // using additional compiler flags.
 //        FlowRow(
 //            mainAxisAlignment = MainAxisAlignment.Center,
 //            crossAxisSpacing = 16.dp,

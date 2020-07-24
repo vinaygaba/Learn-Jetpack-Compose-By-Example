@@ -7,7 +7,9 @@ import androidx.compose.frames.ModelList
 import androidx.compose.frames.modelListOf
 import androidx.compose.getValue
 import androidx.compose.launchInComposition
+import androidx.compose.mutableStateListOf
 import androidx.compose.setValue
+import androidx.compose.snapshots.SnapshotStateList
 import androidx.compose.state
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
@@ -174,7 +176,7 @@ fun LaunchInCompositionComponent(viewModel: SuperheroesViewModel) {
     // will be recomposed any time the value changes. This ensures that only the composables that
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
-    var personList by state<ModelList<Person>> { modelListOf() }
+    var personList by state<SnapshotStateList<Person>> { mutableStateListOf() }
     
     // launchInComposition allows you to launch a suspendable function as soon as this composable
     // is first committed i.e this tree node is first allowed to be rendered on the screen. It 
