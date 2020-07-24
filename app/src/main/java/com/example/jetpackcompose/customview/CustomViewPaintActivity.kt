@@ -6,6 +6,8 @@ import androidx.compose.Composable
 import androidx.compose.frames.ModelList
 import androidx.compose.frames.modelListOf
 import androidx.compose.getValue
+import androidx.compose.mutableStateListOf
+import androidx.compose.snapshots.SnapshotStateList
 import androidx.compose.state
 import androidx.ui.core.Modifier
 import androidx.ui.core.gesture.DragObserver
@@ -52,7 +54,7 @@ data class Paths(
 
 @Composable
 fun DrawingBoardComposable() {
-    val paths by state<ModelList<Paths>> { modelListOf() }
+    val paths by state<SnapshotStateList<Paths>> { mutableStateListOf() }
     Box(modifier = Modifier.fillMaxSize() + Modifier.dragGestureFilter(
         startDragImmediately = true,
         dragObserver = object: DragObserver {

@@ -8,7 +8,7 @@ import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.HorizontalScroller
+import androidx.ui.foundation.ScrollableRow
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
@@ -66,7 +66,7 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we ask the HorizontalScroller
     // to occupy the entire available width.
-    HorizontalScroller(modifier = Modifier.fillMaxWidth()) {
+    ScrollableRow(modifier = Modifier.fillMaxWidth(), children = {
         // Row is a composable that places its children in a horizontal sequence. You
         // can think of it similar to a LinearLayout with the horizontal orientation.
         Row {
@@ -94,7 +94,7 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
                 }
             }
         }
-    }
+    })
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -105,7 +105,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
     // composables that are declared inside it in the horizontal direction. One caveat here is that
     // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
     // be thought of as a replacement for [RecyclerView].
-    HorizontalScroller(modifier = Modifier.fillMaxWidth()) {
+    ScrollableRow(modifier = Modifier.fillMaxWidth(), children = {
         // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
         // down the compose tree by passing them as parameters. This makes it easy to have fairly
         // modular and reusable components that are easy to test as well. However, for certain types
@@ -159,7 +159,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                 }
             }
         }
-    }
+    })
 }
 
 /**

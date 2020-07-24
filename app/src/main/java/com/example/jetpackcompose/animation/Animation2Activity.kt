@@ -3,13 +3,14 @@ package com.example.jetpackcompose.animation
 import android.os.Bundle
 import androidx.animation.LinearEasing
 import androidx.animation.transitionDefinition
+import androidx.animation.tween
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.setValue
 import androidx.compose.state
 import androidx.ui.animation.ColorPropKey
-import androidx.ui.animation.Transition
+import androidx.ui.animation.transition
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
@@ -17,7 +18,7 @@ import androidx.ui.graphics.Color
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.tooling.preview.Preview
 
-class Animation2Activity: AppCompatActivity() {
+class Animation2Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -38,7 +39,7 @@ class Animation2Activity: AppCompatActivity() {
 private val color = ColorPropKey()
 
 /**
- * Animations in Jetpack Compose use the [Transition] composable. This transition API depends on
+ * Animations in Jetpack Compose use the [transition] composable. This transition API depends on
  * transitions between states & changing values, similar to how ValueAnimators worked in the older
  * Android UI Toolkit. Transition's do not care about the actual implementation itself, they just
  * allow you to manipulate and transition between different states and also let you specify what
@@ -75,10 +76,10 @@ private val colorDefinition = transitionDefinition {
         // transition. In addition, we also get all the intermediate values of colors between those
         // two colors automatically. This allows us to show a seamless transitions as the colors
         // change.
-        color using tween {
-            duration = 2000
+        color using tween<Color>(
+            durationMillis = 2000,
             easing = LinearEasing
-        }
+        )
     }
 }
 
@@ -90,13 +91,16 @@ private val colorDefinition = transitionDefinition {
 fun AnimateColorComponent() {
     var initialState by state { 0 }
     var toState by state { 1 }
-    // Transition composable creates a state-based transition using the animation configuration
+    // transition composable creates a state-based transition using the animation configuration
     // defined in [TransitionDefinition]. In the example below, we use the
     // colorDefinition that we discussed above and also specify the initial
     // state of the animation & the state that we intend to transition to. The expectation is
     // that the transitionDefinition has been configured to allow for the transition from the
     // "initialState" to the "toState".
-    Transition(definition = colorDefinition, initState = initialState, toState = toState,
+    val state = transition(
+        definition = colorDefinition,
+        initState = initialState,
+        toState = toState,
         onStateChangeFinished =
         // Here we define the action we want to do every time a state transition completes. In
         // our example, we want to continue looping from state 0 -> state 1, state 1 -> state 2,
@@ -122,15 +126,15 @@ fun AnimateColorComponent() {
                     toState = 0
                 }
             }
-        }) { state ->
-        // As the Transition is changing the interpolating the value of your props based
-        // on the "from state" and the "to state", you get access to all the values
-        // including the intermediate values as they are being updated. We can use the
-        // state variable and access the relevant props/properties to update the relevant
-        // composables/layouts. Below, we use state[color] to get get the latest value of color
-        // and use it to paint the screen by setting it as the backgroundColor of the screen.
-        Box(modifier = Modifier.fillMaxSize(), backgroundColor = state[color])
-    }
+        }
+    )
+    // As the Transition is changing the interpolating the value of your props based
+    // on the "from state" and the "to state", you get access to all the values
+    // including the intermediate values as they are being updated. We can use the
+    // state variable and access the relevant props/properties to update the relevant
+    // composables/layouts. Below, we use state[color] to get get the latest value of color
+    // and use it to paint the screen by setting it as the backgroundColor of the screen.
+    Box(modifier = Modifier.fillMaxSize(), backgroundColor = state[color])
 }
 
 /**

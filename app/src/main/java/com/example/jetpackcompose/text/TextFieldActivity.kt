@@ -12,6 +12,7 @@ import androidx.ui.core.AutofillAmbient
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
+import androidx.ui.foundation.ScrollableColumn
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.TextField
 import androidx.ui.foundation.VerticalScroller
@@ -43,10 +44,10 @@ class TextFieldActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Vertical scroller is a composable that adds the ability to scroll through the
+            // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            VerticalScroller {
+            ScrollableColumn {
                 // Column is a composable that places its children in a vertical sequence. You
                 // can think of it similar to a LinearLayout with the vertical orientation.
                 Column {
@@ -327,7 +328,7 @@ fun AutoFillTextInputComponent() {
         TextField(value = textValue,
             modifier = Modifier.padding(16.dp),
             keyboardType = KeyboardType.Email,
-            onFocusChange = {
+            onFocusChanged = { 
                 if(it){
                     autofillAmbient?.requestAutofillForNode(
                         autofillNode = AutofillNode(
