@@ -8,8 +8,8 @@ import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Image
+import androidx.ui.foundation.ScrollableColumn
 import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.imageFromResource
 import androidx.ui.layout.Column
@@ -36,10 +36,10 @@ class ConstraintLayoutActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Vertical scroller is a composable that adds the ability to scroll through the
+            // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            VerticalScroller {
+            ScrollableColumn {
                 // Column is a composable that places its children in a vertical sequence.
                 Column {
                     // Title Component is a custom composable that we created which is capable of
@@ -106,7 +106,7 @@ fun SimpleConstraintLayoutComponent() {
             // Text is a predefined composable that does exactly what you'd expect it to -
             // display text on the screen. It allows you to customize its appearance using
             // the style property. We also pass a modifier to it.
-            
+
             // You can think of Modifiers as implementations of the decorators pattern that are used 
             // to modify the composable that its applied to. In the example below, we configure the
             // Box to occupy the entire available height & width using Modifier.fillMaxSize().
@@ -252,14 +252,14 @@ fun BarrierConstraintLayoutComponent() {
             // constraint on that composable. Look at how each of these references are being 
             // reference below using the Modifier.contrainAs modifier.
             val (text1, text2, text3) = createRefs()
-            
+
 
             // Create a barrier to the right of text1 & text2. To learn more about barriers in
             // constraint layout, see -
             // https://developer.android.com/reference/android/support/constraint/Barrier
             // Also added a margin of 16dp to the barrier
             val barrier = createEndBarrier(text1, text2, margin = 16.dp)
-            
+
             // Text is a predefined composable that does exactly what you'd expect it to -
             // display text on the screen. It allows you to customize its appearance using the
             // style property.
@@ -288,10 +288,10 @@ fun BarrierConstraintLayoutComponent() {
                     // Constraint the left edge of the text2 to the left edge of the parent
                     // and added a margin of 16 dp to the left edge
                     start.linkTo(parent.start, margin = 16.dp)
-                    
+
                     // Constraint the top edge of the text2 to the bottom edge of text1
                     top.linkTo(text1.bottom, margin = 16.dp)
-                    
+
                     bottom.linkTo(parent.bottom, margin = 16.dp)
                 }
             )

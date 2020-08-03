@@ -12,8 +12,8 @@ import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Image
+import androidx.ui.foundation.ScrollableColumn
 import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.clickable
 import androidx.ui.foundation.selection.ToggleableState
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
@@ -55,10 +55,10 @@ class MaterialActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Vertical scroller is a composable that adds the ability to scroll through the
+            // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            VerticalScroller {
+            ScrollableColumn {
                 // Column is a composable that places its children in a vertical sequence.
                 Column {
                     // Title Component is a custom composable that we created which is capable of
@@ -161,7 +161,7 @@ fun MaterialCheckboxComponent() {
     // will be recomposed any time the value changes. This ensures that only the composables that
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
-    var checked by state { false}
+    var checked by state { false }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -171,7 +171,10 @@ fun MaterialCheckboxComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+    ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
@@ -195,7 +198,8 @@ fun MaterialCheckboxComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialTriStateCheckboxComponent() {
-    val toggleableStateArray = listOf(ToggleableState.Off, ToggleableState.On, ToggleableState.Indeterminate)
+    val toggleableStateArray =
+        listOf(ToggleableState.Off, ToggleableState.On, ToggleableState.Indeterminate)
     // Reacting to state changes is the core behavior of Compose. We use the state composable
     // that is used for holding a state value in this composable for representing the current
     // value of the counter. Any composable that reads the value of counter will be recomposed
@@ -212,7 +216,10 @@ fun MaterialTriStateCheckboxComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+    ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
@@ -245,7 +252,7 @@ fun MaterialRadioButtonGroupComponent() {
     // composables that depend on this will be redraw while the rest remain unchanged. This ensures
     // efficiency and is a performance optimization. It is inspired from existing frameworks like
     // React.
-    var selected by state { "Android"}
+    var selected by state { "Android" }
 
     val radioGroupOptions = listOf<String>("Android", "iOS", "Windows")
     // Card composable is a predefined composable that is meant to represent the card surface as
@@ -256,7 +263,10 @@ fun MaterialRadioButtonGroupComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+    ) {
         // A pre-defined composable that's capable of rendering a radio group. It honors the
         // Material Design specification.
         RadioGroup(options = radioGroupOptions, selectedOption = selected, onSelectedChange = {
@@ -279,7 +289,10 @@ fun MaterialLinearProgressIndicatorComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+    ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
@@ -305,7 +318,10 @@ fun MaterialDeterminateLinearProgressIndicatorComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+    ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
@@ -331,7 +347,10 @@ fun MaterialCircularProgressIndicatorComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+    ) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
         CircularProgressIndicator(modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
@@ -352,10 +371,16 @@ fun MaterialDeterminateCircularProgressIndicatorComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+    ) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
-        CircularProgressIndicator(progress = 0.5f, modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
+        CircularProgressIndicator(
+            progress = 0.5f,
+            modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally)
+        )
     }
 }
 
@@ -442,10 +467,15 @@ fun MaterialDiscreteSliderComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // A pre-defined composable that's capable of rendering a slider. It honors the Material
         // Design specification. In this example, we create a discrete slider with fixed steps.
-        Slider(value = sliderValue, valueRange = 0f..10f, steps = 4, onValueChange = { sliderValue = it })
+        Slider(
+            value = sliderValue,
+            valueRange = 0f..10f,
+            steps = 4,
+            onValueChange = { sliderValue = it })
     }
 
-    Text(text = "Slider value is %.1f".format(sliderValue),
+    Text(
+        text = "Slider value is %.1f".format(sliderValue),
         modifier = Modifier.padding(8.dp)
     )
 }
@@ -473,9 +503,11 @@ fun MaterialSwitchComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp),
+    Card(
+        shape = RoundedCornerShape(4.dp),
         modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth(),
-        color = Color(249, 249, 249)) {
+        color = Color(249, 249, 249)
+    ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
@@ -506,21 +538,27 @@ fun MaterialRippleComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
     // width using the Modifier.fillMaxWidth() modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+    Card(
+        shape = RoundedCornerShape(4.dp),
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+    ) {
         // Box with clickable modifier wraps the child composable and enables it to react to a click
         // through the onClick callback similar to the onClick listener that we are accustomed to
         // on Android.
         // In order to show a ripple effect, we set indication of Modifier.clickable with
         // a RippleIndication.
-        Box(modifier = Modifier.clickable(onClick = {}, indication = RippleIndication()),
+        Box(
+            modifier = Modifier.clickable(onClick = {}, indication = RippleIndication()),
             backgroundColor = Color.LightGray,
-            shape = RoundedCornerShape(4.dp)) {
-                // The Text composable is pre-defined by the Compose UI library; you can use this
-                // composable to render text on the screen
-                Text(text = "Click Me",
-                    modifier = Modifier.padding(16.dp),
-                    style = TextStyle(fontSize = TextUnit.Sp(12), fontFamily = FontFamily.Serif)
-                )
+            shape = RoundedCornerShape(4.dp)
+        ) {
+            // The Text composable is pre-defined by the Compose UI library; you can use this
+            // composable to render text on the screen
+            Text(
+                text = "Click Me",
+                modifier = Modifier.padding(16.dp),
+                style = TextStyle(fontSize = TextUnit.Sp(12), fontFamily = FontFamily.Serif)
+            )
         }
     }
 }

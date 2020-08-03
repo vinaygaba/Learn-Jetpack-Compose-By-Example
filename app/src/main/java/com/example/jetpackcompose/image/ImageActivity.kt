@@ -19,10 +19,9 @@ import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Image
+import androidx.ui.foundation.ScrollableColumn
 import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.geometry.Radius
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.ImageAsset
 import androidx.ui.graphics.asImageAsset
@@ -57,10 +56,10 @@ class ImageActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Vertical scroller is a composable that adds the ability to scroll through the
+            // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            VerticalScroller {
+            ScrollableColumn {
                 // Column is a composable that places its children in a vertical sequence. You
                 // can think of it similar to a LinearLayout with the vertical orientation.
 
@@ -135,8 +134,8 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
         // Box composable to have a height of 200dp, width of 200dp, alignment as center
         // and a custom draw modifier to clip the corners of the image.
         Box(
-            modifier = 
-                    Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp)
+            modifier =
+            Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp)
                     + Modifier.RoundedCornerClipModifier(8.dp)
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
@@ -150,9 +149,11 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun NetworkImageComponentPicasso(url: String,
-                                 modifier: Modifier = Modifier.fillMaxWidth() +
-                                         Modifier.preferredHeightIn(maxHeight = 200.dp)) {
+fun NetworkImageComponentPicasso(
+    url: String,
+    modifier: Modifier = Modifier.fillMaxWidth() +
+            Modifier.preferredHeightIn(maxHeight = 200.dp)
+) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
     var image by state<ImageAsset?> { null }
@@ -194,7 +195,8 @@ fun NetworkImageComponentPicasso(url: String,
         // used to modify the composable that its applied to. In this example, we configure the
         // Box composable to have a max height of 200dp and fill out the entire available
         // width.
-        Box(modifier = modifier,
+        Box(
+            modifier = modifier,
             gravity = ContentGravity.Center
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
@@ -202,7 +204,7 @@ fun NetworkImageComponentPicasso(url: String,
         }
     } else if (theDrawable != null) {
         Canvas(modifier = modifier) {
-            drawCanvas { canvas, _ ->  
+            drawCanvas { canvas, _ ->
                 theDrawable.draw(canvas.nativeCanvas)
             }
         }
@@ -216,8 +218,10 @@ fun NetworkImageComponentPicasso(url: String,
  * dependency(or any other kapt related dependency for that matter), the app won't even compile.
  */
 @Composable
-fun NetworkImageComponentGlide(url: String, modifier: Modifier = Modifier.fillMaxWidth() +
-        Modifier.preferredHeightIn(maxHeight = 200.dp)) {
+fun NetworkImageComponentGlide(
+    url: String, modifier: Modifier = Modifier.fillMaxWidth() +
+            Modifier.preferredHeightIn(maxHeight = 200.dp)
+) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
     val context = ContextAmbient.current
@@ -255,8 +259,10 @@ fun NetworkImageComponentGlide(url: String, modifier: Modifier = Modifier.fillMa
         // used to modify the composable that its applied to. In this example, we configure the
         // Box composable to have a max height of 200dp and fill out the entire available
         // width.
-        Box(modifier = modifier,
-            gravity = ContentGravity.Center) {
+        Box(
+            modifier = modifier,
+            gravity = ContentGravity.Center
+        ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(asset = theImage)
         }
@@ -277,9 +283,12 @@ fun NetworkImageComponentGlide(url: String, modifier: Modifier = Modifier.fillMa
 fun TitleComponent(title: String) {
     // Text is a predefined composable that does exactly what you'd expect it to - display text on
     // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.
-    Text(title, style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
-        fontSize = 14.sp, color = Color.Black), modifier = Modifier.padding(16.dp) +
-            Modifier.fillMaxWidth()
+    Text(
+        title, style = TextStyle(
+            fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
+            fontSize = 14.sp, color = Color.Black
+        ), modifier = Modifier.padding(16.dp) +
+                Modifier.fillMaxWidth()
     )
 }
 
@@ -288,7 +297,7 @@ fun TitleComponent(title: String) {
 // Recommendation from -
 // https://kotlinlang.slack .com/archives/CJLTWPH7S/p1589826323481600?thread_ts=1589821110.478100&cid=CJLTWPH7S
 // TODO(vinaygaba) Add some more comments here
-fun Modifier.RoundedCornerClipModifier(size :Dp): Modifier = composed {
+fun Modifier.RoundedCornerClipModifier(size: Dp): Modifier = composed {
     val shape = RoundedCornerShape(size)
     clip(shape)
 }

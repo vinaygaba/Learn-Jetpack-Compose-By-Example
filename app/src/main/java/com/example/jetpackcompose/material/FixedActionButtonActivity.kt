@@ -7,6 +7,7 @@ import androidx.compose.remember
 import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Icon
+import androidx.ui.foundation.ScrollableColumn
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
@@ -94,9 +95,9 @@ fun ScaffoldWithBottomBarAndCutout() {
         },
         floatingActionButtonPosition = Scaffold.FabPosition.End,
         bodyContent = { padding ->
-            // Vertical scroller is a composable that adds the ability to scroll through the
+            // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views
-            VerticalScroller {
+            ScrollableColumn {
                 // Column is a composable that places its children in a vertical sequence. You
                 // can think of it similar to a LinearLayout with the vertical orientation.
                 Column(Modifier.padding(padding)) {
