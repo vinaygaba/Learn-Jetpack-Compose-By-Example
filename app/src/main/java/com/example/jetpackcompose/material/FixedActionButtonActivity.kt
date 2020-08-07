@@ -2,35 +2,32 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.remember
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Icon
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.Column
-import androidx.ui.layout.Spacer
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
-import androidx.ui.material.BottomAppBar
-import androidx.ui.material.Card
-import androidx.ui.material.FloatingActionButton
-import androidx.ui.material.IconButton
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.Scaffold
-import androidx.ui.material.ScaffoldState
-import androidx.ui.material.TopAppBar
-import androidx.ui.material.icons.Icons
-import androidx.ui.material.icons.filled.Favorite
+import androidx.compose.foundation.Icon
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.Card
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
 import com.example.jetpackcompose.core.colors
 
-class FixedActionButtonActivity: AppCompatActivity() {
+class FixedActionButtonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -49,16 +46,6 @@ class FixedActionButtonActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun ScaffoldWithBottomBarAndCutout() {
-    // remember is a composable that allows you to store values that survive recomposition. That
-    // means that the scaffoldState variable will continue to hold its value even if the
-    // ScaffoldWithBottomBarAndCutout is recomposed. The value is calculated only during
-    // the first composition and every subsequent recomposition returns the value produced by the
-    // original composition.
-
-    // ScaffoldState is a @Model class that holds basic screen state relevant to the Scaffold
-    // composable eg. drawerState i.e whether the drawer is open or closed.
-    val scaffoldState = remember { ScaffoldState() }
-
     // Consider negative values to mean 'cut corner' and positive values to mean 'round corner'
     val fabShape = RoundedCornerShape(50)
 
@@ -69,7 +56,6 @@ fun ScaffoldWithBottomBarAndCutout() {
     // app bar is automatically placed at the bottom of the screen even though I didn't specify
     // that explicitly.
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = { TopAppBar(title = { Text("Scaffold Examples") }) },
         bottomBar = {
             // We specify the shape of the FAB bu passing a shape composable (fabShape) as a
@@ -105,11 +91,12 @@ fun ScaffoldWithBottomBarAndCutout() {
                         // Card composable is a predefined composable that is meant to represent
                         // the card surface as specified by the Material Design specification. We
                         // also configure it to have rounded corners and apply a modifier.
-                        Card(color = colors[it % colors.size],
+                        Card(
+                            color = colors[it % colors.size],
                             shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.padding(8.dp)
                         ) {
-                            Spacer(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeight(200.dp))
+                            Spacer(modifier = Modifier.fillMaxWidth().preferredHeight(200.dp))
                         }
                     }
                 }

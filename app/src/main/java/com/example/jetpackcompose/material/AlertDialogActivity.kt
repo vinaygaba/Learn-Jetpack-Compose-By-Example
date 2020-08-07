@@ -2,29 +2,29 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.clickable
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.padding
-import androidx.ui.material.AlertDialog
-import androidx.ui.material.Button
-import androidx.ui.material.Card
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.TextUnit
-import androidx.ui.unit.dp
 
-class AlertDialogActivity: AppCompatActivity() {
+class AlertDialogActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,17 +65,22 @@ fun ClickableText() {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to. In the example below, we add a padding of
         // 8dp to the Card composable and 16dp to the Text composable.
-        Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp),
-            color = Color.LightGray) {
+        Card(
+            shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp),
+            color = Color.LightGray
+        ) {
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Click to see dialog", modifier = Modifier.padding(16.dp),
-                style = TextStyle(fontSize = TextUnit.Sp(16),
-                    fontFamily = FontFamily.Serif)
+            Text(
+                text = "Click to see dialog", modifier = Modifier.padding(16.dp),
+                style = TextStyle(
+                    fontSize = TextUnit.Sp(16),
+                    fontFamily = FontFamily.Serif
+                )
             )
         }
     })
-    
+
     // A lambda that toggles the showPopup value to off. We pass it to the onDismiss equivalent
     // callback of the AlertDialog.
     val onPopupDismissed = { showPopup = false }

@@ -2,29 +2,29 @@ package com.example.jetpackcompose.layout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.ContextAmbient
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.imageFromResource
-import androidx.ui.layout.Column
-import androidx.ui.layout.ConstraintLayout
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
-import androidx.ui.layout.preferredWidth
-import androidx.ui.material.Card
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ConstraintLayout
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.imageFromResource
+import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -87,7 +87,7 @@ fun SimpleConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
+        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -138,15 +138,15 @@ fun SimpleConstraintLayoutComponent() {
             // logic. We give it a ContentGravity of Center to ensure the children of this composable
             // are placed in its center. 
             Box(
-                modifier = Modifier.preferredHeight(72.dp) +
-                        Modifier.preferredWidth(72.dp) +
-                        Modifier.constrainAs(image) {
-                            // We want to vertically center the image tag
-                            centerVerticallyTo(parent)
-                            // Constraint the left edge of image to the left edge of the parent 
-                            // and add a margin of 16dp
-                            start.linkTo(parent.start, margin = 16.dp)
-                        }
+                modifier = Modifier.preferredHeight(72.dp)
+                    .preferredWidth(72.dp)
+                    .constrainAs(image) {
+                        // We want to vertically center the image tag
+                        centerVerticallyTo(parent)
+                        // Constraint the left edge of image to the left edge of the parent 
+                        // and add a margin of 16dp
+                        start.linkTo(parent.start, margin = 16.dp)
+                    }
             ) {
                 // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
                 Image(imageFromResource(resources, R.drawable.lenna))
@@ -166,8 +166,7 @@ fun GuidelineConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() +
-                Modifier.padding(8.dp),
+        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -237,7 +236,7 @@ fun BarrierConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
+        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -321,7 +320,7 @@ fun BiasConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp) + Modifier.fillMaxWidth() + Modifier.padding(8.dp),
+        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints

@@ -168,7 +168,7 @@
             android:exported="true"
             android:label="@string/title_animation_example"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity 
+        <activity
             android:name=".interop.ComposeInClassicAndroidActivity"
             android:exported="true"
             android:label="@string/title_compose_classic_example"

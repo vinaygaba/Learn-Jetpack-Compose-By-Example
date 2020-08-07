@@ -5,41 +5,43 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.onCommit
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.core.ContextAmbient
-import androidx.ui.core.Modifier
-import androidx.ui.core.clip
-import androidx.ui.core.composed
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Canvas
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.graphics.ImageAsset
-import androidx.ui.graphics.asImageAsset
-import androidx.ui.graphics.drawscope.drawCanvas
-import androidx.ui.layout.Column
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
-import androidx.ui.layout.preferredHeightIn
-import androidx.ui.layout.preferredWidth
-import androidx.ui.res.loadImageResource
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.layout.preferredHeightIn
+import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.onCommit
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageAsset
+import androidx.compose.ui.graphics.asImageAsset
+import androidx.compose.ui.graphics.drawscope.drawCanvas
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.res.loadImageResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.Dp
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
+
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -135,8 +137,8 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
         // and a custom draw modifier to clip the corners of the image.
         Box(
             modifier =
-            Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp)
-                    + Modifier.RoundedCornerClipModifier(8.dp)
+            Modifier.preferredHeight(200.dp).preferredWidth(200.dp)
+                   .RoundedCornerClipModifier(8.dp)
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(it)
@@ -151,8 +153,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 @Composable
 fun NetworkImageComponentPicasso(
     url: String,
-    modifier: Modifier = Modifier.fillMaxWidth() +
-            Modifier.preferredHeightIn(maxHeight = 200.dp)
+    modifier: Modifier = Modifier.fillMaxWidth().preferredHeightIn(maxHeight = 200.dp)
 ) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
@@ -219,8 +220,7 @@ fun NetworkImageComponentPicasso(
  */
 @Composable
 fun NetworkImageComponentGlide(
-    url: String, modifier: Modifier = Modifier.fillMaxWidth() +
-            Modifier.preferredHeightIn(maxHeight = 200.dp)
+    url: String, modifier: Modifier = Modifier.fillMaxWidth().preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -287,8 +287,7 @@ fun TitleComponent(title: String) {
         title, style = TextStyle(
             fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
             fontSize = 14.sp, color = Color.Black
-        ), modifier = Modifier.padding(16.dp) +
-                Modifier.fillMaxWidth()
+        ), modifier = Modifier.padding(16.dp).fillMaxWidth()
     )
 }
 

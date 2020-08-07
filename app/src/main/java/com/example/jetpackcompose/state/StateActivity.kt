@@ -2,25 +2,25 @@ package com.example.jetpackcompose.state
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Text
-import androidx.ui.layout.Column
-import androidx.ui.layout.Row
-import androidx.ui.layout.fillMaxHeight
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.material.Button
-import androidx.ui.material.Divider
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
+import androidx.compose.material.Divider
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
 
-class StateActivity: AppCompatActivity() {
+class StateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContent is an extension function of Activity that sets the @Composable function that's
@@ -68,7 +68,7 @@ fun StateComponent() {
         // weight to both the buttons. This is similar to how we used layout_weight with
         // LinearLayouts in the old Android UI Toolkit.
         Button(
-            modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
+            modifier = Modifier.padding(16.dp).weight(1f),
             elevation = 5.dp,
             // We increment the counter every time this button is clicked.
             onClick = {
@@ -80,7 +80,7 @@ fun StateComponent() {
         }
 
         Button(
-            modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
+            modifier = Modifier.padding(16.dp).weight(1f),
             elevation = 5.dp,
             onClick = {
                 counter = 0
@@ -94,9 +94,9 @@ fun StateComponent() {
 }
 
 /**
- * In this example, we are making use of a data class called [CounterState] to hold the state 
- * that we want our composables to observe. This example is very similar to the previous example 
- * with the only difference that it uses a data class to hold the value of our state. In 
+ * In this example, we are making use of a data class called [CounterState] to hold the state
+ * that we want our composables to observe. This example is very similar to the previous example
+ * with the only difference that it uses a data class to hold the value of our state. In
  * addition, we use the copy() method of a data class to mutate the values of the data class.
  */
 @Composable
@@ -122,7 +122,7 @@ fun ModelComponent() {
         // weight to both the buttons. This is similar to how we used layout_weight with
         // LinearLayouts in the old Android UI Toolkit.
         Button(
-            modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
+            modifier = Modifier.padding(16.dp).weight(1f),
             elevation = 5.dp,
             onClick = {
                 counterState = counterState.copy(counter = counterState.counter + 1)
@@ -133,7 +133,7 @@ fun ModelComponent() {
         }
 
         Button(
-            modifier = Modifier.padding(16.dp) + Modifier.weight(1f),
+            modifier = Modifier.padding(16.dp).weight(1f),
             elevation = 5.dp,
             onClick = {
                 counterState = counterState.copy(counter = 0)

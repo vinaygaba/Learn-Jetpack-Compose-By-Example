@@ -2,28 +2,27 @@ package com.example.jetpackcompose.layout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.layout.Arrangement
-import androidx.ui.layout.Column
-import androidx.ui.layout.Row
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.material.Button
-import androidx.ui.text.FirstBaseline
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontStyle
-import androidx.ui.text.font.FontWeight
+import androidx.compose.runtime.Composable
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.FirstBaseline
+import androidx.compose.material.Button
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.TextUnit
-import androidx.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
 
-class ViewLayoutConfigurationsActivity: AppCompatActivity() {
+class ViewLayoutConfigurationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -91,18 +90,22 @@ fun RowEqualWeightComponent() {
         // equal amount of width. We do that by using the Modifier.weight modifier and passing equal
         // weight to both the buttons. This is similar to how we used layout_weight with
         // LinearLayouts in the old Android UI Toolkit.
-        Button(modifier = Modifier.weight(1f) + Modifier.padding(4.dp), onClick = {}) {
+        Button(modifier = Modifier.weight(1f).padding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 1",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
 
-        Button(modifier = Modifier.weight(1f) + Modifier.padding(4.dp), onClick = {}) {
-            Text(text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+        Button(modifier = Modifier.weight(1f).padding(4.dp), onClick = {}) {
+            Text(
+                text = "Button 2",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
     }
 }
@@ -124,18 +127,22 @@ fun RowUnequalWeightComponent() {
         // We do this by using the Modifier.weight modifier and passing equal weight to both the
         // buttons. This is similar to how we used layout_weight with LinearLayouts in the old
         // Android UI Toolkit.
-        Button(modifier = Modifier.weight(0.66f) + Modifier.padding(4.dp), onClick = {}) {
+        Button(modifier = Modifier.weight(0.66f).padding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 1",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
 
-        Button(modifier = Modifier.weight(0.34f) + Modifier.padding(4.dp), onClick = {}) {
-            Text(text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+        Button(modifier = Modifier.weight(0.34f).padding(4.dp), onClick = {}) {
+            Text(
+                text = "Button 2",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
     }
 }
@@ -149,8 +156,11 @@ fun RowAddSpaceBetweenViewsComponent() {
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // We use Arrangement.SpaceBetween to place the children of the row such that they are spaced
     // evenly across the main axis, without free space before the first child or after the last child.
-    Row(modifier = Modifier.fillMaxWidth() + Modifier.padding(4.dp), horizontalArrangement = Arrangement
-        .SpaceBetween) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(4.dp),
+        horizontalArrangement = Arrangement
+            .SpaceBetween
+    ) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
         Button(onClick = {}) {
@@ -158,13 +168,17 @@ fun RowAddSpaceBetweenViewsComponent() {
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 1",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
 
         Button(onClick = {}) {
-            Text(text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 2",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
     }
 }
@@ -187,13 +201,17 @@ fun RowSpaceViewsEvenlyComponent() {
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 1",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
 
         Button(onClick = {}) {
-            Text(text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 2",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
     }
 }
@@ -216,13 +234,17 @@ fun RowSpaceAroundViewsComponent() {
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 1",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
 
         Button(onClick = {}) {
-            Text(text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 2",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
     }
 }
@@ -244,13 +266,17 @@ fun RowViewsCenteredComponent() {
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 1",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
 
         Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
-            Text(text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 2",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
     }
 }
@@ -272,13 +298,17 @@ fun RowViewsArrangedInEndComponent() {
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 1",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
 
         Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
-            Text(text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20)))
+            Text(
+                text = "Button 2",
+                style = TextStyle(fontSize = TextUnit.Sp(20))
+            )
         }
     }
 }
@@ -298,13 +328,17 @@ fun RowBaselineAlignComponent() {
         // In order to align the baseline of both the text composables, we use the
         // Modifier.alignWithSiblings(FirstBaseline) modifier. FirstBaseline here means that we
         // align the baseline of the first line of the Text Composable.
-        Text(text = "Text 1",
+        Text(
+            text = "Text 1",
             style = TextStyle(fontSize = TextUnit.Sp(20), fontStyle = FontStyle.Italic),
             modifier = Modifier.alignWithSiblings(alignmentLine = FirstBaseline)
         )
-        Text(text = "Text 2",
-            style = TextStyle(fontSize = TextUnit.Sp(40), fontStyle = FontStyle.Normal,
-                fontWeight = FontWeight.Bold),
+        Text(
+            text = "Text 2",
+            style = TextStyle(
+                fontSize = TextUnit.Sp(40), fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.Bold
+            ),
             modifier = Modifier.alignWithSiblings(alignmentLine = FirstBaseline)
         )
     }
@@ -322,11 +356,17 @@ fun RowBaselineUnalignedComponent() {
     Row(modifier = Modifier.fillMaxWidth()) {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
-        Text(text = "Text 1",
-            style = TextStyle(fontSize = TextUnit.Sp(20), fontStyle = FontStyle.Italic))
-        Text(text = "Text 2",
-            style = TextStyle(fontSize = TextUnit.Sp(40), fontStyle = FontStyle.Normal,
-                fontWeight = FontWeight.Bold))
+        Text(
+            text = "Text 1",
+            style = TextStyle(fontSize = TextUnit.Sp(20), fontStyle = FontStyle.Italic)
+        )
+        Text(
+            text = "Text 2",
+            style = TextStyle(
+                fontSize = TextUnit.Sp(40), fontStyle = FontStyle.Normal,
+                fontWeight = FontWeight.Bold
+            )
+        )
     }
 }
 

@@ -3,7 +3,7 @@ package com.example.jetpackcompose.core
 import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
-import androidx.ui.graphics.Color
+import androidx.compose.ui.graphics.Color
 
 // Models
 data class Person(

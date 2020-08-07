@@ -2,47 +2,48 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.core.Alignment
-import androidx.ui.core.ContextAmbient
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.clickable
-import androidx.ui.foundation.selection.ToggleableState
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.graphics.imageFromResource
-import androidx.ui.layout.Column
-import androidx.ui.layout.Row
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
-import androidx.ui.layout.preferredWidth
-import androidx.ui.layout.wrapContentWidth
-import androidx.ui.material.Card
-import androidx.ui.material.Checkbox
-import androidx.ui.material.CircularProgressIndicator
-import androidx.ui.material.LinearProgressIndicator
-import androidx.ui.material.ListItem
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.RadioGroup
-import androidx.ui.material.Slider
-import androidx.ui.material.Snackbar
-import androidx.ui.material.Switch
-import androidx.ui.material.TriStateCheckbox
-import androidx.ui.material.ripple.RippleIndication
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.selection.ToggleableState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Checkbox
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.ListItem
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.RadioButton
+import androidx.compose.material.Slider
+import androidx.compose.material.Snackbar
+import androidx.compose.material.Switch
+import androidx.compose.material.TriStateCheckbox
+import androidx.compose.material.ripple.RippleIndication
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.state
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.imageFromResource
+import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.TextUnit
-import androidx.ui.unit.dp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -142,7 +143,7 @@ fun MaterialCardComponent() {
         }, icon = {
             // Box is a predefined convenience composable that allows you to apply common draw & layout
             // logic. In addition we also pass a few modifiers to it.
-            Box(modifier = Modifier.preferredWidth(48.dp) + Modifier.preferredHeight(48.dp)) {
+            Box(modifier = Modifier.preferredWidth(48.dp).preferredHeight(48.dp)) {
                 Image(asset = imageFromResource(resources, R.drawable.lenna))
             }
         })
@@ -173,7 +174,7 @@ fun MaterialCheckboxComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -218,7 +219,7 @@ fun MaterialTriStateCheckboxComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -265,13 +266,35 @@ fun MaterialRadioButtonGroupComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
         // A pre-defined composable that's capable of rendering a radio group. It honors the
         // Material Design specification.
-        RadioGroup(options = radioGroupOptions, selectedOption = selected, onSelectedChange = {
-            selected = it
-        })
+        val onSelectedChange = { text: String ->
+            selected = text
+        }
+        Column {
+            radioGroupOptions.forEach { text ->
+                Row(Modifier
+                    .fillMaxWidth()
+                    .selectable(
+                        selected = (text == selected),
+                        onClick = { onSelectedChange(text) }
+                    )
+                    .padding(horizontal = 16.dp)
+                ) {
+                    RadioButton(
+                        selected = (text == selected),
+                        onClick = { onSelectedChange(text) }
+                    )
+                    Text(
+                        text = text,
+                        style = MaterialTheme.typography.body1.merge(),
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -291,7 +314,7 @@ fun MaterialLinearProgressIndicatorComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -320,7 +343,7 @@ fun MaterialDeterminateLinearProgressIndicatorComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -349,7 +372,7 @@ fun MaterialCircularProgressIndicatorComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
@@ -373,7 +396,7 @@ fun MaterialDeterminateCircularProgressIndicatorComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
@@ -505,7 +528,7 @@ fun MaterialSwitchComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth(),
+        modifier = Modifier.padding(8.dp).fillMaxWidth(),
         color = Color(249, 249, 249)
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
@@ -540,7 +563,7 @@ fun MaterialRippleComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
         // Box with clickable modifier wraps the child composable and enables it to react to a click
         // through the onClick callback similar to the onClick listener that we are accustomed to

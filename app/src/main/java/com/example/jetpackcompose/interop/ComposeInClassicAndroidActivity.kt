@@ -1,26 +1,26 @@
 package com.example.jetpackcompose.interop
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
-import androidx.compose.Composable
-import androidx.compose.Recomposer
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Text
-import androidx.ui.graphics.Color
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
-import androidx.ui.material.Card
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Recomposer
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.core.colors
 
@@ -63,21 +63,23 @@ fun CardComponentWithMessage() {
         // specified by the Material Design specification. We also configure it to have rounded
         // corners and apply a modifier.
         Card(
-            modifier = Modifier.fillMaxWidth() +
-                    Modifier.preferredHeight(200.dp) +
-                    Modifier.padding(16.dp),
+            modifier = Modifier.fillMaxWidth()
+                .preferredHeight(200.dp)
+                .padding(16.dp),
             color = colors[1]
         ) {
             // Text is a predefined composable that does exactly what you'd expect it to - display text on
             // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.
-            Text("This is an example of a Jetpack Compose composable inside a classic Android " +
-                    "view", 
+            Text(
+                "This is an example of a Jetpack Compose composable inside a classic Android " +
+                        "view",
                 style = TextStyle(
-                    fontFamily = FontFamily.Monospace, 
-                    fontWeight = FontWeight.W900, 
-                    fontSize = 14.sp, 
-                    color = Color.Black), 
-                modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth()
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.W900,
+                    fontSize = 14.sp,
+                    color = Color.Black
+                ),
+                modifier = Modifier.padding(16.dp).fillMaxWidth()
             )
         }
     }

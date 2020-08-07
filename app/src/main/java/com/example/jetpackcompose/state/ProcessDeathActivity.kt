@@ -2,41 +2,41 @@ package com.example.jetpackcompose.state
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.TextField
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.input.KeyboardType
-import androidx.ui.input.OffsetMap
-import androidx.ui.input.TextFieldValue
-import androidx.ui.input.TransformedText
-import androidx.ui.input.VisualTransformation
-import androidx.ui.layout.Arrangement
-import androidx.ui.layout.Column
-import androidx.ui.layout.aspectRatio
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredWidth
-import androidx.ui.material.Card
-import androidx.ui.savedinstancestate.savedInstanceState
-import androidx.ui.text.AnnotatedString
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.savedinstancestate.savedInstanceState
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMap
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.TransformedText
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.image.TitleComponent
 
-class ProcessDeathActivity: AppCompatActivity() {
+class ProcessDeathActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -73,8 +73,9 @@ fun ProcessDeathComponent() {
         // corners and apply few modifiers to alter the dimensions of this card.
         Card(
             shape = RoundedCornerShape(16.dp),
-            modifier = Modifier.preferredWidth(300.dp) + Modifier.aspectRatio(16/9f),
-            color = colors[0]) {
+            modifier = Modifier.preferredWidth(300.dp).aspectRatio(16 / 9f),
+            color = colors[0]
+        ) {
             // Column is a composable that places its children in a vertical sequence. You
             // can think of it similar to a LinearLayout with the vertical orientation.
 
@@ -108,9 +109,12 @@ fun ProcessDeathComponent() {
                 // Discussion - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1586187000148500?thread_ts=1586186224.146600&cid=CJLTWPH7S
                 var textValue by savedInstanceState { "1234567812345678" }
                 TextField(value = TextFieldValue(textValue),
+                    label = { },
                     modifier = Modifier.padding(16.dp),
-                    textStyle = TextStyle(color = Color.White, fontFamily = FontFamily.Serif,
-                        fontSize = 25.sp, fontWeight = FontWeight.Bold),
+                    textStyle = TextStyle(
+                        color = Color.White, fontFamily = FontFamily.Serif,
+                        fontSize = 25.sp, fontWeight = FontWeight.Bold
+                    ),
                     keyboardType = KeyboardType.Number,
                     // Visual transformation is used to modify the visual output of the input field. In
                     // this example, I'm using a custom visual transformation - the
@@ -148,7 +152,7 @@ fun ProcessDeathComponent() {
 // that it transforms the input to have a space added after every 4 characters. The text itself isn't
 // altered, just its visual appearance is. You can easily created you own visual transformations by
 // implementing the VisualTransformation interface like we did for CreditCardVisualTransformation.
-class CreditCardVisualTransformation: VisualTransformation {
+class CreditCardVisualTransformation : VisualTransformation {
     override fun filter(text: AnnotatedString): TransformedText {
         return TransformedText(
             // Regex used to add a space after every 4 characters.
@@ -163,9 +167,9 @@ class CreditCardVisualTransformation: VisualTransformation {
 // case of CreditCardVisualTransformation, since we add a space character after every 4
 // characters, we need to move the cursor accordingly. For example, if we added 3 space
 // characters, we need to account for that and move the cursor offset by 3 characters.
-val creditCardOffsetMap =  object: OffsetMap {
-    override fun originalToTransformed(offset: Int) = offset + (offset/4)
-    override fun transformedToOriginal(offset: Int) = offset - (offset/4)
+val creditCardOffsetMap = object : OffsetMap {
+    override fun originalToTransformed(offset: Int) = offset + (offset / 4)
+    override fun transformedToOriginal(offset: Int) = offset - (offset / 4)
 }
 
 /**

@@ -3,12 +3,12 @@ package com.example.jetpackcompose.state.backpress
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcherOwner
-import androidx.compose.Composable
-import androidx.compose.Providers
-import androidx.compose.onCommit
-import androidx.compose.remember
-import androidx.compose.staticAmbientOf
-import androidx.ui.core.LifecycleOwnerAmbient
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Providers
+import androidx.compose.runtime.onCommit
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticAmbientOf
+import androidx.compose.ui.platform.LifecycleOwnerAmbient
 
 /**
  * Related discussion -

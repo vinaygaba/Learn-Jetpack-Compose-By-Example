@@ -8,7 +8,7 @@ import com.example.jetpackcompose.core.getSuperheroList
 import kotlinx.coroutines.delay
 
 class SuperheroesViewModel : ViewModel() {
-    val superheroes: LiveData<List<Person>> = liveData { 
+    val superheroes: LiveData<List<Person>> = liveData {
         val superheroList = loadSuperheroes()
         emit(superheroList)
     }

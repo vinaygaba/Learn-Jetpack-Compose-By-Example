@@ -2,24 +2,24 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Border
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.graphics.SolidColor
-import androidx.ui.layout.Column
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.padding
-import androidx.ui.material.Button
-import androidx.ui.material.OutlinedButton
-import androidx.ui.material.TextButton
+import androidx.compose.foundation.Border
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.setContent
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.TextButton
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
+import androidx.compose.ui.unit.dp
 
-class ButtonActivity: AppCompatActivity() {
+class ButtonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -86,7 +86,8 @@ fun SimpleButtonWithBorderComponent() {
         modifier = Modifier.padding(16.dp),
         elevation = 5.dp,
         // Provide a border for this button
-        border = Border(size = 5.dp, brush = SolidColor(Color.Black))) {
+        border = Border(size = 5.dp, brush = SolidColor(Color.Black))
+    ) {
         // The Button composable allows you to provide child composables that inherit this button
         // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -113,7 +114,8 @@ fun RoundedCornerButtonComponent() {
         // Provide a custom shape for this button. In this example. we specify the button to have
         // round corners of 16dp radius.
         shape = RoundedCornerShape(16.dp),
-        elevation = 5.dp) {
+        elevation = 5.dp
+    ) {
         // The Button composable allows you to provide child composables that inherit this button
         // functionality.
         // The Text composable is pre-defined by the Compose UI library; you can use this

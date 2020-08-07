@@ -1,28 +1,28 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
-import androidx.animation.AnimationConstants.Infinite
-import androidx.animation.FastOutLinearInEasing
-import androidx.animation.FloatPropKey
-import androidx.animation.repeatable
-import androidx.animation.transitionDefinition
-import androidx.animation.tween
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.animation.transition
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Canvas
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.graphics.Color
-import androidx.ui.graphics.drawscope.rotate
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.preferredSize
+import androidx.compose.animation.core.AnimationConstants.Infinite
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.FloatPropKey
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.transitionDefinition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.transition
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
 
-class Animation1Activity: AppCompatActivity() {
+class Animation1Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -50,19 +50,19 @@ private val rotation = FloatPropKey()
  * the interpolation, duration & behavior of these transitions should be like. Read through the
  * comments below to understand this better.
  */
-private val rotationTransitionDefinition = transitionDefinition {
+private val rotationTransitionDefinition = transitionDefinition<String> {
     // We define a transitionDefinition that's meant to be an exhaustive list of all states &
     // state transitions that are a part of your animation. Below, we define two states - state 0
     // & state 360. For each state, we also define the value of the properties when they are in
     // the respective state. For example - for state A, we assign the rotation prop the value 0f
     // and for state B, we assign the rotation prop the value 360f.
-    state("A"){ this[rotation] = 0f }
+    state("A") { this[rotation] = 0f }
     state("B") { this[rotation] = 360f }
 
     // Here we define the transition spec i.e what action do we need to do as we transition from
     // one state to another. Below, we define a TransitionSpec for the transition
     // state A -> state B.
-    transition(fromState = "A", toState =  "B") {
+    transition(fromState = "A", toState = "B") {
         // For the transition from state A -> state B, we assign a AnimationBuilder to the
         // rotation prop where we specify how we want to update the value of the rotation prop
         // between state A & B, what the duration of this animation should be, what kind of

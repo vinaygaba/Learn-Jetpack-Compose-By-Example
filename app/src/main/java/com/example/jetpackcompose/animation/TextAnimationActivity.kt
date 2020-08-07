@@ -1,42 +1,41 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
-import androidx.animation.AnimationConstants.Infinite
-import androidx.animation.FastOutLinearInEasing
-import androidx.animation.FloatPropKey
-import androidx.animation.LinearEasing
-import androidx.animation.repeatable
-import androidx.animation.transitionDefinition
-import androidx.animation.tween
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.animation.ColorPropKey
-import androidx.ui.animation.Transition
-import androidx.ui.animation.transition
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Canvas
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Text
-import androidx.ui.graphics.Color
-import androidx.ui.graphics.drawscope.rotate
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.preferredSize
-import androidx.ui.res.loadImageResource
-import androidx.ui.text.InlineTextContent
-import androidx.ui.text.Placeholder
-import androidx.ui.text.PlaceholderVerticalAlign
-import androidx.ui.text.TextStyle
-import androidx.ui.text.annotatedString
-import androidx.ui.text.appendInlineContent
-import androidx.ui.text.font.FontFamily
-import androidx.ui.unit.dp
-import androidx.ui.unit.em
-import androidx.ui.unit.sp
+import androidx.compose.animation.ColorPropKey
+import androidx.compose.animation.core.AnimationConstants.Infinite
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.FloatPropKey
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.transitionDefinition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.transition
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.foundation.text.appendInlineContent
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.res.loadImageResource
+import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.text.PlaceholderVerticalAlign
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.annotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.R
 
 class TextAnimationActivity : AppCompatActivity() {
@@ -69,7 +68,7 @@ private val rotation = FloatPropKey()
  * the interpolation, duration & behavior of these transitions should be like. Read through the
  * comments below to understand this better.
  */
-private val colorDefinition = transitionDefinition {
+private val colorDefinition = transitionDefinition<Int> {
     // We define a transitionDefinition that's meant to be an exhaustive list of all states &
     // state transitions that are a part of your animation. Below, we define three states - state 0
     // state 1, & state 2. For each state, we also define the value of the properties when they
@@ -114,19 +113,19 @@ private val colorDefinition = transitionDefinition {
  * the interpolation, duration & behavior of these transitions should be like. Read through the
  * comments below to understand this better.
  */
-private val rotationTransitionDefinition = transitionDefinition {
+private val rotationTransitionDefinition = transitionDefinition<String> {
     // We define a transitionDefinition that's meant to be an exhaustive list of all states &
     // state transitions that are a part of your animation. Below, we define two states - state 0
     // & state 360. For each state, we also define the value of the properties when they are in
     // the respective state. For example - for state A, we assign the rotation prop the value 0f
     // and for state B, we assign the rotation prop the value 360f.
-    state("A"){ this[rotation] = 0f }
+    state("A") { this[rotation] = 0f }
     state("B") { this[rotation] = 360f }
 
     // Here we define the transition spec i.e what action do we need to do as we transition from
     // one state to another. Below, we define a TransitionSpec for the transition
     // state A -> state B.
-    transition(fromState = "A", toState =  "B") {
+    transition(fromState = "A", toState = "B") {
         // For the transition from state A -> state B, we assign a AnimationBuilder to the
         // rotation prop where we specify how we want to update the value of the rotation prop
         // between state A & B, what the duration of this animation should be, what kind of
@@ -161,7 +160,7 @@ fun TextAnimationComponent() {
         appendInlineContent("composeLogo", "Compose Logo")
         appendInlineContent("animatedText", "Animated Text")
     }
-    
+
     val inlineContent = mapOf(
         "composeLogo" to InlineTextContent(
             placeholder = Placeholder(
@@ -194,7 +193,7 @@ fun TextAnimationComponent() {
         // Text is a predefined composable that does exactly what you'd expect it to - display text 
         // on the screen. It allows you to customize its appearance using style, fontWeight, 
         // fontSize, etc.
-        
+
         // In addition, we also pass it the inlineContent map that is used to describe how we 
         // will specify alternate composables to describe areas within the Text composable.
         Text(
@@ -229,7 +228,7 @@ fun ComposeLogoComponent() {
             initState = "A",
             toState = "B"
         )
-        
+
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
         // Image composable to have a height of 48 dp.
@@ -269,8 +268,8 @@ fun ColorChangingTextComponent() {
     // that the transitionDefinition has been configured to allow for the transition from the
     // "initialState" to the "toState".
     val state = transition(
-        definition = colorDefinition, 
-        initState = initialState, 
+        definition = colorDefinition,
+        initState = initialState,
         toState = toState,
         onStateChangeFinished =
         // Here we define the action we want to do every time a state transition completes. In

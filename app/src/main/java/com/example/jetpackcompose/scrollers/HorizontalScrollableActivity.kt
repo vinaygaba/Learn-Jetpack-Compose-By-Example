@@ -2,26 +2,26 @@ package com.example.jetpackcompose.scrollers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.ContextAmbient
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.ScrollableRow
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.Row
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredWidth
-import androidx.ui.material.Card
-import androidx.ui.text.TextStyle
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.ScrollableRow
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.Person
 import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
@@ -44,8 +44,10 @@ class HorizontalScrollableActivity : AppCompatActivity() {
                 TitleComponent("Horizontal Scrollable Carousel")
                 HorizontalScrollableComponent(getPersonList())
 
-                TitleComponent("Horizontal Scrolling Carousel where each item occupies the" +
-                        " width of the screen")
+                TitleComponent(
+                    "Horizontal Scrolling Carousel where each item occupies the" +
+                            " width of the screen"
+                )
                 HorizontalScrollableComponentWithScreenWidth(getPersonList())
             }
         }
@@ -72,7 +74,7 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
         Row {
             // We iterate over each item from the personList and define what each item should
             // look like.
-            for((index, person) in personList.withIndex()) {
+            for ((index, person) in personList.withIndex()) {
                 // Card composable is a predefined composable that is meant to represent the card
                 // surface as specified by the Material Design specification. We also configure it
                 // to have rounded corners and apply a modifier.
@@ -80,17 +82,20 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
                 // You can think of Modifiers as implementations of the decorators pattern that are
                 // used to modify the composable that its applied to. In this example, we assign a
                 // padding of 16dp to the Card.
-                Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                Card(
+                    shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                     modifier = Modifier.padding(16.dp)
                 ) {
                     // The Text composable is pre-defined by the Compose UI library; you can use this
                     // composable to render text on the screen
-                    Text(person.name,
+                    Text(
+                        person.name,
                         modifier = Modifier.padding(16.dp),
                         style = TextStyle(
                             color = Color.Black,
                             fontSize = 20.sp
-                        ))
+                        )
+                    )
                 }
             }
         }
@@ -126,7 +131,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
         Row {
             // We iterate over each item from the personList and define what each item should
             // look like.
-            for((index, person) in personList.withIndex()) {
+            for ((index, person) in personList.withIndex()) {
                 // Card composable is a predefined composable that is meant to represent the card
                 // surface as specified by the Material Design specification. We also configure it
                 // to have rounded corners and apply a modifier.
@@ -134,7 +139,8 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                 // You can think of Modifiers as implementations of the decorators pattern that are
                 // used to modify the composable that its applied to. In this example, we assign a
                 // padding of 16dp to the Card.
-                Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                Card(
+                    shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
                     modifier = Modifier.padding(16.dp)
                 ) {
                     // Box is a predefined convenience composable that allows you to apply common
@@ -143,8 +149,10 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                     // To ensure that the item occupies the entire screen, we make sure that the
                     // width of the box is equal to the computed screenWidth. We subtract
                     // some spacing to make the other item slightly visible.
-                    Box(modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2)),
-                        gravity = ContentGravity.Center) {
+                    Box(
+                        modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2)),
+                        gravity = ContentGravity.Center
+                    ) {
                         // The Text composable is pre-defined by the Compose UI library; you can use
                         // this composable to render text on the screen
                         Text(

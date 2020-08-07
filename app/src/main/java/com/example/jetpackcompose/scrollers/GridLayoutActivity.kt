@@ -2,33 +2,10 @@ package com.example.jetpackcompose.scrollers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Alignment
-import androidx.ui.core.Modifier
-import androidx.ui.core.Modifier.Companion
-import androidx.ui.core.setContent
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-//import androidx.ui.layout.LayoutAlign
-//import androidx.ui.layout.Table
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
-import androidx.ui.layout.wrapContentHeight
-import androidx.ui.material.Card
-import androidx.ui.text.TextStyle
-import androidx.ui.text.style.TextAlign
-import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
-import com.example.jetpackcompose.core.Person
-import com.example.jetpackcompose.core.colors
-import com.example.jetpackcompose.core.getPersonList
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.ui.platform.setContent
 
-class GridLayoutActivity: AppCompatActivity() {
+class GridLayoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -58,9 +35,9 @@ class GridLayoutActivity: AppCompatActivity() {
 //@Composable
 //fun GridLayoutComponent(personList: List<Person>) {
 //    val numberOfColumns = 2
-    // Table is a composable that adds the ability to scroll through the child composables that are
-    // declared inside it. One caveat here is that this is not optimized to recycle the views and
-    // loads everything non-lazily
+// Table is a composable that adds the ability to scroll through the child composables that are
+// declared inside it. One caveat here is that this is not optimized to recycle the views and
+// loads everything non-lazily
 //    Table(columns = numberOfColumns) {
 //        for (i in personList.indices step numberOfColumns) {
 //            // This allows to to create a new row in the Table and specify the composables inside
@@ -76,13 +53,13 @@ class GridLayoutActivity: AppCompatActivity() {
 //                    // we add a padding of 16dp, specify it to occupy the entire available width
 //                    // using Modifier.fillMaxWidth() & give it a height of 100dp.
 //                    Card(shape = RoundedCornerShape(4.dp), color = colors[(i + j) % colors.size],
-//                        modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth() +
+//                        modifier = Modifier.padding(16.dp).fillMaxWidth() +
 //                                Modifier.preferredHeight(100.dp)
 //                    ) {
 //                        // The Text composable is pre-defined by the Compose UI library; you can use
 //                        // this composable to render text on the screen
 //                        Text(text = personList[i + j].name,
-//                            modifier = Modifier.padding(16.dp) + Modifier.wrapContentHeight(
+//                            modifier = Modifier.padding(16.dp).wrapContentHeight(
 //                                Alignment.Center
 //                            ),
 //                            style = TextStyle(
