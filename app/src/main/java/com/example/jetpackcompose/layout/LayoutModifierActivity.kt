@@ -119,8 +119,7 @@ fun AspectRatioComponent() {
     // modify the composable that its applied to. In this example, we make use of the
     // Modifier.aspectRatio modifier that attempts to size a layout to match a specified aspect ratio.
     Surface(
-        color = colors[3], modifier = Modifier.aspectRatio(16 / 9f) +
-                Modifier.padding(top = 16.dp)
+        color = colors[3], modifier = Modifier.aspectRatio(16 / 9f).padding(top = 16.dp)
     ) {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
