@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Box
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ContentGravity
-import androidx.compose.foundation.HorizontalScroller
+import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -48,7 +48,7 @@ class MeasuringScaleActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun MeasuringScaleComponent() {
-    // HorizontalScroller is a composable that adds the ability to scroll through the child
+    // ScrollableRow is a composable that adds the ability to scroll through the child
     // composables that are declared inside it in the horizontal direction. One caveat here is that
     // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
     // be thought of as a replacement for [RecyclerView]. We also give it a modifier.
@@ -57,13 +57,12 @@ fun MeasuringScaleComponent() {
     // used to modify the composable that its applied to. In this example, we assign a
     // padding of 16dp to the HorizontalScroller and specify it to occupy the entire available 
     // width.
-    HorizontalScroller(
-        modifier = Modifier.padding(top = 16.dp).fillMaxWidth()
-    ) {
-        for (i in -20..1020) {
-            ScaleLineComponent(i)
-        }
-    }
+    ScrollableRow(modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
+        children = {
+            for (i in -20..1020) {
+                ScaleLineComponent(i)
+            }
+        })
     // Box is a predefined convenience composable that allows you to apply common draw & layout
     // logic. We give it a ContentGravity of Center to ensure the children of this composable
     // are placed in its center. In addition we also pass a few modifiers to it.
