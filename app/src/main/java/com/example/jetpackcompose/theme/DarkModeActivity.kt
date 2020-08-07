@@ -2,49 +2,50 @@ package com.example.jetpackcompose.theme
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.MutableState
-import androidx.compose.state
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Icon
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.clickable
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.Row
-import androidx.ui.layout.fillMaxHeight
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.material.Card
-import androidx.ui.material.DrawerState
-import androidx.ui.material.IconButton
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.ModalDrawerLayout
-import androidx.ui.material.Surface
-import androidx.ui.material.Switch
-import androidx.ui.material.TopAppBar
-import androidx.ui.material.Typography
-import androidx.ui.material.darkColorPalette
-import androidx.ui.material.icons.Icons
-import androidx.ui.material.icons.filled.Menu
-import androidx.ui.material.lightColorPalette
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
-import androidx.ui.text.style.TextAlign
-import androidx.ui.text.style.TextIndent
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Icon
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Card
+import androidx.compose.material.DrawerValue
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ModalDrawerLayout
+import androidx.compose.material.Surface
+import androidx.compose.material.Switch
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.Typography
+import androidx.compose.material.darkColors
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.lightColors
+import androidx.compose.material.rememberDrawerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign.Justify
+import androidx.compose.ui.text.style.TextIndent
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.TextUnit
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.LOREM_IPSUM_1
 import com.example.jetpackcompose.core.LOREM_IPSUM_2
 import com.example.jetpackcompose.core.LOREM_IPSUM_3
 
-class DarkModeActivity: AppCompatActivity() {
+class DarkModeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,13 +72,13 @@ class DarkModeActivity: AppCompatActivity() {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 @Composable
-fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable()() -> Unit) {
-    // lightColorPalette is a default implementation of the ColorPalette from the MaterialDesign
+fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable() () -> Unit) {
+    // lightColors is a default implementation of the ColorPalette from the MaterialDesign
     // specification https://material.io/design/color/the-color-system.html#color-theme-creation.
     // for easy use. In this case, I'm just showing an example of how you can
     // override any of the values that are a part of the Palette even though I'm just using the
     // default values itself.
-    val lightColors = lightColorPalette(
+    val lightColors = lightColors(
         primary = Color(0xFF6200EE),
         primaryVariant = Color(0xFF3700B3),
         onPrimary = Color(0xFFFFFFFF),
@@ -92,21 +93,22 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable()()
         onError = Color(0xFFFFFFFF)
     )
 
-    // darkColorPalette is a default implementation of dark mode ColorPalette from the
+    // darkColors is a default implementation of dark mode ColorPalette from the
     // Material Design specification
     // https://material.io/design/color/the-color-system.html#color-theme-creation.
-    val darkColors = darkColorPalette()
+    val darkColors = darkColors()
     val colors = if (enableDarkMode.value) darkColors else lightColors
 
     // Data class holding typography definitions as defined by the
     // Material typography specification
     // https://material.io/design/typography/the-type-system.html#type-scale
     val typography = Typography(
-        body1 = TextStyle(fontFamily = FontFamily.Serif,
+        body1 = TextStyle(
+            fontFamily = FontFamily.Serif,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp,
-            textIndent = TextIndent(firstLine = TextUnit.Companion.Sp(16)),
-            textAlign = TextAlign.Justify
+            textIndent = TextIndent(firstLine = TextUnit.Sp(16)),
+            textAlign = Justify
         )
     )
 
@@ -127,7 +129,7 @@ fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    val (drawerState, onDrawerStateChange) = state { DrawerState.Closed }
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     // State composable used to hold the value of the current active screen
     val currentScreen = state { ThemedDrawerAppScreen.Screen1 }
 
@@ -137,14 +139,13 @@ fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
     ModalDrawerLayout(
         // Drawer state to denote whether the drawer should be open or closed.
         drawerState = drawerState,
-        onStateChange = onDrawerStateChange,
-        gesturesEnabled = drawerState == DrawerState.Opened,
+        gesturesEnabled = drawerState.isOpen,
         drawerContent = {
             //drawerContent takes a composable to represent the view/layout to display when the
             // drawer is open.
             ThemedDrawerContentComponent(
                 currentScreen = currentScreen,
-                closeDrawer = { onDrawerStateChange(DrawerState.Closed) }
+                closeDrawer = { drawerState.close() }
             )
         },
         bodyContent = {
@@ -154,7 +155,7 @@ fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
                 currentScreen = currentScreen.value,
                 enableDarkMode = enableDarkMode,
                 openDrawer = {
-                    onDrawerStateChange(DrawerState.Opened)
+                    drawerState.open()
                 }
             )
         }
@@ -350,7 +351,8 @@ fun ThemedScreen2Component(
                 // A pre-defined composable that's capable of rendering a switch. It honors the Material
                 // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
-                Text(text = "Enable Dark Mode", style = MaterialTheme.typography.body1,
+                Text(
+                    text = "Enable Dark Mode", style = MaterialTheme.typography.body1,
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -359,7 +361,8 @@ fun ThemedScreen2Component(
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables.
         Surface(modifier = Modifier.weight(1f)) {
-            Text(text = LOREM_IPSUM_2, style = MaterialTheme.typography.body1,
+            Text(
+                text = LOREM_IPSUM_2, style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(16.dp)
             )
         }
@@ -409,7 +412,8 @@ fun ThemedScreen3Component(
                 // A pre-defined composable that's capable of rendering a switch. It honors the Material
                 // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
-                Text(text = "Enable Dark Mode", style = MaterialTheme.typography.body1,
+                Text(
+                    text = "Enable Dark Mode", style = MaterialTheme.typography.body1,
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -418,7 +422,8 @@ fun ThemedScreen3Component(
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables.
         Surface(modifier = Modifier.weight(1f)) {
-            Text(text = LOREM_IPSUM_3, style = MaterialTheme.typography.body1,
+            Text(
+                text = LOREM_IPSUM_3, style = MaterialTheme.typography.body1,
                 modifier = Modifier.padding(16.dp)
             )
         }
@@ -452,7 +457,7 @@ fun CustomThemeLightPreview() {
 
 @Preview
 @Composable
-fun CustomThemeDarkPreview() { 
+fun CustomThemeDarkPreview() {
     CustomTheme(enableDarkMode = state { true }) {
         Card {
             Text("Preview Text", modifier = Modifier.padding(32.dp))

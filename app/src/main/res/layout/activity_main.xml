@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".core.MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/default_padding"
-        >
+        android:padding="@dimen/default_padding">
+
         <androidx.cardview.widget.CardView
             android:id="@+id/simple_text_example"
             android:layout_width="match_parent"
@@ -19,14 +20,14 @@
             android:padding="@dimen/default_padding"
             android:onClick="startSimpleTextExample"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_simple_text_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -38,14 +39,14 @@
             android:onClick="startCustomTextExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_custom_text_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -57,14 +58,14 @@
             android:onClick="startVerticalScrollableExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_vertical_scrollable_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -76,14 +77,14 @@
             android:onClick="startHorizontalScrollableExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_horizontal_scrollable_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -95,36 +96,36 @@
             android:onClick="starLoadImageExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_load_image_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <!-- The Table API was removed in dev11 so disabling this example until an alternative is
          added back -->
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:id="@+id/load_grid_example"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/cardview_height"-->
-<!--            app:cardBackgroundColor="@color/colorPrimary"-->
-<!--            android:padding="@dimen/default_padding"-->
-<!--            android:onClick="startGridExample"-->
-<!--            android:layout_marginTop="@dimen/default_padding"-->
-<!--            app:cardCornerRadius="@dimen/card_corner_radius">-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/tv_grid_example"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:fontFamily="monospace"-->
-<!--                />-->
-<!--        </androidx.cardview.widget.CardView>-->
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/load_grid_example"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="@dimen/cardview_height"-->
+        <!--            app:cardBackgroundColor="@color/colorPrimary"-->
+        <!--            android:padding="@dimen/default_padding"-->
+        <!--            android:onClick="startGridExample"-->
+        <!--            android:layout_marginTop="@dimen/default_padding"-->
+        <!--            app:cardCornerRadius="@dimen/card_corner_radius">-->
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="@string/tv_grid_example"-->
+        <!--                android:textColor="@color/white"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:fontFamily="monospace"-->
+        <!--                />-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/load_clickable_example"
@@ -135,14 +136,14 @@
             android:onClick="startAlertDialogExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_clickable_component_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -154,14 +155,14 @@
             android:onClick="startDrawerExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_drawer_component_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -173,14 +174,14 @@
             android:onClick="startButtonsExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_buttons_component_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -192,14 +193,14 @@
             android:onClick="startStateExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_state_component_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -211,14 +212,14 @@
             android:onClick="startCustomViewExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_custom_view_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -230,14 +231,14 @@
             android:onClick="startCustomViewPaintExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_custom_view_paint_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -249,14 +250,14 @@
             android:onClick="startMeasuringScaleExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_measuring_scale_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -268,14 +269,14 @@
             android:onClick="startAutofillTextExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_text_input_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -287,14 +288,14 @@
             android:onClick="startStackExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_stack_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -306,14 +307,14 @@
             android:onClick="startViewAlignExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_view_layout_arrangement_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -325,14 +326,14 @@
             android:onClick="startMaterialDesignExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_material_design_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -344,14 +345,14 @@
             android:onClick="startFixedActionButtonExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_fab_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -363,14 +364,14 @@
             android:onClick="startConstraintLayoutExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_constraint_layout_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -382,14 +383,14 @@
             android:onClick="startBottomNavigationExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_bottom_navigation_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -401,14 +402,14 @@
             android:onClick="startAnimation1Example"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_animation1_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -420,14 +421,14 @@
             android:onClick="startAnimation2Example"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_animation2_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -439,14 +440,14 @@
             android:onClick="startTextInlineContentExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_text_inline_content_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -458,14 +459,14 @@
             android:onClick="startThemeExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_theme_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -477,14 +478,14 @@
             android:onClick="startLayoutModifierExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_layout_modifier_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -496,14 +497,14 @@
             android:onClick="startProcessDeathExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_process_death_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -515,14 +516,14 @@
             android:onClick="startLiveDataExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_live_data_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -534,14 +535,14 @@
             android:onClick="startFlowRowExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_filter_chips_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -553,14 +554,14 @@
             android:onClick="startShadowExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_shadow_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -572,14 +573,14 @@
             android:onClick="startCoroutineFlowExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_coroutine_flow_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -591,14 +592,14 @@
             android:onClick="startComposeWithClassicAndroidExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_compose_classic_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -610,14 +611,14 @@
             android:onClick="startBackPressExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_back_press_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -629,14 +630,14 @@
             android:onClick="startZoomableExample"
             android:layout_marginTop="@dimen/default_padding"
             app:cardCornerRadius="@dimen/card_corner_radius">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_zoomable_example"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:fontFamily="monospace"
-                />
+                android:fontFamily="monospace" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 </ScrollView>

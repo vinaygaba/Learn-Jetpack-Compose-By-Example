@@ -2,22 +2,22 @@ package com.example.jetpackcompose.customview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.core.Alignment
-import androidx.ui.core.Modifier
-import androidx.ui.core.drawLayer
-import androidx.ui.core.gesture.DragObserver
-import androidx.ui.core.gesture.rawDragGestureFilter
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.gestures.zoomable
-import androidx.ui.geometry.Offset
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.res.loadImageResource
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.zoomable
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.state
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.drawLayer
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.gesture.DragObserver
+import androidx.compose.ui.gesture.rawDragGestureFilter
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.res.loadImageResource
 import com.example.jetpackcompose.R
 
 class ZoomableActivity : AppCompatActivity() {
@@ -59,7 +59,7 @@ fun ZoomableComposable() {
     // by using the rawDragGestureFilter modifier. 
     Box(
         gravity = Alignment.Center,
-        modifier = Modifier.zoomable(onZoomDelta = { scale *= it }) + Modifier.rawDragGestureFilter(
+        modifier = Modifier.zoomable(onZoomDelta = { scale *= it }).rawDragGestureFilter(
             object : DragObserver {
                 override fun onDrag(dragDistance: Offset): Offset {
                     translate = translate.plus(dragDistance)
@@ -76,7 +76,7 @@ fun ZoomableComposable() {
             // We use the drawLayer modifier to modify the scale & translation of the image. 
             // This is read from the state properties that we created above.
             Image(
-                modifier = Modifier.fillMaxSize() + Modifier.drawLayer(
+                modifier = Modifier.fillMaxSize().drawLayer(
                     scaleX = scale,
                     scaleY = scale,
                     translationX = translate.x,

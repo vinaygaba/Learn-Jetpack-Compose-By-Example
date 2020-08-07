@@ -2,26 +2,25 @@ package com.example.jetpackcompose.state.coroutine
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.collectAsState
-import androidx.compose.getValue
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Text
-import androidx.ui.graphics.Color
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
-import androidx.ui.unit.sp
-import kotlinx.coroutines.coroutineScope
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class CoroutineFlowActivity: AppCompatActivity() {
+class CoroutineFlowActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -69,7 +68,7 @@ fun FlowComponent(flow: Flow<Int>) {
             }
         }
     }
-    
+
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable

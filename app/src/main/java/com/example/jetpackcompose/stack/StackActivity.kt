@@ -2,26 +2,26 @@ package com.example.jetpackcompose.stack
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Text
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Stack
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
-import androidx.ui.material.Surface
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Stack
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.LocalResourceImageComponent
 
-class StackActivity: AppCompatActivity() {
+class StackActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -48,7 +48,7 @@ fun StackComponent() {
     // used to modify the composable that its applied to. In this example, we assign a
     // ask the Stack to occupy the full available width using the Modifier.fillMaxWidth() modifier
     // and give it a height of 200 dp.
-    Stack(modifier = Modifier.fillMaxWidth() + Modifier.preferredHeight(200.dp)) {
+    Stack(modifier = Modifier.fillMaxWidth().preferredHeight(200.dp)) {
         // LocalResourceImageComponent is a composable that takes in an image resource id and
         // display it on the screen. Take a look at its implementation to learn more.
         LocalResourceImageComponent(resId = R.drawable.lenna)
@@ -59,10 +59,13 @@ fun StackComponent() {
             // Text is a predefined composable that does exactly what you'd expect it to -
             // display text on the screen. It allows you to customize its appearance using the
             // style property.
-            Text("Title",
-                style = TextStyle(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
-                    fontSize = 14.sp),
-                modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth()
+            Text(
+                "Title",
+                style = TextStyle(
+                    fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
+                    fontSize = 14.sp
+                ),
+                modifier = Modifier.padding(16.dp).fillMaxWidth()
             )
         }
     }

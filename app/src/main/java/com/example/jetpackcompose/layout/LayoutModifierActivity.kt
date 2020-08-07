@@ -2,25 +2,24 @@ package com.example.jetpackcompose.layout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.layout.Column
-import androidx.ui.layout.aspectRatio
-import androidx.ui.layout.offset
-import androidx.ui.layout.padding
-import androidx.ui.material.Surface
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.colors
 
-class LayoutModifierActivity: AppCompatActivity() {
+class LayoutModifierActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,8 +118,10 @@ fun AspectRatioComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we make use of the
     // Modifier.aspectRatio modifier that attempts to size a layout to match a specified aspect ratio.
-    Surface(color = colors[3], modifier = Modifier.aspectRatio(16/9f) +
-            Modifier.padding(top = 16.dp)) {
+    Surface(
+        color = colors[3], modifier = Modifier.aspectRatio(16 / 9f) +
+                Modifier.padding(top = 16.dp)
+    ) {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(

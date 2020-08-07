@@ -2,34 +2,33 @@ package com.example.jetpackcompose.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.geometry.Offset
-import androidx.ui.graphics.Color
-import androidx.ui.graphics.Shadow
-import androidx.ui.layout.Column
-import androidx.ui.layout.Row
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.material.Divider
-import androidx.ui.material.Surface
-import androidx.ui.text.SpanStyle
-import androidx.ui.text.TextStyle
-import androidx.ui.text.annotatedString
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontStyle
-import androidx.ui.text.font.FontWeight
-import androidx.ui.text.style.TextAlign
-import androidx.ui.text.style.TextDecoration
-import androidx.ui.text.style.TextIndent
-import androidx.ui.text.style.TextOverflow
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.annotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextIndent
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 
 class CustomTextActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,7 +127,8 @@ class CustomTextActivity : AppCompatActivity() {
                         // Text is a predefined composable that does exactly what you'd expect it to -
                         // display text on the screen. It allows you to customize its appearance using
                         // the style property.
-                        Text(text = "This text is center aligned",
+                        Text(
+                            text = "This text is center aligned",
                             style = TextStyle(
                                 textAlign = TextAlign.Center
                             ),

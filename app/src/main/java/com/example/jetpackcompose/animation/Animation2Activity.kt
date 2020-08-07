@@ -1,21 +1,21 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
-import androidx.animation.LinearEasing
-import androidx.animation.transitionDefinition
-import androidx.animation.tween
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.animation.ColorPropKey
-import androidx.ui.animation.transition
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.graphics.Color
-import androidx.ui.layout.fillMaxSize
+import androidx.compose.animation.ColorPropKey
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.transitionDefinition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.transition
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
 import androidx.ui.tooling.preview.Preview
 
 class Animation2Activity : AppCompatActivity() {
@@ -46,7 +46,7 @@ private val color = ColorPropKey()
  * the interpolation, duration & behavior of these transitions should be like. Read through the
  * comments below to understand this better.
  */
-private val colorDefinition = transitionDefinition {
+private val colorDefinition = transitionDefinition<Int> {
     // We define a transitionDefinition that's meant to be an exhaustive list of all states &
     // state transitions that are a part of your animation. Below, we define three states - state 0
     // state 1, & state 2. For each state, we also define the value of the properties when they

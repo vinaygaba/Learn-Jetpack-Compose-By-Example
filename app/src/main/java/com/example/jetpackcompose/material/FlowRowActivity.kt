@@ -2,34 +2,21 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.frames.modelListOf
-import androidx.compose.getValue
-import androidx.compose.mutableStateListOf
-import androidx.compose.state
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.clickable
-import androidx.ui.foundation.drawBackground
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.Column
-import androidx.ui.layout.ExperimentalLayout
-import androidx.ui.layout.FlowRow
-import androidx.ui.layout.MainAxisAlignment
-import androidx.ui.layout.SizeMode
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.padding
-import androidx.ui.text.style.TextOverflow
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
 import com.example.jetpackcompose.core.Amenity
-import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getAmenityList
 import com.example.jetpackcompose.image.TitleComponent
 
-class FlowRowActivity: AppCompatActivity() {
+class FlowRowActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -71,7 +58,7 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
     // modify the composable that its applied to. In the example below, we configure the
     // Box to occupy the entire available width using the Modifier.fillMaxSize() modifier and 
     // also give it a padding of 4 dp.
-    Box(modifier = Modifier.padding(4.dp) + Modifier.fillMaxSize() + Modifier) {
+    Box(modifier = Modifier.padding(4.dp).fillMaxSize() + Modifier) {
         // FlowRow is a pre-defined composable that places its children in a horizontal flow 
         // similar to the Row composable. However, its different from the Row composable in that if 
         // the horizontal space is not sufficient for all the children in one row, it 
@@ -79,7 +66,7 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
         // mainAxisAlignment is the alignment in the horizontal direction
         // crossAxisSpacing is the spacing between rows in the vertical direction
         // mainAxisSpacing is the spacing between the children in the same row
-        
+
 //        FlowRow(
 //            mainAxisAlignment = MainAxisAlignment.Center,
 //            crossAxisSpacing = 16.dp,

@@ -2,37 +2,37 @@ package com.example.jetpackcompose.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.autofill.AutofillNode
-import androidx.ui.autofill.AutofillType
-import androidx.ui.core.AutofillAmbient
-import androidx.ui.core.ContextAmbient
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.TextField
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.input.ImeAction
-import androidx.ui.input.KeyboardType
-import androidx.ui.input.PasswordVisualTransformation
-import androidx.ui.input.TextFieldValue
-import androidx.ui.layout.Column
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.material.FilledTextField
-import androidx.ui.material.Surface
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontWeight
-import androidx.ui.text.style.TextDecoration
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.CoreTextField
+import androidx.compose.material.Surface
+import androidx.compose.material.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillNode
+import androidx.compose.ui.autofill.AutofillType
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.AutofillAmbient
+import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.TextUnit
-import androidx.ui.unit.dp
 import com.example.jetpackcompose.core.hideKeyboard
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -69,7 +69,7 @@ class TextFieldActivity : AppCompatActivity() {
                     PasswordVisualTransformationInputComponent()
 
                     TitleComponent("This is a filled TextInput field based on Material Design")
-                    FilledTextInputComponent()
+                    MaterialTextInputComponent()
                 }
             }
         }
@@ -90,7 +90,7 @@ fun SimpleTextInputComponent() {
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        // TextField is a composable that is capable of accepting text user input. It renders the
+        // CoreTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -99,8 +99,8 @@ fun SimpleTextInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by state { TextFieldValue("Enter your text here") }
-        TextField(value = textValue,
-            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
+        CoreTextField(value = textValue,
+            modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
@@ -124,7 +124,7 @@ fun CustomStyleTextInputComponent() {
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        // TextField is a composable that is capable of accepting text user input. It renders the
+        // CoreTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -133,8 +133,8 @@ fun CustomStyleTextInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by state { TextFieldValue("Enter your text here") }
-        TextField(value = textValue,
-            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
+        CoreTextField(value = textValue,
+            modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // You can also customize the appearance of the TextInput by passing a TextStyle
             // configuration to the TextField composable. If you don't pass this, it's just going
             // to use the default values for all the properties.
@@ -167,7 +167,7 @@ fun NumberTextInputComponent() {
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        // TextField is a composable that is capable of accepting text user input. It renders the
+        // CoreTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -176,8 +176,8 @@ fun NumberTextInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by state { TextFieldValue("123") }
-        TextField(value = textValue,
-            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
+        CoreTextField(value = textValue,
+            modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // Setting the keyboard type allows you to configure what kind of data you can input
             // in this TextInput. Some examples are number, phone, email, password, etc.
             keyboardType = KeyboardType.Number,
@@ -214,9 +214,11 @@ fun SearchImeActionInputComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
-    Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp),
-        shape = RoundedCornerShape(5.dp)) {
-        // TextField is a composable that is capable of accepting text user input. It renders the
+    Surface(
+        color = Color.LightGray, modifier = Modifier.padding(16.dp),
+        shape = RoundedCornerShape(5.dp)
+    ) {
+        // CoreTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -225,8 +227,8 @@ fun SearchImeActionInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by state { TextFieldValue("Enter your search query here") }
-        TextField(value = textValue,
-            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
+        CoreTextField(value = textValue,
+            modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // Changing the imeAction allows you to change the primary icon of the keyboard which
             // is typically shown in the bottom right corner of the keyboard. Some examples of
             // ImeActions are search, send, done, go, etc.
@@ -257,7 +259,7 @@ fun PasswordVisualTransformationInputComponent() {
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        // TextField is a composable that is capable of accepting text user input. It renders the
+        // CoreTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -266,8 +268,8 @@ fun PasswordVisualTransformationInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by state { TextFieldValue("Enter your password here") }
-        TextField(value = textValue,
-            modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth(),
+        CoreTextField(value = textValue,
+            modifier = Modifier.padding(16.dp).fillMaxWidth(),
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
             // Visual transformation is used to modify the visual output of the input field. In
@@ -290,7 +292,7 @@ fun PasswordVisualTransformationInputComponent() {
 // think of composable functions to be similar to lego blocks - each composable function is in turn 
 // built up of smaller composable functions.
 @Composable
-fun FilledTextInputComponent() {
+fun MaterialTextInputComponent() {
     var textValue by state { TextFieldValue("") }
 
     // TextField is a composable that is capable of accepting text user input. It renders the
@@ -310,12 +312,12 @@ fun FilledTextInputComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we 
     // assign a padding of 16dp and ask the FilledTextField composable to occupy the entire 
     // available width.
-    FilledTextField(
+    TextField(
         value = textValue,
         onValueChange = { textValue = it },
         label = { Text("Enter Your Name") },
         placeholder = { Text(text = "John Doe") },
-        modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth()
+        modifier = Modifier.padding(16.dp).fillMaxWidth()
     )
 }
 
@@ -326,20 +328,21 @@ fun AutoFillTextInputComponent() {
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         var textValue by state { TextFieldValue("") }
         TextField(value = textValue,
+            label = { },
             modifier = Modifier.padding(16.dp),
             keyboardType = KeyboardType.Email,
-            onFocusChanged = { 
-                if(it){
+            onFocusChanged = {
+                if (it) {
                     autofillAmbient?.requestAutofillForNode(
                         autofillNode = AutofillNode(
                             autofillTypes = listOf(AutofillType.EmailAddress),
-                            boundingBox = androidx.ui.geometry.Rect(0f, 0f, 400f, 400f),
+                            boundingBox = Rect(0f, 0f, 400f, 400f),
                             onFill = {
                                 textValue = TextFieldValue(it)
                             }
                         )
                     )
-                }else{
+                } else {
                     autofillAmbient?.cancelAutofillForNode(autofillNode = AutofillNode(
                         autofillTypes = listOf(AutofillType.EmailAddress),
                         onFill = {}
@@ -362,7 +365,7 @@ fun AutoFillTextInputComponent() {
  * function requires a parameter, you can simply wrap your component inside another composable
  * function that doesn't take any parameters and call your composable function with the appropriate
  * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
-*/
+ */
 @Preview
 @Composable
 fun SimpleTextInputComponentPreview() {
@@ -396,7 +399,7 @@ fun PasswordVisualTransformationInputComponentPreview() {
 @Preview
 @Composable
 fun FilledTextInputComponentPreview() {
-    FilledTextInputComponent()
+    MaterialTextInputComponent()
 }
 
 

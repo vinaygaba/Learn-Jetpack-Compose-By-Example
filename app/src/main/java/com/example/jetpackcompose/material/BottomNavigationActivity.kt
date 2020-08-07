@@ -2,27 +2,27 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.setValue
-import androidx.compose.state
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Icon
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.Column
-import androidx.ui.layout.padding
-import androidx.ui.material.BottomNavigation
-import androidx.ui.material.BottomNavigationItem
-import androidx.ui.material.Card
-import androidx.ui.material.icons.Icons
-import androidx.ui.material.icons.filled.Favorite
+import androidx.compose.foundation.Icon
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Card
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
 
-class BottomNavigationActivity: AppCompatActivity() {
+class BottomNavigationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -46,8 +46,10 @@ class BottomNavigationActivity: AppCompatActivity() {
                 Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
                     BottomNavigationAlwaysShowLabelComponent()
                 }
-                TitleComponent("This is a bottom navigation bar that only shows label for " +
-                        "selected item")
+                TitleComponent(
+                    "This is a bottom navigation bar that only shows label for " +
+                            "selected item"
+                )
                 Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
                     BottomNavigationOnlySelectedLabelComponent()
                 }
@@ -84,7 +86,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
                     // accepts a vector asset as the icon.
                     Icon(asset = Icons.Filled.Favorite)
                 },
-                text = {
+                label = {
                     // Text is a predefined composable that does exactly what you'd expect it to -
                     // display text on the screen. It allows you to customize its appearance using the
                     // style property.
@@ -92,7 +94,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
                 },
                 // Update the selected index when the BottomNavigationItem is clicked
                 selected = selectedIndex == index,
-                onSelected = { selectedIndex = index }
+                onSelect = { selectedIndex = index }
             )
         }
     }
@@ -120,7 +122,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                     // accepts a vector asset as the icon.
                     Icon(asset = Icons.Filled.Favorite)
                 },
-                text = {
+                label = {
                     // Text is a predefined composable that does exactly what you'd expect it to -
                     // display text on the screen. It allows you to customize its appearance using the
                     // style property.
@@ -128,11 +130,12 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 },
                 selected = selectedIndex == index,
                 // Update the selected index when the BottomNavigationItem is clicked
-                onSelected = { selectedIndex = index },
+                onSelect = { selectedIndex = index },
                 // Setting this to false causes the label to be show only for the navigation item
                 // that is currently selected, like in the BottomNavigationAlwaysShowLabelComponent
                 // component.
-                alwaysShowLabels = false)
+                alwaysShowLabels = false
+            )
         }
     }
 }

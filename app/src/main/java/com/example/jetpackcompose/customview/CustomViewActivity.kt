@@ -2,14 +2,12 @@ package com.example.jetpackcompose.customview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Canvas
-import androidx.ui.graphics.Color
-import androidx.ui.graphics.Paint
-import androidx.ui.graphics.PaintingStyle
-import androidx.ui.layout.fillMaxSize
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
 import androidx.ui.tooling.preview.Preview
 
 class CustomViewActivity : AppCompatActivity() {

@@ -2,26 +2,25 @@ package com.example.jetpackcompose.scrollers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.ScrollableColumn
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.lazy.LazyColumnItems
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.Row
-import androidx.ui.layout.fillMaxHeight
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.material.Card
-import androidx.ui.text.TextStyle
-import androidx.ui.text.style.TextAlign
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumnFor
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
 import com.example.jetpackcompose.core.Person
 import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
@@ -50,7 +49,7 @@ fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
     // LazyColumnItems is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecylerView tries to do as it's more optimized
     // than the VerticalScroller.
-    LazyColumnItems(items = personList, modifier = Modifier.fillMaxHeight()) { person ->
+    LazyColumnFor(items = personList, modifier = Modifier.fillMaxHeight()) { person ->
         // TODO(vinaygaba) Replace this with an index callback once its available.
         val index = personList.indexOf(person)
         // Row is a composable that places its children in a horizontal sequence. You
@@ -60,12 +59,14 @@ fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
         // modify the composable that its applied to. In this example, we configure the
         // Row to occupify the entire available width using Modifier.fillMaxWidth() and also give
         // it a padding of 16dp.
-        Row(modifier = Modifier.padding(16.dp) + Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.padding(16.dp).fillParentMaxWidth()) {
             // Card composable is a predefined composable that is meant to represent the card surface as
             // specified by the Material Design specification. We also configure it to have rounded
             // corners and apply a modifier.
-            Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
-                modifier = Modifier.fillMaxWidth()) {
+            Card(
+                shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                modifier = Modifier.fillParentMaxWidth()
+            ) {
                 // Text is a predefined composable that does exactly what you'd expect it to -
                 // display text on the screen. It allows you to customize its appearance using
                 // the style property.
@@ -91,7 +92,7 @@ fun VerticalScrollableComponent(personList: List<Person>) {
     ScrollableColumn {
         // Column is a composable that places its children in a vertical sequence.
         Column {
-            for ((index,person) in personList.withIndex()) {
+            for ((index, person) in personList.withIndex()) {
                 // Row is a composable that places its children in a horizontal sequence. You
                 // can think of it similar to a LinearLayout with the horizontal orientation.
                 // In addition, we pass a modifier to the Row composable. You can think of
@@ -99,12 +100,14 @@ fun VerticalScrollableComponent(personList: List<Person>) {
                 // modify the composable that its applied to. In this example, we configure the
                 // Row to occupify the entire available width using Modifier.fillMaxWidth() and also
                 // give it a padding of 16dp.
-                Row(modifier = Modifier.fillMaxWidth() + Modifier.padding(16.dp)) {
+                Row(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                     // Card composable is a predefined composable that is meant to represent the card surface as
                     // specified by the Material Design specification. We also configure it to have rounded
                     // corners and apply a modifier.
-                    Card(shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
-                        modifier = Modifier.fillMaxWidth()) {
+                    Card(
+                        shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
                         // Text is a predefined composable that does exactly what you'd expect it to
                         // display text on the screen. It allows you to customize its appearance
                         // using the style property.

@@ -2,33 +2,34 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.MutableState
-import androidx.compose.state
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Icon
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.clickable
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.material.DrawerState
-import androidx.ui.material.IconButton
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.ModalDrawerLayout
-import androidx.ui.material.Surface
-import androidx.ui.material.TopAppBar
-import androidx.ui.material.icons.Icons
-import androidx.ui.material.icons.filled.Menu
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.Icon
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.DrawerValue
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ModalDrawerLayout
+import androidx.compose.material.Surface
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.rememberDrawerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.dp
 
-class DrawerAppActivity: AppCompatActivity() {
+class DrawerAppActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +49,13 @@ class DrawerAppActivity: AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun DrawerAppComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // Reacting to state changes is the core behavior of Compose. We use the rememberDrawerState composable
     // that is used for holding a state value in this composable for representing the current
     // value of the drawerState. Any composable that reads the value of drawerState will be recomposed
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    val (drawerState, onDrawerStateChange) = state { DrawerState.Closed }
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     // State composable used to hold the value of the current active screen
     val currentScreen = state { DrawerAppScreen.Screen1 }
 
@@ -64,8 +65,7 @@ fun DrawerAppComponent() {
     ModalDrawerLayout(
         // Drawer state to denote whether the drawer should be open or closed.
         drawerState = drawerState,
-        onStateChange = onDrawerStateChange,
-        gesturesEnabled = drawerState == DrawerState.Opened,
+        gesturesEnabled = drawerState.isOpen,
         drawerContent = {
             //drawerContent takes a composable to represent the view/layout to display when the
             // drawer is open.
@@ -73,7 +73,7 @@ fun DrawerAppComponent() {
                 // We pass a state composable that represents the current screen that's selected
                 // and what action to take when the drawer is closed.
                 currentScreen = currentScreen,
-                closeDrawer = { onDrawerStateChange(DrawerState.Closed) }
+                closeDrawer = { drawerState.close() }
             )
         },
         bodyContent = {
@@ -82,7 +82,7 @@ fun DrawerAppComponent() {
             BodyContentComponent(
                 currentScreen = currentScreen.value,
                 openDrawer = {
-                    onDrawerStateChange(DrawerState.Opened)
+                    drawerState.open()
                 }
             )
         }

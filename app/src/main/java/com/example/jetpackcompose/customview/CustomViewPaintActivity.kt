@@ -2,30 +2,28 @@ package com.example.jetpackcompose.customview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.frames.ModelList
-import androidx.compose.frames.modelListOf
-import androidx.compose.getValue
-import androidx.compose.mutableStateListOf
-import androidx.compose.snapshots.SnapshotStateList
-import androidx.compose.state
-import androidx.ui.core.Modifier
-import androidx.ui.core.gesture.DragObserver
-import androidx.ui.core.gesture.dragGestureFilter
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.Canvas
-import androidx.ui.geometry.Offset
-import androidx.ui.graphics.Color
-import androidx.ui.graphics.Path
-import androidx.ui.graphics.StrokeJoin
-import androidx.ui.graphics.drawscope.Stroke
-import androidx.ui.layout.fillMaxSize
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.state
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.gesture.DragObserver
+import androidx.compose.ui.gesture.dragGestureFilter
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.setContent
 
 /**
  * This example needs some more work.
  */
-class CustomViewPaintActivity: AppCompatActivity() {
+class CustomViewPaintActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -55,21 +53,25 @@ data class Paths(
 @Composable
 fun DrawingBoardComposable() {
     val paths by state<SnapshotStateList<Paths>> { mutableStateListOf() }
-    Box(modifier = Modifier.fillMaxSize() + Modifier.dragGestureFilter(
-        startDragImmediately = true,
-        dragObserver = object: DragObserver {
-            override fun onStart(downPosition: Offset) {
-                super.onStart(downPosition)
-                paths += Paths(downPosition.x, downPosition.y)
-            }
-        })) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .dragGestureFilter(
+            startDragImmediately = true,
+            dragObserver = object : DragObserver {
+                override fun onStart(downPosition: Offset) {
+                    super.onStart(downPosition)
+                    paths += Paths(downPosition.x, downPosition.y)
+                }
+            })
+    ) {
         Canvas(modifier = Modifier) {
             val p = Path()
             for (path in paths) {
                 p.lineTo(path.x, path.y)
                 p.moveTo(path.x, path.y)
             }
-            drawPath(p, color = Color.Black, style = Stroke(width = 3f, join = StrokeJoin.round))
+            drawPath(p, color = Color.Black, style = Stroke(width = 3f, join = StrokeJoin.Round))
         }
     }
 }

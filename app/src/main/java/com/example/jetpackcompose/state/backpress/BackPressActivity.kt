@@ -3,21 +3,21 @@ package com.example.jetpackcompose.state.backpress
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.getValue
-import androidx.compose.mutableStateOf
-import androidx.compose.remember
-import androidx.compose.setValue
-import androidx.ui.core.LifecycleOwnerAmbient
-import androidx.ui.core.Modifier
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.graphics.Color
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.padding
-import androidx.ui.material.Button
-import androidx.ui.unit.dp
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LifecycleOwnerAmbient
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
 
 class BackPressActivity : AppCompatActivity() {
@@ -33,7 +33,7 @@ class BackPressActivity : AppCompatActivity() {
             // based on the actions of the user across the different screens. Every time the value
             // of this variable changes, the relevant sub-composables that depends on it is 
             // automatically updated/recomposed.
-            
+
             // remember{} is a helper composable that calculates the value passed to it only 
             // during the first composition. It then returns the same value for every subsequent 
             // composition. In the example below, it initializes the value of AppState() and does
@@ -75,7 +75,7 @@ fun Screen1(appState: AppState) {
     // modify the composable that its applied to. In this example, as the Box composable to
     // occupy the entire available height & width using Modifier.fillMaxSize().
     Box(
-        modifier = Modifier.fillMaxSize() + Modifier.padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         gravity = ContentGravity.Center
     ) {
         // TitleComponent is a composable we created in one of the files that merely renders 
@@ -116,7 +116,7 @@ fun Screen2(appState: AppState) {
     // modify the composable that its applied to. In this example, as the Box composable to
     // occupy the entire available height & width using Modifier.fillMaxSize().
     Box(
-        modifier = Modifier.fillMaxSize() + Modifier.padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         gravity = ContentGravity.Center
     ) {
         // TitleComponent is a composable we created in one of the files that merely renders 
@@ -156,7 +156,7 @@ fun Screen3(appState: AppState) {
     // modify the composable that its applied to. In this example, as the Box composable to
     // occupy the entire available height & width using Modifier.fillMaxSize().
     Box(
-        modifier = Modifier.fillMaxSize() + Modifier.padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         gravity = ContentGravity.Center
     ) {
         // TitleComponent is a composable we created in one of the files that merely renders 

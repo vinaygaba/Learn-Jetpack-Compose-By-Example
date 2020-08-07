@@ -63,7 +63,7 @@ dependencies {
 
     // Constraint Layout
     implementation deps.constraintLayout
-    
+
     // Coroutine
     implementation deps.coroutine.core
 
