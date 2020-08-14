@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.preferredHeightIn
-import androidx.compose.foundation.layout.preferredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,7 +40,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -83,7 +81,7 @@ class ImageActivity : AppCompatActivity() {
 @Composable
 fun DisplayImagesComponent() {
     TitleComponent("Load image from the resource folder")
-    LocalResourceImageComponent(R.drawable.lenna)
+    LocalResourceImageComponent(R.drawable.landscape)
 
     TitleComponent("Load image from url using Picasso")
     NetworkImageComponentPicasso(
@@ -96,7 +94,7 @@ fun DisplayImagesComponent() {
     )
 
     TitleComponent("Image with rounded corners")
-    ImageWithRoundedCorners(R.drawable.lenna)
+    ImageWithRoundedCorners(R.drawable.landscape)
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -114,7 +112,9 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
         // Image composable to have a height of 200 dp.
-        Image(asset = it, modifier = Modifier.preferredHeightIn(maxHeight = 200.dp))
+        Image(asset = it, 
+            modifier = Modifier.preferredHeightIn(maxHeight = 200.dp)
+                .fillMaxWidth())
     }
 }
 
@@ -133,15 +133,15 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
-        // Box composable to have a height of 200dp, width of 200dp, alignment as center
-        // and a custom draw modifier to clip the corners of the image.
+        // Box composable to clip the corners of the image.
         Box(
-            modifier =
-            Modifier.preferredHeight(200.dp).preferredWidth(200.dp)
-                   .RoundedCornerClipModifier(8.dp)
+            modifier = Modifier.clip(RoundedCornerShape(8.dp))
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
-            Image(it)
+            Image(
+                asset = it,
+                modifier = Modifier.preferredHeight(200.dp)
+            )
         }
     }
 }
@@ -314,7 +314,7 @@ fun Modifier.RoundedCornerClipModifier(size: Dp): Modifier = composed {
 @Composable
 fun LocalResourceImageComponentPreview() {
     Column {
-        LocalResourceImageComponent(R.drawable.lenna)
+        LocalResourceImageComponent(R.drawable.landscape)
     }
 }
 
@@ -333,5 +333,5 @@ fun NetworkImageComponentGlidePreview() {
 @Preview("Add round corners to an image")
 @Composable
 fun ImageWithRoundedCornersPreview() {
-    ImageWithRoundedCorners(R.drawable.lenna)
+    ImageWithRoundedCorners(R.drawable.landscape)
 }

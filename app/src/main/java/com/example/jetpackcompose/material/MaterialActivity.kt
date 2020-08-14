@@ -144,7 +144,7 @@ fun MaterialCardComponent() {
             // Box is a predefined convenience composable that allows you to apply common draw & layout
             // logic. In addition we also pass a few modifiers to it.
             Box(modifier = Modifier.preferredWidth(48.dp).preferredHeight(48.dp)) {
-                Image(asset = imageFromResource(resources, R.drawable.lenna))
+                Image(asset = imageFromResource(resources, R.drawable.landscape))
             }
         })
     }
