@@ -21,8 +21,9 @@ import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -259,8 +260,8 @@ fun ComposeLogoComponent() {
 // built up of smaller composable functions.
 @Composable
 fun ColorChangingTextComponent() {
-    var initialState by state { 0 }
-    var toState by state { 1 }
+    var initialState by remember { mutableStateOf(0) }
+    var toState by remember { mutableStateOf(1) }
     // Transition composable creates a state-based transition using the animation configuration
     // defined in [TransitionDefinition]. In the example below, we use the
     // colorDefinition that we discussed above and also specify the initial

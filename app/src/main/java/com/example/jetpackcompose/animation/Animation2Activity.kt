@@ -11,8 +11,9 @@ import androidx.compose.foundation.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -89,8 +90,8 @@ private val colorDefinition = transitionDefinition<Int> {
 // built up of smaller composable functions.
 @Composable
 fun AnimateColorComponent() {
-    var initialState by state { 0 }
-    var toState by state { 1 }
+    var initialState by remember { mutableStateOf(0) }
+    var toState by remember { mutableStateOf(1) }
     // transition composable creates a state-based transition using the animation configuration
     // defined in [TransitionDefinition]. In the example below, we use the
     // colorDefinition that we discussed above and also specify the initial

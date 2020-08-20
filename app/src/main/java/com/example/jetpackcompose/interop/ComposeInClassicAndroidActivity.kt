@@ -66,7 +66,7 @@ fun CardComponentWithMessage() {
             modifier = Modifier.fillMaxWidth()
                 .preferredHeight(200.dp)
                 .padding(16.dp),
-            color = colors[1]
+            backgroundColor = colors[1],
         ) {
             // Text is a predefined composable that does exactly what you'd expect it to - display text on
             // the screen. It allows you to customize its appearance using style, fontWeight, fontSize, etc.

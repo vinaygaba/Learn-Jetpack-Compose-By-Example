@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Card
+import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -79,7 +80,7 @@ fun ScaffoldWithBottomBarAndCutout() {
                 }
             }
         },
-        floatingActionButtonPosition = Scaffold.FabPosition.End,
+        floatingActionButtonPosition = FabPosition.End,
         bodyContent = { padding ->
             // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views
@@ -92,7 +93,7 @@ fun ScaffoldWithBottomBarAndCutout() {
                         // the card surface as specified by the Material Design specification. We
                         // also configure it to have rounded corners and apply a modifier.
                         Card(
-                            color = colors[it % colors.size],
+                            backgroundColor = colors[it % colors.size],
                             shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.padding(8.dp)
                         ) {

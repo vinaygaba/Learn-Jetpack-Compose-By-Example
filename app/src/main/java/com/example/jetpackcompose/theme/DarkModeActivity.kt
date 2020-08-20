@@ -280,7 +280,7 @@ fun ThemedScreen1Component(
         // corners and apply a modifier.
         Card(
             modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colors.surface
+            backgroundColor = MaterialTheme.colors.surface
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
@@ -343,7 +343,7 @@ fun ThemedScreen2Component(
         // corners and apply a modifier.
         Card(
             modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colors.surface
+            backgroundColor = MaterialTheme.colors.surface
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
@@ -404,7 +404,7 @@ fun ThemedScreen3Component(
         // corners and apply a modifier.
         Card(
             modifier = Modifier.fillMaxWidth(),
-            color = MaterialTheme.colors.surface
+            backgroundColor = MaterialTheme.colors.surface
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.

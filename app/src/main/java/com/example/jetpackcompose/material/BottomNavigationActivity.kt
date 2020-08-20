@@ -14,8 +14,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
@@ -72,7 +73,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    var selectedIndex by state { 0 }
+    var selectedIndex by remember { mutableStateOf(0) }
     // BottomNavigation is a component placed at the bottom of the screen that represents primary
     // destinations in your application.
     BottomNavigation(modifier = Modifier.padding(16.dp)) {
@@ -108,7 +109,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    var selectedIndex by state { 0 }
+    var selectedIndex by remember { mutableStateOf(0) }
     // BottomNavigation is a component placed at the bottom of the screen that represents primary
     // destinations in your application.
     BottomNavigation(modifier = Modifier.padding(16.dp)) {

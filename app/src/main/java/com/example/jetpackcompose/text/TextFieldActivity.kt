@@ -13,14 +13,11 @@ import androidx.compose.material.Surface
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillNode
-import androidx.compose.ui.autofill.AutofillType
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AutofillAmbient
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.TextStyle
@@ -98,7 +95,7 @@ fun SimpleTextInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { TextFieldValue("Enter your text here") }
+        var textValue by remember { mutableStateOf(TextFieldValue("Enter your text here")) }
         CoreTextField(value = textValue,
             modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // Update value of textValue with the latest value of the text field
@@ -132,7 +129,7 @@ fun CustomStyleTextInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { TextFieldValue("Enter your text here") }
+        var textValue by remember { mutableStateOf(TextFieldValue("Enter your text here")) }
         CoreTextField(value = textValue,
             modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // You can also customize the appearance of the TextInput by passing a TextStyle
@@ -175,7 +172,7 @@ fun NumberTextInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { TextFieldValue("123") }
+        var textValue by remember { mutableStateOf(TextFieldValue("123")) }
         CoreTextField(value = textValue,
             modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // Setting the keyboard type allows you to configure what kind of data you can input
@@ -226,7 +223,7 @@ fun SearchImeActionInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { TextFieldValue("Enter your search query here") }
+        var textValue by remember { mutableStateOf(TextFieldValue("Enter your search query here")) }
         CoreTextField(value = textValue,
             modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // Changing the imeAction allows you to change the primary icon of the keyboard which
@@ -267,7 +264,7 @@ fun PasswordVisualTransformationInputComponent() {
         // TextField is reading the value from the textValue value, and that's also the value
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
-        var textValue by state { TextFieldValue("Enter your password here") }
+        var textValue by remember { mutableStateOf(TextFieldValue("Enter your password here")) }
         CoreTextField(value = textValue,
             modifier = Modifier.padding(16.dp).fillMaxWidth(),
             keyboardType = KeyboardType.Password,
@@ -293,7 +290,7 @@ fun PasswordVisualTransformationInputComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialTextInputComponent() {
-    var textValue by state { TextFieldValue("") }
+    var textValue by remember { mutableStateOf(TextFieldValue("")) }
 
     // TextField is a composable that is capable of accepting text user input. It renders the
     // value that you pass to the "value" field. In order to update this as the user is
@@ -319,42 +316,6 @@ fun MaterialTextInputComponent() {
         placeholder = { Text(text = "John Doe") },
         modifier = Modifier.padding(16.dp).fillMaxWidth()
     )
-}
-
-// Not working yet for some reason
-@Composable
-fun AutoFillTextInputComponent() {
-    val autofillAmbient = AutofillAmbient.current
-    Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        var textValue by state { TextFieldValue("") }
-        TextField(value = textValue,
-            label = { },
-            modifier = Modifier.padding(16.dp),
-            keyboardType = KeyboardType.Email,
-            onFocusChanged = {
-                if (it) {
-                    autofillAmbient?.requestAutofillForNode(
-                        autofillNode = AutofillNode(
-                            autofillTypes = listOf(AutofillType.EmailAddress),
-                            boundingBox = Rect(0f, 0f, 400f, 400f),
-                            onFill = {
-                                textValue = TextFieldValue(it)
-                            }
-                        )
-                    )
-                } else {
-                    autofillAmbient?.cancelAutofillForNode(autofillNode = AutofillNode(
-                        autofillTypes = listOf(AutofillType.EmailAddress),
-                        onFill = {}
-                    ))
-                }
-            },
-            imeAction = ImeAction.Done,
-            onValueChange = {
-                textValue = it
-            }
-        )
-    }
 }
 
 /**

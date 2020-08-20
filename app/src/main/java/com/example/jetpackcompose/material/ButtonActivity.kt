@@ -2,22 +2,22 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Border
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Text
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.TextButton
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
+import androidx.ui.tooling.preview.Preview
 
 class ButtonActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,7 +86,7 @@ fun SimpleButtonWithBorderComponent() {
         modifier = Modifier.padding(16.dp),
         elevation = 5.dp,
         // Provide a border for this button
-        border = Border(size = 5.dp, brush = SolidColor(Color.Black))
+        border = BorderStroke(width = 5.dp, brush = SolidColor(Color.Black))
     ) {
         // The Button composable allows you to provide child composables that inherit this button
         // functionality.
