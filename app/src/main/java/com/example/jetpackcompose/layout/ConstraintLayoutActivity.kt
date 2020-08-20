@@ -149,7 +149,7 @@ fun SimpleConstraintLayoutComponent() {
                     }
             ) {
                 // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
-                Image(imageFromResource(resources, R.drawable.lenna))
+                Image(imageFromResource(resources, R.drawable.landscape))
             }
         }
     }
