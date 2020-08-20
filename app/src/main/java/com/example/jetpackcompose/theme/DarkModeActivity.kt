@@ -28,6 +28,8 @@ import androidx.compose.material.lightColors
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -131,7 +133,7 @@ fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
     // performance optimization. It is inspired from existing frameworks like React.
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     // State composable used to hold the value of the current active screen
-    val currentScreen = state { ThemedDrawerAppScreen.Screen1 }
+    val currentScreen = remember { mutableStateOf(ThemedDrawerAppScreen.Screen1) }
 
     // ModalDrawerLayout is a pre-defined composable used to provide access to destinations in
     // the app. It's a common pattern used across multiple apps where you see a drawer on the
@@ -448,7 +450,7 @@ enum class ThemedDrawerAppScreen {
 @Preview
 @Composable
 fun CustomThemeLightPreview() {
-    CustomTheme(enableDarkMode = state { false }) {
+    CustomTheme(enableDarkMode = remember { mutableStateOf(false) }) {
         Card {
             Text("Preview Text", modifier = Modifier.padding(32.dp))
         }
@@ -458,7 +460,7 @@ fun CustomThemeLightPreview() {
 @Preview
 @Composable
 fun CustomThemeDarkPreview() {
-    CustomTheme(enableDarkMode = state { true }) {
+    CustomTheme(enableDarkMode = remember { mutableStateOf(true) }) {
         Card {
             Text("Preview Text", modifier = Modifier.padding(32.dp))
         }

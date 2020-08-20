@@ -22,7 +22,8 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.state
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -57,7 +58,7 @@ fun DrawerAppComponent() {
     // performance optimization. It is inspired from existing frameworks like React.
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     // State composable used to hold the value of the current active screen
-    val currentScreen = state { DrawerAppScreen.Screen1 }
+    val currentScreen = remember { mutableStateOf(DrawerAppScreen.Screen1) }
 
     // ModalDrawerLayout is a pre-defined composable used to provide access to destinations in
     // the app. It's a common pattern used across multiple apps where you see a drawer on the
