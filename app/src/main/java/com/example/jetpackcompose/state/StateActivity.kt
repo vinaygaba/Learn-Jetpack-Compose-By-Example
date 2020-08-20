@@ -12,8 +12,9 @@ import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
@@ -53,7 +54,7 @@ fun StateComponent() {
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    var counter by state { 0 }
+    var counter by remember { mutableStateOf(0) }
     TitleComponent("Example using state class to store state")
     // Row is a composable that places its children in a horizontal sequence. You can think of it
     // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -107,7 +108,7 @@ fun ModelComponent() {
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    var counterState by state { CounterState() }
+    var counterState by remember { mutableStateOf(CounterState()) }
     TitleComponent("Example using Model class to store state")
     // Row is a composable that places its children in a horizontal sequence. You can think of it
     // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier

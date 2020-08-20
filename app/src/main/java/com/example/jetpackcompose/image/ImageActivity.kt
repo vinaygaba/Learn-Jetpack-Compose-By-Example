@@ -19,9 +19,10 @@ import androidx.compose.foundation.layout.preferredHeightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.onCommit
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
@@ -157,8 +158,8 @@ fun NetworkImageComponentPicasso(
 ) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
-    var image by state<ImageAsset?> { null }
-    var drawable by state<Drawable?> { null }
+    var image by remember { mutableStateOf<ImageAsset?>(null) }
+    var drawable by remember { mutableStateOf<Drawable?>(null) }
     onCommit(url) {
         val picasso = Picasso.get()
         val target = object : Target {
@@ -222,8 +223,8 @@ fun NetworkImageComponentPicasso(
 fun NetworkImageComponentGlide(
     url: String, modifier: Modifier = Modifier.fillMaxWidth().preferredHeightIn(maxHeight = 200.dp)
 ) {
-    var image by state<ImageAsset?> { null }
-    var drawable by state<Drawable?> { null }
+    var image by remember { mutableStateOf<ImageAsset?>(null) }
+    var drawable by remember { mutableStateOf<Drawable?>(null) }
     val context = ContextAmbient.current
     onCommit(url) {
         val glide = Glide.with(context)

@@ -20,9 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.launchInComposition
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.runtime.state
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -103,7 +100,8 @@ fun LiveDataComponentList(personList: List<Person>) {
         // modify the composable that its applied to. In this example, we assign a padding of
         // 16dp to the Card along with specifying it to occupy the entire available width.
         Card(
-            shape = RoundedCornerShape(4.dp), color = Color.White,
+            shape = RoundedCornerShape(4.dp),
+            backgroundColor = Color.White,
             modifier = Modifier.fillParentMaxWidth().padding(8.dp)
         ) {
             // ListItem is a predefined composable that is a Material Design implementation of [list
@@ -174,7 +172,7 @@ fun LaunchInCompositionComponent(viewModel: SuperheroesViewModel) {
     // will be recomposed any time the value changes. This ensures that only the composables that
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
-    var personList by state<SnapshotStateList<Person>> { mutableStateListOf() }
+    var personList = mutableStateListOf<Person>()
 
     // launchInComposition allows you to launch a suspendable function as soon as this composable
     // is first committed i.e this tree node is first allowed to be rendered on the screen. It 

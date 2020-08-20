@@ -12,8 +12,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.CoreTextField
 import androidx.compose.material.Card
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
@@ -74,7 +74,7 @@ fun ProcessDeathComponent() {
         Card(
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier.preferredWidth(300.dp).aspectRatio(16 / 9f),
-            color = colors[0]
+            backgroundColor = colors[0]
         ) {
             // Column is a composable that places its children in a vertical sequence. You
             // can think of it similar to a LinearLayout with the vertical orientation.
@@ -108,8 +108,7 @@ fun ProcessDeathComponent() {
                 // Thus you should be careful about what data you store inside.
                 // Discussion - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1586187000148500?thread_ts=1586186224.146600&cid=CJLTWPH7S
                 var textValue by savedInstanceState { "1234567812345678" }
-                TextField(value = TextFieldValue(textValue),
-                    label = { },
+                CoreTextField(value = TextFieldValue(textValue),
                     modifier = Modifier.padding(16.dp),
                     textStyle = TextStyle(
                         color = Color.White, fontFamily = FontFamily.Serif,

@@ -6,10 +6,7 @@ import androidx.compose.foundation.Box
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.gesture.DragObserver
@@ -52,7 +49,7 @@ data class Paths(
 
 @Composable
 fun DrawingBoardComposable() {
-    val paths by state<SnapshotStateList<Paths>> { mutableStateListOf() }
+    val paths = mutableStateListOf<Paths>()
     Box(
         modifier = Modifier
             .fillMaxSize()

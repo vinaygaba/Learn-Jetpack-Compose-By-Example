@@ -13,8 +13,9 @@ import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -55,7 +56,7 @@ fun ClickableText() {
     // is used to control whether the popup should be shown. The value is toggled every time the
     // text "Click to see dialog" is clicked. Every time the value of this variable changes,
     // the relevant sub-composables that use showPopup are automatically recomposed.
-    var showPopup by state { false }
+    var showPopup by remember { mutableStateOf(false) }
     // Box with clickable modifier wraps the child composable and enables it to react to a click
     // through the onClick callback similar to the onClick listener that we are accustomed to
     // on Android.
@@ -67,7 +68,7 @@ fun ClickableText() {
         // 8dp to the Card composable and 16dp to the Text composable.
         Card(
             shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp),
-            color = Color.LightGray
+            backgroundColor = Color.LightGray
         ) {
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
@@ -95,7 +96,7 @@ fun ClickableText() {
         // shows a simple alert dialog on the screen if this code path is executed (i.e showPopup
         // variable is true)
         AlertDialog(
-            onCloseRequest = onPopupDismissed,
+            onDismissRequest = onPopupDismissed,
             text = {
                 Text("Congratulations! You just clicked the text successfully")
             },

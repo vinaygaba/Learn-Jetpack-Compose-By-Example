@@ -31,8 +31,9 @@ import androidx.compose.material.TriStateCheckbox
 import androidx.compose.material.ripple.RippleIndication
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.state
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -162,7 +163,7 @@ fun MaterialCheckboxComponent() {
     // will be recomposed any time the value changes. This ensures that only the composables that
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
-    var checked by state { false }
+    var checked by remember { mutableStateOf(false) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -207,7 +208,7 @@ fun MaterialTriStateCheckboxComponent() {
     // any time the value changes. This ensures that only the composables that depend on this
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
-    var counter by state { 0 }
+    var counter by remember { mutableStateOf(0) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -253,7 +254,7 @@ fun MaterialRadioButtonGroupComponent() {
     // composables that depend on this will be redraw while the rest remain unchanged. This ensures
     // efficiency and is a performance optimization. It is inspired from existing frameworks like
     // React.
-    var selected by state { "Android" }
+    var selected by remember { mutableStateOf("Android") }
 
     val radioGroupOptions = listOf<String>("Android", "iOS", "Windows")
     // Card composable is a predefined composable that is meant to represent the card surface as
@@ -447,7 +448,7 @@ fun MaterialContinousSliderComponent() {
     // composables that depend on this will be redraw while the rest remain unchanged. This ensures
     // efficiency and is a performance optimization. It is inspired from existing frameworks like
     // React.
-    var sliderValue by state { 0f }
+    var sliderValue by remember { mutableStateOf(0f) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -478,7 +479,7 @@ fun MaterialDiscreteSliderComponent() {
     // composables that depend on this will be redraw while the rest remain unchanged. This ensures
     // efficiency and is a performance optimization. It is inspired from existing frameworks like
     // React.
-    var sliderValue by state { 0f }
+    var sliderValue by remember { mutableStateOf(0f) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -516,7 +517,7 @@ fun MaterialSwitchComponent() {
     // composables that depend on this will be redraw while the rest remain unchanged. This ensures
     // efficiency and is a performance optimization. It is inspired from existing frameworks like
     // React.
-    var checked by state { false }
+    var checked by remember { mutableStateOf(false) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -529,7 +530,7 @@ fun MaterialSwitchComponent() {
     Card(
         shape = RoundedCornerShape(4.dp),
         modifier = Modifier.padding(8.dp).fillMaxWidth(),
-        color = Color(249, 249, 249)
+        backgroundColor = Color(249, 249, 249)
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier

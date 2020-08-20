@@ -2,7 +2,7 @@ package com.example.jetpackcompose.text
 
 import androidx.ui.test.assertIsDisplayed
 import androidx.ui.test.createComposeRule
-import androidx.ui.test.findByText
+import androidx.ui.test.onNodeWithText
 import org.junit.Before
 
 import org.junit.Rule
@@ -44,6 +44,6 @@ class SimpleTextComposableTest {
 
         // In this example, we just check if there is a composable with the text
         // "Learn Jetpack Compose By Example"
-        findByText("Learn Jetpack Compose By Example").assertIsDisplayed()
+        onNodeWithText("Learn Jetpack Compose By Example").assertIsDisplayed()
     }
 }

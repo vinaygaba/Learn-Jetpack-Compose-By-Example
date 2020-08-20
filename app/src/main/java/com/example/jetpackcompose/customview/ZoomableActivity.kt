@@ -8,7 +8,8 @@ import androidx.compose.foundation.gestures.zoomable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.state
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,8 +47,8 @@ fun ZoomableComposable() {
     // This ensures that only the composables that depend on this will be redraw while the 
     // rest remain unchanged. This ensures efficiency and is a performance optimization. It 
     // is inspired from existing frameworks like React.
-    var scale by state { 1f }
-    var translate by state { Offset(0f, 0f) }
+    var scale by remember { mutableStateOf(1f) }
+    var translate by remember { mutableStateOf(Offset(0f, 0f)) }
 
     // Box is a predefined convenience composable that allows you to apply common draw & layout
     // logic. In addition we also pass a few modifiers to it.

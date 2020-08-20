@@ -64,7 +64,8 @@ fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
             // specified by the Material Design specification. We also configure it to have rounded
             // corners and apply a modifier.
             Card(
-                shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                shape = RoundedCornerShape(4.dp), 
+                backgroundColor = colors[index % colors.size],
                 modifier = Modifier.fillParentMaxWidth()
             ) {
                 // Text is a predefined composable that does exactly what you'd expect it to -
@@ -105,7 +106,8 @@ fun VerticalScrollableComponent(personList: List<Person>) {
                     // specified by the Material Design specification. We also configure it to have rounded
                     // corners and apply a modifier.
                     Card(
-                        shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                        shape = RoundedCornerShape(4.dp),
+                        backgroundColor = colors[index % colors.size],
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         // Text is a predefined composable that does exactly what you'd expect it to

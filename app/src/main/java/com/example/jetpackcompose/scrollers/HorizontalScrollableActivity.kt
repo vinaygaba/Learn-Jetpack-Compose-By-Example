@@ -83,7 +83,8 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
                 // used to modify the composable that its applied to. In this example, we assign a
                 // padding of 16dp to the Card.
                 Card(
-                    shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                    shape = RoundedCornerShape(4.dp), 
+                    backgroundColor = colors[index % colors.size],
                     modifier = Modifier.padding(16.dp)
                 ) {
                     // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -140,7 +141,8 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                 // used to modify the composable that its applied to. In this example, we assign a
                 // padding of 16dp to the Card.
                 Card(
-                    shape = RoundedCornerShape(4.dp), color = colors[index % colors.size],
+                    shape = RoundedCornerShape(4.dp), 
+                    backgroundColor = colors[index % colors.size],
                     modifier = Modifier.padding(16.dp)
                 ) {
                     // Box is a predefined convenience composable that allows you to apply common
