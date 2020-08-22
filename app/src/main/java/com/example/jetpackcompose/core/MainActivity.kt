@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.animation.Animation1Activity
 import com.example.jetpackcompose.animation.Animation2Activity
+import com.example.jetpackcompose.animation.ListAnimationActivity
 import com.example.jetpackcompose.animation.TextAnimationActivity
 import com.example.jetpackcompose.customview.CustomViewActivity
 import com.example.jetpackcompose.customview.CustomViewPaintActivity
@@ -135,6 +136,10 @@ class MainActivity : AppCompatActivity() {
 
     fun startTextInlineContentExample(view: View) {
         startActivity(Intent(this, TextAnimationActivity::class.java))
+    }
+
+    fun startListAnimation(view: View) {
+        startActivity(Intent(this, ListAnimationActivity::class.java))
     }
 
     fun startThemeExample(view: View) {

@@ -188,6 +188,11 @@
             android:exported="true"
             android:label="@string/title_zoomable_example"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".animation.ListAnimationActivity"
+            android:exported="true"
+            android:label="@string/title_list_animation_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

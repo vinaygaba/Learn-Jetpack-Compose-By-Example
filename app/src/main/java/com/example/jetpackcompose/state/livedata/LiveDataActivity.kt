@@ -89,7 +89,7 @@ fun LiveDataComponent(personListLiveData: LiveData<List<Person>>) {
 @Composable
 fun LiveDataComponentList(personList: List<Person>) {
     // LazyColumnItems is a vertically scrolling list that only composes and lays out the currently
-    // visible items. This is very similar to what RecylerView tries to do as it's more optimized
+    // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
     // than the VerticalScroller.
     LazyColumnFor(items = personList) { person ->
         // Card composable is a predefined composable that is meant to represent the
