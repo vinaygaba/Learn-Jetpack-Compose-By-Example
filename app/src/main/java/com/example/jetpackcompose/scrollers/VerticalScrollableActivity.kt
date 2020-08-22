@@ -47,7 +47,7 @@ class VerticalScrollableActivity : AppCompatActivity() {
 @Composable
 fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
     // LazyColumnItems is a vertically scrolling list that only composes and lays out the currently
-    // visible items. This is very similar to what RecylerView tries to do as it's more optimized
+    // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
     // than the VerticalScroller.
     LazyColumnFor(items = personList, modifier = Modifier.fillMaxHeight()) { person ->
         // TODO(vinaygaba) Replace this with an index callback once its available.
