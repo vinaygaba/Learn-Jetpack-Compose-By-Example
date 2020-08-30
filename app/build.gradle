@@ -33,7 +33,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerVersion "1.4.0-dev-withExperimentalGoogleExtensions-20200720"
+        kotlinCompilerVersion "${versions.kotlinCompilerVersion}"
         kotlinCompilerExtensionVersion "${versions.compose}"
 
     }
@@ -82,8 +82,6 @@ dependencies {
     implementation deps.imageLoading.picasso
     implementation deps.imageLoading.glideCore
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation deps.test.junit
     androidTestImplementation deps.test.junitImplementation
 }
