@@ -38,7 +38,7 @@ Examples
 Each example is meant to be self contained and tries to explain all the
 concepts that its using with comments. Compose also comes with this
 nifty feature that lets you preview each component in the IntelliJ IDE
-itself. To do so, go to any of the examples examples and the click on
+itself. To do so, go to any of the examples and the click on
 the preview button in the top right corner. This is possible if your
 `@Composable` component has a corresponding `@Preview` method associated
 with it. Look at the examples below for all this to make a bit more
