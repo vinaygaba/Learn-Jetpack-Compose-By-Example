@@ -58,7 +58,7 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
     // modify the composable that its applied to. In the example below, we configure the
     // Box to occupy the entire available width using the Modifier.fillMaxSize() modifier and 
     // also give it a padding of 4 dp.
-    Box(modifier = Modifier.padding(4.dp).fillMaxSize() + Modifier) {
+    Box(modifier = Modifier.padding(4.dp).fillMaxSize()) {
         // FlowRow is a pre-defined composable that places its children in a horizontal flow 
         // similar to the Row composable. However, its different from the Row composable in that if 
         // the horizontal space is not sufficient for all the children in one row, it 
