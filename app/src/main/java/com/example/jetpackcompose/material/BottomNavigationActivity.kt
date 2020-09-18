@@ -95,7 +95,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
                 },
                 // Update the selected index when the BottomNavigationItem is clicked
                 selected = selectedIndex == index,
-                onSelect = { selectedIndex = index }
+                onClick = { selectedIndex = index }
             )
         }
     }
@@ -131,7 +131,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 },
                 selected = selectedIndex == index,
                 // Update the selected index when the BottomNavigationItem is clicked
-                onSelect = { selectedIndex = index },
+                onClick = { selectedIndex = index },
                 // Setting this to false causes the label to be show only for the navigation item
                 // that is currently selected, like in the BottomNavigationAlwaysShowLabelComponent
                 // component.

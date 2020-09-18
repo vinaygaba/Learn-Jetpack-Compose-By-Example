@@ -30,7 +30,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.state
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -61,7 +60,7 @@ class DarkModeActivity : AppCompatActivity() {
             // button that's part of the ThemedDrawerAppComponent composable. Every time the
             // value of this variable changes, the relevant sub composables of
             // ThemedDrawerAppComponent that use enableDarkMode are automatically recomposed.
-            val enableDarkMode = state { false }
+            val enableDarkMode = remember { mutableStateOf( false) }
             CustomTheme(enableDarkMode) {
                 ThemedDrawerAppComponent(enableDarkMode)
             }

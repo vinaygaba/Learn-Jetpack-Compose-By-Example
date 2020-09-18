@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredHeightIn
+import androidx.compose.foundation.layout.preferredSizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -114,7 +114,7 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
         // used to modify the composable that its applied to. In this example, we configure the
         // Image composable to have a height of 200 dp.
         Image(asset = it, 
-            modifier = Modifier.preferredHeightIn(maxHeight = 200.dp)
+            modifier = Modifier.preferredSizeIn(maxHeight = 200.dp)
                 .fillMaxWidth())
     }
 }
@@ -154,7 +154,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 @Composable
 fun NetworkImageComponentPicasso(
     url: String,
-    modifier: Modifier = Modifier.fillMaxWidth().preferredHeightIn(maxHeight = 200.dp)
+    modifier: Modifier = Modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
 ) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
@@ -221,7 +221,7 @@ fun NetworkImageComponentPicasso(
  */
 @Composable
 fun NetworkImageComponentGlide(
-    url: String, modifier: Modifier = Modifier.fillMaxWidth().preferredHeightIn(maxHeight = 200.dp)
+    url: String, modifier: Modifier = Modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
 ) {
     var image by remember { mutableStateOf<ImageAsset?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }

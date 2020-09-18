@@ -50,15 +50,15 @@ fun ShadowComponent() {
             // We specify that the box should have round corners with 8.dp as the radius.
             shape = RoundedCornerShape(8.dp),
             // It will occupy the maximum available width
-            modifier = Modifier.fillMaxWidth() +
+            modifier = Modifier.fillMaxWidth()
                     // with a height of 250 dp
-                    Modifier.preferredHeight(250.dp) +
+                    .preferredHeight(250.dp)
                     // and a padding of 16 dp
-                    Modifier.padding(16.dp) +
+                    .padding(16.dp)
                     // In addition, we will also draw a shadow around the Box using the 
                     // drawShadow modifier. Because its a modifier, it can basically be applied 
                     // to any modifier without much hassle. It's that simple! 
-                    Modifier.drawShadow(
+                    .drawShadow(
                         elevation = 3.dp,
                         shape = RoundedCornerShape(8.dp)
                     ),
