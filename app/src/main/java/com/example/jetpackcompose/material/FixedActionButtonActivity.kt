@@ -80,6 +80,7 @@ fun ScaffoldWithBottomBarAndCutout() {
                 }
             }
         },
+        isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.End,
         bodyContent = { padding ->
             // ScrollableColumn is a composable that adds the ability to scroll through the
