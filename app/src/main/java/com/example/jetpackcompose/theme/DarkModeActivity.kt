@@ -2,7 +2,6 @@ package com.example.jetpackcompose.theme
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
@@ -181,37 +180,46 @@ fun ThemedDrawerContentComponent(
     // use the Scaffold composable that takes care of placing the drawer content in the correct
     // position. Look at [FixedActionButtonActivity] to see an example.
     Column(modifier = Modifier.fillMaxHeight()) {
-        // Box with clickable modifier wraps the child composable and enables it to react to a click
-        // through the onClick callback similar to the onClick listener that we are accustomed to
-        // on Android.
+        // Column with clickable modifier wraps the child composable and enables it to react to a 
+        // click through the onClick callback similar to the onClick listener that we are accustomed 
+        // to on Android.
         // Here, we just update the currentScreen variable to hold the appropriate value based on
         // the row that is clicked i.e if the first row is clicked, we set the value of
         // currentScreen to DrawerAppScreen.Screen1, when second row is clicked we set it to
         // DrawerAppScreen.Screen2 and so on and so forth.
-        Box(Modifier.clickable(onClick = {
-            currentScreen.value = ThemedDrawerAppScreen.Screen1
-            // We also close the drawer when an option from the drawer is selected.
-            closeDrawer()
-        }), children = {
-            // Text is a predefined composable that does exactly what you'd expect it to -
-            // display text on the screen. It allows you to customize its appearance using
-            // the style property.
-            Text(text = ThemedDrawerAppScreen.Screen1.name, modifier = Modifier.padding(16.dp))
-        })
+        Column(
+            modifier = Modifier.clickable(onClick = {
+                currentScreen.value = ThemedDrawerAppScreen.Screen1
+                // We also close the drawer when an option from the drawer is selected.
+                closeDrawer()
+            }), children = {
+                // Text is a predefined composable that does exactly what you'd expect it to -
+                // display text on the screen. It allows you to customize its appearance using
+                // the style property.
+                Text(text = ThemedDrawerAppScreen.Screen1.name, modifier = Modifier.padding(16.dp))
+            }
+        )
 
-        Box(Modifier.clickable(onClick = {
-            currentScreen.value = ThemedDrawerAppScreen.Screen2
-            closeDrawer()
-        }), children = {
-            Text(text = ThemedDrawerAppScreen.Screen2.name, modifier = Modifier.padding(16.dp))
-        })
+        Column(
+            modifier = Modifier.clickable(
+                onClick = {
+                    currentScreen.value = ThemedDrawerAppScreen.Screen2
+                    closeDrawer()
+                }
+            ), children = {
+                Text(text = ThemedDrawerAppScreen.Screen2.name, modifier = Modifier.padding(16.dp))
+            }
+        )
 
-        Box(Modifier.clickable(onClick = {
-            currentScreen.value = ThemedDrawerAppScreen.Screen3
-            closeDrawer()
-        }), children = {
-            Text(text = ThemedDrawerAppScreen.Screen3.name, modifier = Modifier.padding(16.dp))
-        })
+        Column(
+            modifier = Modifier.clickable {
+                currentScreen.value = ThemedDrawerAppScreen.Screen3
+                closeDrawer()
+            },
+            children = {
+                Text(text = ThemedDrawerAppScreen.Screen3.name, modifier = Modifier.padding(16.dp))
+            }
+        )
     }
 }
 

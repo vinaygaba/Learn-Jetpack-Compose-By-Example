@@ -3,8 +3,8 @@ package com.example.jetpackcompose.state.backpress
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LifecycleOwnerAmbient
@@ -67,16 +68,17 @@ fun BackPressApp(appState: AppState) {
 @Composable
 fun Screen1(appState: AppState) {
     val activity = (LifecycleOwnerAmbient.current as ComponentActivity)
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. We give it a ContentGravity of Center to ensure the children of this composable
-    // are placed in its center. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, as the Box composable to
+    // modify the composable that its applied to. In this example, as the Column composable to
     // occupy the entire available height & width using Modifier.fillMaxSize().
-    Box(
+    Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
-        gravity = ContentGravity.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // TitleComponent is a composable we created in one of the files that merely renders 
         // text on the screen. 
@@ -108,16 +110,17 @@ fun Screen1(appState: AppState) {
 // built up of smaller composable functions.
 @Composable
 fun Screen2(appState: AppState) {
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. We give it a ContentGravity of Center to ensure the children of this composable
-    // are placed in its center. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, as the Box composable to
+    // modify the composable that its applied to. In this example, as the Column composable to
     // occupy the entire available height & width using Modifier.fillMaxSize().
-    Box(
+    Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
-        gravity = ContentGravity.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // TitleComponent is a composable we created in one of the files that merely renders 
         // text on the screen. 
@@ -148,16 +151,17 @@ fun Screen2(appState: AppState) {
 // built up of smaller composable functions.
 @Composable
 fun Screen3(appState: AppState) {
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. We give it a ContentGravity of Center to ensure the children of this composable
-    // are placed in its center. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, as the Box composable to
+    // modify the composable that its applied to. In this example, as the Column composable to
     // occupy the entire available height & width using Modifier.fillMaxSize().
-    Box(
+    Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
-        gravity = ContentGravity.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // TitleComponent is a composable we created in one of the files that merely renders 
         // text on the screen. 

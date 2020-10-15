@@ -9,12 +9,13 @@ import androidx.compose.animation.core.repeatable
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.transition
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.preferredSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -85,14 +86,18 @@ private val rotationTransitionDefinition = transitionDefinition<String> {
 // built up of smaller composable functions.
 @Composable
 fun RotatingSquareComponent() {
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. We give it a ContentGravity of Center to ensure the children of this composable
-    // are placed in its center. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, as the Box composable to
     // occupy the entire available height & width using Modifier.fillMaxSize().
-    Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
+    Column(
+        modifier = Modifier.fillMaxSize(), 
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        children = {
         // Transition composable creates a state-based transition using the animation configuration
         // defined in [TransitionDefinition]. In the example below, we use the
         // rotationTransitionDefinition that we discussed above and also specify the initial

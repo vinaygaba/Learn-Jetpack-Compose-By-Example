@@ -2,11 +2,10 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -113,7 +113,7 @@ fun DrawerContentComponent(
             // currentScreen to DrawerAppScreen.Screen1, when second row is clicked we set it to
             // DrawerAppScreen.Screen2 and so on and so forth.
             val screen = getScreenBasedOnIndex(index)
-            Box(Modifier.clickable(onClick = {
+            Column(Modifier.clickable(onClick = {
                 currentScreen.value = screen
                 // We also close the drawer when an option from the drawer is selected.
                 closeDrawer()
@@ -202,13 +202,18 @@ fun Screen1Component(openDrawer: () -> Unit) {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to.
         Surface(color = Color(0xFFffd7d7.toInt()), modifier = Modifier.weight(1f)) {
-            // Box is a predefined convenience composable that allows you to apply common draw & layout
-            // logic. In addition we also pass a few modifiers to it.
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation. 
+            // In addition we also pass a few modifiers to it.
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In the example below, we configure the
-            // Box to occupy the entire available height & width using Modifier.fillMaxSize().
-            Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
+            // Column to occupy the entire available height & width using Modifier.fillMaxSize().
+            Column(
+                modifier = Modifier.fillMaxSize(), 
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                children = {
                 Text(text = "Screen 1")
             })
         }
@@ -246,13 +251,18 @@ fun Screen2Component(openDrawer: () -> Unit) {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to.
         Surface(color = Color(0xFFffe9d6.toInt()), modifier = Modifier.weight(1f)) {
-            // Box is a predefined convenience composable that allows you to apply common draw & layout
-            // logic. In addition we also pass a few modifiers to it.
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation. 
+            // In addition we also pass a few modifiers to it.
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In the example below, we configure the
             // Box to occupy the entire available height & width using Modifier.fillMaxSize().
-            Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                children = {
                 Text(text = "Screen 2")
             })
         }
@@ -290,13 +300,17 @@ fun Screen3Component(openDrawer: () -> Unit) {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to.
         Surface(color = Color(0xFFfffbd0.toInt()), modifier = Modifier.weight(1f)) {
-            // Box is a predefined convenience composable that allows you to apply common draw & layout
-            // logic. In addition we also pass a few modifiers to it.
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation. 
+            // In addition we also pass a few modifiers to it.
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In the example below, we configure the
-            // Box to occupy the entire available height & width using Modifier.fillMaxSize().
-            Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
+            // Column to occupy the entire available height & width using Modifier.fillMaxSize().
+            Column(modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                children = {
                 Text(text = "Screen 3")
             })
         }

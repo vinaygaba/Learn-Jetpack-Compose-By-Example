@@ -2,7 +2,6 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -51,14 +50,15 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
     val selectedIndices = mutableStateListOf<Int>()
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we configure the
-    // Box to occupy the entire available width using the Modifier.fillMaxSize() modifier and 
+    // Column to occupy the entire available width using the Modifier.fillMaxSize() modifier and 
     // also give it a padding of 4 dp.
-    Box(modifier = Modifier.padding(4.dp).fillMaxSize()) {
+    Column(modifier = Modifier.padding(4.dp).fillMaxSize()) {
         // FlowRow is a pre-defined composable that places its children in a horizontal flow 
         // similar to the Row composable. However, its different from the Row composable in that if 
         // the horizontal space is not sufficient for all the children in one row, it 

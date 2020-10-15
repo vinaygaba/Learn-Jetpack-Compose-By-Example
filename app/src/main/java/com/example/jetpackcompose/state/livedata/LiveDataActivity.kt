@@ -2,9 +2,9 @@ package com.example.jetpackcompose.state.livedata
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
@@ -16,10 +16,11 @@ import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ListItem
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedTask
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.launchInComposition
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -146,14 +147,19 @@ fun LiveDataComponentList(personList: List<Person>) {
 // built up of smaller composable functions.
 @Composable
 fun LiveDataLoadingComponent() {
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are
     // used to modify the composable that its applied to. In this example, we configure the
-    // Box composable to occupy the entire available width and height using
-    // Modifier.fillMaxSize() and give center gravity to the content inside this box.
-    Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center) {
+    // Column composable to occupy the entire available width and height using
+    // Modifier.fillMaxSize().
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
         CircularProgressIndicator(modifier = Modifier.wrapContentWidth(CenterHorizontally))
@@ -172,12 +178,12 @@ fun LaunchInCompositionComponent(viewModel: SuperheroesViewModel) {
     // will be recomposed any time the value changes. This ensures that only the composables that
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
-    var personList = mutableStateListOf<Person>()
+    val personList = mutableStateListOf<Person>()
 
-    // launchInComposition allows you to launch a suspendable function as soon as this composable
+    // LaunchedTask allows you to launch a suspendable function as soon as this composable
     // is first committed i.e this tree node is first allowed to be rendered on the screen. It 
     // also takes care of automatically cancelling it when it is no longer in the composition. 
-    launchInComposition {
+    LaunchedTask {
         // This view model merely calls a suspendable function "loadSuperheroes" to get a list of 
         // "Person" objects
         val list = viewModel.loadSuperheroes()

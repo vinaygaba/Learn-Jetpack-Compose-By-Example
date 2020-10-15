@@ -5,12 +5,11 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,13 +22,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.onCommit
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageAsset
 import androidx.compose.ui.graphics.asImageAsset
-import androidx.compose.ui.graphics.drawscope.drawCanvas
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.setContent
@@ -129,13 +129,14 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // be advisable to use the loadImageResource method as it loads an image resource asynchronously
     val image = loadImageResource(resId)
     image.resource.resource?.let {
-        // Box is a predefined convenience composable that allows you to apply common draw & layout
-        // logic. In addition we also pass a few modifiers to it.
+        // Column is a composable that places its children in a vertical sequence. You
+        // can think of it similar to a LinearLayout with the vertical orientation. 
+        // In addition we also pass a few modifiers to it.
 
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
         // Box composable to clip the corners of the image.
-        Box(
+        Column(
             modifier = Modifier.clip(RoundedCornerShape(8.dp))
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
@@ -190,23 +191,23 @@ fun NetworkImageComponentPicasso(
     val theImage = image
     val theDrawable = drawable
     if (theImage != null) {
-        // Box is a predefined convenience composable that allows you to apply common draw & layout
-        // logic. In addition we also pass a few modifiers to it.
+        // Column is a composable that places its children in a vertical sequence. You
+        // can think of it similar to a LinearLayout with the vertical orientation. 
+        // In addition we also pass a few modifiers to it.
 
         // You can think of Modifiers as implementations of the decorators pattern that are
-        // used to modify the composable that its applied to. In this example, we configure the
-        // Box composable to have a max height of 200dp and fill out the entire available
-        // width.
-        Box(
+        // used to modify the composable that its applied to. 
+        Column(
             modifier = modifier,
-            gravity = ContentGravity.Center
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(asset = theImage)
         }
     } else if (theDrawable != null) {
         Canvas(modifier = modifier) {
-            drawCanvas { canvas, _ ->
+            drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
             }
         }
@@ -253,23 +254,23 @@ fun NetworkImageComponentGlide(
     val theImage = image
     val theDrawable = drawable
     if (theImage != null) {
-        // Box is a predefined convenience composable that allows you to apply common draw & layout
-        // logic. In addition we also pass a few modifiers to it.
+        // Column is a composable that places its children in a vertical sequence. You
+        // can think of it similar to a LinearLayout with the vertical orientation. 
+        // In addition we also pass a few modifiers to it.
 
         // You can think of Modifiers as implementations of the decorators pattern that are
-        // used to modify the composable that its applied to. In this example, we configure the
-        // Box composable to have a max height of 200dp and fill out the entire available
-        // width.
-        Box(
+        // used to modify the composable that its applied to.
+        Column(
             modifier = modifier,
-            gravity = ContentGravity.Center
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
             Image(asset = theImage)
         }
     } else if (theDrawable != null) {
         Canvas(modifier = modifier) {
-            drawCanvas { canvas, _ ->
+            drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
             }
         }

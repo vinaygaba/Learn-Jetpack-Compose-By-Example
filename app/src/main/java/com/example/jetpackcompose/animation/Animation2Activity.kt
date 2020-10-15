@@ -7,7 +7,8 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.transition
-import androidx.compose.foundation.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -135,7 +136,9 @@ fun AnimateColorComponent() {
     // state variable and access the relevant props/properties to update the relevant
     // composables/layouts. Below, we use state[color] to get get the latest value of color
     // and use it to paint the screen by setting it as the backgroundColor of the screen.
-    Box(modifier = Modifier.fillMaxSize(), backgroundColor = state[color])
+    Column(modifier = Modifier.fillMaxSize().background(color = state[color])) {
+        
+    }
 }
 
 /**
