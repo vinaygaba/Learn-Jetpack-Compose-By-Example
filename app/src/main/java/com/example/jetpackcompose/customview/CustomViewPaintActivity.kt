@@ -2,8 +2,8 @@ package com.example.jetpackcompose.customview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -50,7 +50,7 @@ data class Paths(
 @Composable
 fun DrawingBoardComposable() {
     val paths = mutableStateListOf<Paths>()
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .dragGestureFilter(

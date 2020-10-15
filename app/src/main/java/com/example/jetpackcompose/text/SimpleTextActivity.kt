@@ -2,13 +2,14 @@ package com.example.jetpackcompose.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
-import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.ui.tooling.preview.Preview
 
 class SimpleTextActivity : AppCompatActivity() {
@@ -19,13 +20,18 @@ class SimpleTextActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Box is a predefined convenience composable that allows you to apply common draw & layout
-            // logic. In addition we also pass a few modifiers to it.
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation. 
+            // In addition we also pass a few modifiers to it.
 
             // You can think of Modifiers as implementations of the decorators pattern that are used to
             // modify the composable that its applied to. In the example below, we configure the
-            // Box to occupy the entire available height & width using Modifier.fillMaxSize().
-            Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center, children = {
+            // Column to occupy the entire available height & width using Modifier.fillMaxSize().
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                children = {
                 // Here, SimpleText is a Composable function which is going to describe the contents of
                 // this activity that will be rendered on the screen.
                 SimpleText("This is the Learn Jetpack Compose By Example tutorial")

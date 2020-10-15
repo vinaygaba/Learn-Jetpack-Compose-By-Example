@@ -2,14 +2,16 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawShadow
 import androidx.compose.ui.platform.setContent
@@ -37,33 +39,39 @@ class ShadowActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun ShadowComponent() {
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In this example, as the Box composable to
+    // modify the composable that its applied to. In this example, as the Column composable to
     // occupy the entire available height & width using Modifier.fillMaxSize(). In addition, we 
-    // specify that the content of this box should be centered.
-    Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center) {
-        // We used another Box composable to create a container that will have the shadow applied.
-        Box(
+    // specify that the content of this Column should be centered.
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // We used another Composable composable to create a container that will have the shadow 
+        // applied.
+        Column(
             // We specify that the box should have round corners with 8.dp as the radius.
-            shape = RoundedCornerShape(8.dp),
             // It will occupy the maximum available width
             modifier = Modifier.fillMaxWidth()
-                    // with a height of 250 dp
-                    .preferredHeight(250.dp)
-                    // and a padding of 16 dp
-                    .padding(16.dp)
-                    // In addition, we will also draw a shadow around the Box using the 
-                    // drawShadow modifier. Because its a modifier, it can basically be applied 
-                    // to any modifier without much hassle. It's that simple! 
-                    .drawShadow(
-                        elevation = 3.dp,
-                        shape = RoundedCornerShape(8.dp)
-                    ),
-            gravity = ContentGravity.Center,
-            backgroundColor = colors[2]
+                // with a height of 250 dp
+                .preferredHeight(250.dp)
+                // and a padding of 16 dp
+                .padding(16.dp)
+                // In addition, we will also draw a shadow around the Box using the 
+                // drawShadow modifier. Because its a modifier, it can basically be applied 
+                // to any modifier without much hassle. It's that simple! 
+                .drawShadow(
+                    elevation = 3.dp,
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .background(color = colors[2]),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // TitleComponent is a composable we created in one of the files that merely renders 
             // text on the screen. 

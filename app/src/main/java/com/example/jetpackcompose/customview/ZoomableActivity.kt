@@ -2,9 +2,10 @@ package com.example.jetpackcompose.customview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.zoomable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -50,16 +51,18 @@ fun ZoomableComposable() {
     var scale by remember { mutableStateOf(1f) }
     var translate by remember { mutableStateOf(Offset(0f, 0f)) }
 
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we configure the
     // Box. In the example below, we make the Box composable zoomable by assigning the 
     // Modifier.zoomable modifier & also add a drag observer to it(for panning functionality)
     // by using the rawDragGestureFilter modifier. 
-    Box(
-        gravity = Alignment.Center,
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.zoomable(onZoomDelta = { scale *= it }).rawDragGestureFilter(
             object : DragObserver {
                 override fun onDrag(dragDistance: Offset): Offset {

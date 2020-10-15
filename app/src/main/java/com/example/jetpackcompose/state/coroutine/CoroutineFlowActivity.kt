@@ -2,13 +2,14 @@ package com.example.jetpackcompose.state.coroutine
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -49,14 +50,19 @@ fun FlowComponent(flow: Flow<Int>) {
     // will be redraw while the rest remain unchanged. This ensures efficiency and is a
     // performance optimization. It is inspired from existing frameworks like React.
     val countDownValue by flow.collectAsState(initial = 10)
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are
     // used to modify the composable that its applied to. In this example, we configure the
-    // Box composable to occupy the entire available width and height using Modifier.fillMaxSize
-    // (). We also configure the content inside this box to have the center gravity.
-    Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center) {
+    // Column composable to occupy the entire available width and height using Modifier.fillMaxSize
+    // ().
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         when (countDownValue) {
             // When the value is between 1 to 10, show the countDownValue 
             in 1..10 -> {

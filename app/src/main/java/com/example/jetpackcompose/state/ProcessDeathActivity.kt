@@ -3,7 +3,6 @@ package com.example.jetpackcompose.state
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
@@ -60,14 +60,19 @@ class ProcessDeathActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun ProcessDeathComponent() {
-    // Box is a predefined convenience composable that allows you to apply common draw & layout
-    // logic. In addition we also pass a few modifiers to it.
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation. 
+    // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are
     // used to modify the composable that its applied to. In this example, we configure the
-    // Box composable to occupuy the entire available width and height using
+    // Column composable to occupuy the entire available width and height using
     // Modifier.fillMaxSize() and give center gravity to the content inside this box.
-    Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         // Card composable is a predefined composable that is meant to represent the card surface as
         // specified by the Material Design specification. We also configure it to have rounded
         // corners and apply few modifiers to alter the dimensions of this card.

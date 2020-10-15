@@ -2,7 +2,6 @@ package com.example.jetpackcompose.layout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
@@ -134,10 +133,15 @@ fun SimpleConstraintLayoutComponent() {
                     start.linkTo(image.end, margin = 16.dp)
                 }
             )
-            // Box is a predefined convenience composable that allows you to apply common draw & layout
-            // logic. We give it a ContentGravity of Center to ensure the children of this composable
-            // are placed in its center. 
-            Box(
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation. 
+            // In addition we also pass a few modifiers to it.
+
+            // You can think of Modifiers as implementations of the decorators pattern that are used to
+            // modify the composable that its applied to. In the example below, we configure the
+            // Column to occupy a height and width of 72dp and give it constrains using the 
+            // constrainAs modifier. 
+            Column(
                 modifier = Modifier.preferredHeight(72.dp)
                     .preferredWidth(72.dp)
                     .constrainAs(image) {

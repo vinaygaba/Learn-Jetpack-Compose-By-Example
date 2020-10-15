@@ -2,10 +2,10 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -142,9 +142,10 @@ fun MaterialCardComponent() {
         }, secondaryText = {
             Text(text = "Subtitle")
         }, icon = {
-            // Box is a predefined convenience composable that allows you to apply common draw & layout
-            // logic. In addition we also pass a few modifiers to it.
-            Box(modifier = Modifier.preferredWidth(48.dp).preferredHeight(48.dp)) {
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation. 
+            // In addition we also pass a few modifiers to it.
+            Column(modifier = Modifier.preferredWidth(48.dp).preferredHeight(48.dp)) {
                 Image(asset = imageFromResource(resources, R.drawable.landscape))
             }
         })
@@ -566,15 +567,16 @@ fun MaterialRippleComponent() {
         shape = RoundedCornerShape(4.dp),
         modifier = Modifier.padding(8.dp).fillMaxWidth()
     ) {
-        // Box with clickable modifier wraps the child composable and enables it to react to a click
-        // through the onClick callback similar to the onClick listener that we are accustomed to
-        // on Android.
-        // In order to show a ripple effect, we set indication of Modifier.clickable with
-        // a RippleIndication.
-        Box(
-            modifier = Modifier.clickable(onClick = {}, indication = RippleIndication()),
-            backgroundColor = Color.LightGray,
-            shape = RoundedCornerShape(4.dp)
+        // Column with clickable modifier wraps the child composable and enables it to react to a 
+        // click through the onClick callback similar to the onClick listener that we are accustomed 
+        // to on Android. In order to show a ripple effect, we set indication of Modifier.clickable 
+        // with a RippleIndication.
+        Column(
+            modifier = Modifier.clickable(onClick = {}, indication = RippleIndication())
+                .background(
+                    color = Color.LightGray, 
+                    shape = RoundedCornerShape(4.dp)
+                )
         ) {
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen

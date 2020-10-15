@@ -3,7 +3,7 @@ package com.example.jetpackcompose.stack
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.Stack
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
@@ -40,15 +40,15 @@ class StackActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun StackComponent() {
-    // Stack is a predefined component that is useful for drawing children that overlap. The
-    // children will always be drawn in the order they are specified in the body of the Stack. It
+    // Box is a predefined component that is useful for drawing children that overlap. The
+    // children will always be drawn in the order they are specified in the body of the Box. It
     // works similar to the FrameLayout that we are used to using in the original UI toolkit.
 
     // You can think of Modifiers as implementations of the decorators pattern that are
     // used to modify the composable that its applied to. In this example, we assign a
-    // ask the Stack to occupy the full available width using the Modifier.fillMaxWidth() modifier
+    // ask the Box to occupy the full available width using the Modifier.fillMaxWidth() modifier
     // and give it a height of 200 dp.
-    Stack(modifier = Modifier.fillMaxWidth().preferredHeight(200.dp)) {
+    Box(modifier = Modifier.fillMaxWidth().preferredHeight(200.dp)) {
         // LocalResourceImageComponent is a composable that takes in an image resource id and
         // display it on the screen. Take a look at its implementation to learn more.
         LocalResourceImageComponent(resId = R.drawable.landscape)

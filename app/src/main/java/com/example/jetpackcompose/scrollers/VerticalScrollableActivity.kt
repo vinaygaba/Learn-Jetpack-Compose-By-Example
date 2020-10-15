@@ -59,14 +59,14 @@ fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
         // modify the composable that its applied to. In this example, we configure the
         // Row to occupify the entire available width using Modifier.fillMaxWidth() and also give
         // it a padding of 16dp.
-        Row(modifier = Modifier.padding(16.dp).fillParentMaxWidth()) {
+        Row(modifier = Modifier.fillParentMaxWidth()) {
             // Card composable is a predefined composable that is meant to represent the card surface as
             // specified by the Material Design specification. We also configure it to have rounded
             // corners and apply a modifier.
             Card(
                 shape = RoundedCornerShape(4.dp), 
                 backgroundColor = colors[index % colors.size],
-                modifier = Modifier.fillParentMaxWidth()
+                modifier = Modifier.fillParentMaxWidth().padding(16.dp)
             ) {
                 // Text is a predefined composable that does exactly what you'd expect it to -
                 // display text on the screen. It allows you to customize its appearance using

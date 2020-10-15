@@ -2,7 +2,6 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -57,12 +56,12 @@ fun ClickableText() {
     // text "Click to see dialog" is clicked. Every time the value of this variable changes,
     // the relevant sub-composables that use showPopup are automatically recomposed.
     var showPopup by remember { mutableStateOf(false) }
-    // Box with clickable modifier wraps the child composable and enables it to react to a click
+    // Column with clickable modifier wraps the child composable and enables it to react to a click
     // through the onClick callback similar to the onClick listener that we are accustomed to
     // on Android.
     // Here, we just change the value of showPopup to be true every time we click on the text that
     // says "Click to see Popup"
-    Box(Modifier.clickable(onClick = { showPopup = true }), children = {
+    Column(Modifier.clickable(onClick = { showPopup = true }), children = {
         // You can think of Modifiers as implementations of the decorators pattern that are used to
         // modify the composable that its applied to. In the example below, we add a padding of
         // 8dp to the Card composable and 16dp to the Text composable.

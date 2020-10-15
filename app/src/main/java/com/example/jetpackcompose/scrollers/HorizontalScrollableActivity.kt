@@ -2,10 +2,9 @@ package com.example.jetpackcompose.scrollers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.ContentGravity
 import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +13,7 @@ import androidx.compose.foundation.layout.preferredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ContextAmbient
@@ -145,15 +145,17 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                     backgroundColor = colors[index % colors.size],
                     modifier = Modifier.padding(16.dp)
                 ) {
-                    // Box is a predefined convenience composable that allows you to apply common
-                    // draw & layout logic. In addition we also pass a few modifiers to it.
+                    // Column is a composable that places its children in a vertical sequence. You
+                    // can think of it similar to a LinearLayout with the vertical orientation. 
+                    // In addition we also pass a few modifiers to it.
 
                     // To ensure that the item occupies the entire screen, we make sure that the
-                    // width of the box is equal to the computed screenWidth. We subtract
+                    // width of the column is equal to the computed screenWidth. We subtract
                     // some spacing to make the other item slightly visible.
-                    Box(
+                    Column(
                         modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2)),
-                        gravity = ContentGravity.Center
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         // The Text composable is pre-defined by the Compose UI library; you can use
                         // this composable to render text on the screen
