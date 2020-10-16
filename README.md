@@ -24,6 +24,9 @@ I've also used the examples listed in this repo and given talks at conferences. 
 **360|AnDev 2020: Learning Jetpack Compose By Example**
 [Video](https://www.youtube.com/watch?v=2rEOpqDKOUA)| [Slides](https://speakerdeck.com/vinaygaba/360-andev-2020-learning-jetpack-compose-by-example)
 
+**Android Summit 2020: Learn Jetpack Compose By Example v2**
+[Slides](https://speakerdeck.com/vinaygaba/android-summit-2020-learn-jetpack-compose-by-example)
+
 Setup
 -----
 To try out this sample app, you need to at least use the Canary version
