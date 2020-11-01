@@ -44,6 +44,6 @@ class SimpleTextComposableTest {
 
         // In this example, we just check if there is a composable with the text
         // "Learn Jetpack Compose By Example"
-        onNodeWithText("Learn Jetpack Compose By Example").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Learn Jetpack Compose By Example").assertIsDisplayed()
     }
 }
