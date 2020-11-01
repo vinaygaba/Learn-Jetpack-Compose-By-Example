@@ -2,7 +2,6 @@ package com.example.jetpackcompose.layout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.Composable
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Arrangement
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.FirstBaseline
 import androidx.compose.material.Button
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.TextStyle
@@ -326,12 +326,12 @@ fun RowBaselineAlignComponent() {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         // In order to align the baseline of both the text composables, we use the
-        // Modifier.alignWithSiblings(FirstBaseline) modifier. FirstBaseline here means that we
+        // Modifier.alignBy(FirstBaseline) modifier. FirstBaseline here means that we
         // align the baseline of the first line of the Text Composable.
         Text(
             text = "Text 1",
             style = TextStyle(fontSize = TextUnit.Sp(20), fontStyle = FontStyle.Italic),
-            modifier = Modifier.alignWithSiblings(alignmentLine = FirstBaseline)
+            modifier = Modifier.alignBy(alignmentLine = FirstBaseline)
         )
         Text(
             text = "Text 2",
@@ -339,7 +339,7 @@ fun RowBaselineAlignComponent() {
                 fontSize = TextUnit.Sp(40), fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.Bold
             ),
-            modifier = Modifier.alignWithSiblings(alignmentLine = FirstBaseline)
+            modifier = Modifier.alignBy(alignmentLine = FirstBaseline)
         )
     }
 }

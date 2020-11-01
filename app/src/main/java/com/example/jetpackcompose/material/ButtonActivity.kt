@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonConstants
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -59,7 +60,7 @@ fun SimpleButtonComponent() {
     // 16dp to the Button.
     Button(
         modifier = Modifier.padding(16.dp),
-        elevation = 5.dp,
+        elevation = ButtonConstants.defaultElevation(5.dp),
         onClick = {}) {
         // The Button composable allows you to provide child composables that inherit this button
         // functionality.
@@ -84,7 +85,7 @@ fun SimpleButtonWithBorderComponent() {
     Button(
         onClick = {},
         modifier = Modifier.padding(16.dp),
-        elevation = 5.dp,
+        elevation = ButtonConstants.defaultElevation(5.dp),
         // Provide a border for this button
         border = BorderStroke(width = 5.dp, brush = SolidColor(Color.Black))
     ) {
@@ -114,7 +115,7 @@ fun RoundedCornerButtonComponent() {
         // Provide a custom shape for this button. In this example. we specify the button to have
         // round corners of 16dp radius.
         shape = RoundedCornerShape(16.dp),
-        elevation = 5.dp
+        elevation = ButtonConstants.defaultElevation(5.dp),
     ) {
         // The Button composable allows you to provide child composables that inherit this button
         // functionality.
