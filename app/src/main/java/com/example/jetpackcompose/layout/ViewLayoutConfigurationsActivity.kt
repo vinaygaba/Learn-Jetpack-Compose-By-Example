@@ -326,7 +326,7 @@ fun RowBaselineAlignComponent() {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         // In order to align the baseline of both the text composables, we use the
-        // Modifier.alignWithSiblings(FirstBaseline) modifier. FirstBaseline here means that we
+        // Modifier.alignBy(FirstBaseline) modifier. FirstBaseline here means that we
         // align the baseline of the first line of the Text Composable.
         Text(
             text = "Text 1",
