@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonConstants
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -70,7 +71,7 @@ fun StateComponent() {
         // LinearLayouts in the old Android UI Toolkit.
         Button(
             modifier = Modifier.padding(16.dp).weight(1f),
-            elevation = 5.dp,
+            elevation = ButtonConstants.defaultElevation(5.dp),
             // We increment the counter every time this button is clicked.
             onClick = {
                 counter++
@@ -82,7 +83,7 @@ fun StateComponent() {
 
         Button(
             modifier = Modifier.padding(16.dp).weight(1f),
-            elevation = 5.dp,
+            elevation = ButtonConstants.defaultElevation(5.dp),
             onClick = {
                 counter = 0
             }) {
@@ -124,7 +125,7 @@ fun ModelComponent() {
         // LinearLayouts in the old Android UI Toolkit.
         Button(
             modifier = Modifier.padding(16.dp).weight(1f),
-            elevation = 5.dp,
+            elevation = ButtonConstants.defaultElevation(5.dp),
             onClick = {
                 counterState = counterState.copy(counter = counterState.counter + 1)
             }) {
@@ -135,7 +136,7 @@ fun ModelComponent() {
 
         Button(
             modifier = Modifier.padding(16.dp).weight(1f),
-            elevation = 5.dp,
+            elevation = ButtonConstants.defaultElevation(5.dp),
             onClick = {
                 counterState = counterState.copy(counter = 0)
             }) {

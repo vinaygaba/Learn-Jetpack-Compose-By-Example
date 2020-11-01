@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonConstants
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -86,7 +87,7 @@ fun Screen1(appState: AppState) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
         Button(
-            backgroundColor = Color.Gray,
+            colors = ButtonConstants.defaultButtonColors(backgroundColor = Color.Gray),
             onClick = {
                 appState.currentScreen = CurrentScreen.SCREEN2
             }) {
@@ -128,7 +129,7 @@ fun Screen2(appState: AppState) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
         Button(
-            backgroundColor = Color.Gray,
+            colors = ButtonConstants.defaultButtonColors(backgroundColor = Color.Gray),
             onClick = {
                 appState.currentScreen = CurrentScreen.SCREEN3
             }) {
