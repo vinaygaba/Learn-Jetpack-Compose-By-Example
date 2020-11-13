@@ -2,7 +2,6 @@ package com.example.jetpackcompose.state.livedata
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,8 +14,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ListItem
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedTask
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateListOf
@@ -180,10 +180,10 @@ fun LaunchInCompositionComponent(viewModel: SuperheroesViewModel) {
     // is a performance optimization. It is inspired from existing frameworks like React.
     val personList = mutableStateListOf<Person>()
 
-    // LaunchedTask allows you to launch a suspendable function as soon as this composable
+    // LaunchedEffect allows you to launch a suspendable function as soon as this composable
     // is first committed i.e this tree node is first allowed to be rendered on the screen. It 
     // also takes care of automatically cancelling it when it is no longer in the composition. 
-    LaunchedTask {
+    LaunchedEffect(Unit) {
         // This view model merely calls a suspendable function "loadSuperheroes" to get a list of 
         // "Person" objects
         val list = viewModel.loadSuperheroes()
