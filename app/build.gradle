@@ -43,6 +43,7 @@ android {
     // > 2 files found with path 'META-INF/AL2.0' from inputs:
     packagingOptions {
         exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
     }
 }
 
