@@ -1,8 +1,8 @@
 package com.example.jetpackcompose.text
 
-import androidx.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.ui.test.createComposeRule
-import androidx.ui.test.onNodeWithText
 import org.junit.Before
 
 import org.junit.Rule
