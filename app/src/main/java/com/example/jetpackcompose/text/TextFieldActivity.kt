@@ -3,13 +3,13 @@ package com.example.jetpackcompose.text
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.CoreTextField
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,9 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.InternalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.ImeOptions
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
@@ -34,6 +36,7 @@ import com.example.jetpackcompose.core.hideKeyboard
 import com.example.jetpackcompose.image.TitleComponent
 
 class TextFieldActivity : AppCompatActivity() {
+    @InternalTextApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -77,6 +80,7 @@ class TextFieldActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@InternalTextApi
 @Composable
 fun SimpleTextInputComponent() {
     // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
@@ -111,6 +115,7 @@ fun SimpleTextInputComponent() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@InternalTextApi
 @Composable
 fun CustomStyleTextInputComponent() {
     // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
@@ -154,6 +159,7 @@ fun CustomStyleTextInputComponent() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@InternalTextApi
 @Composable
 fun NumberTextInputComponent() {
     // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
@@ -177,7 +183,7 @@ fun NumberTextInputComponent() {
             modifier = Modifier.padding(16.dp).fillMaxWidth(),
             // Setting the keyboard type allows you to configure what kind of data you can input
             // in this TextInput. Some examples are number, phone, email, password, etc.
-            keyboardType = KeyboardType.Number,
+            imeOptions = ImeOptions(keyboardType = KeyboardType.Number),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
@@ -191,6 +197,7 @@ fun NumberTextInputComponent() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@InternalTextApi
 @Composable
 fun SearchImeActionInputComponent() {
     // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
@@ -229,7 +236,7 @@ fun SearchImeActionInputComponent() {
             // Changing the imeAction allows you to change the primary icon of the keyboard which
             // is typically shown in the bottom right corner of the keyboard. Some examples of
             // ImeActions are search, send, done, go, etc.
-            imeAction = ImeAction.Search,
+            imeOptions = ImeOptions(imeAction = ImeAction.Search),
             onImeActionPerformed = {
                 hideKeyboard(context)
             },
@@ -246,6 +253,7 @@ fun SearchImeActionInputComponent() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@InternalTextApi
 @Composable
 fun PasswordVisualTransformationInputComponent() {
     // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
@@ -267,8 +275,7 @@ fun PasswordVisualTransformationInputComponent() {
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your password here")) }
         CoreTextField(value = textValue,
             modifier = Modifier.padding(16.dp).fillMaxWidth(),
-            keyboardType = KeyboardType.Password,
-            imeAction = ImeAction.Done,
+            imeOptions = ImeOptions(imeAction = ImeAction.Done, keyboardType = KeyboardType.Password),
             // Visual transformation is used to modify the visual output of the input field. In
             // this example, I'm using an existing visual transformation - the
             // PasswordVisualTransformation. All it does is that it transforms any input character
@@ -327,30 +334,35 @@ fun MaterialTextInputComponent() {
  * function that doesn't take any parameters and call your composable function with the appropriate
  * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
  */
+@InternalTextApi
 @Preview
 @Composable
 fun SimpleTextInputComponentPreview() {
     SimpleTextInputComponent()
 }
 
+@InternalTextApi
 @Preview
 @Composable
 fun CustomStyleTextInputComponentPreview() {
     CustomStyleTextInputComponent()
 }
 
+@InternalTextApi
 @Preview
 @Composable
 fun NumberTextInputComponentPreview() {
     NumberTextInputComponent()
 }
 
+@InternalTextApi
 @Preview
 @Composable
 fun SearchImeActionInputComponentPreview() {
     SearchImeActionInputComponent()
 }
 
+@InternalTextApi
 @Preview
 @Composable
 fun PasswordVisualTransformationInputComponentPreview() {

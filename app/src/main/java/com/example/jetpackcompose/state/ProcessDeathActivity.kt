@@ -2,8 +2,6 @@ package com.example.jetpackcompose.state
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Box
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -11,8 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.CoreTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.savedinstancestate.savedInstanceState
@@ -113,13 +113,13 @@ fun ProcessDeathComponent() {
                 // Thus you should be careful about what data you store inside.
                 // Discussion - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1586187000148500?thread_ts=1586186224.146600&cid=CJLTWPH7S
                 var textValue by savedInstanceState { "1234567812345678" }
-                CoreTextField(value = TextFieldValue(textValue),
+                TextField(value = TextFieldValue(textValue),
                     modifier = Modifier.padding(16.dp),
                     textStyle = TextStyle(
                         color = Color.White, fontFamily = FontFamily.Serif,
                         fontSize = 25.sp, fontWeight = FontWeight.Bold
                     ),
-                    keyboardType = KeyboardType.Number,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     // Visual transformation is used to modify the visual output of the input field. In
                     // this example, I'm using a custom visual transformation - the
                     // CreditCardVisualTransformation. All it does is that it transforms the input
