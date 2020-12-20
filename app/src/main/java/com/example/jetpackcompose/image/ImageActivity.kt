@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.preferredSizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,10 +37,10 @@ import androidx.compose.ui.res.loadImageResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -156,10 +156,11 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 @Composable
 fun NetworkImageComponentPicasso(
     url: String,
-    modifier: Modifier = Modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
+    modifier: Modifier = Modifier
 ) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
+    val sizeModifier = modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
     onCommit(url) {
@@ -199,7 +200,7 @@ fun NetworkImageComponentPicasso(
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. 
         Column(
-            modifier = modifier,
+            modifier = sizeModifier,
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -207,7 +208,7 @@ fun NetworkImageComponentPicasso(
             Image(bitmap = theImage)
         }
     } else if (theDrawable != null) {
-        Canvas(modifier = modifier) {
+        Canvas(modifier = sizeModifier) {
             drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
             }
@@ -223,10 +224,11 @@ fun NetworkImageComponentPicasso(
  */
 @Composable
 fun NetworkImageComponentGlide(
-    url: String, modifier: Modifier = Modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
+    url: String, modifier: Modifier = Modifier
 ) {
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
+    val sizeModifier = modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
     val context = AmbientContext.current
     onCommit(url) {
         val glide = Glide.with(context)
@@ -262,7 +264,7 @@ fun NetworkImageComponentGlide(
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to.
         Column(
-            modifier = modifier,
+            modifier = sizeModifier,
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -270,7 +272,7 @@ fun NetworkImageComponentGlide(
             Image(bitmap = theImage)
         }
     } else if (theDrawable != null) {
-        Canvas(modifier = modifier) {
+        Canvas(modifier = sizeModifier) {
             drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
             }
