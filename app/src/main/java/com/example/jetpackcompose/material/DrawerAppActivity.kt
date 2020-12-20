@@ -2,8 +2,6 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,10 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.DrawerValue
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalDrawerLayout
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -27,8 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 
 class DrawerAppActivity : AppCompatActivity() {
 
@@ -117,7 +117,7 @@ fun DrawerContentComponent(
                 currentScreen.value = screen
                 // We also close the drawer when an option from the drawer is selected.
                 closeDrawer()
-            }), children = {
+            }), content = {
                 // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from
                 // the Material Design specification. It's generally used to change the background
                 // color, add elevation, clip or add background shape to its children composables.
@@ -188,7 +188,7 @@ fun Screen1Component(openDrawer: () -> Unit) {
             title = { Text("Screen 1 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(asset = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu)
                 }
             }
         )
@@ -213,9 +213,10 @@ fun Screen1Component(openDrawer: () -> Unit) {
                 modifier = Modifier.fillMaxSize(), 
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                children = {
-                Text(text = "Screen 1")
-            })
+                content = {
+                    Text(text = "Screen 1")
+                }
+            )
         }
     }
 }
@@ -237,7 +238,7 @@ fun Screen2Component(openDrawer: () -> Unit) {
             title = { Text("Screen 2 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(asset = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu)
                 }
             }
         )
@@ -262,9 +263,10 @@ fun Screen2Component(openDrawer: () -> Unit) {
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                children = {
-                Text(text = "Screen 2")
-            })
+                content = {
+                    Text(text = "Screen 2") 
+                }
+            )
         }
     }
 }
@@ -286,7 +288,7 @@ fun Screen3Component(openDrawer: () -> Unit) {
             title = { Text("Screen 3 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(asset = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu)
                 }
             }
         )
@@ -310,9 +312,10 @@ fun Screen3Component(openDrawer: () -> Unit) {
             Column(modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                children = {
-                Text(text = "Screen 3")
-            })
+                content = {
+                    Text(text = "Screen 3")
+                }
+            )
         }
     }
 }

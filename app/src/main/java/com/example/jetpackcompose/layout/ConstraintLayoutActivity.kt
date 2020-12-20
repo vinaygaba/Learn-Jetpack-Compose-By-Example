@@ -16,14 +16,14 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.imageFromResource
-import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -71,11 +71,11 @@ fun SimpleConstraintLayoutComponent() {
     // modular and reusable components that are easy to test as well. However, for certain types
     // of data where multiple components need to use it, it makes sense to have an implicit way
     // to access this data. For such scenarios, we use Ambients. In this example, we use the
-    // ContextAmbient to get hold of the Context object. In order to get access to the latest
-    // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
-    // examples of common Ambient's are TextInputServiceAmbient, DensityAmbient,
-    // CoroutineContextAmbient, etc.
-    val resources = ContextAmbient.current.resources
+    // AmbientContext to get hold of the Context object. In order to get access to the latest
+    // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
+    // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
+    // CoroutineAmbientContext, etc.
+    val resources = AmbientContext.current.resources
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -152,7 +152,7 @@ fun SimpleConstraintLayoutComponent() {
                         start.linkTo(parent.start, margin = 16.dp)
                     }
             ) {
-                // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
+                // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
                 Image(imageFromResource(resources, R.drawable.landscape))
             }
         }

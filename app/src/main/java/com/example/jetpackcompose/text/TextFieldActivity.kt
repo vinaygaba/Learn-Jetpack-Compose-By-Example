@@ -18,7 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.InternalTextApi
 import androidx.compose.ui.text.TextStyle
@@ -31,7 +31,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.hideKeyboard
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -205,11 +205,11 @@ fun SearchImeActionInputComponent() {
     // modular and reusable components that are easy to test as well. However, for certain types
     // of data where multiple components need to use it, it makes sense to have an implicit way
     // to access this data. For such scenarios, we use Ambients. In this example, we use the
-    // ContextAmbient to get hold of the Context object. In order to get access to the latest
-    // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
-    // examples of common Ambient's are TextInputServiceAmbient, DensityAmbient,
-    // CoroutineContextAmbient, etc.
-    val context = ContextAmbient.current
+    // AmbientContext to get hold of the Context object. In order to get access to the latest
+    // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
+    // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
+    // CoroutineAmbientContext, etc.
+    val context = AmbientContext.current
 
     // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
     // Material Design specification. It's generally used to change the background color, add

@@ -25,7 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.colors
 
 class FixedActionButtonActivity : AppCompatActivity() {
@@ -76,7 +76,7 @@ fun ScaffoldWithBottomBarAndCutout() {
                 backgroundColor = MaterialTheme.colors.secondary
             ) {
                 IconButton(onClick = {}) {
-                    Icon(asset = Icons.Filled.Favorite)
+                    Icon(imageVector = Icons.Filled.Favorite)
                 }
             }
         },

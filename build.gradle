@@ -3,7 +3,7 @@
 buildscript {
     ext.versions = [
             'cardView': '1.0.0',
-            'compose': '1.0.0-alpha07',
+            'compose': '1.0.0-alpha09',
             'constraintLayout' : '1.1.3',
             'coroutine': '1.3.7',
             'espresso': '3.2.0',
@@ -11,8 +11,8 @@ buildscript {
             'gradle': '4.2.0-alpha15',
             'junit' : '4.12',
             'junitImplementation' : '1.1.1',
-            'kotlin': '1.4.0',
-            'kotlinCompilerVersion': '1.4.0',
+            'kotlin': '1.4.21',
+            'kotlinCompilerVersion': '1.4.21',
             'ktx': '1.1.0',
             'ktxSupport': '2.2.0',
             'lifecycle':'2.2.0',
@@ -27,9 +27,10 @@ buildscript {
                     'composeRuntime': "androidx.compose.runtime:runtime:${versions.compose}",
                     'core': "androidx.compose.ui:ui:${versions.compose}",
                     'foundation': "androidx.compose.foundation:foundation:${versions.compose}",
-                    'tooling': "androidx.ui:ui-tooling:${versions.compose}",
+                    'tooling': "androidx.compose.ui:ui-tooling:${versions.compose}",
                     'layout': "androidx.compose.foundation:foundation-layout:${versions.compose}",
                     'material': "androidx.compose.material:material:${versions.compose}",
+                    'materialRipple': "androidx.compose.material:material-ripple:${versions.compose}",
                     'savedInstanceState': "androidx.compose.runtime:runtime-saved-instance-state:${versions.compose}",
                     'uiTest': "androidx.ui:ui-test:${versions.compose}",
                     'uiLiveData': "androidx.compose.runtime:runtime-livedata:${versions.compose}"

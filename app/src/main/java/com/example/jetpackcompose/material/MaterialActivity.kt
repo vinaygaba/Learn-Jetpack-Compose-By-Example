@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.material.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.preferredWidth
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.selection.ToggleableState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -27,8 +25,9 @@ import androidx.compose.material.RadioButton
 import androidx.compose.material.Slider
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Switch
+import androidx.compose.material.Text
 import androidx.compose.material.TriStateCheckbox
-import androidx.compose.material.ripple.RippleIndication
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,13 +37,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.imageFromResource
-import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -120,11 +120,11 @@ fun MaterialCardComponent() {
     // modular and reusable components that are easy to test as well. However, for certain types
     // of data where multiple components need to use it, it makes sense to have an implicit way
     // to access this data. For such scenarios, we use Ambients. In this example, we use the
-    // ContextAmbient to get hold of the Context object. In order to get access to the latest
-    // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
-    // examples of common Ambient's are TextInputServiceAmbient, DensityAmbient,
-    // CoroutineContextAmbient, etc.
-    val resources = ContextAmbient.current.resources
+    // AmbientContext to get hold of the Context object. In order to get access to the latest
+    // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
+    // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
+    // CoroutineAmbientContext, etc.
+    val resources = AmbientContext.current.resources
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -146,7 +146,7 @@ fun MaterialCardComponent() {
             // can think of it similar to a LinearLayout with the vertical orientation. 
             // In addition we also pass a few modifiers to it.
             Column(modifier = Modifier.preferredWidth(48.dp).preferredHeight(48.dp)) {
-                Image(asset = imageFromResource(resources, R.drawable.landscape))
+                Image(bitmap = imageFromResource(resources, R.drawable.landscape))
             }
         })
     }
@@ -572,9 +572,9 @@ fun MaterialRippleComponent() {
         // to on Android. In order to show a ripple effect, we set indication of Modifier.clickable 
         // with a RippleIndication.
         Column(
-            modifier = Modifier.clickable(onClick = {}, indication = RippleIndication())
+            modifier = Modifier.clickable(onClick = {}, indication = rememberRipple())
                 .background(
-                    color = Color.LightGray, 
+                    color = Color.LightGray,
                     shape = RoundedCornerShape(4.dp)
                 )
         ) {

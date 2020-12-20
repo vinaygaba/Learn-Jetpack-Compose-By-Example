@@ -13,10 +13,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawShadow
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -63,9 +63,9 @@ fun ShadowComponent() {
                 // and a padding of 16 dp
                 .padding(16.dp)
                 // In addition, we will also draw a shadow around the Box using the 
-                // drawShadow modifier. Because its a modifier, it can basically be applied 
+                // shadow modifier. Because its a modifier, it can basically be applied 
                 // to any modifier without much hassle. It's that simple! 
-                .drawShadow(
+                .shadow(
                     elevation = 3.dp,
                     shape = RoundedCornerShape(8.dp)
                 )

@@ -3,11 +3,10 @@ package com.example.jetpackcompose.animation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ColorPropKey
-import androidx.compose.animation.core.AnimationConstants.Infinite
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.transition
@@ -33,7 +32,7 @@ import androidx.compose.ui.res.loadImageResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.annotatedString
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
@@ -134,12 +133,11 @@ private val rotationTransitionDefinition = transitionDefinition<String> {
         // interpolator to use for the animation & how many iterations of this animation are needed.
         // Since we want the rotation to be continous, we use the repeatable AnimationBuilder and
         // set the iterations to Infinite.
-        rotation using repeatable<Float>(
+        rotation using infiniteRepeatable(
             animation = tween<Float>(
                 durationMillis = 3000,
                 easing = FastOutLinearInEasing
-            ),
-            iterations = Infinite
+            )
         )
     }
 }
@@ -151,7 +149,7 @@ private val rotationTransitionDefinition = transitionDefinition<String> {
 @Composable
 fun TextAnimationComponent() {
     // Annotate string is used to define a text with multiple styles.
-    val text = annotatedString {
+    val text = buildAnnotatedString {
         // appended string
         append("Jetpack ")
         // Add inline content. Inline content is used to describe/tag sections inside the Text 

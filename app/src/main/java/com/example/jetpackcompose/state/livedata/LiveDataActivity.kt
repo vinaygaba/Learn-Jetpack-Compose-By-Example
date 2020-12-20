@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.preferredWidth
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyColumnFor
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
@@ -28,11 +28,11 @@ import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.Person
 import com.example.jetpackcompose.core.getSuperheroList
 import com.example.jetpackcompose.image.NetworkImageComponentPicasso
@@ -89,55 +89,57 @@ fun LiveDataComponent(personListLiveData: LiveData<List<Person>>) {
 // built up of smaller composable functions.
 @Composable
 fun LiveDataComponentList(personList: List<Person>) {
-    // LazyColumnItems is a vertically scrolling list that only composes and lays out the currently
+    // LazyColumn is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
     // than the VerticalScroller.
-    LazyColumnFor(items = personList) { person ->
-        // Card composable is a predefined composable that is meant to represent the
-        // card surface as specified by the Material Design specification. We also
-        // configure it to have rounded corners and apply a modifier.
+    LazyColumn {
+        items(items = personList, itemContent = { person ->
+            // Card composable is a predefined composable that is meant to represent the
+            // card surface as specified by the Material Design specification. We also
+            // configure it to have rounded corners and apply a modifier.
 
-        // You can think of Modifiers as implementations of the decorators pattern that are used to
-        // modify the composable that its applied to. In this example, we assign a padding of
-        // 16dp to the Card along with specifying it to occupy the entire available width.
-        Card(
-            shape = RoundedCornerShape(4.dp),
-            backgroundColor = Color.White,
-            modifier = Modifier.fillParentMaxWidth().padding(8.dp)
-        ) {
-            // ListItem is a predefined composable that is a Material Design implementation of [list
-            // items](https://material.io/components/lists). This component can be used to achieve the
-            // list item templates existing in the spec
-            ListItem(text = {
-                // The Text composable is pre-defined by the Compose UI library; you can use this
-                // composable to render text on the screen
-                Text(
-                    text = person.name,
-                    style = TextStyle(
-                        fontFamily = FontFamily.Serif, fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold
+            // You can think of Modifiers as implementations of the decorators pattern that are used to
+            // modify the composable that its applied to. In this example, we assign a padding of
+            // 16dp to the Card along with specifying it to occupy the entire available width.
+            Card(
+                shape = RoundedCornerShape(4.dp),
+                backgroundColor = Color.White,
+                modifier = Modifier.fillParentMaxWidth().padding(8.dp)
+            ) {
+                // ListItem is a predefined composable that is a Material Design implementation of [list
+                // items](https://material.io/components/lists). This component can be used to achieve the
+                // list item templates existing in the spec
+                ListItem(text = {
+                    // The Text composable is pre-defined by the Compose UI library; you can use this
+                    // composable to render text on the screen
+                    Text(
+                        text = person.name,
+                        style = TextStyle(
+                            fontFamily = FontFamily.Serif, fontSize = 25.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
-                )
-            }, secondaryText = {
-                Text(
-                    text = "Age: ${person.age}",
-                    style = TextStyle(
-                        fontFamily = FontFamily.Serif, fontSize = 15.sp,
-                        fontWeight = FontWeight.Light, color = Color.DarkGray
+                }, secondaryText = {
+                    Text(
+                        text = "Age: ${person.age}",
+                        style = TextStyle(
+                            fontFamily = FontFamily.Serif, fontSize = 15.sp,
+                            fontWeight = FontWeight.Light, color = Color.DarkGray
+                        )
                     )
-                )
-            }, icon = {
-                person.profilePictureUrl?.let { imageUrl ->
-                    // Look at the implementation of this composable in ImageActivity to learn
-                    // more about its implementation. It uses Picasso to load the imageUrl passed
-                    // to it.
-                    NetworkImageComponentPicasso(
-                        url = imageUrl,
-                        modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
-                    )
-                }
-            })
-        }
+                }, icon = {
+                    person.profilePictureUrl?.let { imageUrl ->
+                        // Look at the implementation of this composable in ImageActivity to learn
+                        // more about its implementation. It uses Picasso to load the imageUrl passed
+                        // to it.
+                        NetworkImageComponentPicasso(
+                            url = imageUrl,
+                            modifier = Modifier.preferredWidth(60.dp).preferredHeight(60.dp)
+                        )
+                    }
+                })
+            }
+        })
     }
 }
 

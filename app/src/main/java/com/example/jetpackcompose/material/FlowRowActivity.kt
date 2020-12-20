@@ -10,7 +10,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.Amenity
 import com.example.jetpackcompose.core.getAmenityList
 import com.example.jetpackcompose.image.TitleComponent
