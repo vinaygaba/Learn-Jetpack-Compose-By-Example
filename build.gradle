@@ -32,7 +32,7 @@ buildscript {
                     'material': "androidx.compose.material:material:${versions.compose}",
                     'materialRipple': "androidx.compose.material:material-ripple:${versions.compose}",
                     'savedInstanceState': "androidx.compose.runtime:runtime-saved-instance-state:${versions.compose}",
-                    'uiTest': "androidx.ui:ui-test:${versions.compose}",
+                    'uiTest': "androidx.compose.ui:ui-test-junit4:${versions.compose}",
                     'uiLiveData': "androidx.compose.runtime:runtime-livedata:${versions.compose}"
             ],
             'constraintLayout': "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
