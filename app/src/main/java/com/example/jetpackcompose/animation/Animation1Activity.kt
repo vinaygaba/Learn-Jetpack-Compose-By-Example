@@ -2,10 +2,9 @@ package com.example.jetpackcompose.animation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.core.AnimationConstants.Infinite
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.FloatPropKey
-import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.transition
@@ -20,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 
 class Animation1Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,12 +69,11 @@ private val rotationTransitionDefinition = transitionDefinition<String> {
         // interpolator to use for the animation & how many iterations of this animation are needed.
         // Since we want the rotation to be continous, we use the repeatable AnimationBuilder and
         // set the iterations to Infinite.
-        rotation using repeatable(
+        rotation using infiniteRepeatable(
             animation = tween<Float>(
                 durationMillis = 3000,
                 easing = FastOutLinearInEasing
-            ),
-            iterations = Infinite
+            )
         )
     }
 }
@@ -97,7 +95,7 @@ fun RotatingSquareComponent() {
         modifier = Modifier.fillMaxSize(), 
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        children = {
+        content = {
         // Transition composable creates a state-based transition using the animation configuration
         // defined in [TransitionDefinition]. In the example below, we use the
         // rotationTransitionDefinition that we discussed above and also specify the initial

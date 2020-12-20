@@ -1,5 +1,6 @@
 package com.example.jetpackcompose.state.backpress
 
+import android.content.ContextWrapper
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcherOwner
@@ -8,7 +9,7 @@ import androidx.compose.runtime.Providers
 import androidx.compose.runtime.onCommit
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticAmbientOf
-import androidx.compose.ui.platform.LifecycleOwnerAmbient
+import androidx.compose.ui.platform.AmbientContext
 
 /**
  * Related discussion -
@@ -27,7 +28,7 @@ import androidx.compose.ui.platform.LifecycleOwnerAmbient
 
 // Another way to think about Providers is that I can get access to a value in the middle of 
 // a composition, without having to pass the value in. Some other examples of Providers and 
-// Ambients are ContextAmbient(to get access to the context), CoroutineContextAmbient, etc. 
+// Ambients are AmbientContext(to get access to the context), CoroutineAmbientContext, etc. 
 private val AmbientBackPressedDispatcher =
     staticAmbientOf<OnBackPressedDispatcherOwner?> { null }
 
@@ -95,9 +96,21 @@ internal fun BackButtonHandler(onBackPressed: () -> Unit) {
 
     // Another way to think about Providers is that I can get access to a value in the middle of 
     // a composition, without having to pass the value in. Some other examples of Providers and 
-    // Ambients are ContextAmbient(to get access to the context), CoroutineContextAmbient, etc. 
+    // Ambients are AmbientContext(to get access to the context), CoroutineAmbientContext, etc. 
+    var context = AmbientContext.current
+    // Inspired from https://cs.android.com/androidx/platform/frameworks/support/+/
+    // androidx-master-dev:navigation/navigation-compose/src/main/java/androidx/navigation/
+    // compose/NavHost.kt;l=88
+    // This was necessary because using Jetpack Navigation does not allow typecasting a 
+    // NavBackStackEntry to LifecycleOwnerAmbient.
+    while (context is ContextWrapper) {
+        if (context is OnBackPressedDispatcherOwner) {
+            break
+        }
+        context = context.baseContext
+    }
     Providers(
-        AmbientBackPressedDispatcher provides LifecycleOwnerAmbient.current as ComponentActivity
+        AmbientBackPressedDispatcher provides context as ComponentActivity
     ) {
         handler {
             onBackPressed()

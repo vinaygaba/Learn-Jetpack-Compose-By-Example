@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.layout.preferredSizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,20 +27,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageAsset
-import androidx.compose.ui.graphics.asImageAsset
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.res.loadImageResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -108,12 +108,13 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     // be advisable to use the loadImageResource method as it loads an image resource asynchronously
     val image = loadImageResource(resId)
     image.resource.resource?.let {
-        // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
+        // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
 
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. In this example, we configure the
         // Image composable to have a height of 200 dp.
-        Image(asset = it, 
+        Image(
+            bitmap = it, 
             modifier = Modifier.preferredSizeIn(maxHeight = 200.dp)
                 .fillMaxWidth())
     }
@@ -139,9 +140,9 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
         Column(
             modifier = Modifier.clip(RoundedCornerShape(8.dp))
         ) {
-            // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
+            // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
             Image(
-                asset = it,
+                bitmap = it,
                 modifier = Modifier.preferredHeight(200.dp)
             )
         }
@@ -155,11 +156,12 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 @Composable
 fun NetworkImageComponentPicasso(
     url: String,
-    modifier: Modifier = Modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
+    modifier: Modifier = Modifier
 ) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
-    var image by remember { mutableStateOf<ImageAsset?>(null) }
+    val sizeModifier = modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
+    var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
     onCommit(url) {
         val picasso = Picasso.get()
@@ -174,7 +176,7 @@ fun NetworkImageComponentPicasso(
             }
 
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                image = bitmap?.asImageAsset()
+                image = bitmap?.asImageBitmap()
             }
         }
         picasso
@@ -198,15 +200,15 @@ fun NetworkImageComponentPicasso(
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to. 
         Column(
-            modifier = modifier,
+            modifier = sizeModifier,
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
-            Image(asset = theImage)
+            // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+            Image(bitmap = theImage)
         }
     } else if (theDrawable != null) {
-        Canvas(modifier = modifier) {
+        Canvas(modifier = sizeModifier) {
             drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
             }
@@ -222,11 +224,12 @@ fun NetworkImageComponentPicasso(
  */
 @Composable
 fun NetworkImageComponentGlide(
-    url: String, modifier: Modifier = Modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
+    url: String, modifier: Modifier = Modifier
 ) {
-    var image by remember { mutableStateOf<ImageAsset?>(null) }
+    var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
-    val context = ContextAmbient.current
+    val sizeModifier = modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
+    val context = AmbientContext.current
     onCommit(url) {
         val glide = Glide.with(context)
         val target = object : CustomTarget<Bitmap>() {
@@ -236,7 +239,7 @@ fun NetworkImageComponentGlide(
             }
 
             override fun onResourceReady(bitmap: Bitmap, transition: Transition<in Bitmap>?) {
-                image = bitmap.asImageAsset()
+                image = bitmap.asImageBitmap()
             }
         }
         glide
@@ -261,15 +264,15 @@ fun NetworkImageComponentGlide(
         // You can think of Modifiers as implementations of the decorators pattern that are
         // used to modify the composable that its applied to.
         Column(
-            modifier = modifier,
+            modifier = sizeModifier,
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Image is a pre-defined composable that lays out and draws a given [ImageAsset].
-            Image(asset = theImage)
+            // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+            Image(bitmap = theImage)
         }
     } else if (theDrawable != null) {
-        Canvas(modifier = modifier) {
+        Canvas(modifier = sizeModifier) {
             drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
             }

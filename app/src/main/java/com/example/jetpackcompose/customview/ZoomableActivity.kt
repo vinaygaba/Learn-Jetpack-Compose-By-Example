@@ -14,10 +14,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.drawLayer
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.gesture.DragObserver
 import androidx.compose.ui.gesture.rawDragGestureFilter
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.res.loadImageResource
 import com.example.jetpackcompose.R
@@ -74,19 +74,19 @@ fun ZoomableComposable() {
         // There are multiple methods available to load an image resource in Compose. 
         // However, it would be advisable to use the loadImageResource method as it loads 
         // an image resource asynchronously
-        val imageAsset = loadImageResource(id = R.drawable.landscape).resource.resource
-        imageAsset?.let {
-            // Image is a pre-defined composable that lays out and draws a given [ImageAsset]. 
-            // We use the drawLayer modifier to modify the scale & translation of the image. 
+        val imageBitmap = loadImageResource(id = R.drawable.landscape).resource.resource
+        imageBitmap?.let {
+            // Image is a pre-defined composable that lays out and draws a given [ImageBitmap]. 
+            // We use the graphicsLayer modifier to modify the scale & translation of the image. 
             // This is read from the state properties that we created above.
             Image(
-                modifier = Modifier.fillMaxSize().drawLayer(
+                modifier = Modifier.fillMaxSize().graphicsLayer(
                     scaleX = scale,
                     scaleY = scale,
                     translationX = translate.x,
                     translationY = translate.y
                 ),
-                asset = it
+                bitmap = it
             )
         }
     }

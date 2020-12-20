@@ -20,7 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.image.TitleComponent
 
 class BottomNavigationActivity : AppCompatActivity() {
@@ -85,7 +85,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
                 icon = {
                     // Simple composable that allows you to draw an icon on the screen. It
                     // accepts a vector asset as the icon.
-                    Icon(asset = Icons.Filled.Favorite)
+                    Icon(imageVector = Icons.Filled.Favorite)
                 },
                 label = {
                     // Text is a predefined composable that does exactly what you'd expect it to -
@@ -121,7 +121,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 icon = {
                     // Simple composable that allows you to draw an icon on the screen. It
                     // accepts a vector asset as the icon.
-                    Icon(asset = Icons.Filled.Favorite)
+                    Icon(imageVector = Icons.Filled.Favorite)
                 },
                 label = {
                     // Text is a predefined composable that does exactly what you'd expect it to -

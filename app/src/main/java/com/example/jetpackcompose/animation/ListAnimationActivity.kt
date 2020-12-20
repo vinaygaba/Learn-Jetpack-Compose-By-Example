@@ -7,16 +7,16 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumnForIndexed
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
@@ -27,9 +27,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.Person
 import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
@@ -61,82 +61,84 @@ fun ListAnimationComponent(personList: List<Person>) {
     // changes. This ensures that only the composables that depend on this will be redraw while the 
     // rest remain unchanged. This ensures efficiency and is a performance optimization. It 
     // is inspired from existing frameworks like React.
-    
+
     // We use this variable to hold the list of all Person objects that are deleted from the list
     // below.
     val deletedPersonList = remember { mutableStateListOf<Person>() }
-    
-    // LazyColumnItems is a vertically scrolling list that only composes and lays out the currently
+
+    // LazyColumn is a vertically scrolling list that only composes and lays out the currently
     // visible items. This is very similar to what RecyclerView tries to do as it's more optimized
     // than the VerticalScroller.
 
-    // In addition, we pass a modifier to the LazyColumnForIndexed composable. You can think of
+    // In addition, we pass a modifier to the LazyColumn composable. You can think of
     // Modifiers as implementations of the decorators pattern that  are used to modify the 
-    // composable that its applied to. In this example, we configure the LazyColumnForIndexed to 
+    // composable that its applied to. In this example, we configure the LazyColumn to 
     // occupy the entire available width using Modifier.fillMaxWidth().
-    LazyColumnForIndexed(
-        items = personList,
+    LazyColumn(
         modifier = Modifier.fillMaxWidth()
-    ) { index, person ->
-        // AnimatedVisibility is a pre-defined composable that automatically animates the 
-        // appearace and disappearance of it's content. This makes it super easy to animated 
-        // things like insertion/deletion of a list element. The visible property tells the
-        // AnimatedVisibility about whether to show the composable that it wraps (in this case, 
-        // the Card that you see below). This is where you can add logic about whether a certain 
-        // element needs to either be shown or not. In our case, we want to show an element, only
-        // if its not a part of the deletedPersonList list. As this list changes and a given 
-        // person is either shown or hidden from the screen, the "enter" and "exit" animations 
-        // are called for a given item. AnimatedVisibility also let's you specify the enter and 
-        // exit animation so that you have full control over how you'd like to animate it's enter
-        // or exit. In the example below, since I also added functionality to delete an item, I 
-        // customize the exit animation to be an animation that shrinks vertically and gave the 
-        // animation a duration of 1000ms. 
-        AnimatedVisibility(
-            visible = !deletedPersonList.contains(person),
-            enter = expandVertically(),
-            exit = shrinkVertically(
-                animSpec = tween(
-                    durationMillis = 1000,
-                )
-            )
-        ) {
-            // Card composable is a predefined composable that is meant to represent the 
-            // card surface as specified by the Material Design specification. We also 
-            // configure it to have rounded corners and apply a modifier.
-            Card(
-                shape = RoundedCornerShape(4.dp),
-                backgroundColor = colors[index % colors.size],
-                modifier = Modifier.fillParentMaxWidth()
-            ) {
-                // Row is a composable that places its children in a horizontal sequence. You
-                // can think of it similar to a LinearLayout with the horizontal orientation.
-                Row(
-                    modifier = Modifier.fillParentMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    // Text is a predefined composable that does exactly what you'd expect it to -
-                    // display text on the screen. It allows you to customize its appearance using
-                    // the style property.
-                    Text(
-                        person.name, style = TextStyle(
-                            color = Color.Black,
-                            fontSize = 20.sp,
-                            textAlign = TextAlign.Center
-                        ), modifier = Modifier.padding(16.dp)
+    ) {
+        itemsIndexed(items = personList,
+            itemContent = { index, person ->
+                // AnimatedVisibility is a pre-defined composable that automatically animates the 
+                // appearace and disappearance of it's content. This makes it super easy to animated 
+                // things like insertion/deletion of a list element. The visible property tells the
+                // AnimatedVisibility about whether to show the composable that it wraps (in this case, 
+                // the Card that you see below). This is where you can add logic about whether a certain 
+                // element needs to either be shown or not. In our case, we want to show an element, only
+                // if its not a part of the deletedPersonList list. As this list changes and a given 
+                // person is either shown or hidden from the screen, the "enter" and "exit" animations 
+                // are called for a given item. AnimatedVisibility also let's you specify the enter and 
+                // exit animation so that you have full control over how you'd like to animate it's enter
+                // or exit. In the example below, since I also added functionality to delete an item, I 
+                // customize the exit animation to be an animation that shrinks vertically and gave the 
+                // animation a duration of 1000ms. 
+                AnimatedVisibility(
+                    visible = !deletedPersonList.contains(person),
+                    enter = expandVertically(),
+                    exit = shrinkVertically(
+                        animSpec = tween(
+                            durationMillis = 1000,
+                        )
                     )
-                    IconButton(
-                        // When this button is clicked, we add the person to deletedPersonList.
-                        onClick = {
-                            deletedPersonList.add(person)
-                        }
+                ) {
+                    // Card composable is a predefined composable that is meant to represent the 
+                    // card surface as specified by the Material Design specification. We also 
+                    // configure it to have rounded corners and apply a modifier.
+                    Card(
+                        shape = RoundedCornerShape(4.dp),
+                        backgroundColor = colors[index % colors.size],
+                        modifier = Modifier.fillParentMaxWidth()
                     ) {
-                        // Simple composable that allows you to draw an icon on the screen. It
-                        // accepts a vector asset as the icon.
-                        Icon(Icons.Filled.Delete)
+                        // Row is a composable that places its children in a horizontal sequence. You
+                        // can think of it similar to a LinearLayout with the horizontal orientation.
+                        Row(
+                            modifier = Modifier.fillParentMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            // Text is a predefined composable that does exactly what you'd expect it to -
+                            // display text on the screen. It allows you to customize its appearance using
+                            // the style property.
+                            Text(
+                                person.name, style = TextStyle(
+                                    color = Color.Black,
+                                    fontSize = 20.sp,
+                                    textAlign = TextAlign.Center
+                                ), modifier = Modifier.padding(16.dp)
+                            )
+                            IconButton(
+                                // When this button is clicked, we add the person to deletedPersonList.
+                                onClick = {
+                                    deletedPersonList.add(person)
+                                }
+                            ) {
+                                // Simple composable that allows you to draw an icon on the screen. It
+                                // accepts a vector asset as the icon.
+                                Icon(Icons.Filled.Delete)
+                            }
+                        }
                     }
                 }
-            }
-        }
+            })
     }
 }
 

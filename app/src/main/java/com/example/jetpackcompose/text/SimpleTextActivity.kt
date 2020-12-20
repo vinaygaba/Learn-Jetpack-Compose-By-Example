@@ -2,15 +2,15 @@ package com.example.jetpackcompose.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 class SimpleTextActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +31,12 @@ class SimpleTextActivity : AppCompatActivity() {
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                children = {
-                // Here, SimpleText is a Composable function which is going to describe the contents of
-                // this activity that will be rendered on the screen.
-                SimpleText("This is the Learn Jetpack Compose By Example tutorial")
-            })
+                content = {
+                    // Here, SimpleText is a Composable function which is going to describe the contents of
+                    // this activity that will be rendered on the screen.
+                    SimpleText("This is the Learn Jetpack Compose By Example tutorial")
+                }
+            )
         }
     }
 }

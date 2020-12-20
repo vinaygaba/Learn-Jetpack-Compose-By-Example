@@ -2,8 +2,6 @@ package com.example.jetpackcompose.theme
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,11 +11,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
 import androidx.compose.material.DrawerValue
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalDrawerLayout
 import androidx.compose.material.Surface
 import androidx.compose.material.Switch
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.Typography
 import androidx.compose.material.darkColors
@@ -37,10 +37,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign.Justify
 import androidx.compose.ui.text.style.TextIndent
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.LOREM_IPSUM_1
 import com.example.jetpackcompose.core.LOREM_IPSUM_2
 import com.example.jetpackcompose.core.LOREM_IPSUM_3
@@ -192,7 +192,7 @@ fun ThemedDrawerContentComponent(
                 currentScreen.value = ThemedDrawerAppScreen.Screen1
                 // We also close the drawer when an option from the drawer is selected.
                 closeDrawer()
-            }), children = {
+            }), content = {
                 // Text is a predefined composable that does exactly what you'd expect it to -
                 // display text on the screen. It allows you to customize its appearance using
                 // the style property.
@@ -206,7 +206,7 @@ fun ThemedDrawerContentComponent(
                     currentScreen.value = ThemedDrawerAppScreen.Screen2
                     closeDrawer()
                 }
-            ), children = {
+            ), content = {
                 Text(text = ThemedDrawerAppScreen.Screen2.name, modifier = Modifier.padding(16.dp))
             }
         )
@@ -216,7 +216,7 @@ fun ThemedDrawerContentComponent(
                 currentScreen.value = ThemedDrawerAppScreen.Screen3
                 closeDrawer()
             },
-            children = {
+            content = {
                 Text(text = ThemedDrawerAppScreen.Screen3.name, modifier = Modifier.padding(16.dp))
             }
         )
@@ -280,7 +280,7 @@ fun ThemedScreen1Component(
             title = { Text("Screen 1") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(asset = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu)
                 }
             }
         )
@@ -343,7 +343,7 @@ fun ThemedScreen2Component(
             title = { Text("Screen 2") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(asset = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu)
                 }
             }
         )
@@ -404,7 +404,7 @@ fun ThemedScreen3Component(
             title = { Text("Screen 3") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(asset = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu)
                 }
             }
         )
