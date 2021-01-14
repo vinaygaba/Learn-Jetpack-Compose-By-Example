@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".interop.ComposeInClassicAndroidActivity">
 
-    <FrameLayout
-        android:id="@+id/frame_container"
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

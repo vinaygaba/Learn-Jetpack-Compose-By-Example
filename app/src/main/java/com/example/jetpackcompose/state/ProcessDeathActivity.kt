@@ -26,13 +26,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.OffsetMap
+import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -171,7 +171,7 @@ class CreditCardVisualTransformation : VisualTransformation {
 // case of CreditCardVisualTransformation, since we add a space character after every 4
 // characters, we need to move the cursor accordingly. For example, if we added 3 space
 // characters, we need to account for that and move the cursor offset by 3 characters.
-val creditCardOffsetMap = object : OffsetMap {
+val creditCardOffsetMap = object : OffsetMapping {
     override fun originalToTransformed(offset: Int) = offset + (offset / 4)
     override fun transformedToOriginal(offset: Int) = offset - (offset / 4)
 }
