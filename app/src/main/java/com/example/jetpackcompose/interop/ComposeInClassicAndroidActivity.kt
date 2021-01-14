@@ -1,9 +1,7 @@
 package com.example.jetpackcompose.interop
 
 import android.os.Bundle
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,12 +9,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Recomposer
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -26,18 +24,16 @@ import com.example.jetpackcompose.R
 import com.example.jetpackcompose.core.colors
 
 class ComposeInClassicAndroidActivity : AppCompatActivity() {
-    private lateinit var containerLayout: FrameLayout
+    private lateinit var containerLayout: ComposeView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compose_in_classic_android)
-        containerLayout = findViewById(R.id.frame_container)
-        // We make use of the setContent extension function that's available for all view groups.
-        // This allows us to render a @Composable function inside a view group. This allows us to
-        // render composables inside classic android views. In the example below, we use the frame 
-        // layout called containerLayout and pass the composable called CardComponentWithMessage to 
-        // render inside it.
-        containerLayout.setContent(Recomposer.current()) {
+        containerLayout = findViewById(R.id.compose_view)
+        // We make use of the setContent extension function that's available on the ComposeView 
+        // view that is capable of hosting a @Composable function inside it. This allows us to 
+        // render composables inside classic android views.
+        containerLayout.setContent {
             CardComponentWithMessage()
         }
     }
