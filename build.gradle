@@ -2,7 +2,7 @@
 
 buildscript {
     ext.versions = [
-
+            'gradle': '4.0.2',
             'kotlin': '1.4.32',
             'cardView': '1.0.0',
             'compose': '1.0.0-alpha10',
@@ -10,7 +10,7 @@ buildscript {
             'coroutine': '1.3.7',
             'espresso': '3.2.0',
             'glide': '4.10.0',
-            'gradle': '4.2.0-alpha15',
+
             'junit' : '4.12',
             'junitImplementation' : '1.1.1',
 
