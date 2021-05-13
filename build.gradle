@@ -49,7 +49,7 @@ buildscript {
                     'glideCompiler': "com.github.bumptech.glide:compiler:${versions.glide}"
             ],
             'support': [
-                    'appCompat': "androidx.appcompat:appcompat:${versions.supportLibrary}",
+                    'appCompat': "androidx.appcompat:appcompat:1.3.0-beta01",
                     'ktx': "androidx.core:core-ktx:${versions.supportLibrary}",
                     'ktxLiveData': "androidx.lifecycle:lifecycle-livedata-ktx:${versions.ktxSupport}",
                     'ktxViewModel': "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.ktxSupport}",
