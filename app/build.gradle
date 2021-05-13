@@ -115,7 +115,6 @@ dependencies {
     implementation deps.compose.layout
     implementation deps.compose.material
     implementation deps.compose.materialRipple
-    implementation deps.compose.savedInstanceState
     implementation deps.compose.uiLiveData
     androidTestImplementation deps.compose.uiTest
 
