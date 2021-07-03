@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -16,8 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -123,7 +123,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
         // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
         // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
         // CoroutineAmbientContext, etc.
-        val context = AmbientContext.current
+        val context = LocalContext.current
         val resources = context.resources
         val displayMetrics = resources.displayMetrics
         // Compute the screen width using the actual display width and the density of the display.
@@ -155,7 +155,7 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                     // width of the column is equal to the computed screenWidth. We subtract
                     // some spacing to make the other item slightly visible.
                     Column(
-                        modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2)),
+                        modifier = Modifier.width(screenWidth.dp - (spacing * 2)),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {

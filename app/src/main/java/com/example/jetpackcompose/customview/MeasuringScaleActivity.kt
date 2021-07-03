@@ -6,12 +6,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.darkColors
@@ -20,7 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -98,7 +93,7 @@ fun ScaleLineComponent(index: Int) {
         // We use the Canvas composable that gives you access to a canvas that you can draw
         // into. We also pass it a modifier.
         Canvas(
-            modifier = Modifier.padding(5.dp).preferredHeight(100.dp).preferredWidth(3.dp)
+            modifier = Modifier.padding(5.dp).height(100.dp).width(3.dp)
         ) {
             // Allows you to draw a line between two points (p1 & p2) on the canvas.
             drawLine(
@@ -142,7 +137,7 @@ fun ScaleCenterPointer() {
         // used to modify the composable that its applied to. In this example, we give it a 
         // padding of 5 dp, height of 120dp & width of 3dp. 
         Canvas(
-            modifier = Modifier.padding(5.dp).preferredHeight(120.dp).preferredWidth(3.dp)
+            modifier = Modifier.padding(5.dp).height(120.dp).width(3.dp)
         ) {
             // Allows you to draw a line between two points (p1 & p2) on the canvas.
             drawLine(

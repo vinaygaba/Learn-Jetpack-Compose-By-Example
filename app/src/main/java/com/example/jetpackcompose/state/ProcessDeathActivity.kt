@@ -2,12 +2,6 @@ package com.example.jetpackcompose.state
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
@@ -15,12 +9,14 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -78,7 +74,9 @@ fun ProcessDeathComponent() {
         // corners and apply few modifiers to alter the dimensions of this card.
         Card(
             shape = RoundedCornerShape(16.dp),
-            modifier = Modifier.preferredWidth(300.dp).aspectRatio(16 / 9f),
+            modifier = Modifier
+                .width(300.dp)
+                .aspectRatio(16 / 9f),
             backgroundColor = colors[0]
         ) {
             // Column is a composable that places its children in a vertical sequence. You
@@ -112,7 +110,7 @@ fun ProcessDeathComponent() {
                 // (https://stackoverflow .com/questions/8552514/is-there-any-limit-of-bundle-in-android)
                 // Thus you should be careful about what data you store inside.
                 // Discussion - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1586187000148500?thread_ts=1586186224.146600&cid=CJLTWPH7S
-                var textValue by savedInstanceState { "1234567812345678" }
+                var textValue by rememberSaveable { mutableStateOf("1234567812345678") }
                 TextField(value = TextFieldValue(textValue),
                     modifier = Modifier.padding(16.dp),
                     textStyle = TextStyle(

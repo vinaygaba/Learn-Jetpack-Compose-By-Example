@@ -9,13 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.gesture.DragObserver
-import androidx.compose.ui.gesture.dragGestureFilter
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.gestures.DraggableState
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.runtime.remember
 
 /**
  * This example needs some more work.
@@ -49,16 +51,22 @@ data class Paths(
 
 @Composable
 fun DrawingBoardComposable() {
-    val paths = mutableStateListOf<Paths>()
+    val paths = remember { mutableStateListOf<Paths>() }
+    val draggableState = DraggableState {  }
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .draggable(
+                state = rememberDraggableState {
+                    paths += Paths(downPosition.x, downPosition.y)
+                }
+            )
             .dragGestureFilter(
             startDragImmediately = true,
             dragObserver = object : DragObserver {
                 override fun onStart(downPosition: Offset) {
                     super.onStart(downPosition)
-                    paths += Paths(downPosition.x, downPosition.y)
+
                 }
             })
     ) {

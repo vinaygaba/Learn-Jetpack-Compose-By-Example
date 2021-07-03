@@ -76,16 +76,18 @@ dependencies {
     implementation deps.coroutine.core
 
     // Compose
+    implementation deps.compose.activityCompose
     implementation deps.compose.composeRuntime
+    implementation deps.compose.constraintLayout
     implementation deps.compose.core
     implementation deps.compose.foundation
     implementation deps.compose.tooling
     implementation deps.compose.layout
     implementation deps.compose.material
-    implementation deps.compose.materialRipple
     implementation deps.compose.savedInstanceState
     implementation deps.compose.uiLiveData
     androidTestImplementation deps.compose.uiTest
+
 
     // Image loading
     implementation deps.imageLoading.picasso

@@ -3,7 +3,7 @@ package com.example.jetpackcompose.scrollers
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 
 class GridLayoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class GridLayoutActivity : AppCompatActivity() {
 //                    // using Modifier.fillMaxWidth() & give it a height of 100dp.
 //                    Card(shape = RoundedCornerShape(4.dp), color = colors[(i + j) % colors.size],
 //                        modifier = Modifier.padding(16.dp).fillMaxWidth() +
-//                                Modifier.preferredHeight(100.dp)
+//                                Modifier.height(100.dp)
 //                    ) {
 //                        // The Text composable is pre-defined by the Compose UI library; you can use
 //                        // this composable to render text on the screen

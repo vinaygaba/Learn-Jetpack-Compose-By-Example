@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -64,7 +64,7 @@ fun CardComponentWithMessage() {
         // corners and apply a modifier.
         Card(
             modifier = Modifier.fillMaxWidth()
-                .preferredHeight(200.dp)
+                .height(200.dp)
                 .padding(16.dp),
             backgroundColor = colors[1],
         ) {

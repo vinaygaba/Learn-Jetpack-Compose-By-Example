@@ -27,8 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.res.loadImageResource
+import androidx.activity.compose.setContent
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.TextStyle
@@ -219,8 +219,8 @@ fun TextAnimationComponent() {
 @Composable
 fun ComposeLogoComponent() {
     // There are multiple methods available to load an image resource in Compose. However, it would
-    // be advisable to use the loadImageResource method as it loads an image resource asynchronously
-    val image = loadImageResource(R.drawable.compose_logo)
+    // be advisable to use the painterResource method as it loads an image resource asynchronously
+    val image = painterResource(R.drawable.compose_logo)
     image.resource.resource?.let { img ->
         // Transition composable creates a state-based transition using the animation configuration
         // defined in [TransitionDefinition]. In the example below, we use the

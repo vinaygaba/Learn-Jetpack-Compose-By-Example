@@ -17,7 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
@@ -63,7 +63,7 @@ fun StateComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier(Modifier.fillMaxWidth()) to the Row and ask it to extend the
     // full width available to it. Alternatively, we could've assigned a fixed width to this row
-    // using Modifier.preferredWidth(val width: Dp).
+    // using Modifier.width(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // This Row consists of two buttons. We wanted to ensure that both these buttons occupy
         // equal amount of width. We do that by using the LayoutWeight modifier and passing equal
@@ -117,7 +117,7 @@ fun ModelComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using
-    // Modifier.preferredWidth(val width: Dp).
+    // Modifier.width(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // This Row consists of two buttons. We wanted to ensure that both these buttons occupy
         // equal amount of width. We do that by using the LayoutWeight modifier and passing equal

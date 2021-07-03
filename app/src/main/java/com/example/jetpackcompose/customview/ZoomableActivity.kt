@@ -18,8 +18,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.gesture.DragObserver
 import androidx.compose.ui.gesture.rawDragGestureFilter
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.res.loadImageResource
+import androidx.activity.compose.setContent
+import androidx.compose.ui.res.painterResource
 import com.example.jetpackcompose.R
 
 class ZoomableActivity : AppCompatActivity() {
@@ -72,23 +72,22 @@ fun ZoomableComposable() {
             })
     ) {
         // There are multiple methods available to load an image resource in Compose. 
-        // However, it would be advisable to use the loadImageResource method as it loads 
+        // However, it would be advisable to use the painterResource method as it loads
         // an image resource asynchronously
-        val imageBitmap = loadImageResource(id = R.drawable.landscape).resource.resource
-        imageBitmap?.let {
-            // Image is a pre-defined composable that lays out and draws a given [ImageBitmap]. 
-            // We use the graphicsLayer modifier to modify the scale & translation of the image. 
-            // This is read from the state properties that we created above.
-            Image(
-                modifier = Modifier.fillMaxSize().graphicsLayer(
-                    scaleX = scale,
-                    scaleY = scale,
-                    translationX = translate.x,
-                    translationY = translate.y
-                ),
-                bitmap = it
-            )
-        }
+        val imagepainter = painterResource(id = R.drawable.landscape)
+        // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+        // We use the graphicsLayer modifier to modify the scale & translation of the image.
+        // This is read from the state properties that we created above.
+        Image(
+            modifier = Modifier.fillMaxSize().graphicsLayer(
+                scaleX = scale,
+                scaleY = scale,
+                translationX = translate.x,
+                translationY = translate.y
+            ),
+            painter = imagepainter,
+            contentDescription = "Landscape Image"
+        )
     }
 }
 

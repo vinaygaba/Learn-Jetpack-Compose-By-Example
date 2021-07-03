@@ -4,12 +4,8 @@ import android.content.ContextWrapper
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcherOwner
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Providers
-import androidx.compose.runtime.onCommit
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.staticAmbientOf
-import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
 
 /**
  * Related discussion -
@@ -30,7 +26,7 @@ import androidx.compose.ui.platform.AmbientContext
 // a composition, without having to pass the value in. Some other examples of Providers and 
 // Ambients are AmbientContext(to get access to the context), CoroutineAmbientContext, etc. 
 private val AmbientBackPressedDispatcher =
-    staticAmbientOf<OnBackPressedDispatcherOwner?> { null }
+    staticCompositionLocalOf<OnBackPressedDispatcherOwner?> { null }
 
 // Simple implementation of OnBackPressedCallback interface. Holds a reference to a lambda that's
 // used to describe the onBackPressed action and calls it at the right instance (when  
@@ -64,16 +60,16 @@ internal fun handler(
     // composition is committed. In simpler words, the first onCommit block below will run each 
     // time the value of dispatcher changes (in addition to the first time the handler composable
     // is called)
-    onCommit(dispatcher) {
+    DisposableEffect(dispatcher) {
         dispatcher.addCallback(handler)
         // The onDispose block inside the onCommit effect is called to do any clean up(if 
         // necessary) for the side effect that executed inside onCommit. 
         onDispose { handler.remove() }
     }
-    onCommit(enabled) {
+    LaunchedEffect(enabled) {
         handler.isEnabled = enabled
     }
-    onCommit(onBackPressed) {
+    LaunchedEffect(onBackPressed) {
         handler.onBackPressed = onBackPressed
     }
 }
@@ -97,7 +93,7 @@ internal fun BackButtonHandler(onBackPressed: () -> Unit) {
     // Another way to think about Providers is that I can get access to a value in the middle of 
     // a composition, without having to pass the value in. Some other examples of Providers and 
     // Ambients are AmbientContext(to get access to the context), CoroutineAmbientContext, etc. 
-    var context = AmbientContext.current
+    var context = LocalContext.current
     // Inspired from https://cs.android.com/androidx/platform/frameworks/support/+/
     // androidx-master-dev:navigation/navigation-compose/src/main/java/androidx/navigation/
     // compose/NavHost.kt;l=88
@@ -109,7 +105,7 @@ internal fun BackButtonHandler(onBackPressed: () -> Unit) {
         }
         context = context.baseContext
     }
-    Providers(
+    CompositionLocalProvider(
         AmbientBackPressedDispatcher provides context as ComponentActivity
     ) {
         handler {

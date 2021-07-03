@@ -9,15 +9,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ConstraintLayout
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.imageFromResource
 import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -86,7 +86,7 @@ fun SimpleConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
+        modifier = Modifier.height(120.dp).fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -142,8 +142,8 @@ fun SimpleConstraintLayoutComponent() {
             // Column to occupy a height and width of 72dp and give it constrains using the 
             // constrainAs modifier. 
             Column(
-                modifier = Modifier.preferredHeight(72.dp)
-                    .preferredWidth(72.dp)
+                modifier = Modifier.height(72.dp)
+                    .width(72.dp)
                     .constrainAs(image) {
                         // We want to vertically center the image tag
                         centerVerticallyTo(parent)
@@ -170,7 +170,7 @@ fun GuidelineConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
+        modifier = Modifier.height(120.dp).fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -240,7 +240,7 @@ fun BarrierConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
+        modifier = Modifier.height(120.dp).fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -324,7 +324,7 @@ fun BiasConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
+        modifier = Modifier.height(120.dp).fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints

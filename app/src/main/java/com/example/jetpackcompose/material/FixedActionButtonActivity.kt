@@ -5,11 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Icon
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.material.Text
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Card
@@ -23,7 +18,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.colors
@@ -76,13 +72,13 @@ fun ScaffoldWithBottomBarAndCutout() {
                 backgroundColor = MaterialTheme.colors.secondary
             ) {
                 IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Filled.Favorite)
+                    Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
                 }
             }
         },
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.End,
-        bodyContent = { padding ->
+        content = { padding ->
             // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views
             ScrollableColumn {
@@ -98,7 +94,7 @@ fun ScaffoldWithBottomBarAndCutout() {
                             shape = RoundedCornerShape(8.dp),
                             modifier = Modifier.padding(8.dp)
                         ) {
-                            Spacer(modifier = Modifier.fillMaxWidth().preferredHeight(200.dp))
+                            Spacer(modifier = Modifier.fillMaxWidth().height(200.dp))
                         }
                     }
                 }

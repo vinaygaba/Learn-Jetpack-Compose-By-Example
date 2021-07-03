@@ -13,13 +13,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.FirstBaseline
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.image.TitleComponent
 
 class ViewLayoutConfigurationsActivity : AppCompatActivity() {
@@ -82,7 +83,7 @@ fun RowEqualWeightComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using
-    // Modifier.preferredWidth(val width: Dp).
+    // Modifier.width(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
@@ -97,14 +98,14 @@ fun RowEqualWeightComponent() {
             // composable to render text on the screen
             Text(
                 text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
 
         Button(modifier = Modifier.weight(1f).padding(4.dp), onClick = {}) {
             Text(
                 text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
     }
@@ -118,7 +119,7 @@ fun RowUnequalWeightComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using
-    // Modifier.preferredWidth(val width: Dp).
+    // Modifier.width(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // Button is a pre-defined Material Design implementation of a contained button -
         // https://material.io/design/components/buttons.html#contained-button.
@@ -134,14 +135,14 @@ fun RowUnequalWeightComponent() {
             // composable to render text on the screen
             Text(
                 text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
 
         Button(modifier = Modifier.weight(0.34f).padding(4.dp), onClick = {}) {
             Text(
                 text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
     }
@@ -170,14 +171,14 @@ fun RowAddSpaceBetweenViewsComponent() {
             // composable to render text on the screen
             Text(
                 text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
 
         Button(onClick = {}) {
             Text(
                 text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
     }
@@ -203,14 +204,14 @@ fun RowSpaceViewsEvenlyComponent() {
             // composable to render text on the screen
             Text(
                 text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
 
         Button(onClick = {}) {
             Text(
                 text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
     }
@@ -236,14 +237,14 @@ fun RowSpaceAroundViewsComponent() {
             // composable to render text on the screen
             Text(
                 text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
 
         Button(onClick = {}) {
             Text(
                 text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
     }
@@ -268,14 +269,14 @@ fun RowViewsCenteredComponent() {
             // composable to render text on the screen
             Text(
                 text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
 
         Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
             Text(
                 text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
     }
@@ -300,14 +301,14 @@ fun RowViewsArrangedInEndComponent() {
             // composable to render text on the screen
             Text(
                 text = "Button 1",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
 
         Button(onClick = {}, modifier = Modifier.padding(4.dp)) {
             Text(
                 text = "Button 2",
-                style = TextStyle(fontSize = TextUnit.Sp(20))
+                style = TextStyle(fontSize = 20.sp)
             )
         }
     }
@@ -321,7 +322,7 @@ fun RowBaselineAlignComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using
-    // Modifier.preferredWidth(val width: Dp).
+    // Modifier.width(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
@@ -330,13 +331,13 @@ fun RowBaselineAlignComponent() {
         // align the baseline of the first line of the Text Composable.
         Text(
             text = "Text 1",
-            style = TextStyle(fontSize = TextUnit.Sp(20), fontStyle = FontStyle.Italic),
+            style = TextStyle(fontSize = 20.sp, fontStyle = FontStyle.Italic),
             modifier = Modifier.alignBy(alignmentLine = FirstBaseline)
         )
         Text(
             text = "Text 2",
             style = TextStyle(
-                fontSize = TextUnit.Sp(40), fontStyle = FontStyle.Normal,
+                fontSize = 40.sp, fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.Bold
             ),
             modifier = Modifier.alignBy(alignmentLine = FirstBaseline)
@@ -352,18 +353,18 @@ fun RowBaselineUnalignedComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using
-    // Modifier.preferredWidth(val width: Dp).
+    // Modifier.width(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen
         Text(
             text = "Text 1",
-            style = TextStyle(fontSize = TextUnit.Sp(20), fontStyle = FontStyle.Italic)
+            style = TextStyle(fontSize = 20.sp, fontStyle = FontStyle.Italic)
         )
         Text(
             text = "Text 2",
             style = TextStyle(
-                fontSize = TextUnit.Sp(40), fontStyle = FontStyle.Normal,
+                fontSize = 40.sp, fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.Bold
             )
         )

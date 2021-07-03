@@ -8,20 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredSizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.onCommit
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -31,9 +19,11 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.res.loadImageResource
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -105,19 +95,20 @@ fun DisplayImagesComponent() {
 @Composable
 fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
-    // be advisable to use the loadImageResource method as it loads an image resource asynchronously
-    val image = loadImageResource(resId)
-    image.resource.resource?.let {
-        // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+    // be advisable to use the painterResource method as it loads an image resource asynchronously
+    val image = painterResource(resId)
 
-        // You can think of Modifiers as implementations of the decorators pattern that are
-        // used to modify the composable that its applied to. In this example, we configure the
-        // Image composable to have a height of 200 dp.
-        Image(
-            bitmap = it, 
-            modifier = Modifier.preferredSizeIn(maxHeight = 200.dp)
-                .fillMaxWidth())
-    }
+    // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+
+    // You can think of Modifiers as implementations of the decorators pattern that are
+    // used to modify the composable that its applied to. In this example, we configure the
+    // Image composable to have a height of 200 dp.
+    Image(
+        painter = image,
+        contentDescription = null,
+        modifier = Modifier.sizeIn(maxHeight = 200.dp)
+            .fillMaxWidth()
+    )
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -127,25 +118,24 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
 @Composable
 fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
-    // be advisable to use the loadImageResource method as it loads an image resource asynchronously
-    val image = loadImageResource(resId)
-    image.resource.resource?.let {
-        // Column is a composable that places its children in a vertical sequence. You
-        // can think of it similar to a LinearLayout with the vertical orientation. 
-        // In addition we also pass a few modifiers to it.
+    // be advisable to use the painterResource method as it loads an image resource asynchronously
+    val image = painterResource(resId)
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation.
+    // In addition we also pass a few modifiers to it.
 
-        // You can think of Modifiers as implementations of the decorators pattern that are
-        // used to modify the composable that its applied to. In this example, we configure the
-        // Box composable to clip the corners of the image.
-        Column(
-            modifier = Modifier.clip(RoundedCornerShape(8.dp))
-        ) {
-            // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
-            Image(
-                bitmap = it,
-                modifier = Modifier.preferredHeight(200.dp)
-            )
-        }
+    // You can think of Modifiers as implementations of the decorators pattern that are
+    // used to modify the composable that its applied to. In this example, we configure the
+    // Box composable to clip the corners of the image.
+    Column(
+        modifier = Modifier.clip(RoundedCornerShape(8.dp))
+    ) {
+        // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+        Image(
+            painter = image,
+            modifier = Modifier.height(200.dp),
+            contentDescription = null
+        )
     }
 }
 
@@ -160,10 +150,10 @@ fun NetworkImageComponentPicasso(
 ) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
-    val sizeModifier = modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
+    val sizeModifier = modifier.fillMaxWidth().sizeIn(maxHeight = 200.dp)
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
-    onCommit(url) {
+    DisposableEffect(url) {
         val picasso = Picasso.get()
         val target = object : Target {
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
@@ -182,7 +172,6 @@ fun NetworkImageComponentPicasso(
         picasso
             .load(url)
             .into(target)
-
         onDispose {
             image = null
             drawable = null
@@ -205,7 +194,7 @@ fun NetworkImageComponentPicasso(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
-            Image(bitmap = theImage)
+            Image(bitmap = theImage, contentDescription = null)
         }
     } else if (theDrawable != null) {
         Canvas(modifier = sizeModifier) {
@@ -228,9 +217,9 @@ fun NetworkImageComponentGlide(
 ) {
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
-    val sizeModifier = modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
-    val context = AmbientContext.current
-    onCommit(url) {
+    val sizeModifier = modifier.fillMaxWidth().sizeIn(maxHeight = 200.dp)
+    val context = LocalContext.current
+    DisposableEffect(url) {
         val glide = Glide.with(context)
         val target = object : CustomTarget<Bitmap>() {
             override fun onLoadCleared(placeholder: Drawable?) {
@@ -269,7 +258,7 @@ fun NetworkImageComponentGlide(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
-            Image(bitmap = theImage)
+            Image(bitmap = theImage, contentDescription = null)
         }
     } else if (theDrawable != null) {
         Canvas(modifier = sizeModifier) {
