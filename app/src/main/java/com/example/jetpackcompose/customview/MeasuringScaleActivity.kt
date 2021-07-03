@@ -2,10 +2,6 @@ package com.example.jetpackcompose.customview
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ScrollableRow
-import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.darkColors
@@ -15,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -43,6 +40,8 @@ class MeasuringScaleActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun MeasuringScaleComponent() {
+    val scrollState = rememberScrollState()
+
     // ScrollableRow is a composable that adds the ability to scroll through the child
     // composables that are declared inside it in the horizontal direction. One caveat here is that
     // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
@@ -52,7 +51,7 @@ fun MeasuringScaleComponent() {
     // used to modify the composable that its applied to. In this example, we assign a
     // padding of 16dp to the HorizontalScroller and specify it to occupy the entire available 
     // width.
-    ScrollableRow(modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
+    Row(modifier = Modifier.horizontalScroll(scrollState).padding(top = 16.dp).fillMaxWidth(),
         content = {
             for (i in -20..1020) {
                 ScaleLineComponent(i)

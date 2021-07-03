@@ -7,7 +7,6 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
@@ -21,6 +20,8 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -50,16 +51,8 @@ class ImageActivity : AppCompatActivity() {
             // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence. You
-                // can think of it similar to a LinearLayout with the vertical orientation.
-
-                // You can think of Modifiers as implementations of the decorators pattern that are
-                // used to modify the composable that its applied to. In this example, we assign a
-                // padding of 16dp to the Column.
-                Column(modifier = Modifier.padding(16.dp)) {
-                    DisplayImagesComponent()
-                }
+            LazyColumn(modifier = Modifier.padding(16.dp)) {
+                displayImagesComponent()
             }
         }
     }
@@ -69,23 +62,30 @@ class ImageActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
-@Composable
-fun DisplayImagesComponent() {
-    TitleComponent("Load image from the resource folder")
-    LocalResourceImageComponent(R.drawable.landscape)
+fun LazyListScope.displayImagesComponent() {
+    item {
+        TitleComponent("Load image from the resource folder")
+        LocalResourceImageComponent(R.drawable.landscape)
+    }
 
-    TitleComponent("Load image from url using Picasso")
-    NetworkImageComponentPicasso(
-        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
-    )
+    item {
+        TitleComponent("Load image from url using Picasso")
+        NetworkImageComponentPicasso(
+            url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
+        )
+    }
 
-    TitleComponent("Load image from url using Glide")
-    NetworkImageComponentGlide(
-        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
-    )
+    item {
+        TitleComponent("Load image from url using Glide")
+        NetworkImageComponentGlide(
+            url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
+        )
+    }
 
-    TitleComponent("Image with rounded corners")
-    ImageWithRoundedCorners(R.drawable.landscape)
+    item {
+        TitleComponent("Image with rounded corners")
+        ImageWithRoundedCorners(R.drawable.landscape)
+    }
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -106,7 +106,8 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     Image(
         painter = image,
         contentDescription = null,
-        modifier = Modifier.sizeIn(maxHeight = 200.dp)
+        modifier = Modifier
+            .sizeIn(maxHeight = 200.dp)
             .fillMaxWidth()
     )
 }
@@ -150,7 +151,9 @@ fun NetworkImageComponentPicasso(
 ) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
-    val sizeModifier = modifier.fillMaxWidth().sizeIn(maxHeight = 200.dp)
+    val sizeModifier = modifier
+        .fillMaxWidth()
+        .sizeIn(maxHeight = 200.dp)
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
     DisposableEffect(url) {
@@ -217,7 +220,9 @@ fun NetworkImageComponentGlide(
 ) {
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
-    val sizeModifier = modifier.fillMaxWidth().sizeIn(maxHeight = 200.dp)
+    val sizeModifier = modifier
+        .fillMaxWidth()
+        .sizeIn(maxHeight = 200.dp)
     val context = LocalContext.current
     DisposableEffect(url) {
         val glide = Glide.with(context)
@@ -281,7 +286,9 @@ fun TitleComponent(title: String) {
         title, style = TextStyle(
             fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
             fontSize = 14.sp, color = Color.Black
-        ), modifier = Modifier.padding(16.dp).fillMaxWidth()
+        ), modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
     )
 }
 

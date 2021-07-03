@@ -2,9 +2,7 @@ package com.example.jetpackcompose.layout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,10 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -34,35 +32,50 @@ class ViewLayoutConfigurationsActivity : AppCompatActivity() {
             // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence.
-                Column {
+            LazyColumn {
+                item {
                     // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.
                     TitleComponent("Child views with equal weights")
                     RowEqualWeightComponent()
+                }
 
+                item {
                     TitleComponent("Child views with unequal weights")
                     RowUnequalWeightComponent()
+                }
 
+                item {
                     TitleComponent("Child view with auto space in between")
                     RowAddSpaceBetweenViewsComponent()
+                }
 
+                item {
                     TitleComponent("Child views spaced evenly")
                     RowSpaceViewsEvenlyComponent()
+                }
 
+                item {
                     TitleComponent("Space added around child views")
                     RowSpaceAroundViewsComponent()
+                }
 
+                item {
                     TitleComponent("Child views centered")
                     RowViewsCenteredComponent()
+                }
 
+                item {
                     TitleComponent("Child views arranged in end")
                     RowViewsArrangedInEndComponent()
+                }
 
+                item {
                     TitleComponent("Baseline of child views aligned")
                     RowBaselineAlignComponent()
+                }
 
+                item {
                     TitleComponent("Baseline of child views not aligned")
                     RowBaselineUnalignedComponent()
                 }
@@ -91,7 +104,9 @@ fun RowEqualWeightComponent() {
         // equal amount of width. We do that by using the Modifier.weight modifier and passing equal
         // weight to both the buttons. This is similar to how we used layout_weight with
         // LinearLayouts in the old Android UI Toolkit.
-        Button(modifier = Modifier.weight(1f).padding(4.dp), onClick = {}) {
+        Button(modifier = Modifier
+            .weight(1f)
+            .padding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -102,7 +117,9 @@ fun RowEqualWeightComponent() {
             )
         }
 
-        Button(modifier = Modifier.weight(1f).padding(4.dp), onClick = {}) {
+        Button(modifier = Modifier
+            .weight(1f)
+            .padding(4.dp), onClick = {}) {
             Text(
                 text = "Button 2",
                 style = TextStyle(fontSize = 20.sp)
@@ -128,7 +145,9 @@ fun RowUnequalWeightComponent() {
         // We do this by using the Modifier.weight modifier and passing equal weight to both the
         // buttons. This is similar to how we used layout_weight with LinearLayouts in the old
         // Android UI Toolkit.
-        Button(modifier = Modifier.weight(0.66f).padding(4.dp), onClick = {}) {
+        Button(modifier = Modifier
+            .weight(0.66f)
+            .padding(4.dp), onClick = {}) {
             // The Button composable allows you to provide child composables that inherit this button
             // functionality.
             // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -139,7 +158,9 @@ fun RowUnequalWeightComponent() {
             )
         }
 
-        Button(modifier = Modifier.weight(0.34f).padding(4.dp), onClick = {}) {
+        Button(modifier = Modifier
+            .weight(0.34f)
+            .padding(4.dp), onClick = {}) {
             Text(
                 text = "Button 2",
                 style = TextStyle(fontSize = 20.sp)
@@ -158,7 +179,9 @@ fun RowAddSpaceBetweenViewsComponent() {
     // We use Arrangement.SpaceBetween to place the children of the row such that they are spaced
     // evenly across the main axis, without free space before the first child or after the last child.
     Row(
-        modifier = Modifier.fillMaxWidth().padding(4.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(4.dp),
         horizontalArrangement = Arrangement
             .SpaceBetween
     ) {
