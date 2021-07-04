@@ -56,19 +56,19 @@ fun DrawingBoardComposable() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .draggable(
-                state = rememberDraggableState {
-                    paths += Paths(downPosition.x, downPosition.y)
-                }
-            )
-            .dragGestureFilter(
-            startDragImmediately = true,
-            dragObserver = object : DragObserver {
-                override fun onStart(downPosition: Offset) {
-                    super.onStart(downPosition)
-
-                }
-            })
+//            .draggable(
+//                state = rememberDraggableState {
+//                    paths += Paths(downPosition.x, downPosition.y)
+//                }
+//            )
+//            .dragGestureFilter(
+//            startDragImmediately = true,
+//            dragObserver = object : DragObserver {
+//                override fun onStart(downPosition: Offset) {
+//                    super.onStart(downPosition)
+//
+//                }
+//            })
     ) {
         Canvas(modifier = Modifier) {
             val p = Path()

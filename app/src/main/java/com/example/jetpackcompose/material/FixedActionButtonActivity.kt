@@ -3,7 +3,6 @@ package com.example.jetpackcompose.material
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Icon
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.material.Text
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomAppBar
@@ -19,7 +18,10 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.colors
@@ -79,23 +81,27 @@ fun ScaffoldWithBottomBarAndCutout() {
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.End,
         content = { padding ->
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence. You
-                // can think of it similar to a LinearLayout with the vertical orientation.
-                Column(Modifier.padding(padding)) {
-                    repeat(100) {
-                        // Card composable is a predefined composable that is meant to represent
-                        // the card surface as specified by the Material Design specification. We
-                        // also configure it to have rounded corners and apply a modifier.
-                        Card(
-                            backgroundColor = colors[it % colors.size],
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier.padding(8.dp)
-                        ) {
-                            Spacer(modifier = Modifier.fillMaxWidth().height(200.dp))
-                        }
+            val scrollState = rememberScrollState()
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation.
+            Column(
+                modifier = Modifier.padding(padding).
+                scrollable(scrollState, orientation = Orientation.Vertical)
+            ) {
+                repeat(100) {
+                    // Card composable is a predefined composable that is meant to represent
+                    // the card surface as specified by the Material Design specification. We
+                    // also configure it to have rounded corners and apply a modifier.
+                    Card(
+                        backgroundColor = colors[it % colors.size],
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(200.dp)
+                        )
                     }
                 }
             }

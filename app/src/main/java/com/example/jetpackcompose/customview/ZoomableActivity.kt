@@ -3,7 +3,6 @@ package com.example.jetpackcompose.customview
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.zoomable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,11 +13,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.gesture.DragObserver
-import androidx.compose.ui.gesture.rawDragGestureFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.gestures.*
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import com.example.jetpackcompose.R
 
@@ -49,7 +47,8 @@ fun ZoomableComposable() {
     // rest remain unchanged. This ensures efficiency and is a performance optimization. It 
     // is inspired from existing frameworks like React.
     var scale by remember { mutableStateOf(1f) }
-    var translate by remember { mutableStateOf(Offset(0f, 0f)) }
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
 
     // Column is a composable that places its children in a vertical sequence. You
     // can think of it similar to a LinearLayout with the vertical orientation. 
@@ -63,13 +62,21 @@ fun ZoomableComposable() {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.zoomable(onZoomDelta = { scale *= it }).rawDragGestureFilter(
-            object : DragObserver {
-                override fun onDrag(dragDistance: Offset): Offset {
-                    translate = translate.plus(dragDistance)
-                    return super.onDrag(dragDistance)
+        modifier = Modifier
+            .pointerInput(Unit) {
+                forEachGesture {
+                    awaitPointerEventScope {
+                        awaitFirstDown()
+                        do {
+                            val event = awaitPointerEvent()
+                            scale *= event.calculateZoom()
+                            val offset = event.calculatePan()
+                            offsetX += offset.x
+                            offsetY += offset.y
+                        } while (event.changes.any { it.pressed })
+                    }
                 }
-            })
+            }
     ) {
         // There are multiple methods available to load an image resource in Compose. 
         // However, it would be advisable to use the painterResource method as it loads
@@ -82,8 +89,8 @@ fun ZoomableComposable() {
             modifier = Modifier.fillMaxSize().graphicsLayer(
                 scaleX = scale,
                 scaleY = scale,
-                translationX = translate.x,
-                translationY = translate.y
+                translationX = offsetX,
+                translationY = offsetY
             ),
             painter = imagepainter,
             contentDescription = "Landscape Image"

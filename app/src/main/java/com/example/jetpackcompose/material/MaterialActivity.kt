@@ -3,7 +3,6 @@ package com.example.jetpackcompose.material
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -24,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -49,47 +49,70 @@ class MaterialActivity : AppCompatActivity() {
             // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence.
-                Column {
+            LazyColumn {
+                item {
                     // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.
                     TitleComponent("This is a simple Material card")
                     MaterialCardComponent()
+                }
 
+                item {
                     TitleComponent("This is a loading progress indicator ")
                     MaterialLinearProgressIndicatorComponent()
+                }
 
+                item {
                     TitleComponent("This is a determinate progress indicator")
                     MaterialDeterminateLinearProgressIndicatorComponent()
+                }
 
-                    TitleComponent("This is a loading circular progress indicator")
+                item {
                     MaterialCircularProgressIndicatorComponent()
+                    TitleComponent("This is a loading circular progress indicator")
+                }
 
+                item {
                     TitleComponent("This is a determinate circular progress indicator")
                     MaterialDeterminateCircularProgressIndicatorComponent()
+                }
 
+                item {
                     TitleComponent("This is a material Snackbar")
                     MaterialSnackbarComponent()
+                }
 
+                item {
                     TitleComponent("This is a non-discrete slider")
                     MaterialContinousSliderComponent()
+                }
 
+                item {
                     TitleComponent("This is a discrete slider")
                     MaterialDiscreteSliderComponent()
+                }
 
+                item {
                     TitleComponent("This is a checkbox that represents two states")
                     MaterialCheckboxComponent()
+                }
 
+                item {
                     TitleComponent("This is a checkbox that represents three states")
                     MaterialTriStateCheckboxComponent()
+                }
 
+                item {
                     TitleComponent("This is a radio button group")
                     MaterialRadioButtonGroupComponent()
+                }
 
+                item {
                     TitleComponent("This is a switch component")
                     MaterialSwitchComponent()
+                }
 
+                item {
                     TitleComponent("This is how you add a ripple effect to a view")
                     MaterialRippleComponent()
                 }
@@ -135,10 +158,15 @@ fun MaterialCardComponent() {
             // Column is a composable that places its children in a vertical sequence. You
             // can think of it similar to a LinearLayout with the vertical orientation. 
             // In addition we also pass a few modifiers to it.
-            Column(modifier = Modifier
-                .width(48.dp)
-                .height(48.dp)) {
-                Image(painter = painterResource(R.drawable.landscape), contentDescription = "Landscape")
+            Column(
+                modifier = Modifier
+                    .width(48.dp)
+                    .height(48.dp)
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.landscape),
+                    contentDescription = "Landscape"
+                )
             }
         })
     }

@@ -2,7 +2,6 @@ package com.example.jetpackcompose.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,10 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.InternalTextApi
 import androidx.compose.ui.text.TextStyle
@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.core.hideKeyboard
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -47,35 +48,31 @@ class TextFieldActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence. You
-                // can think of it similar to a LinearLayout with the vertical orientation.
-                Column(
-                    modifier = Modifier.scrollable()
-                ) {
-                    // Title Component is a custom composable that we created which is capable of
-                    // rendering text on the screen in a certain font style & text size.
-                    TitleComponent("This is a Simple Text Input field")
-                    SimpleTextInputComponent()
+            val scrollState = rememberScrollState()
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation.
+            Column(
+                modifier = Modifier.verticalScroll(scrollState)
+            ) {
+                // Title Component is a custom composable that we created which is capable of
+                // rendering text on the screen in a certain font style & text size.
+                TitleComponent("This is a Simple Text Input field")
+                SimpleTextInputComponent()
 
-                    TitleComponent("This is a TextInput with custom text style")
-                    CustomStyleTextInputComponent()
+                TitleComponent("This is a TextInput with custom text style")
+                CustomStyleTextInputComponent()
 
-                    TitleComponent("This is a TextInput suitable for typing numbers")
-                    NumberTextInputComponent()
+                TitleComponent("This is a TextInput suitable for typing numbers")
+                NumberTextInputComponent()
 
-                    TitleComponent("This is a search view created using TextInput")
-                    SearchImeActionInputComponent()
+                TitleComponent("This is a search view created using TextInput")
+                SearchImeActionInputComponent()
 
-                    TitleComponent("This is a TextInput that uses a Password Visual Transformation")
-                    PasswordVisualTransformationInputComponent()
+                TitleComponent("This is a TextInput that uses a Password Visual Transformation")
+                PasswordVisualTransformationInputComponent()
 
-                    TitleComponent("This is a filled TextInput field based on Material Design")
-                    MaterialTextInputComponent()
-                }
+                TitleComponent("This is a filled TextInput field based on Material Design")
+                MaterialTextInputComponent()
             }
         }
     }
@@ -107,7 +104,9 @@ fun SimpleTextInputComponent() {
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your text here")) }
         BasicTextField(
             value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
@@ -143,13 +142,15 @@ fun CustomStyleTextInputComponent() {
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your text here")) }
         BasicTextField(
             value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // You can also customize the appearance of the TextInput by passing a TextStyle
             // configuration to the TextField composable. If you don't pass this, it's just going
             // to use the default values for all the properties.
             textStyle = TextStyle(
                 color = Color.Blue,
-                fontSize = TextUnit.Companion.Sp(20),
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline
             ),
@@ -186,15 +187,20 @@ fun NumberTextInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by remember { mutableStateOf(TextFieldValue("123")) }
-        BasicTextField(value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        BasicTextField(
+            value = textValue,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // Setting the keyboard type allows you to configure what kind of data you can input
             // in this TextInput. Some examples are number, phone, email, password, etc.
-            imeOptions = ImeOptions(keyboardType = KeyboardType.Number),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
-            }
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number
+            )
         )
     }
 }
@@ -240,7 +246,9 @@ fun SearchImeActionInputComponent() {
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your search query here")) }
         BasicTextField(
             value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // Changing the imeAction allows you to change the primary icon of the keyboard which
             // is typically shown in the bottom right corner of the keyboard. Some examples of
             // ImeActions are search, send, done, go, etc.
@@ -285,7 +293,9 @@ fun PasswordVisualTransformationInputComponent() {
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your password here")) }
         BasicTextField(
             value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // Visual transformation is used to modify the visual output of the input field. In
             // this example, I'm using an existing visual transformation - the
             // PasswordVisualTransformation. All it does is that it transforms any input character
@@ -335,7 +345,9 @@ fun MaterialTextInputComponent() {
         onValueChange = { textValue = it },
         label = { Text("Enter Your Name") },
         placeholder = { Text(text = "John Doe") },
-        modifier = Modifier.padding(16.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
     )
 }
 
