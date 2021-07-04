@@ -1,10 +1,35 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+def android_builder_version = "4.0.1"
 
+ext {
+    android_builder_main_version = Integer.parseInt(android_builder_version.split("\\.")[0])
+    android_builder_mid_version = Integer.parseInt(android_builder_version.split("\\.")[1])
+}
 android {
+    this.rootProject.buildscript.configurations.classpath
+            .resolvedConfiguration
+            .firstLevelModuleDependencies.
+            each {
+                def name = it.name
+                if (name.contains('com.android.tools.build:gradle')) {
+                    def moduleVersion = it.moduleVersion
+                    if (moduleVersion.contains("-")) {
+                        def alphaversionArray = moduleVersion.split("-")[0]
+                        def versionArray = alphaversionArray.toString().split("\\.")
+                        ext.android_builder_main_version = Integer.parseInt(versionArray[0])
+                        ext.android_builder_mid_version = Integer.parseInt(versionArray[1])
+                    } else {
+                        version = moduleVersion
+                        android_builder_version = moduleVersion
+                        ext.android_builder_main_version = Integer.parseInt(android_builder_version.split("\\.")[0])
+                        ext.android_builder_mid_version = Integer.parseInt(android_builder_version.split("\\.")[1])
+                    }
+                }
+            }
     compileSdkVersion 30
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.jetpackcomposeplayground"
@@ -26,17 +51,17 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+
     buildFeatures {
-        compose true
+        if (android_builder_main_version >= 7 || (android_builder_main_version > 4 && android_builder_mid_version > 1)) {
+            compose true
+        }
     }
     composeOptions {
         kotlinCompilerVersion "${versions.kotlinCompilerVersion}"
         kotlinCompilerExtensionVersion "${versions.compose}"
-
     }
+
     // Added to avoid this error -
     // Execution failed for task ':app:mergeDebugAndroidTestJavaResource'.
     // > A failure occurred while executing com.android.build.gradle.internal.tasks.MergeJavaResWorkAction
@@ -76,6 +101,9 @@ dependencies {
     implementation deps.coroutine.core
 
     // Compose
+    if (android_builder_main_version < 7) {
+        add("kotlinCompilerPluginClasspath", "androidx.compose.compiler:compiler:${versions.compose}")
+    }
     implementation deps.compose.activityCompose
     implementation deps.compose.composeRuntime
     implementation deps.compose.constraintLayout
