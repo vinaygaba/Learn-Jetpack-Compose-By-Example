@@ -1,6 +1,7 @@
 package com.example.jetpackcompose.customview
 
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Column
@@ -8,16 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.gestures.DraggableState
-import androidx.compose.foundation.gestures.draggable
-import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.input.pointer.pointerInteropFilter
 
 /**
  * This example needs some more work.
@@ -49,26 +48,22 @@ data class Paths(
     val y: Float
 )
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DrawingBoardComposable() {
     val paths = remember { mutableStateListOf<Paths>() }
-    val draggableState = DraggableState {  }
     Column(
         modifier = Modifier
             .fillMaxSize()
-//            .draggable(
-//                state = rememberDraggableState {
-//                    paths += Paths(downPosition.x, downPosition.y)
-//                }
-//            )
-//            .dragGestureFilter(
-//            startDragImmediately = true,
-//            dragObserver = object : DragObserver {
-//                override fun onStart(downPosition: Offset) {
-//                    super.onStart(downPosition)
-//
-//                }
-//            })
+            .pointerInteropFilter {
+                when (it.actionMasked) {
+                    MotionEvent.ACTION_DOWN -> {
+                        paths += Paths(it.x, it.y)
+                        true
+                    }
+                    else -> false
+                }
+            }
     ) {
         Canvas(modifier = Modifier) {
             val p = Path()

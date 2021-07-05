@@ -13,6 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -39,7 +42,9 @@ fun AnimateColorComponent() {
     val currentColor by remember { mutableStateOf(Color.Red) }
     val transition = updateTransition(currentColor)
 
-    val color by transition.animateColor { state ->
+    val color by transition.animateColor(
+        transitionSpec = { TweenSpec<Color>(durationMillis = 2000) }
+    ) { state ->
         when (state) {
             Color.Red -> Color.Green
             Color.Green -> Color.Blue
@@ -56,9 +61,7 @@ fun AnimateColorComponent() {
     // and use it to paint the screen by setting it as the backgroundColor of the screen.
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(color = color)) {
-        
-    }
+        .background(color = color)) { }
 }
 
 /**
