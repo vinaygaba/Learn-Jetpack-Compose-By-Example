@@ -1,6 +1,7 @@
 package com.example.jetpackcompose.theme
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -9,33 +10,16 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.DrawerValue
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ModalDrawerLayout
-import androidx.compose.material.Surface
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.lightColors
-import androidx.compose.material.rememberDrawerState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign.Justify
+import androidx.compose.ui.text.style.TextAlign.Companion.Justify
 import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
@@ -44,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.core.LOREM_IPSUM_1
 import com.example.jetpackcompose.core.LOREM_IPSUM_2
 import com.example.jetpackcompose.core.LOREM_IPSUM_3
+import kotlinx.coroutines.launch
 
 class DarkModeActivity : AppCompatActivity() {
 
@@ -107,7 +92,7 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable() (
             fontFamily = FontFamily.Serif,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp,
-            textIndent = TextIndent(firstLine = TextUnit.Sp(16)),
+            textIndent = TextIndent(firstLine = 16.sp),
             textAlign = Justify
         )
     )
@@ -132,11 +117,12 @@ fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     // State composable used to hold the value of the current active screen
     val currentScreen = remember { mutableStateOf(ThemedDrawerAppScreen.Screen1) }
+    val scope = rememberCoroutineScope()
 
-    // ModalDrawerLayout is a pre-defined composable used to provide access to destinations in
+    // ModalDrawer is a pre-defined composable used to provide access to destinations in
     // the app. It's a common pattern used across multiple apps where you see a drawer on the
     // left of the screen.
-    ModalDrawerLayout(
+    ModalDrawer(
         // Drawer state to denote whether the drawer should be open or closed.
         drawerState = drawerState,
         gesturesEnabled = drawerState.isOpen,
@@ -145,17 +131,17 @@ fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
             // drawer is open.
             ThemedDrawerContentComponent(
                 currentScreen = currentScreen,
-                closeDrawer = { drawerState.close() }
+                closeDrawer = { scope.launch { drawerState.close() } }
             )
         },
-        bodyContent = {
+        content = {
             // bodyContent takes a composable to represent the view/layout to display on the
             // screen. We select the appropriate screen based on the value stored in currentScreen.
             ThemedBodyContentComponent(
                 currentScreen = currentScreen.value,
                 enableDarkMode = enableDarkMode,
                 openDrawer = {
-                    drawerState.open()
+                    scope.launch { drawerState.open() }
                 }
             )
         }
@@ -280,7 +266,7 @@ fun ThemedScreen1Component(
             title = { Text("Screen 1") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(imageVector = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
                 }
             }
         )
@@ -343,7 +329,7 @@ fun ThemedScreen2Component(
             title = { Text("Screen 2") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(imageVector = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
                 }
             }
         )
@@ -404,7 +390,7 @@ fun ThemedScreen3Component(
             title = { Text("Screen 3") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(imageVector = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
                 }
             }
         )

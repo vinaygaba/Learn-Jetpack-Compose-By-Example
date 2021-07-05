@@ -18,7 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.image.TitleComponent
@@ -85,7 +85,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
                 icon = {
                     // Simple composable that allows you to draw an icon on the screen. It
                     // accepts a vector asset as the icon.
-                    Icon(imageVector = Icons.Filled.Favorite)
+                    Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
                 },
                 label = {
                     // Text is a predefined composable that does exactly what you'd expect it to -
@@ -121,7 +121,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 icon = {
                     // Simple composable that allows you to draw an icon on the screen. It
                     // accepts a vector asset as the icon.
-                    Icon(imageVector = Icons.Filled.Favorite)
+                    Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
                 },
                 label = {
                     // Text is a predefined composable that does exactly what you'd expect it to -
@@ -135,7 +135,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 // Setting this to false causes the label to be show only for the navigation item
                 // that is currently selected, like in the BottomNavigationAlwaysShowLabelComponent
                 // component.
-                alwaysShowLabels = false
+                alwaysShowLabel = false
             )
         }
     }

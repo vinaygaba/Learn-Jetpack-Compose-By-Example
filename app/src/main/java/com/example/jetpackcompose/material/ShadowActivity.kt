@@ -8,13 +8,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.core.colors
@@ -59,7 +59,7 @@ fun ShadowComponent() {
             // It will occupy the maximum available width
             modifier = Modifier.fillMaxWidth()
                 // with a height of 250 dp
-                .preferredHeight(250.dp)
+                .height(250.dp)
                 // and a padding of 16 dp
                 .padding(16.dp)
                 // In addition, we will also draw a shadow around the Box using the 

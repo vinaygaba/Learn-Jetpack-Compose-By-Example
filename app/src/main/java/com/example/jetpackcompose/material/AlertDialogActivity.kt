@@ -17,12 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 class AlertDialogActivity : AppCompatActivity() {
 
@@ -74,7 +75,7 @@ fun ClickableText() {
             Text(
                 text = "Click to see dialog", modifier = Modifier.padding(16.dp),
                 style = TextStyle(
-                    fontSize = TextUnit.Sp(16),
+                    fontSize = 16.sp,
                     fontFamily = FontFamily.Serif
                 )
             )

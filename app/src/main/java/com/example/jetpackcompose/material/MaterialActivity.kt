@@ -3,31 +3,17 @@ package com.example.jetpackcompose.material
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.ListItem
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Slider
-import androidx.compose.material.Snackbar
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
-import androidx.compose.material.TriStateCheckbox
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,20 +22,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.imageFromResource
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
 class MaterialActivity : AppCompatActivity() {
 
+    @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
@@ -60,47 +49,70 @@ class MaterialActivity : AppCompatActivity() {
             // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence.
-                Column {
+            LazyColumn {
+                item {
                     // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.
                     TitleComponent("This is a simple Material card")
                     MaterialCardComponent()
+                }
 
+                item {
                     TitleComponent("This is a loading progress indicator ")
                     MaterialLinearProgressIndicatorComponent()
+                }
 
+                item {
                     TitleComponent("This is a determinate progress indicator")
                     MaterialDeterminateLinearProgressIndicatorComponent()
+                }
 
-                    TitleComponent("This is a loading circular progress indicator")
+                item {
                     MaterialCircularProgressIndicatorComponent()
+                    TitleComponent("This is a loading circular progress indicator")
+                }
 
+                item {
                     TitleComponent("This is a determinate circular progress indicator")
                     MaterialDeterminateCircularProgressIndicatorComponent()
+                }
 
+                item {
                     TitleComponent("This is a material Snackbar")
                     MaterialSnackbarComponent()
+                }
 
+                item {
                     TitleComponent("This is a non-discrete slider")
                     MaterialContinousSliderComponent()
+                }
 
+                item {
                     TitleComponent("This is a discrete slider")
                     MaterialDiscreteSliderComponent()
+                }
 
+                item {
                     TitleComponent("This is a checkbox that represents two states")
                     MaterialCheckboxComponent()
+                }
 
+                item {
                     TitleComponent("This is a checkbox that represents three states")
                     MaterialTriStateCheckboxComponent()
+                }
 
+                item {
                     TitleComponent("This is a radio button group")
                     MaterialRadioButtonGroupComponent()
+                }
 
+                item {
                     TitleComponent("This is a switch component")
                     MaterialSwitchComponent()
+                }
 
+                item {
                     TitleComponent("This is how you add a ripple effect to a view")
                     MaterialRippleComponent()
                 }
@@ -113,6 +125,7 @@ class MaterialActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MaterialCardComponent() {
     // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
@@ -124,7 +137,7 @@ fun MaterialCardComponent() {
     // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
     // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
     // CoroutineAmbientContext, etc.
-    val resources = AmbientContext.current.resources
+    val resources = LocalContext.current.resources
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -145,8 +158,15 @@ fun MaterialCardComponent() {
             // Column is a composable that places its children in a vertical sequence. You
             // can think of it similar to a LinearLayout with the vertical orientation. 
             // In addition we also pass a few modifiers to it.
-            Column(modifier = Modifier.preferredWidth(48.dp).preferredHeight(48.dp)) {
-                Image(bitmap = imageFromResource(resources, R.drawable.landscape))
+            Column(
+                modifier = Modifier
+                    .width(48.dp)
+                    .height(48.dp)
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.landscape),
+                    contentDescription = "Landscape"
+                )
             }
         })
     }
@@ -176,7 +196,9 @@ fun MaterialCheckboxComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -221,7 +243,9 @@ fun MaterialTriStateCheckboxComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -268,7 +292,9 @@ fun MaterialRadioButtonGroupComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         // A pre-defined composable that's capable of rendering a radio group. It honors the
         // Material Design specification.
@@ -316,7 +342,9 @@ fun MaterialLinearProgressIndicatorComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -345,7 +373,9 @@ fun MaterialDeterminateLinearProgressIndicatorComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
@@ -374,7 +404,9 @@ fun MaterialCircularProgressIndicatorComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
@@ -398,7 +430,9 @@ fun MaterialDeterminateCircularProgressIndicatorComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
@@ -425,13 +459,15 @@ fun MaterialSnackbarComponent() {
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // A pre-defined composable that's capable of rendering a Snackbar. It honors the Material
         // Design specification.
-        Snackbar(text = {
-            // The Text composable is pre-defined by the Compose UI library; you can use this
-            // composable to render text on the screen
-            Text(text = "I'm a very nice Snackbar")
-        }, action = {
-            Text(text = "OK", style = TextStyle(color = MaterialTheme.colors.secondary))
-        })
+        Snackbar(
+            content = {
+                // The Text composable is pre-defined by the Compose UI library; you can use this
+                // composable to render text on the screen
+                Text(text = "I'm a very nice Snackbar")
+            }, action = {
+                Text(text = "OK", style = TextStyle(color = MaterialTheme.colors.secondary))
+            }
+        )
     }
 
 }
@@ -530,7 +566,9 @@ fun MaterialSwitchComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth(),
         backgroundColor = Color(249, 249, 249)
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
@@ -565,14 +603,17 @@ fun MaterialRippleComponent() {
     // width using the Modifier.fillMaxWidth() modifier.
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier.padding(8.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         // Column with clickable modifier wraps the child composable and enables it to react to a 
         // click through the onClick callback similar to the onClick listener that we are accustomed 
         // to on Android. In order to show a ripple effect, we set indication of Modifier.clickable 
         // with a RippleIndication.
         Column(
-            modifier = Modifier.clickable(onClick = {}, indication = rememberRipple())
+            modifier = Modifier
+                .clickable(onClick = {})
                 .background(
                     color = Color.LightGray,
                     shape = RoundedCornerShape(4.dp)
@@ -583,7 +624,7 @@ fun MaterialRippleComponent() {
             Text(
                 text = "Click Me",
                 modifier = Modifier.padding(16.dp),
-                style = TextStyle(fontSize = TextUnit.Sp(12), fontFamily = FontFamily.Serif)
+                style = TextStyle(fontSize = 12.sp, fontFamily = FontFamily.Serif)
             )
         }
     }

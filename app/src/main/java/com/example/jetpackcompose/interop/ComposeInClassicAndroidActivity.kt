@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.R
@@ -64,7 +65,7 @@ fun CardComponentWithMessage() {
         // corners and apply a modifier.
         Card(
             modifier = Modifier.fillMaxWidth()
-                .preferredHeight(200.dp)
+                .height(200.dp)
                 .padding(16.dp),
             backgroundColor = colors[1],
         ) {
@@ -95,6 +96,7 @@ fun CardComponentWithMessage() {
  * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
  */
 @Composable
+@Preview
 fun CardComponentWithMessagePreview() {
     CardComponentWithMessage()
 }

@@ -6,12 +6,12 @@ import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.height
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -48,7 +48,7 @@ fun StackComponent() {
     // used to modify the composable that its applied to. In this example, we assign a
     // ask the Box to occupy the full available width using the Modifier.fillMaxWidth() modifier
     // and give it a height of 200 dp.
-    Box(modifier = Modifier.fillMaxWidth().preferredHeight(200.dp)) {
+    Box(modifier = Modifier.fillMaxWidth().height(200.dp)) {
         // LocalResourceImageComponent is a composable that takes in an image resource id and
         // display it on the screen. Take a look at its implementation to learn more.
         LocalResourceImageComponent(resId = R.drawable.landscape)

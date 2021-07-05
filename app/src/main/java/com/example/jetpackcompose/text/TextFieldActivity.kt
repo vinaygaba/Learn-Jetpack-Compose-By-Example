@@ -2,12 +2,10 @@ package com.example.jetpackcompose.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.CoreTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -18,8 +16,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.InternalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +35,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.core.hideKeyboard
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -44,33 +48,31 @@ class TextFieldActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence. You
-                // can think of it similar to a LinearLayout with the vertical orientation.
-                Column {
-                    // Title Component is a custom composable that we created which is capable of
-                    // rendering text on the screen in a certain font style & text size.
-                    TitleComponent("This is a Simple Text Input field")
-                    SimpleTextInputComponent()
+            val scrollState = rememberScrollState()
+            // Column is a composable that places its children in a vertical sequence. You
+            // can think of it similar to a LinearLayout with the vertical orientation.
+            Column(
+                modifier = Modifier.verticalScroll(scrollState)
+            ) {
+                // Title Component is a custom composable that we created which is capable of
+                // rendering text on the screen in a certain font style & text size.
+                TitleComponent("This is a Simple Text Input field")
+                SimpleTextInputComponent()
 
-                    TitleComponent("This is a TextInput with custom text style")
-                    CustomStyleTextInputComponent()
+                TitleComponent("This is a TextInput with custom text style")
+                CustomStyleTextInputComponent()
 
-                    TitleComponent("This is a TextInput suitable for typing numbers")
-                    NumberTextInputComponent()
+                TitleComponent("This is a TextInput suitable for typing numbers")
+                NumberTextInputComponent()
 
-                    TitleComponent("This is a search view created using TextInput")
-                    SearchImeActionInputComponent()
+                TitleComponent("This is a search view created using TextInput")
+                SearchImeActionInputComponent()
 
-                    TitleComponent("This is a TextInput that uses a Password Visual Transformation")
-                    PasswordVisualTransformationInputComponent()
+                TitleComponent("This is a TextInput that uses a Password Visual Transformation")
+                PasswordVisualTransformationInputComponent()
 
-                    TitleComponent("This is a filled TextInput field based on Material Design")
-                    MaterialTextInputComponent()
-                }
+                TitleComponent("This is a filled TextInput field based on Material Design")
+                MaterialTextInputComponent()
             }
         }
     }
@@ -91,7 +93,7 @@ fun SimpleTextInputComponent() {
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        // CoreTextField is a composable that is capable of accepting text user input. It renders the
+        // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -100,8 +102,11 @@ fun SimpleTextInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your text here")) }
-        CoreTextField(value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        BasicTextField(
+            value = textValue,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
@@ -126,7 +131,7 @@ fun CustomStyleTextInputComponent() {
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        // CoreTextField is a composable that is capable of accepting text user input. It renders the
+        // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -135,14 +140,17 @@ fun CustomStyleTextInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your text here")) }
-        CoreTextField(value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        BasicTextField(
+            value = textValue,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // You can also customize the appearance of the TextInput by passing a TextStyle
             // configuration to the TextField composable. If you don't pass this, it's just going
             // to use the default values for all the properties.
             textStyle = TextStyle(
                 color = Color.Blue,
-                fontSize = TextUnit.Companion.Sp(20),
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline
             ),
@@ -170,7 +178,7 @@ fun NumberTextInputComponent() {
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        // CoreTextField is a composable that is capable of accepting text user input. It renders the
+        // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -179,15 +187,20 @@ fun NumberTextInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by remember { mutableStateOf(TextFieldValue("123")) }
-        CoreTextField(value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        BasicTextField(
+            value = textValue,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // Setting the keyboard type allows you to configure what kind of data you can input
             // in this TextInput. Some examples are number, phone, email, password, etc.
-            imeOptions = ImeOptions(keyboardType = KeyboardType.Number),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
-            }
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number
+            )
         )
     }
 }
@@ -209,7 +222,7 @@ fun SearchImeActionInputComponent() {
     // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
     // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
     // CoroutineAmbientContext, etc.
-    val context = AmbientContext.current
+    val context = LocalContext.current
 
     // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
     // Material Design specification. It's generally used to change the background color, add
@@ -222,7 +235,7 @@ fun SearchImeActionInputComponent() {
         color = Color.LightGray, modifier = Modifier.padding(16.dp),
         shape = RoundedCornerShape(5.dp)
     ) {
-        // CoreTextField is a composable that is capable of accepting text user input. It renders the
+        // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -231,19 +244,24 @@ fun SearchImeActionInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your search query here")) }
-        CoreTextField(value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        BasicTextField(
+            value = textValue,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // Changing the imeAction allows you to change the primary icon of the keyboard which
             // is typically shown in the bottom right corner of the keyboard. Some examples of
             // ImeActions are search, send, done, go, etc.
-            imeOptions = ImeOptions(imeAction = ImeAction.Search),
-            onImeActionPerformed = {
-                hideKeyboard(context)
-            },
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
-            }
+            },
+            keyboardActions = KeyboardActions(
+                onSearch = {
+                    hideKeyboard(context)
+                }
+            )
         )
     }
 }
@@ -264,7 +282,7 @@ fun PasswordVisualTransformationInputComponent() {
     // modify the composable that its applied to. In this example, we assign a padding of
     // 16dp to the Surface.
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
-        // CoreTextField is a composable that is capable of accepting text user input. It renders the
+        // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate. Reacting to state changes is
         // the core behavior of Compose. Any composable that reads the value of the textValue
@@ -273,9 +291,11 @@ fun PasswordVisualTransformationInputComponent() {
         // that we update as the user types (through the onValueChange lambda), this composable
         // is redrawn and updated with the latest value.
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your password here")) }
-        CoreTextField(value = textValue,
-            modifier = Modifier.padding(16.dp).fillMaxWidth(),
-            imeOptions = ImeOptions(imeAction = ImeAction.Done, keyboardType = KeyboardType.Password),
+        BasicTextField(
+            value = textValue,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             // Visual transformation is used to modify the visual output of the input field. In
             // this example, I'm using an existing visual transformation - the
             // PasswordVisualTransformation. All it does is that it transforms any input character
@@ -286,7 +306,11 @@ fun PasswordVisualTransformationInputComponent() {
             // Update value of textValue with the latest value of the text field
             onValueChange = {
                 textValue = it
-            }
+            },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Password
+            )
         )
     }
 }
@@ -321,7 +345,9 @@ fun MaterialTextInputComponent() {
         onValueChange = { textValue = it },
         label = { Text("Enter Your Name") },
         placeholder = { Text(text = "John Doe") },
-        modifier = Modifier.padding(16.dp).fillMaxWidth()
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
     )
 }
 
