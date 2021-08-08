@@ -29,8 +29,8 @@ I've also used the examples listed in this repo and given talks at conferences. 
 
 Setup
 -----
-To try out this sample app, you need to at least use the Canary version
-of Android Studio 4.2, specifically Android Studio 4.2 Canary 15.
+To try out this sample app, you need to at least use the latest version
+of Android Studio. This project has been tested against Android Studio Artic Fox.
 [You can download it here](https://developer.android.com/studio/preview).
 In general, Jetpack Compose requires you to use the Canary version of
 Android Studio.
