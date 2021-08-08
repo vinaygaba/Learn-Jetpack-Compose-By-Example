@@ -38,8 +38,19 @@ class Animation2Activity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun AnimateColorComponent() {
-    // TODO: Add comment
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     val currentColor by remember { mutableStateOf(Color.Red) }
+    // updateTransition creates a transition that is useful for developing animations. It takes
+    // in a target value and it transition the child animations towards the target value.
     val transition = updateTransition(currentColor)
 
     val color by transition.animateColor(
@@ -57,7 +68,7 @@ fun AnimateColorComponent() {
     // on the "from state" and the "to state", you get access to all the values
     // including the intermediate values as they are being updated. We can use the
     // state variable and access the relevant props/properties to update the relevant
-    // composables/layouts. Below, we use state[color] to get get the latest value of color
+    // composables/layouts. Below, we use color to get get the latest value of color
     // and use it to paint the screen by setting it as the backgroundColor of the screen.
     Column(modifier = Modifier
         .fillMaxSize()

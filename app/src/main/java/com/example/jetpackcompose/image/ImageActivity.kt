@@ -48,9 +48,8 @@ class ImageActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
+            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+            // visible items. This is very similar to what RecyclerView tries to do as well.
             LazyColumn(modifier = Modifier.padding(16.dp)) {
                 displayImagesComponent()
             }
@@ -63,6 +62,8 @@ class ImageActivity : AppCompatActivity() {
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
 fun LazyListScope.displayImagesComponent() {
+    // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+    // for a single element in the list
     item {
         TitleComponent("Load image from the resource folder")
         LocalResourceImageComponent(R.drawable.landscape)
@@ -156,6 +157,10 @@ fun NetworkImageComponentPicasso(
         .sizeIn(maxHeight = 200.dp)
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
+    // Sometimes we need to make changes to the state of the app. For those cases, Composes provides
+    // some Effect API's which provide a way to perform side effects in a predictable manner.
+    // DisposableEffect is one such side effect API that provides a mechanism to perform some
+    // clean up actions if the key to the effect changes or if the composable leaves composition.
     DisposableEffect(url) {
         val picasso = Picasso.get()
         val target = object : Target {
@@ -200,6 +205,8 @@ fun NetworkImageComponentPicasso(
             Image(bitmap = theImage, contentDescription = null)
         }
     } else if (theDrawable != null) {
+        // We use the Canvas composable that gives you access to a canvas that you can draw
+        // into. We also pass it a modifier.
         Canvas(modifier = sizeModifier) {
             drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
@@ -218,12 +225,38 @@ fun NetworkImageComponentPicasso(
 fun NetworkImageComponentGlide(
     url: String, modifier: Modifier = Modifier
 ) {
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
     val sizeModifier = modifier
         .fillMaxWidth()
         .sizeIn(maxHeight = 200.dp)
+
+    // LocalContext is a LocalComposition for accessting the context value that we are used to using
+    // in Android.
+
+    // LocalComposition is an implicit way to pass values down the compose tree. Typically, we pass values
+    // down the compose tree by passing them as parameters. This makes it easy to have fairly
+    // modular and reusable components that are easy to test as well. However, for certain types
+    // of data where multiple components need to use it, it makes sense to have an implicit way
+    // to access this data. For such scenarios, we use LocalComposition. In this example, we use the
+    // LocalContext to get hold of the Context object. In order to get access to the latest
+    // value of the LocalComposition, use the "current" property eg - LocalContext.current. Some other
+    // examples of common LocalComposition's are LocalTextInputService,LocalDensity, etc.
     val context = LocalContext.current
+    // Sometimes we need to make changes to the state of the app. For those cases, Composes provides
+    // some Effect API's which provide a way to perform side effects in a predictable manner.
+    // DisposableEffect is one such side effect API that provides a mechanism to perform some
+    // clean up actions if the key to the effect changes or if the composable leaves composition.
     DisposableEffect(url) {
         val glide = Glide.with(context)
         val target = object : CustomTarget<Bitmap>() {
@@ -266,6 +299,8 @@ fun NetworkImageComponentGlide(
             Image(bitmap = theImage, contentDescription = null)
         }
     } else if (theDrawable != null) {
+        // We use the Canvas composable that gives you access to a canvas that you can draw
+        // into. We also pass it a modifier.
         Canvas(modifier = sizeModifier) {
             drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)

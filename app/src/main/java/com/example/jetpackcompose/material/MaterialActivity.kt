@@ -46,10 +46,11 @@ class MaterialActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
+            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+            // visible items. This is very similar to what RecyclerView tries to do as well.
             LazyColumn {
+                // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+                // for a single element in the list
                 item {
                     // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.
@@ -128,17 +129,6 @@ class MaterialActivity : AppCompatActivity() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MaterialCardComponent() {
-    // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
-    // down the compose tree by passing them as parameters. This makes it easy to have fairly
-    // modular and reusable components that are easy to test as well. However, for certain types
-    // of data where multiple components need to use it, it makes sense to have an implicit way
-    // to access this data. For such scenarios, we use Ambients. In this example, we use the
-    // AmbientContext to get hold of the Context object. In order to get access to the latest
-    // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
-    // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
-    // CoroutineAmbientContext, etc.
-    val resources = LocalContext.current.resources
-
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
     // corners and apply a modifier.
@@ -178,12 +168,16 @@ fun MaterialCardComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialCheckboxComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of whether the checkbox is checked. Any composable that reads the value of "checked"
-    // will be recomposed any time the value changes. This ensures that only the composables that
-    // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
-    // is a performance optimization. It is inspired from existing frameworks like React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var checked by remember { mutableStateOf(false) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
@@ -225,12 +219,16 @@ fun MaterialCheckboxComponent() {
 fun MaterialTriStateCheckboxComponent() {
     val toggleableStateArray =
         listOf(ToggleableState.Off, ToggleableState.On, ToggleableState.Indeterminate)
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the counter. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var counter by remember { mutableStateOf(0) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
@@ -272,16 +270,19 @@ fun MaterialTriStateCheckboxComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialRadioButtonGroupComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of whether a radio button is selected. Any composable that reads the value of
-    // "selected" variable will be recomposed any time the value changes. This ensures that only the
-    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
-    // efficiency and is a performance optimization. It is inspired from existing frameworks like
-    // React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var selected by remember { mutableStateOf("Android") }
 
-    val radioGroupOptions = listOf<String>("Android", "iOS", "Windows")
+    val radioGroupOptions = listOf("Android", "iOS", "Windows")
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
     // corners and apply a modifier.
@@ -478,13 +479,16 @@ fun MaterialSnackbarComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialContinousSliderComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the slider. Any composable that reads the value of "sliderValue"
-    // variable will be recomposed any time the value changes. This ensures that only the
-    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
-    // efficiency and is a performance optimization. It is inspired from existing frameworks like
-    // React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var sliderValue by remember { mutableStateOf(0f) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
@@ -509,13 +513,16 @@ fun MaterialContinousSliderComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialDiscreteSliderComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the slider. Any composable that reads the value of "sliderValue"
-    // variable will be recomposed any time the value changes. This ensures that only the
-    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
-    // efficiency and is a performance optimization. It is inspired from existing frameworks like
-    // React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var sliderValue by remember { mutableStateOf(0f) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
@@ -547,13 +554,16 @@ fun MaterialDiscreteSliderComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialSwitchComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of whether the checkbox is checked. Any composable that reads the value of "checked"
-    // variable will be recomposed any time the value changes. This ensures that only the
-    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
-    // efficiency and is a performance optimization. It is inspired from existing frameworks like
-    // React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var checked by remember { mutableStateOf(false) }
 
     // Card composable is a predefined composable that is meant to represent the card surface as

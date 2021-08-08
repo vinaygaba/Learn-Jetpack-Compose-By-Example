@@ -39,11 +39,16 @@ class DarkModeActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // Reacting to state changes is core to how Jetpack Compose works. This state variable
-            // is used to control if dark mode is enabled or not. The value is toggled using a
-            // button that's part of the ThemedDrawerAppComponent composable. Every time the
-            // value of this variable changes, the relevant sub composables of
-            // ThemedDrawerAppComponent that use enableDarkMode are automatically recomposed.
+            // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+            // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+            // composable that calculates the value passed to it only during the first composition. It then
+            // returns the same value for every subsequent composition. Next, you can think of
+            // mutableStateOf as an observable value where updates to this variable will redraw all
+            // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+            // composable that reads its value will be recomposed any time the value
+            // changes. This ensures that only the composables that depend on this will be redraw while the
+            // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+            // is inspired from existing frameworks like React.
             val enableDarkMode = remember { mutableStateOf( false) }
             CustomTheme(enableDarkMode) {
                 ThemedDrawerAppComponent(enableDarkMode)
@@ -108,14 +113,17 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable() (
 // built up of smaller composable functions.
 @Composable
 fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the drawerState. Any composable that reads the value of drawerState will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    // State composable used to hold the value of the current active screen
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     val currentScreen = remember { mutableStateOf(ThemedDrawerAppScreen.Screen1) }
     val scope = rememberCoroutineScope()
 

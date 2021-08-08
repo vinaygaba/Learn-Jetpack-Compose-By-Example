@@ -29,6 +29,12 @@ class CustomViewActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun CustomViewComponent() {
+    // We use the Canvas composable that gives you access to a canvas that you can draw
+    // into. We also pass it a modifier.
+
+    // You can think of Modifiers as implementations of the decorators pattern that are used to
+    // modify the composable that its applied to. In this example, as the Box composable to
+    // occupy the entire available height & width using Modifier.fillMaxSize().
     Canvas(modifier = Modifier.fillMaxSize()) {
         drawCircle(
             color = Color.Red,

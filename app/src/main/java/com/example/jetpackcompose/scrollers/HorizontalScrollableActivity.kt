@@ -64,11 +64,15 @@ class HorizontalScrollableActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun HorizontalScrollableComponent(personList: List<Person>) {
+    // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+    // This allows us to also control the scroll position and other scroll related properties.
+
+    // remember calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. More details are available in the
+    // comments below.
     val scrollState = rememberScrollState()
-    // HorizontalScroller is a composable that adds the ability to scroll through the child
-    // composables that are declared inside it in the horizontal direction. One caveat here is that
-    // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
-    // be thought of as a replacement for [RecyclerView]. We also give it a modifier.
+    // Row is a composable that places its children in a horizontal sequence. You
+    // can think of it similar to a LinearLayout with the horizontal orientation.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we ask the HorizontalScroller
@@ -114,11 +118,15 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
 // functions can only be called from within the scope of other composable functions.
 @Composable
 fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
+    // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+    // This allows us to also control the scroll position and other scroll related properties.
+
+    // remember calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. More details are available in the
+    // comments below.
     val scrollState = rememberScrollState()
-    // HorizontalScroller is a composable that adds the ability to scroll through the child
-    // composables that are declared inside it in the horizontal direction. One caveat here is that
-    // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
-    // be thought of as a replacement for [RecyclerView].
+    // Row is a composable that places its children in a horizontal sequence. You
+    // can think of it similar to a LinearLayout with the horizontal orientation.
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -126,15 +134,17 @@ fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
                 state = scrollState,
             ),
         content = {
-            // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
+            // LocalContext is a LocalComposition for accessting the context value that we are used to using
+            // in Android.
+
+            // LocalComposition is an implicit way to pass values down the compose tree. Typically, we pass values
             // down the compose tree by passing them as parameters. This makes it easy to have fairly
             // modular and reusable components that are easy to test as well. However, for certain types
             // of data where multiple components need to use it, it makes sense to have an implicit way
-            // to access this data. For such scenarios, we use Ambients. In this example, we use the
-            // AmbientContext to get hold of the Context object. In order to get access to the latest
-            // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
-            // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
-            // CoroutineAmbientContext, etc.
+            // to access this data. For such scenarios, we use LocalComposition. In this example, we use the
+            // LocalContext to get hold of the Context object. In order to get access to the latest
+            // value of the LocalComposition, use the "current" property eg - LocalContext.current. Some other
+            // examples of common LocalComposition's are LocalTextInputService,LocalDensity, etc.
             val context = LocalContext.current
             val resources = context.resources
             val displayMetrics = resources.displayMetrics

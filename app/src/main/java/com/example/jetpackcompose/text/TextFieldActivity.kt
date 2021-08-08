@@ -48,6 +48,12 @@ class TextFieldActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
+            // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+            // This allows us to also control the scroll position and other scroll related properties.
+
+            // remember calculates the value passed to it only during the first composition. It then
+            // returns the same value for every subsequent composition. More details are available in the
+            // comments below.
             val scrollState = rememberScrollState()
             // Column is a composable that places its children in a vertical sequence. You
             // can think of it similar to a LinearLayout with the vertical orientation.
@@ -95,12 +101,18 @@ fun SimpleTextInputComponent() {
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
-        // typing a new string, we make use of the state delegate. Reacting to state changes is
-        // the core behavior of Compose. Any composable that reads the value of the textValue
-        // field will recompose whenever this value is changed. In this example, since the
-        // TextField is reading the value from the textValue value, and that's also the value
-        // that we update as the user types (through the onValueChange lambda), this composable
-        // is redrawn and updated with the latest value.
+        // typing a new string, we make use of the state delegate.
+
+        // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+        // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+        // composable that calculates the value passed to it only during the first composition. It then
+        // returns the same value for every subsequent composition. Next, you can think of
+        // mutableStateOf as an observable value where updates to this variable will redraw all
+        // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+        // composable that reads its value will be recomposed any time the value
+        // changes. This ensures that only the composables that depend on this will be redraw while the
+        // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+        // is inspired from existing frameworks like React.
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your text here")) }
         BasicTextField(
             value = textValue,
@@ -133,12 +145,18 @@ fun CustomStyleTextInputComponent() {
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
-        // typing a new string, we make use of the state delegate. Reacting to state changes is
-        // the core behavior of Compose. Any composable that reads the value of the textValue
-        // field will recompose whenever this value is changed. In this example, since the
-        // TextField is reading the value from the textValue value, and that's also the value
-        // that we update as the user types (through the onValueChange lambda), this composable
-        // is redrawn and updated with the latest value.
+        // typing a new string, we make use of the state delegate.
+
+        // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+        // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+        // composable that calculates the value passed to it only during the first composition. It then
+        // returns the same value for every subsequent composition. Next, you can think of
+        // mutableStateOf as an observable value where updates to this variable will redraw all
+        // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+        // composable that reads its value will be recomposed any time the value
+        // changes. This ensures that only the composables that depend on this will be redraw while the
+        // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+        // is inspired from existing frameworks like React.
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your text here")) }
         BasicTextField(
             value = textValue,
@@ -180,12 +198,18 @@ fun NumberTextInputComponent() {
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
-        // typing a new string, we make use of the state delegate. Reacting to state changes is
-        // the core behavior of Compose. Any composable that reads the value of the textValue
-        // field will recompose whenever this value is changed. In this example, since the
-        // TextField is reading the value from the textValue value, and that's also the value
-        // that we update as the user types (through the onValueChange lambda), this composable
-        // is redrawn and updated with the latest value.
+        // typing a new string, we make use of the state delegate.
+
+        // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+        // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+        // composable that calculates the value passed to it only during the first composition. It then
+        // returns the same value for every subsequent composition. Next, you can think of
+        // mutableStateOf as an observable value where updates to this variable will redraw all
+        // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+        // composable that reads its value will be recomposed any time the value
+        // changes. This ensures that only the composables that depend on this will be redraw while the
+        // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+        // is inspired from existing frameworks like React.
         var textValue by remember { mutableStateOf(TextFieldValue("123")) }
         BasicTextField(
             value = textValue,
@@ -213,15 +237,17 @@ fun NumberTextInputComponent() {
 @InternalTextApi
 @Composable
 fun SearchImeActionInputComponent() {
-    // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
+    // LocalContext is a LocalComposition for accessting the context value that we are used to using
+    // in Android.
+
+    // LocalComposition is an implicit way to pass values down the compose tree. Typically, we pass values
     // down the compose tree by passing them as parameters. This makes it easy to have fairly
     // modular and reusable components that are easy to test as well. However, for certain types
     // of data where multiple components need to use it, it makes sense to have an implicit way
-    // to access this data. For such scenarios, we use Ambients. In this example, we use the
-    // AmbientContext to get hold of the Context object. In order to get access to the latest
-    // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
-    // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
-    // CoroutineAmbientContext, etc.
+    // to access this data. For such scenarios, we use LocalComposition. In this example, we use the
+    // LocalContext to get hold of the Context object. In order to get access to the latest
+    // value of the LocalComposition, use the "current" property eg - LocalContext.current. Some other
+    // examples of common LocalComposition's are LocalTextInputService,LocalDensity, etc.
     val context = LocalContext.current
 
     // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
@@ -237,12 +263,18 @@ fun SearchImeActionInputComponent() {
     ) {
         // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
-        // typing a new string, we make use of the state delegate. Reacting to state changes is
-        // the core behavior of Compose. Any composable that reads the value of the textValue
-        // field will recompose whenever this value is changed. In this example, since the
-        // TextField is reading the value from the textValue value, and that's also the value
-        // that we update as the user types (through the onValueChange lambda), this composable
-        // is redrawn and updated with the latest value.
+        // typing a new string, we make use of the state delegate.
+
+        // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+        // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+        // composable that calculates the value passed to it only during the first composition. It then
+        // returns the same value for every subsequent composition. Next, you can think of
+        // mutableStateOf as an observable value where updates to this variable will redraw all
+        // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+        // composable that reads its value will be recomposed any time the value
+        // changes. This ensures that only the composables that depend on this will be redraw while the
+        // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+        // is inspired from existing frameworks like React.
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your search query here")) }
         BasicTextField(
             value = textValue,
@@ -284,12 +316,18 @@ fun PasswordVisualTransformationInputComponent() {
     Surface(color = Color.LightGray, modifier = Modifier.padding(16.dp)) {
         // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
-        // typing a new string, we make use of the state delegate. Reacting to state changes is
-        // the core behavior of Compose. Any composable that reads the value of the textValue
-        // field will recompose whenever this value is changed. In this example, since the
-        // TextField is reading the value from the textValue value, and that's also the value
-        // that we update as the user types (through the onValueChange lambda), this composable
-        // is redrawn and updated with the latest value.
+        // typing a new string, we make use of the state delegate.
+
+        // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+        // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+        // composable that calculates the value passed to it only during the first composition. It then
+        // returns the same value for every subsequent composition. Next, you can think of
+        // mutableStateOf as an observable value where updates to this variable will redraw all
+        // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+        // composable that reads its value will be recomposed any time the value
+        // changes. This ensures that only the composables that depend on this will be redraw while the
+        // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+        // is inspired from existing frameworks like React.
         var textValue by remember { mutableStateOf(TextFieldValue("Enter your password here")) }
         BasicTextField(
             value = textValue,

@@ -123,8 +123,13 @@ fun ComposeLogoComponent() {
     // be advisable to use the painterResource method as it loads an image resource asynchronously
     val image = ImageBitmap.imageResource(R.drawable.compose_logo)
 
-    // TODO: Add comment
+    // rememberInfiniteTransition is used to create a transition that uses infitine
+    // child animations. Animations typically get invoked as soon as they enter the
+    // composition so don't need to be explicitly started.
     val infiniteTransition = rememberInfiniteTransition()
+    // Create a value that is altered by the transition based on the configuration. We use
+    // the animated float value the returns and updates a float from the initial value to
+    // target value and repeats it (as its called on the infititeTransition).
     val rotation by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
@@ -140,13 +145,10 @@ fun ComposeLogoComponent() {
     // used to modify the composable that its applied to. In this example, we configure the
     // Image composable to have a height of 48 dp.
     Canvas(Modifier.size(48.dp)) {
-        // As the Transition is changing the interpolating the value of your props based
-        // on the "from state" and the "to state", you get access to all the values
-        // including the intermediate values as they are being updated. We can use the
-        // state variable and access the relevant props/properties to update the relevant
-        // composables/layouts. Below, we use state[rotation] to get the latest value of
-        // rotation (it will be a value between 0 & 360 depending on where it is in the
-        // transition) and use it to rotate our canvas.
+        // As the Transition is changing the interpolating the value of the animated float
+        // "rotation", you get access to all the values including the intermediate values as
+        // its  being updated. The value of "rotation" goes from 0 to 360 and transitions
+        // infinitely due to the infiniteRepetable animationSpec used above.
         rotate(rotation) {
             drawImage(image)
         }
@@ -160,7 +162,16 @@ fun ComposeLogoComponent() {
 // built up of smaller composable functions.
 @Composable
 fun ColorChangingTextComponent() {
-    // TODO: Add comment
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     val currentColor by remember { mutableStateOf(Color.Red) }
     val transition = updateTransition(currentColor)
 

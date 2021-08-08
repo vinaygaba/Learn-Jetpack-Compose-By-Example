@@ -49,12 +49,16 @@ class StateActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun StateComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the counter. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var counter by remember { mutableStateOf(0) }
     TitleComponent("Example using state class to store state")
     // Row is a composable that places its children in a horizontal sequence. You can think of it
@@ -103,12 +107,16 @@ fun StateComponent() {
  */
 @Composable
 fun ModelComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the counter. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var counterState by remember { mutableStateOf(CounterState()) }
     TitleComponent("Example using Model class to store state")
     // Row is a composable that places its children in a horizontal sequence. You can think of it

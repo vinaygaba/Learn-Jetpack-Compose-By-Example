@@ -92,6 +92,12 @@ fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
 
 @Composable
 fun VerticalScrollableComponent(personList: List<Person>) {
+    // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+    // This allows us to also control the scroll position and other scroll related properties.
+
+    // remember calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. More details are available in the
+    // comments below.
     val scrollState = rememberScrollState()
     // Column is a composable that places its children in a vertical sequence.
     Column(

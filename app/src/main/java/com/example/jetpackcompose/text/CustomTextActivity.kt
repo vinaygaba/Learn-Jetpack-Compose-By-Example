@@ -39,6 +39,12 @@ class CustomTextActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
+            // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+            // This allows us to also control the scroll position and other scroll related properties.
+
+            // remember calculates the value passed to it only during the first composition. It then
+            // returns the same value for every subsequent composition. More details are available in the
+            // comments below.
             val scrollState = rememberScrollState()
             // Column is a composable that places its children in a vertical sequence.
             Column(

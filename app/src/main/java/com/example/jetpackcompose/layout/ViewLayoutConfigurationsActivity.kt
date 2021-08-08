@@ -29,10 +29,11 @@ class ViewLayoutConfigurationsActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
+            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+            // visible items. This is very similar to what RecyclerView tries to do as well.
             LazyColumn {
+                // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+                // for a single element in the list
                 item {
                     // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.

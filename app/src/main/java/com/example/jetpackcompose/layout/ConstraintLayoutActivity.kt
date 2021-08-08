@@ -35,11 +35,11 @@ class ConstraintLayoutActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
+            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+            // visible items. This is very similar to what RecyclerView tries to do as well.
             LazyColumn {
-
+                // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+                // for a single element in the list
                 item {
                     // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.
@@ -73,17 +73,6 @@ class ConstraintLayoutActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun SimpleConstraintLayoutComponent() {
-    // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
-    // down the compose tree by passing them as parameters. This makes it easy to have fairly
-    // modular and reusable components that are easy to test as well. However, for certain types
-    // of data where multiple components need to use it, it makes sense to have an implicit way
-    // to access this data. For such scenarios, we use Ambients. In this example, we use the
-    // AmbientContext to get hold of the Context object. In order to get access to the latest
-    // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
-    // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
-    // CoroutineAmbientContext, etc.
-    val resources = LocalContext.current.resources
-
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
     // corners and apply a modifier.

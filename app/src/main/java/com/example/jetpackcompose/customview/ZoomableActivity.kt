@@ -55,10 +55,8 @@ fun ZoomableComposable() {
     // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In the example below, we configure the
-    // Box. In the example below, we make the Box composable zoomable by assigning the 
-    // Modifier.zoomable modifier & also add a drag observer to it(for panning functionality)
-    // by using the rawDragGestureFilter modifier. 
+    // modify the composable that its applied to. In the example below, we make the Column composable
+    // zoomable by leveraging the Modifier.pointerInput modifier
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
