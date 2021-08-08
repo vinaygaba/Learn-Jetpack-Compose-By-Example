@@ -18,7 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.image.TitleComponent
@@ -67,12 +67,16 @@ val listItems = listOf("Games", "Apps", "Movies", "Books")
 // built up of smaller composable functions.
 @Composable
 fun BottomNavigationAlwaysShowLabelComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the selectedIndex. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var selectedIndex by remember { mutableStateOf(0) }
     // BottomNavigation is a component placed at the bottom of the screen that represents primary
     // destinations in your application.
@@ -85,7 +89,7 @@ fun BottomNavigationAlwaysShowLabelComponent() {
                 icon = {
                     // Simple composable that allows you to draw an icon on the screen. It
                     // accepts a vector asset as the icon.
-                    Icon(imageVector = Icons.Filled.Favorite)
+                    Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
                 },
                 label = {
                     // Text is a predefined composable that does exactly what you'd expect it to -
@@ -103,12 +107,16 @@ fun BottomNavigationAlwaysShowLabelComponent() {
 
 @Composable
 fun BottomNavigationOnlySelectedLabelComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the selectedIndex. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var selectedIndex by remember { mutableStateOf(0) }
     // BottomNavigation is a component placed at the bottom of the screen that represents primary
     // destinations in your application.
@@ -121,7 +129,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 icon = {
                     // Simple composable that allows you to draw an icon on the screen. It
                     // accepts a vector asset as the icon.
-                    Icon(imageVector = Icons.Filled.Favorite)
+                    Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
                 },
                 label = {
                     // Text is a predefined composable that does exactly what you'd expect it to -
@@ -135,7 +143,7 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 // Setting this to false causes the label to be show only for the navigation item
                 // that is currently selected, like in the BottomNavigationAlwaysShowLabelComponent
                 // component.
-                alwaysShowLabels = false
+                alwaysShowLabel = false
             )
         }
     }

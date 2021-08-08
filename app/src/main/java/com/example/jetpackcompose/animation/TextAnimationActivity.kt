@@ -1,20 +1,20 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.ColorPropKey
+import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.FloatPropKey
-import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.transitionDefinition
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.transition
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.material.Text
@@ -22,13 +22,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.res.loadImageResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.TextStyle
@@ -49,96 +48,6 @@ class TextAnimationActivity : AppCompatActivity() {
         setContent {
             TextAnimationComponent()
         }
-    }
-}
-
-/**
- * PropKeys are used in Jetpack Compose animations to hold properties that are going to be
- * updated by the animation transitions. In this example, we use a [ColorPropKey] to hold a Color
- * value that represents the value of color on screen & a [FloatPropKey] to hold a float value to
- * represent the rotation of the compose icon.
- */
-private val color = ColorPropKey()
-private val rotation = FloatPropKey()
-
-/**
- * Animations in Jetpack Compose use the [Transition] composable. This transition API depends on
- * transitions between states & changing values, similar to how ValueAnimators worked in the older
- * Android UI Toolkit. Transition's do not care about the actual implementation itself, they just
- * allow you to manipulate and transition between different states and also let you specify what
- * the interpolation, duration & behavior of these transitions should be like. Read through the
- * comments below to understand this better.
- */
-private val colorDefinition = transitionDefinition<Int> {
-    // We define a transitionDefinition that's meant to be an exhaustive list of all states &
-    // state transitions that are a part of your animation. Below, we define three states - state 0
-    // state 1, & state 2. For each state, we also define the value of the properties when they
-    // are in the respective state. For example - for state 1, we assign the color prop to have
-    // the value Color.RED, for state 2 the value of color is Color.Green & for state 3 the value
-    // of color prop is Color.Blue.
-    state(0) {
-        this[color] = Color.Red
-    }
-
-    state(1) {
-        this[color] = Color.Green
-    }
-
-    state(2) {
-        this[color] = Color.Blue
-    }
-
-    // Here we define the transition spec i.e what action do we need to do as we transition from
-    // one state to another. Below, we define a TransitionSpec for the transition from
-    // state 0 -> state1, state 1 -> state 2 & state 2 -> state 0.
-    transition(0 to 1, 1 to 2, 2 to 0) {
-        // We are using the tween animation and have also specified the duration of this
-        // animation(2000ms). By using ColorPropKey and tween animation, as we transition from
-        // state 0 (Color.RED) to state 1 (Color.Green), the value of color automatically updates
-        // to represent Color.Red at the start of the transition and Color.Green at the end of
-        // transition. In addition, we also get all the intermediate values of colors between those
-        // two colors automatically. This allows us to show a seamless transitions as the colors
-        // change.
-        color using tween<Color>(
-            durationMillis = 200,
-            easing = LinearEasing
-        )
-    }
-}
-
-/**
- * Animations in Jetpack Compose use the [Transition] composable. This transition API depends on
- * transitions between states & changing values, similar to how ValueAnimators worked in the older
- * Android UI Toolkit. Transition's do not care about the actual implementation itself, they just
- * allow you to manipulate and transition between different states and also let you specify what
- * the interpolation, duration & behavior of these transitions should be like. Read through the
- * comments below to understand this better.
- */
-private val rotationTransitionDefinition = transitionDefinition<String> {
-    // We define a transitionDefinition that's meant to be an exhaustive list of all states &
-    // state transitions that are a part of your animation. Below, we define two states - state 0
-    // & state 360. For each state, we also define the value of the properties when they are in
-    // the respective state. For example - for state A, we assign the rotation prop the value 0f
-    // and for state B, we assign the rotation prop the value 360f.
-    state("A") { this[rotation] = 0f }
-    state("B") { this[rotation] = 360f }
-
-    // Here we define the transition spec i.e what action do we need to do as we transition from
-    // one state to another. Below, we define a TransitionSpec for the transition
-    // state A -> state B.
-    transition(fromState = "A", toState = "B") {
-        // For the transition from state A -> state B, we assign a AnimationBuilder to the
-        // rotation prop where we specify how we want to update the value of the rotation prop
-        // between state A & B, what the duration of this animation should be, what kind of
-        // interpolator to use for the animation & how many iterations of this animation are needed.
-        // Since we want the rotation to be continous, we use the repeatable AnimationBuilder and
-        // set the iterations to Infinite.
-        rotation using infiniteRepeatable(
-            animation = tween<Float>(
-                durationMillis = 3000,
-                easing = FastOutLinearInEasing
-            )
-        )
     }
 }
 
@@ -219,41 +128,38 @@ fun TextAnimationComponent() {
 @Composable
 fun ComposeLogoComponent() {
     // There are multiple methods available to load an image resource in Compose. However, it would
-    // be advisable to use the loadImageResource method as it loads an image resource asynchronously
-    val image = loadImageResource(R.drawable.compose_logo)
-    image.resource.resource?.let { img ->
-        // Transition composable creates a state-based transition using the animation configuration
-        // defined in [TransitionDefinition]. In the example below, we use the
-        // rotationTransitionDefinition that we discussed above and also specify the initial
-        // state of the animation & the state that we intend to transition to. The expectation is
-        // that the transitionDefinition allows for the transition from the "initialState" to the
-        // "toState".
-        val state = transition(
-            definition = rotationTransitionDefinition,
-            initState = "A",
-            toState = "B"
-        )
+    // be advisable to use the painterResource method as it loads an image resource asynchronously
+    val image = ImageBitmap.imageResource(R.drawable.compose_logo)
 
-        // You can think of Modifiers as implementations of the decorators pattern that are
-        // used to modify the composable that its applied to. In this example, we configure the
-        // Image composable to have a height of 48 dp.
-        Canvas(Modifier.preferredSize(48.dp)) {
-            // As the Transition is changing the interpolating the value of your props based
-            // on the "from state" and the "to state", you get access to all the values
-            // including the intermediate values as they are being updated. We can use the
-            // state variable and access the relevant props/properties to update the relevant
-            // composables/layouts. Below, we use state[rotation] to get the latest value of
-            // rotation (it will be a value between 0 & 360 depending on where it is in the
-            // transition) and use it to rotate our canvas.
-            rotate(state[rotation]) {
-                drawImage(img)
-            }
-        }
-        transition(
-            definition = rotationTransitionDefinition,
-            toState = "B",
-            initState = "A"
+    // rememberInfiniteTransition is used to create a transition that uses infitine
+    // child animations. Animations typically get invoked as soon as they enter the
+    // composition so don't need to be explicitly started.
+    val infiniteTransition = rememberInfiniteTransition()
+    // Create a value that is altered by the transition based on the configuration. We use
+    // the animated float value the returns and updates a float from the initial value to
+    // target value and repeats it (as its called on the infititeTransition).
+    val rotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween<Float>(
+                durationMillis = 3000,
+                easing = FastOutLinearInEasing,
+            ),
         )
+    )
+
+    // You can think of Modifiers as implementations of the decorators pattern that are
+    // used to modify the composable that its applied to. In this example, we configure the
+    // Image composable to have a height of 48 dp.
+    Canvas(Modifier.size(48.dp)) {
+        // As the Transition is changing the interpolating the value of the animated float
+        // "rotation", you get access to all the values including the intermediate values as
+        // its  being updated. The value of "rotation" goes from 0 to 360 and transitions
+        // infinitely due to the infiniteRepetable animationSpec used above.
+        rotate(rotation) {
+            drawImage(image)
+        }
     }
 }
 
@@ -264,44 +170,27 @@ fun ComposeLogoComponent() {
 // built up of smaller composable functions.
 @Composable
 fun ColorChangingTextComponent() {
-    var initialState by remember { mutableStateOf(0) }
-    var toState by remember { mutableStateOf(1) }
-    // Transition composable creates a state-based transition using the animation configuration
-    // defined in [TransitionDefinition]. In the example below, we use the
-    // colorDefinition that we discussed above and also specify the initial
-    // state of the animation & the state that we intend to transition to. The expectation is
-    // that the transitionDefinition has been configured to allow for the transition from the
-    // "initialState" to the "toState".
-    val state = transition(
-        definition = colorDefinition,
-        initState = initialState,
-        toState = toState,
-        onStateChangeFinished =
-        // Here we define the action we want to do every time a state transition completes. In
-        // our example, we want to continue looping from state 0 -> state 1, state 1 -> state 2,
-        // state 2 -> state 0 and keep repeating this over and over. In order to accomplish this,
-        // we need to modify the initialState & the toState accordingly. By using the state
-        // delegate, we can easily do this as changes to the initialState & toState variables
-        // also causes the composables to be redrawn.
-        { state ->
-            when (state) {
-                // When state is 0, set initialState to 0 & toState to 1
-                0 -> {
-                    initialState = 0
-                    toState = 1
-                }
-                // When state is 1, set initialState to 1 & toState to 2
-                1 -> {
-                    initialState = 1
-                    toState = 2
-                }
-                // When state is 2, set initialState to 2 & toState to 0
-                2 -> {
-                    initialState = 2
-                    toState = 0
-                }
-            }
-        })
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
+    val currentColor by remember { mutableStateOf(Color.Red) }
+    val transition = updateTransition(currentColor)
+
+    val color by transition.animateColor { state ->
+        when (state) {
+            Color.Red -> Color.Green
+            Color.Green -> Color.Blue
+            Color.Blue -> Color.Red
+            else -> Color.Red
+        }
+    }
 
     // As the Transition is changing the interpolating the value of your props based
     // on the "from state" and the "to state", you get access to all the values
@@ -311,7 +200,7 @@ fun ColorChangingTextComponent() {
     // and use it to set the color of the Text composable.
     Text(
         text = "Compose",
-        color = state[color],
+        color = color,
         style = TextStyle(
             fontFamily = FontFamily.Serif,
             fontSize = 35.sp

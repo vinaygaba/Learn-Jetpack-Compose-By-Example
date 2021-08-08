@@ -2,13 +2,12 @@ package com.example.jetpackcompose.scrollers
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -16,8 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -60,17 +61,93 @@ class HorizontalScrollableActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun HorizontalScrollableComponent(personList: List<Person>) {
-    // HorizontalScroller is a composable that adds the ability to scroll through the child
-    // composables that are declared inside it in the horizontal direction. One caveat here is that
-    // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
-    // be thought of as a replacement for [RecyclerView]. We also give it a modifier.
+    // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+    // This allows us to also control the scroll position and other scroll related properties.
+
+    // remember calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. More details are available in the
+    // comments below.
+    val scrollState = rememberScrollState()
+    // Row is a composable that places its children in a horizontal sequence. You
+    // can think of it similar to a LinearLayout with the horizontal orientation.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In this example, we ask the HorizontalScroller
     // to occupy the entire available width.
-    ScrollableRow(
-        modifier = Modifier.fillMaxWidth(),
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(
+                state = scrollState,
+            ),
         content = {
+            // We iterate over each item from the personList and define what each item should
+            // look like.
+            for ((index, person) in personList.withIndex()) {
+                // Card composable is a predefined composable that is meant to represent the card
+                // surface as specified by the Material Design specification. We also configure it
+                // to have rounded corners and apply a modifier.
+
+                // You can think of Modifiers as implementations of the decorators pattern that are
+                // used to modify the composable that its applied to. In this example, we assign a
+                // padding of 16dp to the Card.
+                Card(
+                    shape = RoundedCornerShape(4.dp),
+                    backgroundColor = colors[index % colors.size],
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    // The Text composable is pre-defined by the Compose UI library; you can use this
+                    // composable to render text on the screen
+                    Text(
+                        person.name,
+                        modifier = Modifier.padding(16.dp),
+                        style = TextStyle(
+                            color = Color.Black,
+                            fontSize = 20.sp
+                        )
+                    )
+                }
+            }
+        })
+}
+
+// We represent a Composable function by annotating it with the @Composable annotation. Composable
+// functions can only be called from within the scope of other composable functions.
+@Composable
+fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
+    // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+    // This allows us to also control the scroll position and other scroll related properties.
+
+    // remember calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. More details are available in the
+    // comments below.
+    val scrollState = rememberScrollState()
+    // Row is a composable that places its children in a horizontal sequence. You
+    // can think of it similar to a LinearLayout with the horizontal orientation.
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(
+                state = scrollState,
+            ),
+        content = {
+            // LocalContext is a LocalComposition for accessting the context value that we are used to using
+            // in Android.
+
+            // LocalComposition is an implicit way to pass values down the compose tree. Typically, we pass values
+            // down the compose tree by passing them as parameters. This makes it easy to have fairly
+            // modular and reusable components that are easy to test as well. However, for certain types
+            // of data where multiple components need to use it, it makes sense to have an implicit way
+            // to access this data. For such scenarios, we use LocalComposition. In this example, we use the
+            // LocalContext to get hold of the Context object. In order to get access to the latest
+            // value of the LocalComposition, use the "current" property eg - LocalContext.current. Some other
+            // examples of common LocalComposition's are LocalTextInputService,LocalDensity, etc.
+            val context = LocalContext.current
+            val resources = context.resources
+            val displayMetrics = resources.displayMetrics
+            // Compute the screen width using the actual display width and the density of the display.
+            val screenWidth = displayMetrics.widthPixels / displayMetrics.density
+            val spacing = 16.dp
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
             Row {
@@ -89,91 +166,33 @@ fun HorizontalScrollableComponent(personList: List<Person>) {
                         backgroundColor = colors[index % colors.size],
                         modifier = Modifier.padding(16.dp)
                     ) {
-                        // The Text composable is pre-defined by the Compose UI library; you can use this
-                        // composable to render text on the screen
-                        Text(
-                            person.name,
-                            modifier = Modifier.padding(16.dp),
-                            style = TextStyle(
-                                color = Color.Black,
-                                fontSize = 20.sp
+                        // Column is a composable that places its children in a vertical sequence. You
+                        // can think of it similar to a LinearLayout with the vertical orientation.
+                        // In addition we also pass a few modifiers to it.
+
+                        // To ensure that the item occupies the entire screen, we make sure that the
+                        // width of the column is equal to the computed screenWidth. We subtract
+                        // some spacing to make the other item slightly visible.
+                        Column(
+                            modifier = Modifier.width(screenWidth.dp - (spacing * 2)),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            // The Text composable is pre-defined by the Compose UI library; you can use
+                            // this composable to render text on the screen
+                            Text(
+                                text = person.name,
+                                modifier = Modifier.padding(16.dp),
+                                style = TextStyle(
+                                    color = Color.Black,
+                                    fontSize = 20.sp
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
         })
-}
-
-// We represent a Composable function by annotating it with the @Composable annotation. Composable
-// functions can only be called from within the scope of other composable functions.
-@Composable
-fun HorizontalScrollableComponentWithScreenWidth(personList: List<Person>) {
-    // HorizontalScroller is a composable that adds the ability to scroll through the child
-    // composables that are declared inside it in the horizontal direction. One caveat here is that
-    // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
-    // be thought of as a replacement for [RecyclerView].
-    ScrollableRow(modifier = Modifier.fillMaxWidth(), content = {
-        // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
-        // down the compose tree by passing them as parameters. This makes it easy to have fairly
-        // modular and reusable components that are easy to test as well. However, for certain types
-        // of data where multiple components need to use it, it makes sense to have an implicit way
-        // to access this data. For such scenarios, we use Ambients. In this example, we use the
-        // AmbientContext to get hold of the Context object. In order to get access to the latest
-        // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
-        // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
-        // CoroutineAmbientContext, etc.
-        val context = AmbientContext.current
-        val resources = context.resources
-        val displayMetrics = resources.displayMetrics
-        // Compute the screen width using the actual display width and the density of the display.
-        val screenWidth = displayMetrics.widthPixels / displayMetrics.density
-        val spacing = 16.dp
-        // Row is a composable that places its children in a horizontal sequence. You
-        // can think of it similar to a LinearLayout with the horizontal orientation.
-        Row {
-            // We iterate over each item from the personList and define what each item should
-            // look like.
-            for ((index, person) in personList.withIndex()) {
-                // Card composable is a predefined composable that is meant to represent the card
-                // surface as specified by the Material Design specification. We also configure it
-                // to have rounded corners and apply a modifier.
-
-                // You can think of Modifiers as implementations of the decorators pattern that are
-                // used to modify the composable that its applied to. In this example, we assign a
-                // padding of 16dp to the Card.
-                Card(
-                    shape = RoundedCornerShape(4.dp), 
-                    backgroundColor = colors[index % colors.size],
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    // Column is a composable that places its children in a vertical sequence. You
-                    // can think of it similar to a LinearLayout with the vertical orientation. 
-                    // In addition we also pass a few modifiers to it.
-
-                    // To ensure that the item occupies the entire screen, we make sure that the
-                    // width of the column is equal to the computed screenWidth. We subtract
-                    // some spacing to make the other item slightly visible.
-                    Column(
-                        modifier = Modifier.preferredWidth(screenWidth.dp - (spacing * 2)),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        // The Text composable is pre-defined by the Compose UI library; you can use
-                        // this composable to render text on the screen
-                        Text(
-                            text = person.name,
-                            modifier = Modifier.padding(16.dp),
-                            style = TextStyle(
-                                color = Color.Black,
-                                fontSize = 20.sp
-                            )
-                        )
-                    }
-                }
-            }
-        }
-    })
 }
 
 /**

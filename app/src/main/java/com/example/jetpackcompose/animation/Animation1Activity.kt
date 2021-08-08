@@ -2,23 +2,23 @@ package com.example.jetpackcompose.animation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.FloatPropKey
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.transitionDefinition
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.transition
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.preferredSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -32,49 +32,6 @@ class Animation1Activity : AppCompatActivity() {
         setContent {
             RotatingSquareComponent()
         }
-    }
-}
-
-/**
- * PropKeys are used in Jetpack Compose animations to hold properties that are going to be
- * updated by the animation transitions. In this example, we use a [FloatPropKey] to hold a float
- * value that represents the value of rotation.
- */
-private val rotation = FloatPropKey()
-
-/**
- * Animations in Jetpack Compose use the [Transition] composable. This transition API depends on
- * transitions between states & changing values, similar to how ValueAnimators worked in the older
- * Android UI Toolkit. Transition's do not care about the actual implementation itself, they just
- * allow you to manipulate and transition between different states and also let you specify what
- * the interpolation, duration & behavior of these transitions should be like. Read through the
- * comments below to understand this better.
- */
-private val rotationTransitionDefinition = transitionDefinition<String> {
-    // We define a transitionDefinition that's meant to be an exhaustive list of all states &
-    // state transitions that are a part of your animation. Below, we define two states - state 0
-    // & state 360. For each state, we also define the value of the properties when they are in
-    // the respective state. For example - for state A, we assign the rotation prop the value 0f
-    // and for state B, we assign the rotation prop the value 360f.
-    state("A") { this[rotation] = 0f }
-    state("B") { this[rotation] = 360f }
-
-    // Here we define the transition spec i.e what action do we need to do as we transition from
-    // one state to another. Below, we define a TransitionSpec for the transition
-    // state A -> state B.
-    transition(fromState = "A", toState = "B") {
-        // For the transition from state A -> state B, we assign a AnimationBuilder to the
-        // rotation prop where we specify how we want to update the value of the rotation prop
-        // between state A & B, what the duration of this animation should be, what kind of
-        // interpolator to use for the animation & how many iterations of this animation are needed.
-        // Since we want the rotation to be continous, we use the repeatable AnimationBuilder and
-        // set the iterations to Infinite.
-        rotation using infiniteRepeatable(
-            animation = tween<Float>(
-                durationMillis = 3000,
-                easing = FastOutLinearInEasing
-            )
-        )
     }
 }
 
@@ -92,40 +49,44 @@ fun RotatingSquareComponent() {
     // modify the composable that its applied to. In this example, as the Box composable to
     // occupy the entire available height & width using Modifier.fillMaxSize().
     Column(
-        modifier = Modifier.fillMaxSize(), 
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
-        // Transition composable creates a state-based transition using the animation configuration
-        // defined in [TransitionDefinition]. In the example below, we use the
-        // rotationTransitionDefinition that we discussed above and also specify the initial
-        // state of the animation & the state that we intend to transition to. The expectation is
-        // that the transitionDefinition allows for the transition from the "initialState" to the
-        // "toState".
-        val state = transition(
-            definition = rotationTransitionDefinition,
-            initState = "A",
-            toState = "B"
-        )
-        // We use the Canvas composable that gives you access to a canvas that you can draw
-        // into. We also pass it a modifier.
+            // rememberInfiniteTransition is used to create a transition that uses infitine
+            // child animations. Animations typically get invoked as soon as they enter the
+            // composition so don't need to be explicitly started.
+            val infiniteTransition = rememberInfiniteTransition()
 
-        // You can think of Modifiers as implementations of the decorators pattern that are used
-        // to modify the composable that its applied to. In this example, we assign a size
-        // of 200dp to the Canvas using Modifier.preferredSize(200.dp).
-        Canvas(modifier = Modifier.preferredSize(200.dp)) {
-            // As the Transition is changing the interpolating the value of your props based
-            // on the "from state" and the "to state", you get access to all the values
-            // including the intermediate values as they are being updated. We can use the
-            // state variable and access the relevant props/properties to update the relevant
-            // composables/layouts. Below, we use state[rotation] to get the latest value of
-            // rotation (it will be a value between 0 & 360 depending on where it is in the
-            // transition) and use it to rotate our canvas.
-            rotate(state[rotation]) {
-                drawRect(color = Color(255, 138, 128))
+            // Create a value that is altered by the transition based on the configuration. We use
+            // the animated float value the returns and updates a float from the initial value to
+            // target value and repeats it (as its called on the infititeTransition).
+            val rotation by infiniteTransition.animateFloat(
+                initialValue = 0f,
+                targetValue = 360f,
+                animationSpec = infiniteRepeatable(
+                    animation = tween<Float>(
+                        durationMillis = 3000,
+                        easing = FastOutLinearInEasing,
+                    ),
+                )
+            )
+            // We use the Canvas composable that gives you access to a canvas that you can draw
+            // into. We also pass it a modifier.
+
+            // You can think of Modifiers as implementations of the decorators pattern that are used
+            // to modify the composable that its applied to. In this example, we assign a size
+            // of 200dp to the Canvas using Modifier.preferredSize(200.dp).
+            Canvas(modifier = Modifier.size(200.dp)) {
+                // As the Transition is changing the interpolating the value of the animated float
+                // "rotation", you get access to all the values including the intermediate values as
+                // its  being updated. The value of "rotation" goes from 0 to 360 and transitions
+                // infinitely due to the infiniteRepetable animationSpec used above.
+                rotate(rotation) {
+                    drawRect(color = Color(255, 138, 128))
+                }
             }
-        }
-    })
+        })
 }
 
 /**

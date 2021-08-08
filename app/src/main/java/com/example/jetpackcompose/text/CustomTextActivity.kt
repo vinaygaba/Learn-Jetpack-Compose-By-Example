@@ -2,7 +2,6 @@ package com.example.jetpackcompose.text
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -38,158 +39,162 @@ class CustomTextActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence.
-                Column {
-                    // This is a custom composable declared in this file. It allows us to
-                    // configure the text to be rendered on the screen.x
-                    CustomStyledText(
-                        "This is the default text style"
-                    )
+            // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+            // This allows us to also control the scroll position and other scroll related properties.
 
-                    CustomStyledText(
-                        "This text is blue in color",
-                        // TextStyle allows you to specify styling configuration for a `Text`
-                        // composable
+            // remember calculates the value passed to it only during the first composition. It then
+            // returns the same value for every subsequent composition. More details are available in the
+            // comments below.
+            val scrollState = rememberScrollState()
+            // Column is a composable that places its children in a vertical sequence.
+            Column(
+                modifier = Modifier.verticalScroll(scrollState)
+            ) {
+                // This is a custom composable declared in this file. It allows us to
+                // configure the text to be rendered on the screen.x
+                CustomStyledText(
+                    "This is the default text style"
+                )
+
+                CustomStyledText(
+                    "This text is blue in color",
+                    // TextStyle allows you to specify styling configuration for a `Text`
+                    // composable
+                    style = TextStyle(
+                        color = Color.Blue
+                    )
+                )
+
+                CustomStyledText(
+                    "This text has a bigger font size",
+                    style = TextStyle(
+                        fontSize = 30.sp
+                    )
+                )
+
+                CustomStyledText(
+                    "This text is bold",
+                    style = TextStyle(
+                        fontWeight = FontWeight.W700
+                    )
+                )
+
+                CustomStyledText(
+                    "This text is italic",
+                    style = TextStyle(
+                        fontStyle = FontStyle.Italic
+                    )
+                )
+
+                CustomStyledText(
+                    "This text is using a custom font family",
+                    style = TextStyle(
+                        fontFamily = FontFamily.Cursive
+                    )
+                )
+
+                CustomStyledText(
+                    "This text has an underline",
+                    style = TextStyle(
+                        textDecoration = TextDecoration.Underline
+                    )
+                )
+
+                CustomStyledText(
+                    "This text has a strikethrough line",
+                    style = TextStyle(
+                        textDecoration = TextDecoration.LineThrough
+                    )
+                )
+
+                CustomStyledText(
+                    "This text will add an ellipsis to the end " +
+                            "of the text if the text is longer that 1 line long.",
+                    maxLines = 1
+                )
+
+                CustomStyledText(
+                    "This text has a shadow",
+                    style = TextStyle(
+                        shadow = Shadow(
+                            color = Color.Black, blurRadius = 10f,
+                            offset = Offset(2f, 2f)
+                        )
+                    )
+                )
+
+                // Row is a composable that places its children in a horizontal sequence. You
+                // can think of it similar to a LinearLayout with the horizontal orientation.
+                // In addition, we pass a modifier to the Row composable. You can think of
+                // Modifiers as implementations of the decorators pattern that  are used to
+                // modify the composable that its applied to. In this example, we configure the
+                // Row to occupify the entire available width using Modifier.fillMaxWidth()
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    // Text is a predefined composable that does exactly what you'd expect it to -
+                    // display text on the screen. It allows you to customize its appearance using
+                    // the style property.
+                    Text(
+                        text = "This text is center aligned",
                         style = TextStyle(
-                            color = Color.Blue
-                        )
+                            textAlign = TextAlign.Center
+                        ),
+                        modifier = Modifier.padding(16.dp)
                     )
+                }
+                // A pre-defined composable that renders a thin line on the screen that makes it
+                // easy to group contents
+                Divider(color = Color.Gray)
 
-                    CustomStyledText(
-                        "This text has a bigger font size",
-                        style = TextStyle(
-                            fontSize = 30.sp
-                        )
+                CustomStyledText(
+                    "This text will demonstrate how to justify " +
+                            "your paragraph to ensure that the text that ends with a soft " +
+                            "line break spreads and takes the entire width of the container",
+                    style = TextStyle(
+                        textAlign = TextAlign.Justify
                     )
+                )
 
-                    CustomStyledText(
-                        "This text is bold",
-                        style = TextStyle(
-                            fontWeight = FontWeight.W700
-                        )
+                CustomStyledText(
+                    "This text will demonstrate how to add " +
+                            "indentation to your text. In this example, indentation was only " +
+                            "added to the first line. You also have the option to add " +
+                            "indentation to the rest of the lines if you'd like",
+                    style = TextStyle(
+                        textAlign = TextAlign.Justify,
+                        textIndent = TextIndent(firstLine = 30.sp)
                     )
+                )
 
-                    CustomStyledText(
-                        "This text is italic",
-                        style = TextStyle(
-                            fontStyle = FontStyle.Italic
-                        )
+                CustomStyledText(
+                    "The line height of this text has been " +
+                            "increased hence you will be able to see more space between each " +
+                            "line in this paragraph.",
+                    style = TextStyle(
+                        textAlign = TextAlign.Justify,
+                        lineHeight = 20.sp
                     )
+                )
 
-                    CustomStyledText(
-                        "This text is using a custom font family",
-                        style = TextStyle(
-                            fontFamily = FontFamily.Cursive
-                        )
+                val annotatedString = buildAnnotatedString {
+                    append("This string has style spans")
+                    addStyle(style = SpanStyle(color = Color.Red), start = 0, end = 4)
+                    addStyle(style = SpanStyle(color = Color.Green), start = 5, end = 21)
+                    addStyle(style = SpanStyle(color = Color.Blue), start = 22, end = 27)
+                }
+                Text(annotatedString, modifier = Modifier.padding(16.dp))
+                // A pre-defined composable that renders a thin line on the screen that makes it
+                // easy to group contents
+                Divider(color = Color.Gray)
+
+                // Surface is a composable provided to fulfill the needs of the "Surface"
+                // metaphor from the Material Design specification. It's generally used to
+                // change the background color, add elevation, clip or add background shape
+                // to its children composables.
+                Surface(color = Color.Yellow) {
+                    Text(
+                        text = "This text has a background color",
+                        modifier = Modifier.padding(16.dp)
                     )
-
-                    CustomStyledText(
-                        "This text has an underline",
-                        style = TextStyle(
-                            textDecoration = TextDecoration.Underline
-                        )
-                    )
-
-                    CustomStyledText(
-                        "This text has a strikethrough line",
-                        style = TextStyle(
-                            textDecoration = TextDecoration.LineThrough
-                        )
-                    )
-
-                    CustomStyledText(
-                        "This text will add an ellipsis to the end " +
-                                "of the text if the text is longer that 1 line long.",
-                        maxLines = 1
-                    )
-
-                    CustomStyledText(
-                        "This text has a shadow",
-                        style = TextStyle(
-                            shadow = Shadow(
-                                color = Color.Black, blurRadius = 10f,
-                                offset = Offset(2f, 2f)
-                            )
-                        )
-                    )
-
-                    // Row is a composable that places its children in a horizontal sequence. You
-                    // can think of it similar to a LinearLayout with the horizontal orientation.
-                    // In addition, we pass a modifier to the Row composable. You can think of
-                    // Modifiers as implementations of the decorators pattern that  are used to
-                    // modify the composable that its applied to. In this example, we configure the
-                    // Row to occupify the entire available width using Modifier.fillMaxWidth()
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        // Text is a predefined composable that does exactly what you'd expect it to -
-                        // display text on the screen. It allows you to customize its appearance using
-                        // the style property.
-                        Text(
-                            text = "This text is center aligned",
-                            style = TextStyle(
-                                textAlign = TextAlign.Center
-                            ),
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
-                    // A pre-defined composable that renders a thin line on the screen that makes it
-                    // easy to group contents
-                    Divider(color = Color.Gray)
-
-                    CustomStyledText(
-                        "This text will demonstrate how to justify " +
-                                "your paragraph to ensure that the text that ends with a soft " +
-                                "line break spreads and takes the entire width of the container",
-                        style = TextStyle(
-                            textAlign = TextAlign.Justify
-                        )
-                    )
-
-                    CustomStyledText(
-                        "This text will demonstrate how to add " +
-                                "indentation to your text. In this example, indentation was only " +
-                                "added to the first line. You also have the option to add " +
-                                "indentation to the rest of the lines if you'd like",
-                        style = TextStyle(
-                            textAlign = TextAlign.Justify,
-                            textIndent = TextIndent(firstLine = 30.sp)
-                        )
-                    )
-
-                    CustomStyledText(
-                        "The line height of this text has been " +
-                                "increased hence you will be able to see more space between each " +
-                                "line in this paragraph.",
-                        style = TextStyle(
-                            textAlign = TextAlign.Justify,
-                            lineHeight = 20.sp
-                        )
-                    )
-
-                    val annotatedString = buildAnnotatedString {
-                        append("This string has style spans")
-                        addStyle(style = SpanStyle(color = Color.Red), start = 0, end = 4)
-                        addStyle(style = SpanStyle(color = Color.Green), start = 5, end = 21)
-                        addStyle(style = SpanStyle(color = Color.Blue), start = 22, end = 27)
-                    }
-                    Text(annotatedString, modifier = Modifier.padding(16.dp))
-                    // A pre-defined composable that renders a thin line on the screen that makes it
-                    // easy to group contents
-                    Divider(color = Color.Gray)
-
-                    // Surface is a composable provided to fulfill the needs of the "Surface"
-                    // metaphor from the Material Design specification. It's generally used to
-                    // change the background color, add elevation, clip or add background shape
-                    // to its children composables.
-                    Surface(color = Color.Yellow) {
-                        Text(
-                            text = "This text has a background color",
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
                 }
             }
         }

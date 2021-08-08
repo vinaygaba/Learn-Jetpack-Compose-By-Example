@@ -42,11 +42,6 @@
             android:label="@string/title_activity_horizontal_scrollable"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".scrollers.GridLayoutActivity"
-            android:exported="true"
-            android:label="@string/title_activity_grid_layout"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".image.ImageActivity"
             android:exported="true"
             android:label="@string/title_activity_image"

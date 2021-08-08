@@ -3,27 +3,26 @@ package com.example.jetpackcompose.layout
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ConstraintLayout
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.imageFromResource
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -35,23 +34,30 @@ class ConstraintLayoutActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence.
-                Column {
+            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+            // visible items. This is very similar to what RecyclerView tries to do as well.
+            LazyColumn {
+                // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+                // for a single element in the list
+                item {
                     // Title Component is a custom composable that we created which is capable of
                     // rendering text on the screen in a certain font style & text size.
                     TitleComponent("Simple constraint layout example")
                     SimpleConstraintLayoutComponent()
+                }
 
+
+                item {
                     TitleComponent("Constraint layout example with guidelines")
                     GuidelineConstraintLayoutComponent()
+                }
 
+                item {
                     TitleComponent("Constraint layout example with barriers")
                     BarrierConstraintLayoutComponent()
+                }
 
+                item {
                     TitleComponent("Constraint layout example with bias")
                     BiasConstraintLayoutComponent()
                 }
@@ -66,17 +72,6 @@ class ConstraintLayoutActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun SimpleConstraintLayoutComponent() {
-    // Ambient is an implicit way to pass values down the compose tree. Typically, we pass values
-    // down the compose tree by passing them as parameters. This makes it easy to have fairly
-    // modular and reusable components that are easy to test as well. However, for certain types
-    // of data where multiple components need to use it, it makes sense to have an implicit way
-    // to access this data. For such scenarios, we use Ambients. In this example, we use the
-    // AmbientContext to get hold of the Context object. In order to get access to the latest
-    // value of the Ambient, use the "current" property eg - AmbientContext.current. Some other
-    // examples of common Ambient's are AmbientTextInputService, AmbientDensity,
-    // CoroutineAmbientContext, etc.
-    val resources = AmbientContext.current.resources
-
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
     // corners and apply a modifier.
@@ -86,7 +81,10 @@ fun SimpleConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
+        modifier = Modifier
+            .height(120.dp)
+            .fillMaxWidth()
+            .padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -142,8 +140,9 @@ fun SimpleConstraintLayoutComponent() {
             // Column to occupy a height and width of 72dp and give it constrains using the 
             // constrainAs modifier. 
             Column(
-                modifier = Modifier.preferredHeight(72.dp)
-                    .preferredWidth(72.dp)
+                modifier = Modifier
+                    .height(72.dp)
+                    .width(72.dp)
                     .constrainAs(image) {
                         // We want to vertically center the image tag
                         centerVerticallyTo(parent)
@@ -153,7 +152,7 @@ fun SimpleConstraintLayoutComponent() {
                     }
             ) {
                 // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
-                Image(imageFromResource(resources, R.drawable.landscape))
+                Image(painterResource(R.drawable.landscape), contentDescription = null)
             }
         }
     }
@@ -170,7 +169,10 @@ fun GuidelineConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
+        modifier = Modifier
+            .height(120.dp)
+            .fillMaxWidth()
+            .padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -240,7 +242,10 @@ fun BarrierConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
+        modifier = Modifier
+            .height(120.dp)
+            .fillMaxWidth()
+            .padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints
@@ -324,7 +329,10 @@ fun BiasConstraintLayoutComponent() {
     // composable to have a padding of 8dp, height of 120 dp & specify it occupy the entire
     // available width.
     Card(
-        modifier = Modifier.preferredHeight(120.dp).fillMaxWidth().padding(8.dp),
+        modifier = Modifier
+            .height(120.dp)
+            .fillMaxWidth()
+            .padding(8.dp),
         shape = RoundedCornerShape(4.dp)
     ) {
         // ConstraintLayout is a composable that positions its children based on the constraints

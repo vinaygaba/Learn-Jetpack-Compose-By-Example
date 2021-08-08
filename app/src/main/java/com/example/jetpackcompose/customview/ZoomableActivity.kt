@@ -1,9 +1,13 @@
 package com.example.jetpackcompose.customview
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.zoomable
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.calculatePan
+import androidx.compose.foundation.gestures.calculateZoom
+import androidx.compose.foundation.gestures.forEachGesture
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,12 +18,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.gesture.DragObserver
-import androidx.compose.ui.gesture.rawDragGestureFilter
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.res.loadImageResource
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.painterResource
 import com.example.jetpackcompose.R
 
 class ZoomableActivity : AppCompatActivity() {
@@ -49,46 +50,52 @@ fun ZoomableComposable() {
     // rest remain unchanged. This ensures efficiency and is a performance optimization. It 
     // is inspired from existing frameworks like React.
     var scale by remember { mutableStateOf(1f) }
-    var translate by remember { mutableStateOf(Offset(0f, 0f)) }
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
 
     // Column is a composable that places its children in a vertical sequence. You
     // can think of it similar to a LinearLayout with the vertical orientation. 
     // In addition we also pass a few modifiers to it.
 
     // You can think of Modifiers as implementations of the decorators pattern that are used to
-    // modify the composable that its applied to. In the example below, we configure the
-    // Box. In the example below, we make the Box composable zoomable by assigning the 
-    // Modifier.zoomable modifier & also add a drag observer to it(for panning functionality)
-    // by using the rawDragGestureFilter modifier. 
+    // modify the composable that its applied to. In the example below, we make the Column composable
+    // zoomable by leveraging the Modifier.pointerInput modifier
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.zoomable(onZoomDelta = { scale *= it }).rawDragGestureFilter(
-            object : DragObserver {
-                override fun onDrag(dragDistance: Offset): Offset {
-                    translate = translate.plus(dragDistance)
-                    return super.onDrag(dragDistance)
+        modifier = Modifier
+            .pointerInput(Unit) {
+                forEachGesture {
+                    awaitPointerEventScope {
+                        awaitFirstDown()
+                        do {
+                            val event = awaitPointerEvent()
+                            scale *= event.calculateZoom()
+                            val offset = event.calculatePan()
+                            offsetX += offset.x
+                            offsetY += offset.y
+                        } while (event.changes.any { it.pressed })
+                    }
                 }
-            })
+            }
     ) {
         // There are multiple methods available to load an image resource in Compose. 
-        // However, it would be advisable to use the loadImageResource method as it loads 
+        // However, it would be advisable to use the painterResource method as it loads
         // an image resource asynchronously
-        val imageBitmap = loadImageResource(id = R.drawable.landscape).resource.resource
-        imageBitmap?.let {
-            // Image is a pre-defined composable that lays out and draws a given [ImageBitmap]. 
-            // We use the graphicsLayer modifier to modify the scale & translation of the image. 
-            // This is read from the state properties that we created above.
-            Image(
-                modifier = Modifier.fillMaxSize().graphicsLayer(
-                    scaleX = scale,
-                    scaleY = scale,
-                    translationX = translate.x,
-                    translationY = translate.y
-                ),
-                bitmap = it
-            )
-        }
+        val imagepainter = painterResource(id = R.drawable.landscape)
+        // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+        // We use the graphicsLayer modifier to modify the scale & translation of the image.
+        // This is read from the state properties that we created above.
+        Image(
+            modifier = Modifier.fillMaxSize().graphicsLayer(
+                scaleX = scale,
+                scaleY = scale,
+                translationX = offsetX,
+                translationY = offsetY
+            ),
+            painter = imagepainter,
+            contentDescription = "Landscape Image"
+        )
     }
 }
 

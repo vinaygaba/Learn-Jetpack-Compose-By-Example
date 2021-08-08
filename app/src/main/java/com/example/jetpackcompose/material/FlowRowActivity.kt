@@ -6,9 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.Amenity
@@ -33,9 +32,8 @@ class FlowRowActivity : AppCompatActivity() {
     }
 }
 
-// NOTE: FlowRow was labeled as an experimental API that required explicit opt-in starting 
-// dev14 version of compose. Commenting it out so that we can compile the repo without 
-// using additional compiler flags.
+// NOTE: FlowRow API was removed by the Compose team. Commenting it out so that we can compile the
+// repo.
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
 // functions can only be called from within the scope of other composable functions. We should 
@@ -49,7 +47,7 @@ fun SimpleFlowRow(amenityList: List<Amenity>) {
     // will be recomposed any time the value changes. This ensures that only the composables that
     // depend on this will be redraw while the rest remain unchanged. This ensures efficiency and
     // is a performance optimization. It is inspired from existing frameworks like React.
-    val selectedIndices = mutableStateListOf<Int>()
+//    val selectedIndices = mutableStateListOf<Int>()
     // Column is a composable that places its children in a vertical sequence. You
     // can think of it similar to a LinearLayout with the vertical orientation. 
     // In addition we also pass a few modifiers to it.

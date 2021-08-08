@@ -17,12 +17,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 class AlertDialogActivity : AppCompatActivity() {
 
@@ -51,10 +51,16 @@ class AlertDialogActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun ClickableText() {
-    // Reacting to state changes is core to how Jetpack Compose works. This state variable "showPopup"
-    // is used to control whether the popup should be shown. The value is toggled every time the
-    // text "Click to see dialog" is clicked. Every time the value of this variable changes,
-    // the relevant sub-composables that use showPopup are automatically recomposed.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var showPopup by remember { mutableStateOf(false) }
     // Column with clickable modifier wraps the child composable and enables it to react to a click
     // through the onClick callback similar to the onClick listener that we are accustomed to
@@ -74,7 +80,7 @@ fun ClickableText() {
             Text(
                 text = "Click to see dialog", modifier = Modifier.padding(16.dp),
                 style = TextStyle(
-                    fontSize = TextUnit.Sp(16),
+                    fontSize = 16.sp,
                     fontFamily = FontFamily.Serif
                 )
             )

@@ -17,8 +17,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AmbientLifecycleOwner
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
 
@@ -68,7 +68,7 @@ fun BackPressApp(appState: AppState) {
 // built up of smaller composable functions.
 @Composable
 fun Screen1(appState: AppState) {
-    val activity = (AmbientLifecycleOwner.current as ComponentActivity)
+    val activity = (LocalLifecycleOwner.current as ComponentActivity)
     // Column is a composable that places its children in a vertical sequence. You
     // can think of it similar to a LinearLayout with the vertical orientation. 
     // In addition we also pass a few modifiers to it.

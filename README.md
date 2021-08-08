@@ -1,5 +1,5 @@
 # Learn Jetpack Compose By Example 
-![Android CI](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/workflows/Android%20CI/badge.svg) ![Compose Version](https://img.shields.io/badge/Compose-1.0.0--alpha10-brightgreen) ![Android Weekly](https://androidweekly.net/issues/issue-414/badge)
+![Android CI](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/workflows/Android%20CI/badge.svg) ![Compose Version](https://img.shields.io/badge/Compose-1.0.1-brightgreen) ![Android Weekly](https://androidweekly.net/issues/issue-414/badge)
 
 ![Feature Image](screenshots/jetpack_compose_poster.png)
 

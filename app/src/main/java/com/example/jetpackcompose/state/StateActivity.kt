@@ -17,7 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
@@ -49,12 +49,16 @@ class StateActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun StateComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the counter. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var counter by remember { mutableStateOf(0) }
     TitleComponent("Example using state class to store state")
     // Row is a composable that places its children in a horizontal sequence. You can think of it
@@ -63,7 +67,7 @@ fun StateComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier(Modifier.fillMaxWidth()) to the Row and ask it to extend the
     // full width available to it. Alternatively, we could've assigned a fixed width to this row
-    // using Modifier.preferredWidth(val width: Dp).
+    // using Modifier.width(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // This Row consists of two buttons. We wanted to ensure that both these buttons occupy
         // equal amount of width. We do that by using the LayoutWeight modifier and passing equal
@@ -103,12 +107,16 @@ fun StateComponent() {
  */
 @Composable
 fun ModelComponent() {
-    // Reacting to state changes is the core behavior of Compose. We use the state composable
-    // that is used for holding a state value in this composable for representing the current
-    // value of the counter. Any composable that reads the value of counter will be recomposed
-    // any time the value changes. This ensures that only the composables that depend on this
-    // will be redraw while the rest remain unchanged. This ensures efficiency and is a
-    // performance optimization. It is inspired from existing frameworks like React.
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var counterState by remember { mutableStateOf(CounterState()) }
     TitleComponent("Example using Model class to store state")
     // Row is a composable that places its children in a horizontal sequence. You can think of it
@@ -117,7 +125,7 @@ fun ModelComponent() {
     // pattern that are used to modify the composable that its applied to. In this example, we
     // assign add a modifier to the Row and ask it to extend the full width available to it.
     // Alternatively, we could've assigned a fixed width to this row using
-    // Modifier.preferredWidth(val width: Dp).
+    // Modifier.width(val width: Dp).
     Row(modifier = Modifier.fillMaxWidth()) {
         // This Row consists of two buttons. We wanted to ensure that both these buttons occupy
         // equal amount of width. We do that by using the LayoutWeight modifier and passing equal

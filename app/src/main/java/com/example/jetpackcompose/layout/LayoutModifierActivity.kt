@@ -2,7 +2,6 @@ package com.example.jetpackcompose.layout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -11,7 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.setContent
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -31,14 +31,11 @@ class LayoutModifierActivity : AppCompatActivity() {
             // ScrollableColumn is a composable that adds the ability to scroll through the
             // child views. We should think of composable functions to be similar to lego blocks -
             // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence.
-                Column {
-                    SamePaddingComponent()
-                    CustomPaddingComponent()
-                    OffsetComponent()
-                    AspectRatioComponent()
-                }
+            LazyColumn {
+                item { SamePaddingComponent() }
+                item { CustomPaddingComponent() }
+                item { OffsetComponent() }
+                item { AspectRatioComponent() }
             }
         }
     }
@@ -119,7 +116,9 @@ fun AspectRatioComponent() {
     // modify the composable that its applied to. In this example, we make use of the
     // Modifier.aspectRatio modifier that attempts to size a layout to match a specified aspect ratio.
     Surface(
-        color = colors[3], modifier = Modifier.aspectRatio(16 / 9f).padding(top = 16.dp)
+        color = colors[3], modifier = Modifier
+            .aspectRatio(16 / 9f)
+            .padding(top = 16.dp)
     ) {
         // The Text composable is pre-defined by the Compose UI library; you can use this
         // composable to render text on the screen

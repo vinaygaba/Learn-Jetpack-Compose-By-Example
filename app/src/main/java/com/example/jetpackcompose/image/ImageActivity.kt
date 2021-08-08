@@ -7,21 +7,8 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredSizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.onCommit
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -31,9 +18,23 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.platform.AmbientContext
-import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.res.loadImageResource
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -57,19 +58,10 @@ class ImageActivity : AppCompatActivity() {
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
         setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
-            ScrollableColumn {
-                // Column is a composable that places its children in a vertical sequence. You
-                // can think of it similar to a LinearLayout with the vertical orientation.
-
-                // You can think of Modifiers as implementations of the decorators pattern that are
-                // used to modify the composable that its applied to. In this example, we assign a
-                // padding of 16dp to the Column.
-                Column(modifier = Modifier.padding(16.dp)) {
-                    DisplayImagesComponent()
-                }
+            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+            // visible items. This is very similar to what RecyclerView tries to do as well.
+            LazyColumn(modifier = Modifier.padding(16.dp)) {
+                displayImagesComponent()
             }
         }
     }
@@ -79,23 +71,32 @@ class ImageActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
-@Composable
-fun DisplayImagesComponent() {
-    TitleComponent("Load image from the resource folder")
-    LocalResourceImageComponent(R.drawable.landscape)
+fun LazyListScope.displayImagesComponent() {
+    // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+    // for a single element in the list
+    item {
+        TitleComponent("Load image from the resource folder")
+        LocalResourceImageComponent(R.drawable.landscape)
+    }
 
-    TitleComponent("Load image from url using Picasso")
-    NetworkImageComponentPicasso(
-        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
-    )
+    item {
+        TitleComponent("Load image from url using Picasso")
+        NetworkImageComponentPicasso(
+            url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
+        )
+    }
 
-    TitleComponent("Load image from url using Glide")
-    NetworkImageComponentGlide(
-        url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
-    )
+    item {
+        TitleComponent("Load image from url using Glide")
+        NetworkImageComponentGlide(
+            url = "https://github.com/vinaygaba/CreditCardView/raw/master/images/Feature%20Image.png"
+        )
+    }
 
-    TitleComponent("Image with rounded corners")
-    ImageWithRoundedCorners(R.drawable.landscape)
+    item {
+        TitleComponent("Image with rounded corners")
+        ImageWithRoundedCorners(R.drawable.landscape)
+    }
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -105,19 +106,21 @@ fun DisplayImagesComponent() {
 @Composable
 fun LocalResourceImageComponent(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
-    // be advisable to use the loadImageResource method as it loads an image resource asynchronously
-    val image = loadImageResource(resId)
-    image.resource.resource?.let {
-        // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+    // be advisable to use the painterResource method as it loads an image resource asynchronously
+    val image = painterResource(resId)
 
-        // You can think of Modifiers as implementations of the decorators pattern that are
-        // used to modify the composable that its applied to. In this example, we configure the
-        // Image composable to have a height of 200 dp.
-        Image(
-            bitmap = it, 
-            modifier = Modifier.preferredSizeIn(maxHeight = 200.dp)
-                .fillMaxWidth())
-    }
+    // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+
+    // You can think of Modifiers as implementations of the decorators pattern that are
+    // used to modify the composable that its applied to. In this example, we configure the
+    // Image composable to have a height of 200 dp.
+    Image(
+        painter = image,
+        contentDescription = null,
+        modifier = Modifier
+            .sizeIn(maxHeight = 200.dp)
+            .fillMaxWidth()
+    )
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -127,25 +130,24 @@ fun LocalResourceImageComponent(@DrawableRes resId: Int) {
 @Composable
 fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     // There are multiple methods available to load an image resource in Compose. However, it would
-    // be advisable to use the loadImageResource method as it loads an image resource asynchronously
-    val image = loadImageResource(resId)
-    image.resource.resource?.let {
-        // Column is a composable that places its children in a vertical sequence. You
-        // can think of it similar to a LinearLayout with the vertical orientation. 
-        // In addition we also pass a few modifiers to it.
+    // be advisable to use the painterResource method as it loads an image resource asynchronously
+    val image = painterResource(resId)
+    // Column is a composable that places its children in a vertical sequence. You
+    // can think of it similar to a LinearLayout with the vertical orientation.
+    // In addition we also pass a few modifiers to it.
 
-        // You can think of Modifiers as implementations of the decorators pattern that are
-        // used to modify the composable that its applied to. In this example, we configure the
-        // Box composable to clip the corners of the image.
-        Column(
-            modifier = Modifier.clip(RoundedCornerShape(8.dp))
-        ) {
-            // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
-            Image(
-                bitmap = it,
-                modifier = Modifier.preferredHeight(200.dp)
-            )
-        }
+    // You can think of Modifiers as implementations of the decorators pattern that are
+    // used to modify the composable that its applied to. In this example, we configure the
+    // Box composable to clip the corners of the image.
+    Column(
+        modifier = Modifier.clip(RoundedCornerShape(8.dp))
+    ) {
+        // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
+        Image(
+            painter = image,
+            modifier = Modifier.height(200.dp),
+            contentDescription = null
+        )
     }
 }
 
@@ -160,10 +162,16 @@ fun NetworkImageComponentPicasso(
 ) {
     // Source code inspired from - https://kotlinlang.slack.com/archives/CJLTWPH7S/p1573002081371500.
     // Made some minor changes to the code Leland posted.
-    val sizeModifier = modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
+    val sizeModifier = modifier
+        .fillMaxWidth()
+        .sizeIn(maxHeight = 200.dp)
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
-    onCommit(url) {
+    // Sometimes we need to make changes to the state of the app. For those cases, Composes provides
+    // some Effect API's which provide a way to perform side effects in a predictable manner.
+    // DisposableEffect is one such side effect API that provides a mechanism to perform some
+    // clean up actions if the key to the effect changes or if the composable leaves composition.
+    DisposableEffect(url) {
         val picasso = Picasso.get()
         val target = object : Target {
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
@@ -182,7 +190,6 @@ fun NetworkImageComponentPicasso(
         picasso
             .load(url)
             .into(target)
-
         onDispose {
             image = null
             drawable = null
@@ -205,9 +212,11 @@ fun NetworkImageComponentPicasso(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
-            Image(bitmap = theImage)
+            Image(bitmap = theImage, contentDescription = null)
         }
     } else if (theDrawable != null) {
+        // We use the Canvas composable that gives you access to a canvas that you can draw
+        // into. We also pass it a modifier.
         Canvas(modifier = sizeModifier) {
             drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
@@ -226,11 +235,39 @@ fun NetworkImageComponentPicasso(
 fun NetworkImageComponentGlide(
     url: String, modifier: Modifier = Modifier
 ) {
+    // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+    // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+    // composable that calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. Next, you can think of
+    // mutableStateOf as an observable value where updates to this variable will redraw all
+    // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+    // composable that reads its value will be recomposed any time the value
+    // changes. This ensures that only the composables that depend on this will be redraw while the
+    // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+    // is inspired from existing frameworks like React.
     var image by remember { mutableStateOf<ImageBitmap?>(null) }
     var drawable by remember { mutableStateOf<Drawable?>(null) }
-    val sizeModifier = modifier.fillMaxWidth().preferredSizeIn(maxHeight = 200.dp)
-    val context = AmbientContext.current
-    onCommit(url) {
+    val sizeModifier = modifier
+        .fillMaxWidth()
+        .sizeIn(maxHeight = 200.dp)
+
+    // LocalContext is a LocalComposition for accessting the context value that we are used to using
+    // in Android.
+
+    // LocalComposition is an implicit way to pass values down the compose tree. Typically, we pass values
+    // down the compose tree by passing them as parameters. This makes it easy to have fairly
+    // modular and reusable components that are easy to test as well. However, for certain types
+    // of data where multiple components need to use it, it makes sense to have an implicit way
+    // to access this data. For such scenarios, we use LocalComposition. In this example, we use the
+    // LocalContext to get hold of the Context object. In order to get access to the latest
+    // value of the LocalComposition, use the "current" property eg - LocalContext.current. Some other
+    // examples of common LocalComposition's are LocalTextInputService,LocalDensity, etc.
+    val context = LocalContext.current
+    // Sometimes we need to make changes to the state of the app. For those cases, Composes provides
+    // some Effect API's which provide a way to perform side effects in a predictable manner.
+    // DisposableEffect is one such side effect API that provides a mechanism to perform some
+    // clean up actions if the key to the effect changes or if the composable leaves composition.
+    DisposableEffect(url) {
         val glide = Glide.with(context)
         val target = object : CustomTarget<Bitmap>() {
             override fun onLoadCleared(placeholder: Drawable?) {
@@ -269,9 +306,11 @@ fun NetworkImageComponentGlide(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Image is a pre-defined composable that lays out and draws a given [ImageBitmap].
-            Image(bitmap = theImage)
+            Image(bitmap = theImage, contentDescription = null)
         }
     } else if (theDrawable != null) {
+        // We use the Canvas composable that gives you access to a canvas that you can draw
+        // into. We also pass it a modifier.
         Canvas(modifier = sizeModifier) {
             drawIntoCanvas { canvas ->
                 theDrawable.draw(canvas.nativeCanvas)
@@ -292,7 +331,9 @@ fun TitleComponent(title: String) {
         title, style = TextStyle(
             fontFamily = FontFamily.Monospace, fontWeight = FontWeight.W900,
             fontSize = 14.sp, color = Color.Black
-        ), modifier = Modifier.padding(16.dp).fillMaxWidth()
+        ), modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
     )
 }
 

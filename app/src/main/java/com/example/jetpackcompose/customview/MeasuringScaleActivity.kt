@@ -1,17 +1,20 @@
 package com.example.jetpackcompose.customview
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredHeight
-import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.darkColors
@@ -20,7 +23,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -48,16 +50,24 @@ class MeasuringScaleActivity : AppCompatActivity() {
 // built up of smaller composable functions.
 @Composable
 fun MeasuringScaleComponent() {
-    // ScrollableRow is a composable that adds the ability to scroll through the child
-    // composables that are declared inside it in the horizontal direction. One caveat here is that
-    // this is not optimized to recycle the views. It is more similar to [ScrollView] and should not
-    // be thought of as a replacement for [RecyclerView]. We also give it a modifier.
+    // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+    // This allows us to also control the scroll position and other scroll related properties.
+
+    // remember calculates the value passed to it only during the first composition. It then
+    // returns the same value for every subsequent composition. More details are available in the
+    // comments below.
+    val scrollState = rememberScrollState()
+
+    // Row is a composable that places its children in a horizontal sequence. You
+    // can think of it similar to a LinearLayout with the horizontal orientation.
 
     // You can think of Modifiers as implementations of the decorators pattern that are
     // used to modify the composable that its applied to. In this example, we assign a
-    // padding of 16dp to the HorizontalScroller and specify it to occupy the entire available 
-    // width.
-    ScrollableRow(modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
+    // padding of 16dp and specify it to occupy the entire available width.
+
+    // In addition, we make use of the horizontalScroll modifier. This modifier makes the using
+    // composable to have scroll functionality in the horizontal direction.
+    Row(modifier = Modifier.horizontalScroll(scrollState).padding(top = 16.dp).fillMaxWidth(),
         content = {
             for (i in -20..1020) {
                 ScaleLineComponent(i)
@@ -98,7 +108,7 @@ fun ScaleLineComponent(index: Int) {
         // We use the Canvas composable that gives you access to a canvas that you can draw
         // into. We also pass it a modifier.
         Canvas(
-            modifier = Modifier.padding(5.dp).preferredHeight(100.dp).preferredWidth(3.dp)
+            modifier = Modifier.padding(5.dp).height(100.dp).width(3.dp)
         ) {
             // Allows you to draw a line between two points (p1 & p2) on the canvas.
             drawLine(
@@ -142,7 +152,7 @@ fun ScaleCenterPointer() {
         // used to modify the composable that its applied to. In this example, we give it a 
         // padding of 5 dp, height of 120dp & width of 3dp. 
         Canvas(
-            modifier = Modifier.padding(5.dp).preferredHeight(120.dp).preferredWidth(3.dp)
+            modifier = Modifier.padding(5.dp).height(120.dp).width(3.dp)
         ) {
             // Allows you to draw a line between two points (p1 & p2) on the canvas.
             drawLine(

@@ -1,6 +1,7 @@
 package com.example.jetpackcompose.material
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +13,7 @@ import androidx.compose.material.DrawerValue
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ModalDrawerLayout
+import androidx.compose.material.ModalDrawer
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -23,12 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 
 class DrawerAppActivity : AppCompatActivity() {
 
@@ -60,10 +62,12 @@ fun DrawerAppComponent() {
     // State composable used to hold the value of the current active screen
     val currentScreen = remember { mutableStateOf(DrawerAppScreen.Screen1) }
 
+    val coroutineScope = rememberCoroutineScope()
+
     // ModalDrawerLayout is a pre-defined composable used to provide access to destinations in
     // the app. It's a common pattern used across multiple apps where you see a drawer on the
     // left of the screen.
-    ModalDrawerLayout(
+    ModalDrawer(
         // Drawer state to denote whether the drawer should be open or closed.
         drawerState = drawerState,
         gesturesEnabled = drawerState.isOpen,
@@ -74,16 +78,16 @@ fun DrawerAppComponent() {
                 // We pass a state composable that represents the current screen that's selected
                 // and what action to take when the drawer is closed.
                 currentScreen = currentScreen,
-                closeDrawer = { drawerState.close() }
+                closeDrawer = { coroutineScope.launch { drawerState.close() } }
             )
         },
-        bodyContent = {
+        content = {
             // bodyContent takes a composable to represent the view/layout to display on the
             // screen. We select the appropriate screen based on the value stored in currentScreen.
             BodyContentComponent(
                 currentScreen = currentScreen.value,
                 openDrawer = {
-                    drawerState.open()
+                    coroutineScope.launch { drawerState.open() }
                 }
             )
         }
@@ -188,7 +192,7 @@ fun Screen1Component(openDrawer: () -> Unit) {
             title = { Text("Screen 1 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(imageVector = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
                 }
             }
         )
@@ -238,7 +242,7 @@ fun Screen2Component(openDrawer: () -> Unit) {
             title = { Text("Screen 2 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(imageVector = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
                 }
             }
         )
@@ -288,7 +292,7 @@ fun Screen3Component(openDrawer: () -> Unit) {
             title = { Text("Screen 3 Title") },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
-                    Icon(imageVector = Icons.Filled.Menu)
+                    Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
                 }
             }
         )
