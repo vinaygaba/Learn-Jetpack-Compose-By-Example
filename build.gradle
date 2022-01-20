@@ -65,8 +65,7 @@ buildscript {
     ]
     repositories {
         google()
-        jcenter()
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.gradle}"
@@ -78,7 +77,7 @@ buildscript {
 }
 
 plugins {
-    id "io.gitlab.arturbosch.detekt" version "1.7.4"
+    id "io.gitlab.arturbosch.detekt" version "1.19.0"
 }
 
 allprojects {
@@ -86,7 +85,7 @@ allprojects {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
