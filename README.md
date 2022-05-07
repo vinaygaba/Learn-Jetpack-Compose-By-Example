@@ -19,7 +19,7 @@ Android UI that we are accustomed to building.
 
 Talks
 -----
-I've also used the examples listed in this repo and given talks at conferences. If video is your preferred medium of learning, you can head to the links below
+I've also used the examples listed in this repo and given talks at conferences. If video is your preferred medium of learning, you can head to the links below:
 
 **360|AnDev 2020: Learning Jetpack Compose By Example**
 [Video](https://www.youtube.com/watch?v=2rEOpqDKOUA)| [Slides](https://speakerdeck.com/vinaygaba/360-andev-2020-learning-jetpack-compose-by-example)
