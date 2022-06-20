@@ -3,10 +3,10 @@
 buildscript {
     ext.versions = [
             'cardView': '1.0.0',
-            'compose': '1.0.1',
-            'composeActivity': '1.3.1',
-            'composeConstraintLayout': '1.0.0-beta02',
-            'composeNavigation': '2.4.0-alpha06',
+            'compose': '1.2.0-rc01',
+            'composeActivity': '1.4.0',
+            'composeConstraintLayout': '1.0.1',
+            'composeNavigation': '2.4.2',
             'constraintLayout' : '1.1.3',
             'coroutine': '1.3.7',
             'espresso': '3.2.0',
