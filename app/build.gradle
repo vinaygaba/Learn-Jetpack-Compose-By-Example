@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "com.example.jetpackcomposeplayground"
@@ -36,18 +35,26 @@ android {
         kotlinCompilerExtensionVersion "${versions.compose}"
 
     }
-    // Added to avoid this error -
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
+        }
+    }
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
+        }
+    }
+
+// Added to avoid this error -
     // Execution failed for task ':app:mergeDebugAndroidTestJavaResource'.
     // > A failure occurred while executing com.android.build.gradle.internal.tasks.MergeJavaResWorkAction
     // > 2 files found with path 'META-INF/AL2.0' from inputs:
-    packagingOptions {
-        exclude 'META-INF/AL2.0'
-        exclude 'META-INF/LGPL2.1'
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     // Kotlin
     implementation deps.kotlinStdLib
 
@@ -79,7 +86,6 @@ dependencies {
     implementation deps.compose.savedInstanceState
     implementation deps.compose.uiLiveData
     androidTestImplementation deps.compose.uiTest
-
 
     // Image loading
     implementation deps.imageLoading.picasso
