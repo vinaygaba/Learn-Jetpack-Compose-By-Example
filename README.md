@@ -20,7 +20,7 @@ Android UI that we are accustomed to building.
 Supporters
 -----
 
-Special thanks to the following sponsors for supporting my work 🙏🏻
+Special thanks to the following companies for supporting my work 🙏🏻
 
 <p align = "center">
   <a href="https://www.emergetools.com/?utm_source=jetpack&utm_medium=sponsor&utm_campaign=emerge" target="__blank">
