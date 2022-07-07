@@ -17,6 +17,18 @@ we know it.
 This repository aims to show the Jetpack Compose way of building common
 Android UI that we are accustomed to building.
 
+Supporters
+-----
+
+Special thanks to the following sponsors for supporting my work 🙏🏻
+
+<p align = "center">
+  <a href="https://www.emergetools.com/?utm_source=jetpack&utm_medium=sponsor&utm_campaign=emerge" target="__blank">
+    <img src="screenshots/emerge_supporter_banner.png" width=400 />
+  </a>
+
+</p>
+
 Talks
 -----
 I've also used the examples listed in this repo and given talks at conferences. If video is your preferred medium of learning, you can head to the links below:
