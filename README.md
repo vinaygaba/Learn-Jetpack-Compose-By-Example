@@ -22,7 +22,12 @@ Supporters
 
 Special thanks to the following companies for supporting my work 🙏🏻
 
+
+
 <p align = "center">
+  <a href="https://www.emergetools.com/?utm_source=jetpack&utm_medium=sponsor&utm_campaign=emerge" target="__blank">
+    <b>Emerge Tools</b>
+  </a> <br/><br/>
   <a href="https://www.emergetools.com/?utm_source=jetpack&utm_medium=sponsor&utm_campaign=emerge" target="__blank">
     <img src="screenshots/emerge_supporter_banner.png" width=400 />
   </a>
