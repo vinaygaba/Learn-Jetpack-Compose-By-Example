@@ -86,6 +86,7 @@ dependencies {
     implementation deps.compose.material
     implementation deps.compose.savedInstanceState
     implementation deps.compose.uiLiveData
+    androidTestImplementation deps.compose.composeNavigationTest
     androidTestImplementation deps.compose.uiTest
 
     // Image loading

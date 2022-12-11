@@ -43,7 +43,7 @@ class ComposeNavigationActivity : ComponentActivity() {
 }
 
 @Composable
-private fun App(
+fun App(
     navController: NavHostController = rememberNavController()
 ) {
 
