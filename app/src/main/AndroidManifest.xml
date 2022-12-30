@@ -188,6 +188,12 @@
             android:exported="true"
             android:label="@string/title_list_animation_example"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".shimmer.ShimmerActivity"
+            android:exported="true"
+            android:label="@string/title_shimmer_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
