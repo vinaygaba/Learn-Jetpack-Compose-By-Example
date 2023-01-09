@@ -1,4 +1,4 @@
-package com.example.jetpackcompose.navigation.navigation_compose
+package com.example.jetpackcompose.navigation.compose
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalContext

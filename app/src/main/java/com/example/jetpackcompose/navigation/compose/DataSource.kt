@@ -1,4 +1,4 @@
-package com.example.jetpackcompose.navigation.navigation_compose
+package com.example.jetpackcompose.navigation.compose
 
 import java.util.Calendar
 import java.util.Date
@@ -7,7 +7,8 @@ data class Task(
     val id: Int,
     val title: String,
     val description: String? = null,
-    val timestamp: Date? = Calendar.getInstance().time, // I haven't used LocalDateTime as de-sugaring is another concept altogether
+    // I haven't used LocalDateTime as de-sugaring is another concept altogether
+    val timestamp: Date? = Calendar.getInstance().time,
 )
 
 // You shouldn't use static data source as it makes testing difficult.

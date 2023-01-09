@@ -1,6 +1,6 @@
 package com.example.jetpackcompose.navigation_compose
 
-import com.example.jetpackcompose.navigation.navigation_compose.DataSource
+import com.example.jetpackcompose.navigation.compose.DataSource
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

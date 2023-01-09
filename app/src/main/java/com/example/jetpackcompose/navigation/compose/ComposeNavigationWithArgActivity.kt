@@ -1,4 +1,4 @@
-package com.example.jetpackcompose.navigation.navigation_compose
+package com.example.jetpackcompose.navigation.compose
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -194,44 +194,6 @@ private fun TaskItem(
     }
 }
 
-@Preview(
-    name = "Night Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-)
-@Preview(
-    name = "Day Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-)
-@Composable
-@Suppress("UnusedPrivateMember", "MagicNumber")
-private fun DetailViewComposeNavigationActivityPreview() {
-    MaterialTheme {
-        Surface {
-            ComposeNavigationWithArgApp()
-        }
-    }
-}
-
-@Preview(
-    name = "Night Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-)
-@Preview(
-    name = "Day Mode",
-    uiMode = Configuration.UI_MODE_NIGHT_NO,
-)
-@Composable
-@Suppress("UnusedPrivateMember", "MagicNumber")
-private fun TaskDetailsPreview() {
-    MaterialTheme {
-        Surface {
-            TaskDetails(
-                taskId = "1"
-            )
-        }
-    }
-}
-
 @Composable
 private fun TaskDetails(
     taskId: String?,
@@ -320,4 +282,42 @@ private fun TitleAndLabel(
         title = title,
         label = formattedTimestamp
     )
+}
+
+@Preview(
+    name = "Night Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
+@Preview(
+    name = "Day Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
+@Composable
+@Suppress("UnusedPrivateMember", "MagicNumber")
+private fun DetailViewComposeNavigationActivityPreview() {
+    MaterialTheme {
+        Surface {
+            ComposeNavigationWithArgApp()
+        }
+    }
+}
+
+@Preview(
+    name = "Night Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
+@Preview(
+    name = "Day Mode",
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+)
+@Composable
+@Suppress("UnusedPrivateMember", "MagicNumber")
+private fun TaskDetailsPreview() {
+    MaterialTheme {
+        Surface {
+            TaskDetails(
+                taskId = "1"
+            )
+        }
+    }
 }
