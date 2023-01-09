@@ -1,4 +1,4 @@
-package com.example.jetpackcompose.navigation
+package com.example.jetpackcompose.navigation.navigation_compose
 
 import java.util.Calendar
 import java.util.Date
@@ -10,7 +10,7 @@ data class Task(
     val timestamp: Date? = Calendar.getInstance().time, // I haven't used LocalDateTime as de-sugaring is another concept altogether
 )
 
-object Datasource {
+object DataSource {
 
     private val tasks = listOf(
         Task(

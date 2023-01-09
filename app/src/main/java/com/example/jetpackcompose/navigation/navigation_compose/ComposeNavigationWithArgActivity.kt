@@ -45,8 +45,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.jetpackcompose.navigation.Datasource
-import com.example.jetpackcompose.navigation.Task
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -125,7 +123,7 @@ private fun AppNavHost(
     ) {
         composable(route = "tasks") {
             TaskListScreen(
-                tasks = Datasource.getAllTasks(),
+                tasks = DataSource.getAllTasks(),
                 onTaskClick = { task -> navController.navigate("tasks/${task.id}") }
             )
         }
@@ -239,7 +237,7 @@ private fun TaskDetails(
     taskId: String?,
 ) {
 
-    val task by remember { mutableStateOf(Datasource.findTaskById(taskId)) }
+    val task by remember { mutableStateOf(DataSource.findTaskById(taskId)) }
 
     if (task == null) {
         Column(
