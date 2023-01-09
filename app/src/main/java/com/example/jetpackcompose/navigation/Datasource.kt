@@ -35,4 +35,9 @@ object Datasource {
     )
 
     fun getAllTasks() = tasks
+
+    fun findTaskById(id: String?): Task? {
+        val taskId = id?.toIntOrNull() ?: return null
+        return tasks.firstOrNull { it.id == taskId }
+    }
 }

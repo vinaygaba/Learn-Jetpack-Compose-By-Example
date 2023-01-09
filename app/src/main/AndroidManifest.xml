@@ -193,6 +193,11 @@
             android:exported="true"
             android:label="@string/title_compose_navigation_example"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".navigation.navigation_compose.ComposeNavigationWithArgActivity"
+            android:exported="true"
+            android:label="@string/title_compose_navigation_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

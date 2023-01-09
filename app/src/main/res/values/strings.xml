@@ -34,6 +34,7 @@
     <string name="title_back_press_example">Back Press Example</string>
     <string name="title_zoomable_example">Zoomable Example</string>
     <string name="title_compose_navigation_example">Compose Navigation Example</string>
+    <string name="title_compose_navigation_w_arg_example">Compose Navigation With Arg Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
     <string name="tv_custom_text_example">Display Styled Text</string>
@@ -70,4 +71,5 @@
     <string name="tv_back_press_example">Back Press Component</string>
     <string name="tv_zoomable_example">Zoomable Component</string>
     <string name="tv_compose_navigation_example">Compose Navigation</string>
+    <string name="tv_compose_navigation_w_arg_example">Compose Navigation With Arg</string>
 </resources>
