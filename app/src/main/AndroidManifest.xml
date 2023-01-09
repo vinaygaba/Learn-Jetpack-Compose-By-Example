@@ -188,6 +188,11 @@
             android:exported="true"
             android:label="@string/title_list_animation_example"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".navigation.ComposeNavigationActivity"
+            android:exported="true"
+            android:label="@string/title_compose_navigation_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

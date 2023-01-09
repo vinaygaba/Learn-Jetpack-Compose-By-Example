@@ -78,6 +78,7 @@ dependencies {
     implementation deps.compose.activityCompose
     implementation deps.compose.composeRuntime
     implementation deps.compose.constraintLayout
+    implementation deps.compose.composeNavigation
     implementation deps.compose.core
     implementation deps.compose.foundation
     implementation deps.compose.tooling
@@ -85,6 +86,7 @@ dependencies {
     implementation deps.compose.material
     implementation deps.compose.savedInstanceState
     implementation deps.compose.uiLiveData
+    androidTestImplementation deps.compose.composeNavigationTest
     androidTestImplementation deps.compose.uiTest
 
     // Image loading
