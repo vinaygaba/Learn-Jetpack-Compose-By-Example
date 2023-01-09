@@ -10,6 +10,7 @@ data class Task(
     val timestamp: Date? = Calendar.getInstance().time, // I haven't used LocalDateTime as de-sugaring is another concept altogether
 )
 
+// You shouldn't use static data source as it makes testing difficult.
 object DataSource {
 
     private val tasks = listOf(
