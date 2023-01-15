@@ -1,11 +1,23 @@
 package com.example.jetpackcompose.shimmer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.core.Easing
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,75 +41,58 @@ class ShimmerActivity : AppCompatActivity() {
         setContent {
             LazyColumn(modifier = Modifier.padding(16.dp)) {
                 item {
-                    ImagePlaceHolder(
+                    item(
                         color = lightRed,
                         tweenType = FastOutSlowInEasing,
-                        size = 100.dp
-                    )
-                    spacerHeight(height = 4.dp)
-                    LinePlaceHolder(
-                        color = lightRed,
-                        tweenType = FastOutSlowInEasing, width = 1f
                     )
 
                     spacerHeight(height = 8.dp)
 
-                    ImagePlaceHolder(
+                    item(
                         color = lightPurple,
-                        tweenType = LinearOutSlowInEasing,
-                        size = 100.dp
-                    )
-                    spacerHeight(height = 4.dp)
-                    LinePlaceHolder(
-                        color = lightPurple,
-                        tweenType = LinearOutSlowInEasing,
-                        width = 1f
+                        tweenType = LinearOutSlowInEasing
                     )
 
                     spacerHeight(height = 8.dp)
 
-                    ImagePlaceHolder(
+
+                    item(
                         color = lightBlue,
-                        tweenType = FastOutLinearInEasing,
-                        size = 100.dp
-                    )
-                    spacerHeight(height = 4.dp)
-                    LinePlaceHolder(
-                        color = lightBlue,
-                        tweenType = FastOutLinearInEasing,
-                        width = 1f
+                        tweenType = FastOutLinearInEasing
                     )
 
                     spacerHeight(height = 8.dp)
 
-                    ImagePlaceHolder(
+
+                    item(
                         color = lightCyan,
-                        tweenType = LinearEasing,
-                        size = 100.dp
-                    )
-                    spacerHeight(height = 4.dp)
-                    LinePlaceHolder(
-                        color = lightCyan,
-                        tweenType = LinearEasing,
-                        width = 1f
+                        tweenType = LinearEasing
                     )
 
                     spacerHeight(height = 8.dp)
 
-                    ImagePlaceHolder(
+
+                    item(
                         color = lightTeal,
-                        tweenType = LinearOutSlowInEasing,
-                        size = 100.dp
-                    )
-                    spacerHeight(height = 4.dp)
-                    LinePlaceHolder(
-                        color = lightTeal,
-                        tweenType = LinearOutSlowInEasing,
-                        width = 1f
+                        tweenType = LinearOutSlowInEasing
                     )
                 }
             }
         }
+    }
+
+    @Composable
+    private fun item(color: Color, tweenType: Easing) {
+        ImagePlaceHolder(
+            color = color,
+            tweenType = tweenType,
+            size = 100.dp
+        )
+        spacerHeight(height = 4.dp)
+        LinePlaceHolder(
+            color = color,
+            tweenType = tweenType, width = 1f
+        )
     }
 }
 
@@ -137,6 +132,9 @@ fun LinePlaceHolder(
             )
     )
 }
+
+@Composable
+fun spacerHeight(height: Dp) = Spacer(modifier = Modifier.height(height))
 
 @Composable
 fun ShimmerAnimation(
@@ -193,6 +191,3 @@ fun ShimmerAnimation(
 
     content(brush)
 }
-
-@Composable
-fun spacerHeight(height: Dp) = Spacer(modifier = Modifier.height(height))
