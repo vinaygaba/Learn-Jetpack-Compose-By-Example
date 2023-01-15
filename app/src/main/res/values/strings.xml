@@ -33,6 +33,7 @@
     <string name="title_measuring_scale_example">Measuring Scale Example</string>
     <string name="title_back_press_example">Back Press Example</string>
     <string name="title_zoomable_example">Zoomable Example</string>
+    <string name="title_compose_navigation_example">Compose Navigation Example</string>
     <string name="title_shimmer_example">Shimmer Example</string>
 
     <string name="tv_simple_text_example">Display Text</string>
@@ -69,5 +70,6 @@
     <string name="tv_measuring_scale_example">Measuring Scale Component</string>
     <string name="tv_back_press_example">Back Press Component</string>
     <string name="tv_zoomable_example">Zoomable Component</string>
+    <string name="tv_compose_navigation_example">Compose Navigation</string>
     <string name="tv_shimmer_example">Shimmer Component</string>
 </resources>

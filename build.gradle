@@ -29,6 +29,7 @@ buildscript {
                     'activityCompose': "androidx.activity:activity-compose:${versions.composeActivity}",
                     'composeComplier': "androidx.compose:compose-compiler:${versions.compose}",
                     'composeNavigation': "androidx.navigation:navigation-compose:${versions.composeNavigation}",
+                    'composeNavigationTest': "androidx.navigation:navigation-testing:${versions.composeNavigation}",
                     'composeRuntime': "androidx.compose.runtime:runtime:${versions.compose}",
                     'constraintLayout': "androidx.constraintlayout:constraintlayout-compose:${versions.composeConstraintLayout}",
                     'core': "androidx.compose.ui:ui:${versions.compose}",

@@ -28,6 +28,7 @@ import com.example.jetpackcompose.material.FixedActionButtonActivity
 import com.example.jetpackcompose.material.FlowRowActivity
 import com.example.jetpackcompose.material.MaterialActivity
 import com.example.jetpackcompose.material.ShadowActivity
+import com.example.jetpackcompose.navigation.ComposeNavigationActivity
 import com.example.jetpackcompose.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcompose.scrollers.VerticalScrollableActivity
 import com.example.jetpackcompose.shimmer.ShimmerActivity
@@ -185,6 +186,10 @@ class MainActivity : AppCompatActivity() {
 
     fun startZoomableExample(view: View) {
         startActivity(Intent(this, ZoomableActivity::class.java))
+    }
+
+    fun startComposeNavigationExample(view: View) {
+        startActivity(Intent(this, ComposeNavigationActivity::class.java))
     }
 
     fun startShimmerExample(view: View) {
