@@ -1,20 +1,21 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.activity.compose.setContent
-import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.TweenSpec
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.ui.tooling.preview.Preview
 
 class Animation2Activity : AppCompatActivity() {
@@ -46,18 +47,24 @@ fun AnimateColorComponent() {
     // changes. This ensures that only the composables that depend on this will be redraw while the
     // rest remain unchanged. This ensures efficiency and is a performance optimization. It
     // is inspired from existing frameworks like React.
-    val currentColor by remember { mutableStateOf(Color.Red) }
+    val currentColor = remember { MutableTransitionState(Color.Red) }
+    val label = "ColorAnimation"
     // updateTransition creates a transition that is useful for developing animations. It takes
     // in a target value and it transition the child animations towards the target value.
-    val transition = updateTransition(currentColor)
+    val transition = updateTransition(currentColor, label)
 
     val color by transition.animateColor(
-        transitionSpec = { TweenSpec<Color>(durationMillis = 2000) }
-    ) { state ->
-        when (state) {
+        transitionSpec = { tween(durationMillis = 2000) },
+        label = label,
+        targetValueByState = { it },
+    )
+
+    LaunchedEffect(key1 = currentColor.currentState) {
+        currentColor.targetState = when (currentColor.currentState) {
             Color.Red -> Color.Green
             Color.Green -> Color.Blue
-            Color.Blue -> Color.Red
+            Color.Blue -> Color.Cyan
+            Color.Cyan -> Color.Magenta
             else -> Color.Red
         }
     }
@@ -68,9 +75,11 @@ fun AnimateColorComponent() {
     // state variable and access the relevant props/properties to update the relevant
     // composables/layouts. Below, we use color to get get the latest value of color
     // and use it to paint the screen by setting it as the backgroundColor of the screen.
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(color = color)) { }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = color)
+    ) { }
 }
 
 /**
