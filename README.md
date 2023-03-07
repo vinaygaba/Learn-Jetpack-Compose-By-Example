@@ -153,6 +153,12 @@ sense.
 |-------|-------|
 |[How can I navigate to different screen in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/navigation/ComposeNavigationActivity.kt) | <img src ="screenshots/compose_navigation_example.gif" width=214 height=400>|
 
+
+### Permissions
+| Example                                                                                                                                                                                                            |Preview|
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
+| [How can I request for permissions in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/permissions/PermissionActivity.kt) | <img src ="screenshots/compose_permission_example.gif" width=214 height=400>|
+
 ### Testing
 |Example|Preview|
 |-------|-------|
