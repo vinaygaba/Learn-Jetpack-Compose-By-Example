@@ -31,8 +31,18 @@ Special thanks to the following companies for supporting my work 🙏🏻
   <a href="https://www.emergetools.com/?utm_source=jetpack&utm_medium=sponsor&utm_campaign=emerge" target="__blank">
     <img src="screenshots/emerge_supporter_banner.png" width=400 />
   </a>
-
 </p>
+
+
+<p align = "center">
+  <a href="https://auth.sofy.ai/sofyprod.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_SOFY_SIGNUP&client_id=0f3b4e4f-0e94-4658-b5af-7e0c78f0dda2&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fportal.sofy.ai%2Fauth&scope=openid&response_type=id_token&prompt=login&utm_source=jetpackcompose&utm_medium=cpc&utm_campaign=JPC-campaign" target="__blank">
+    <b>Sofy.ai</b>
+  </a> <br/><br/>
+  <a href="https://auth.sofy.ai/sofyprod.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_SOFY_SIGNUP&client_id=0f3b4e4f-0e94-4658-b5af-7e0c78f0dda2&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fportal.sofy.ai%2Fauth&scope=openid&response_type=id_token&prompt=login&utm_source=jetpackcompose&utm_medium=cpc&utm_campaign=JPC-campaign" target="__blank">
+    <img src="screenshots/Soft_ai.png" width=400 />
+  </a>
+</p>
+
 
 Talks
 -----
