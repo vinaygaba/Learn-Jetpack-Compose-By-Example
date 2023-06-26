@@ -3,6 +3,7 @@
     package="com.example.jetpackcompose">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -192,6 +193,11 @@
             android:name=".navigation.ComposeNavigationActivity"
             android:exported="true"
             android:label="@string/title_compose_navigation_example"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".permissions.PermissionActivity"
+            android:exported="true"
+            android:label="@string/title_permission_example"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

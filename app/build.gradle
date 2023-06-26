@@ -26,6 +26,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+        freeCompilerArgs += [
+                '-Xopt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi'
+        ]
     }
     buildFeatures {
         compose true
@@ -64,6 +67,9 @@ dependencies {
     implementation deps.support.ktxViewModel
     implementation deps.support.ktxLiveData
     implementation deps.support.lifecycleExtensions
+
+    // Accompanist
+    implementation deps.accompanist.permissions
 
     // CardView
     implementation deps.cardView

@@ -2,6 +2,7 @@
 
 buildscript {
     ext.versions = [
+            'accompanistPermissions': '0.25.1',
             'cardView': '1.0.0',
             'compose': '1.2.0-rc01',
             'composeActivity': '1.4.0',
@@ -24,6 +25,9 @@ buildscript {
             'testRunner': '1.2.0',
     ]
     ext.deps = [
+            'accompanist': [
+                    'permissions': "com.google.accompanist:accompanist-permissions:$versions.accompanistPermissions"
+            ],
             'cardView': "androidx.cardview:cardview:${versions.cardView}",
             'compose': [
                     'activityCompose': "androidx.activity:activity-compose:${versions.composeActivity}",
