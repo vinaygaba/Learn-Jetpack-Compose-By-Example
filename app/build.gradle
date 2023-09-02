@@ -26,6 +26,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+
+        freeCompilerArgs += [
+                "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+                "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+        ]
     }
     buildFeatures {
         compose true
