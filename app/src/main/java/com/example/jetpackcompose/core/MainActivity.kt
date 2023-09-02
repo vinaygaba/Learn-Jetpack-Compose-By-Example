@@ -31,6 +31,7 @@ import com.example.jetpackcompose.material.ShadowActivity
 import com.example.jetpackcompose.navigation.ComposeNavigationActivity
 import com.example.jetpackcompose.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcompose.scrollers.VerticalScrollableActivity
+import com.example.jetpackcompose.shimmer.ShimmerActivity
 import com.example.jetpackcompose.stack.StackActivity
 import com.example.jetpackcompose.state.ProcessDeathActivity
 import com.example.jetpackcompose.state.StateActivity
@@ -189,5 +190,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startComposeNavigationExample(view: View) {
         startActivity(Intent(this, ComposeNavigationActivity::class.java))
+    }
+
+    fun startShimmerExample(view: View) {
+        startActivity(Intent(this, ShimmerActivity::class.java))
     }
 }
