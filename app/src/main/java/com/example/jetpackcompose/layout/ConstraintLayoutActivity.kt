@@ -185,7 +185,7 @@ fun GuidelineConstraintLayoutComponent() {
             // our composable layouts. In order to apply these constraints to a 
             // composable(view/layout), we reference these references to impose the respective 
             // constraint on that composable. Look at how each of these references are being 
-            // reference below using the Modifier.contrainAs modifier.
+            // reference below using the Modifier.constrainAs modifier.
             val (text1, text2) = createRefs()
 
             // Create a guideline that's placed at a 25% width percentage from the left of the
@@ -204,7 +204,7 @@ fun GuidelineConstraintLayoutComponent() {
             // In order to apply the constraints to the references that we created above, we make 
             // use of the Modifier.constrainAs modifier and pass the reference to it in order to 
             // create a mapping between the composable/layout and the reference. We then add 
-            // contraints to the references inside the lambda passed to the constrainAs modifier.
+            // constraints to the references inside the lambda passed to the constrainAs modifier.
             Text(
                 "Quarter", style = TextStyle(
                     fontFamily = FontFamily.Serif, fontWeight =
@@ -258,7 +258,7 @@ fun BarrierConstraintLayoutComponent() {
             // our composable layouts. In order to apply these constraints to a 
             // composable(view/layout), we reference these references to impose the respective 
             // constraint on that composable. Look at how each of these references are being 
-            // reference below using the Modifier.contrainAs modifier.
+            // reference below using the Modifier.constrainAs modifier.
             val (text1, text2, text3) = createRefs()
 
 
@@ -275,7 +275,7 @@ fun BarrierConstraintLayoutComponent() {
             // In order to apply the constraints to the references that we created above, we make 
             // use of the Modifier.constrainAs modifier and pass the reference to it in order to 
             // create a mapping between the composable/layout and the reference. We then add 
-            // contraints to the references inside the lambda passed to the constrainAs modifier.
+            // constraints to the references inside the lambda passed to the constrainAs modifier.
             Text(
                 "Short text", style = TextStyle(
                     fontFamily = FontFamily.Serif,

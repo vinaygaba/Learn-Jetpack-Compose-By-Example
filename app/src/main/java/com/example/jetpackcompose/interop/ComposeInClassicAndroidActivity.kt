@@ -52,9 +52,9 @@ fun CardComponentWithMessage() {
 
     // You can think of Modifiers as implementations of the decorators pattern that are
     // used to modify the composable that its applied to. In this example, we configure the
-    // Column composable to occupuy the entire available width and height using
+    // Column composable to occupy the entire available width and height using
     // Modifier.fillMaxSize() and center the content inside the Column using the appropriate 
-    // veritical arrangement & horizontal alignment.
+    // vertical arrangement & horizontal alignment.
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

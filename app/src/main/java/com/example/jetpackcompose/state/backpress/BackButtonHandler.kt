@@ -22,14 +22,14 @@ import androidx.compose.ui.platform.LocalContext
 
 // What are LocalCompositions?
 // In Compose, we typically pass data through the composition tree explicitly through means of
-// parameters to composable functions. This is inline with the principles of unidirection 
+// parameters to composable functions. This is inline with the principles of unidirectional
 // data flow that Compose heavily recommends using. There are situations where this won't 
 // always be possible. For these cases, [LocalComposition]s can be used as an implicit way to have
 // data flow through a composition.
 
 // Another way to think about Providers is that I can get access to a value in the middle of 
 // a composition, without having to pass the value in. Some other examples of Providers and 
-// LocalComposiiton's are LocalContext(to get access to the context), etc.
+// LocalComposition's are LocalContext(to get access to the context), etc.
 private val LocalBackPressedDispatcher =
     staticCompositionLocalOf<OnBackPressedDispatcherOwner?> { null }
 
@@ -62,7 +62,7 @@ internal fun handler(
     // mutable properties).  
     val handler = remember { ComposableBackHandler(enabled) }
     // Sometimes we need to make changes to the state of the app. For those cases, Composes provides
-    // some Effect API's which provide a way to perform side effects in a predictable manner.
+    // some Effect APIs which provide a way to perform side effects in a predictable manner.
     // DisposableEffect is one such side effect API that provides a mechanism to perform some
     // clean up actions if the key to the effect changes or if the composable leaves composition.
     DisposableEffect(dispatcher) {

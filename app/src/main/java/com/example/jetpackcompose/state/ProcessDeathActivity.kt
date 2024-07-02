@@ -67,7 +67,7 @@ fun ProcessDeathComponent() {
 
     // You can think of Modifiers as implementations of the decorators pattern that are
     // used to modify the composable that its applied to. In this example, we configure the
-    // Column composable to occupuy the entire available width and height using
+    // Column composable to occupy the entire available width and height using
     // Modifier.fillMaxSize() and give center gravity to the content inside this box.
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -169,7 +169,7 @@ class CreditCardVisualTransformation : VisualTransformation {
     }
 }
 
-// Offset map is used to change the position of the cursor based on the transormation being
+// Offset map is used to change the position of the cursor based on the transformation being
 // applied. If no offset is needed for the cursor position, return the same offset value. In the
 // case of CreditCardVisualTransformation, since we add a space character after every 4
 // characters, we need to move the cursor accordingly. For example, if we added 3 space

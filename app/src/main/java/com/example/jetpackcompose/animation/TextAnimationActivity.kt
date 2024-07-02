@@ -65,7 +65,7 @@ fun TextAnimationComponent() {
         // composable that we will replace by other composables tagged with the same id. For 
         // example, we add two sections with id's "composeLogo" & "animatedText" below. We will 
         // reference the same id's in the inlineContent map that we will be passing to the Text 
-        // Commposable.
+        // Composable.
         appendInlineContent("composeLogo", "Compose Logo")
         appendInlineContent("animatedText", "Animated Text")
     }
@@ -131,13 +131,13 @@ fun ComposeLogoComponent() {
     // be advisable to use the painterResource method as it loads an image resource asynchronously
     val image = ImageBitmap.imageResource(R.drawable.compose_logo)
 
-    // rememberInfiniteTransition is used to create a transition that uses infitine
+    // rememberInfiniteTransition is used to create a transition that uses infinite
     // child animations. Animations typically get invoked as soon as they enter the
     // composition so don't need to be explicitly started.
     val infiniteTransition = rememberInfiniteTransition()
     // Create a value that is altered by the transition based on the configuration. We use
     // the animated float value the returns and updates a float from the initial value to
-    // target value and repeats it (as its called on the infititeTransition).
+    // target value and repeats it (as its called on the infiniteTransition).
     val rotation by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
@@ -156,7 +156,7 @@ fun ComposeLogoComponent() {
         // As the Transition is changing the interpolating the value of the animated float
         // "rotation", you get access to all the values including the intermediate values as
         // its  being updated. The value of "rotation" goes from 0 to 360 and transitions
-        // infinitely due to the infiniteRepetable animationSpec used above.
+        // infinitely due to the infiniteRepeatable animationSpec used above.
         rotate(rotation) {
             drawImage(image)
         }

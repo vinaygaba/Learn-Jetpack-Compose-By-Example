@@ -77,7 +77,7 @@ class CustomTextActivity : AppCompatActivity() {
                 // In addition, we pass a modifier to the Row composable. You can think of
                 // Modifiers as implementations of the decorators pattern that  are used to
                 // modify the composable that its applied to. In this example, we configure the
-                // Row to occupify the entire available width using Modifier.fillMaxWidth()
+                // Row to occupy the entire available width using Modifier.fillMaxWidth()
                 CenterTextAlign()
                 // A pre-defined composable that renders a thin line on the screen that makes it
                 // easy to group contents

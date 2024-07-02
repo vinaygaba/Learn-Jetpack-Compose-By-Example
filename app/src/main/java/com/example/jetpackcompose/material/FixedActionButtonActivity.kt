@@ -128,7 +128,7 @@ fun ScaffoldWithBottomBarAndCutout() {
  * function that doesn't take any parameters and call your composable function with the appropriate
  * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
  */
-@Preview("Fixed Aaction Button Example")
+@Preview("Fixed Action Button Example")
 @Composable
 fun ScaffoldWithBottomBarAndCutoutPreview() {
     ScaffoldWithBottomBarAndCutout()
