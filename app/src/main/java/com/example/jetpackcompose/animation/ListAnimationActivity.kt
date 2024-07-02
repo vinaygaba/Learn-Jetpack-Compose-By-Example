@@ -81,7 +81,7 @@ fun ListAnimationComponent(personList: List<Person>) {
         itemsIndexed(items = personList,
             itemContent = { index, person ->
                 // AnimatedVisibility is a pre-defined composable that automatically animates the 
-                // appearace and disappearance of it's content. This makes it super easy to animated 
+                // appearance and disappearance of it's content. This makes it super easy to animated
                 // things like insertion/deletion of a list element. The visible property tells the
                 // AnimatedVisibility about whether to show the composable that it wraps (in this case, 
                 // the Card that you see below). This is where you can add logic about whether a certain 
