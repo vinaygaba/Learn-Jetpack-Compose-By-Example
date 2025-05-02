@@ -43,6 +43,16 @@ Special thanks to the following companies for supporting my work 🙏🏻
   </a>
 </p>
 
+<p align = "center">
+  <a href="https://www.runway.team/?utm_source=jetpack&utm_medium=newsletter&utm_campaign=may-2-25" target="__blank">
+    <b>Runway</b>
+  </a> <br/><br/>
+  <a href="https://www.runway.team/?utm_source=jetpack&utm_medium=newsletter&utm_campaign=may-2-25" target="__blank">
+    <img src="screenshots/runway_latest_logo.png" width=400 />
+  </a>
+  <p align="center"><b>Chaos-free mobile release management.</b></p>
+</p>
+
 
 Talks
 -----
