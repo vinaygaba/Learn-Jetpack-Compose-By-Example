@@ -193,6 +193,12 @@
             android:exported="true"
             android:label="@string/title_compose_navigation_example"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".shimmer.ShimmerActivity"
+            android:exported="true"
+            android:label="@string/title_shimmer_example"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
