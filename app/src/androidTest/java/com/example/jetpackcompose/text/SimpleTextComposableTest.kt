@@ -38,7 +38,7 @@ class SimpleTextComposableTest {
     fun check_if_app_launched_and_displayed_text() {
         // findByText is a helper method that looks for a composable component that contains the
         // text passed to it. It returns a SemanticsNodeInteraction, which allows us to do a
-        // bunch of checks(isDisplayed, isToggelable, etc) and interactions(like click, scroll, etc)
+        // bunch of checks(isDisplayed, isToggleable, etc) and interactions(like click, scroll, etc)
 
 
         // In this example, we just check if there is a composable with the text

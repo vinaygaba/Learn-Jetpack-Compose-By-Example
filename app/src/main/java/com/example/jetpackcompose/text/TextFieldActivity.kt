@@ -235,7 +235,7 @@ fun NumberTextInputComponent() {
 @InternalTextApi
 @Composable
 fun SearchImeActionInputComponent() {
-    // LocalContext is a LocalComposition for accessting the context value that we are used to using
+    // LocalContext is a LocalComposition for accessing the context value that we are used to using
     // in Android.
 
     // LocalComposition is an implicit way to pass values down the compose tree. Typically, we pass values
