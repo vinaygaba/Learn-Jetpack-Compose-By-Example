@@ -70,4 +70,6 @@
     <string name="tv_back_press_example">Back Press Component</string>
     <string name="tv_zoomable_example">Zoomable Component</string>
     <string name="tv_compose_navigation_example">Compose Navigation</string>
+    <string name="title_permission_example">Permission Example</string>
+    <string name="tv_permission_example">Jetpack Compose Permissions</string>
 </resources>
