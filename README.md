@@ -169,9 +169,10 @@ sense.
 |[How can I use Jetpack Compose components inside existing screens?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/interop/ComposeInClassicAndroidActivity.kt) | <img src ="screenshots/interop.png" width=214 height=400>|
 
 ### Navigation
-|Example|Preview|
-|-------|-------|
-|[How can I navigate to different screen in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/navigation/ComposeNavigationActivity.kt) | <img src ="screenshots/compose_navigation_example.gif" width=214 height=400>|
+| Example                                                                                                                                                                                                                       |Preview|
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
+| [How can I navigate to different screen and send argument in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/navigation/compose/ComposeNavigationWithArgActivity.kt) | <img src ="screenshots/compose_navigation_w_arg_example.gif" width=214 height=400>|
+| [How can I navigate to different screen in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/navigation/ComposeNavigationActivity.kt) | <img src ="screenshots/compose_navigation_example.gif" width=214 height=400>|
 
 ### Testing
 |Example|Preview|
