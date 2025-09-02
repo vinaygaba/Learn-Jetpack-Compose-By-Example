@@ -24,7 +24,7 @@ jobs:
         run: |
           yes | sdkmanager --licenses
           sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
-      - uses: actions/cache@v1
+      - uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           # Key inspired from here -
@@ -51,7 +51,7 @@ jobs:
           java-version: '17'
       - name: Checkout Branch
         uses: actions/checkout@v4
-      - uses: actions/cache@v1
+      - uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           # Key inspired from here -
