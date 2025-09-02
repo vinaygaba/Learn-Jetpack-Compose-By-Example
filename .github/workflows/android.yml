@@ -49,7 +49,7 @@ jobs:
       - name: Accept licenses and install SDK components
         run: |
           yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "system-images;android-35;google_apis;arm64-v8a"
       - uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
@@ -63,9 +63,9 @@ jobs:
         with:
           api-level: 35
           target: google_apis
-          arch: x86_64
+          arch: arm64-v8a
           force-avd-creation: true
           disable-animations: true
           emulator-boot-timeout: 900
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          emulator-options: -no-window -gpu host -no-snapshot -noaudio -no-boot-anim
           script: ./gradlew connectedCheck --no-daemon --stacktrace
