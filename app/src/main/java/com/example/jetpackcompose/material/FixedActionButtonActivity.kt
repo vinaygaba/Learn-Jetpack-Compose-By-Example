@@ -12,16 +12,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Card
-import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Card
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
@@ -59,7 +59,7 @@ fun ScaffoldWithBottomBarAndCutout() {
     // app bar is automatically placed at the bottom of the screen even though I didn't specify
     // that explicitly.
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Scaffold Examples") }) },
+        topBar = { TopAppBar(title = { Text("Scaffold Examples", style = MaterialTheme.typography.titleLarge) }) },
         bottomBar = {
             // We specify the shape of the FAB bu passing a shape composable (fabShape) as a
             // parameter to cutoutShape property of the BottomAppBar. It automatically creates a
@@ -75,7 +75,7 @@ fun ScaffoldWithBottomBarAndCutout() {
                 // you don't specify a theme (this example doesn't specify a theme either hence
                 // it will just use defaults. Look at DarkModeActivity if you want to see an
                 // example of using themes.
-                backgroundColor = MaterialTheme.colors.secondary
+                containerColor = MaterialTheme.colorScheme.secondary
             ) {
                 IconButton(onClick = {}) {
                     Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
@@ -103,7 +103,6 @@ fun ScaffoldWithBottomBarAndCutout() {
                     // the card surface as specified by the Material Design specification. We
                     // also configure it to have rounded corners and apply a modifier.
                     Card(
-                        backgroundColor = colors[it % colors.size],
                         shape = RoundedCornerShape(8.dp),
                         modifier = Modifier.padding(8.dp)
                     ) {
