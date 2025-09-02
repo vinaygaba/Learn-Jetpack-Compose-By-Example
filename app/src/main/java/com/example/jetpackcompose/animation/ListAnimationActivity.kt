@@ -13,10 +13,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
@@ -36,7 +36,7 @@ import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
 
 class ListAnimationActivity : AppCompatActivity() {
-    @ExperimentalAnimationApi
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -49,7 +49,7 @@ class ListAnimationActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should 
 // think of composable functions to be similar to lego blocks - each composable function is in turn 
 // built up of smaller composable functions.
-@ExperimentalAnimationApi
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ListAnimationComponent(personList: List<Person>) {
     // Reacting to state changes is the core behavior of Compose. You will notice a couple new 
@@ -155,7 +155,7 @@ fun ListAnimationComponent(personList: List<Person>) {
  * function that doesn't take any parameters and call your composable function with the appropriate
  * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
  */
-@ExperimentalAnimationApi
+@OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
 fun ListAnimationComponentPreview() {

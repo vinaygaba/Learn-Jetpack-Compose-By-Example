@@ -13,11 +13,10 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ListItem
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -90,7 +89,6 @@ fun LiveDataComponent(personListLiveData: LiveData<List<Person>>) {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LiveDataComponentList(personList: List<Person>) {
     // LazyColumn is a vertically scrolling list that only composes and lays out the currently

@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.activity.compose.setContent
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import com.example.jetpackcompose.core.Amenity
 import com.example.jetpackcompose.core.getAmenityList
 import com.example.jetpackcompose.image.TitleComponent
@@ -45,6 +46,7 @@ class FlowRowActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should 
 // think of composable functions to be similar to lego blocks - each composable function is in turn 
 // built up of smaller composable functions.
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SimpleFlowRow(amenityList: List<Amenity>) {
     // Reacting to state changes is the core behavior of Compose. We use the state composable
