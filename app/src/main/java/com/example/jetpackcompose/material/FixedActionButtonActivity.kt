@@ -12,16 +12,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Card
-import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
@@ -47,6 +47,7 @@ class FixedActionButtonActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScaffoldWithBottomBarAndCutout() {
     // Consider negative values to mean 'cut corner' and positive values to mean 'round corner'
@@ -59,31 +60,21 @@ fun ScaffoldWithBottomBarAndCutout() {
     // app bar is automatically placed at the bottom of the screen even though I didn't specify
     // that explicitly.
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Scaffold Examples") }) },
+        topBar = { TopAppBar(title = { Text("Scaffold Examples", style = MaterialTheme.typography.titleLarge) }) },
         bottomBar = {
-            // We specify the shape of the FAB bu passing a shape composable (fabShape) as a
-            // parameter to cutoutShape property of the BottomAppBar. It automatically creates a
-            // cutout in the BottomAppBar based on the shape of the Floating Action Button.
-            BottomAppBar(cutoutShape = fabShape) {}
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {},
-                // We specify the same shape that we passed as the cutoutShape above.
-                shape = fabShape,
-                // We use the secondary color from the current theme. It uses the defaults when
-                // you don't specify a theme (this example doesn't specify a theme either hence
-                // it will just use defaults. Look at DarkModeActivity if you want to see an
-                // example of using themes.
-                backgroundColor = MaterialTheme.colors.secondary
-            ) {
-                IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
+            BottomAppBar(
+                actions = {},
+                floatingActionButton = {
+                    FloatingActionButton(
+                        onClick = {},
+                        shape = fabShape,
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    ) {
+                        Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
+                    }
                 }
-            }
+            )
         },
-        isFloatingActionButtonDocked = true,
-        floatingActionButtonPosition = FabPosition.End,
         content = { padding ->
             // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
             // This allows us to also control the scroll position and other scroll related properties.
@@ -103,7 +94,6 @@ fun ScaffoldWithBottomBarAndCutout() {
                     // the card surface as specified by the Material Design specification. We
                     // also configure it to have rounded corners and apply a modifier.
                     Card(
-                        backgroundColor = colors[it % colors.size],
                         shape = RoundedCornerShape(8.dp),
                         modifier = Modifier.padding(8.dp)
                     ) {

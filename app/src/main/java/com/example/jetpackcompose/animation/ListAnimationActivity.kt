@@ -13,10 +13,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
@@ -36,7 +37,7 @@ import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
 
 class ListAnimationActivity : AppCompatActivity() {
-    @ExperimentalAnimationApi
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -49,7 +50,7 @@ class ListAnimationActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should 
 // think of composable functions to be similar to lego blocks - each composable function is in turn 
 // built up of smaller composable functions.
-@ExperimentalAnimationApi
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ListAnimationComponent(personList: List<Person>) {
     // Reacting to state changes is the core behavior of Compose. You will notice a couple new 
@@ -78,7 +79,8 @@ fun ListAnimationComponent(personList: List<Person>) {
     LazyColumn(
         modifier = Modifier.fillMaxWidth()
     ) {
-        itemsIndexed(items = personList,
+        itemsIndexed(
+            items = personList,
             itemContent = { index, person ->
                 // AnimatedVisibility is a pre-defined composable that automatically animates the 
                 // appearace and disappearance of it's content. This makes it super easy to animated 
@@ -107,42 +109,47 @@ fun ListAnimationComponent(personList: List<Person>) {
                     // configure it to have rounded corners and apply a modifier.
                     Card(
                         shape = RoundedCornerShape(4.dp),
-                        backgroundColor = colors[index % colors.size],
-                        modifier = Modifier.fillParentMaxWidth()
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        // Row is a composable that places its children in a horizontal sequence. You
-                        // can think of it similar to a LinearLayout with the horizontal orientation.
-                        Row(
-                            modifier = Modifier.fillParentMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            color = colors[index % colors.size]
                         ) {
-                            // Text is a predefined composable that does exactly what you'd expect it to -
-                            // display text on the screen. It allows you to customize its appearance using
-                            // the style property.
-                            Text(
-                                person.name, style = TextStyle(
-                                    color = Color.Black,
-                                    fontSize = 20.sp,
-                                    textAlign = TextAlign.Center
-                                ), modifier = Modifier.padding(16.dp)
-                            )
-                            IconButton(
-                                // When this button is clicked, we add the person to deletedPersonList.
-                                onClick = {
-                                    deletedPersonList.add(person)
-                                }
+                            // Row is a composable that places its children in a horizontal sequence. You
+                            // can think of it similar to a LinearLayout with the horizontal orientation.
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                // Simple composable that allows you to draw an icon on the screen. It
-                                // accepts a vector asset as the icon.
-                                Icon(
-                                    imageVector = Icons.Filled.Delete,
-                                    contentDescription = "Delete"
+                                // Text is a predefined composable that does exactly what you'd expect it to -
+                                // display text on the screen. It allows you to customize its appearance using
+                                // the style property.
+                                Text(
+                                    person.name, style = TextStyle(
+                                        color = Color.Black,
+                                        fontSize = 20.sp,
+                                        textAlign = TextAlign.Center
+                                    ), modifier = Modifier.padding(16.dp)
                                 )
+                                IconButton(
+                                    // When this button is clicked, we add the person to deletedPersonList.
+                                    onClick = {
+                                        deletedPersonList.add(person)
+                                    }
+                                ) {
+                                    // Simple composable that allows you to draw an icon on the screen. It
+                                    // accepts a vector asset as the icon.
+                                    Icon(
+                                        imageVector = Icons.Filled.Delete,
+                                        contentDescription = "Delete"
+                                    )
+                                }
                             }
                         }
                     }
                 }
-            })
+            }
+        )
     }
 }
 
@@ -155,7 +162,7 @@ fun ListAnimationComponent(personList: List<Person>) {
  * function that doesn't take any parameters and call your composable function with the appropriate
  * params. Also, don't forget to annotate it with @Preview & @Composable annotations.
  */
-@ExperimentalAnimationApi
+@OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
 fun ListAnimationComponentPreview() {

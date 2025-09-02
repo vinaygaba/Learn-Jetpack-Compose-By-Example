@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -13,11 +14,11 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ListItem
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -90,7 +91,6 @@ fun LiveDataComponent(personListLiveData: LiveData<List<Person>>) {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun LiveDataComponentList(personList: List<Person>) {
     // LazyColumn is a vertically scrolling list that only composes and lays out the currently
@@ -108,41 +108,49 @@ fun LiveDataComponentList(personList: List<Person>) {
             // 16dp to the Card along with specifying it to occupy the entire available width.
             Card(
                 shape = RoundedCornerShape(4.dp),
-                backgroundColor = Color.White,
-                modifier = Modifier.fillParentMaxWidth().padding(8.dp)
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
-                // ListItem is a predefined composable that is a Material Design implementation of [list
-                // items](https://material.io/components/lists). This component can be used to achieve the
-                // list item templates existing in the spec
-                ListItem(text = {
-                    // The Text composable is pre-defined by the Compose UI library; you can use this
-                    // composable to render text on the screen
-                    Text(
-                        text = person.name,
-                        style = TextStyle(
-                            fontFamily = FontFamily.Serif, fontSize = 25.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = Color.White
+                ) {
+                    // ListItem is a predefined composable that is a Material Design implementation of [list
+                    // items](https://material.io/components/lists). This component can be used to achieve the
+                    // list item templates existing in the spec
+                    ListItem(
+                        headlineContent = {
+                            // The Text composable is pre-defined by the Compose UI library; you can use this
+                            // composable to render text on the screen
+                            Text(
+                                text = person.name,
+                                style = TextStyle(
+                                    fontFamily = FontFamily.Serif, fontSize = 25.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                        },
+                        supportingContent = {
+                            Text(
+                                text = "Age: ${person.age}",
+                                style = TextStyle(
+                                    fontFamily = FontFamily.Serif, fontSize = 15.sp,
+                                    fontWeight = FontWeight.Light, color = Color.DarkGray
+                                )
+                            )
+                        },
+                        leadingContent = {
+                            person.profilePictureUrl?.let { imageUrl ->
+                                // Look at the implementation of this composable in ImageActivity to learn
+                                // more about its implementation. It uses Picasso to load the imageUrl passed
+                                // to it.
+                                NetworkImageComponentPicasso(
+                                    url = imageUrl,
+                                    modifier = Modifier.width(60.dp).height(60.dp)
+                                )
+                            }
+                        }
                     )
-                }, secondaryText = {
-                    Text(
-                        text = "Age: ${person.age}",
-                        style = TextStyle(
-                            fontFamily = FontFamily.Serif, fontSize = 15.sp,
-                            fontWeight = FontWeight.Light, color = Color.DarkGray
-                        )
-                    )
-                }, icon = {
-                    person.profilePictureUrl?.let { imageUrl ->
-                        // Look at the implementation of this composable in ImageActivity to learn
-                        // more about its implementation. It uses Picasso to load the imageUrl passed
-                        // to it.
-                        NetworkImageComponentPicasso(
-                            url = imageUrl,
-                            modifier = Modifier.width(60.dp).height(60.dp)
-                        )
-                    }
-                })
+                }
             }
         })
     }
