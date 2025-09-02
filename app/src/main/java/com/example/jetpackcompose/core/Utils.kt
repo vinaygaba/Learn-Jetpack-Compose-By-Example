@@ -60,7 +60,7 @@ fun getAmenityList() = listOf(
 
 fun hideKeyboard(context: Context) {
     val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    imm.hideSoftInputFromWindow(null, 0)
 }
 
 // Constants
