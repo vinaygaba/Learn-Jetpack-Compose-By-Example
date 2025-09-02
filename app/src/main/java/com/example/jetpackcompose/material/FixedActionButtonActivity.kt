@@ -14,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -61,29 +60,19 @@ fun ScaffoldWithBottomBarAndCutout() {
     Scaffold(
         topBar = { TopAppBar(title = { Text("Scaffold Examples", style = MaterialTheme.typography.titleLarge) }) },
         bottomBar = {
-            // We specify the shape of the FAB bu passing a shape composable (fabShape) as a
-            // parameter to cutoutShape property of the BottomAppBar. It automatically creates a
-            // cutout in the BottomAppBar based on the shape of the Floating Action Button.
-            BottomAppBar(cutoutShape = fabShape) {}
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {},
-                // We specify the same shape that we passed as the cutoutShape above.
-                shape = fabShape,
-                // We use the secondary color from the current theme. It uses the defaults when
-                // you don't specify a theme (this example doesn't specify a theme either hence
-                // it will just use defaults. Look at DarkModeActivity if you want to see an
-                // example of using themes.
-                containerColor = MaterialTheme.colorScheme.secondary
-            ) {
-                IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
+            BottomAppBar(
+                actions = {},
+                floatingActionButton = {
+                    FloatingActionButton(
+                        onClick = {},
+                        shape = fabShape,
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    ) {
+                        Icon(imageVector = Icons.Filled.Favorite, contentDescription = "Favorite")
+                    }
                 }
-            }
+            )
         },
-        isFloatingActionButtonDocked = true,
-        floatingActionButtonPosition = FabPosition.End,
         content = { padding ->
             // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
             // This allows us to also control the scroll position and other scroll related properties.
