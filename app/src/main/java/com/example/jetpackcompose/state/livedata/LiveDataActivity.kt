@@ -109,7 +109,7 @@ fun LiveDataComponentList(personList: List<Person>) {
             Card(
                 shape = RoundedCornerShape(4.dp),
                 backgroundColor = Color.White,
-                modifier = Modifier.fillParentMaxWidth().padding(8.dp)
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
                 // ListItem is a predefined composable that is a Material Design implementation of [list
                 // items](https://material.io/components/lists). This component can be used to achieve the

@@ -108,12 +108,12 @@ fun ListAnimationComponent(personList: List<Person>) {
                     Card(
                         shape = RoundedCornerShape(4.dp),
                         backgroundColor = colors[index % colors.size],
-                        modifier = Modifier.fillParentMaxWidth()
+                        modifier = Modifier.fillMaxWidth()
                     ) {
                         // Row is a composable that places its children in a horizontal sequence. You
                         // can think of it similar to a LinearLayout with the horizontal orientation.
                         Row(
-                            modifier = Modifier.fillParentMaxWidth(),
+                            modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             // Text is a predefined composable that does exactly what you'd expect it to -

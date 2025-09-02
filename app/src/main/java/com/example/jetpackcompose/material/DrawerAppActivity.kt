@@ -9,17 +9,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.DrawerValue
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ModalDrawer
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.rememberDrawerState
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -67,31 +67,20 @@ fun DrawerAppComponent() {
     // ModalDrawerLayout is a pre-defined composable used to provide access to destinations in
     // the app. It's a common pattern used across multiple apps where you see a drawer on the
     // left of the screen.
-    ModalDrawer(
-        // Drawer state to denote whether the drawer should be open or closed.
+    ModalNavigationDrawer(
         drawerState = drawerState,
-        gesturesEnabled = drawerState.isOpen,
         drawerContent = {
-            //drawerContent takes a composable to represent the view/layout to display when the
-            // drawer is open.
             DrawerContentComponent(
-                // We pass a state composable that represents the current screen that's selected
-                // and what action to take when the drawer is closed.
                 currentScreen = currentScreen,
                 closeDrawer = { coroutineScope.launch { drawerState.close() } }
             )
-        },
-        content = {
-            // bodyContent takes a composable to represent the view/layout to display on the
-            // screen. We select the appropriate screen based on the value stored in currentScreen.
-            BodyContentComponent(
-                currentScreen = currentScreen.value,
-                openDrawer = {
-                    coroutineScope.launch { drawerState.open() }
-                }
-            )
         }
-    )
+    ) {
+        BodyContentComponent(
+            currentScreen = currentScreen.value,
+            openDrawer = { coroutineScope.launch { drawerState.open() } }
+        )
+    }
 }
 
 @Composable
@@ -130,9 +119,9 @@ fun DrawerContentComponent(
                     // We set the color of the row based on whether that row represents the current
                     // screen that's selected. We only want to highlight the row that's selected.
                     color = if (currentScreen.value == screen) {
-                        MaterialTheme.colors.secondary
+                        MaterialTheme.colorScheme.secondary
                     } else {
-                        MaterialTheme.colors.surface
+                        MaterialTheme.colorScheme.surface
                     }
                 ) {
                     // The Text composable is pre-defined by the Compose UI library; you can use this
@@ -189,7 +178,7 @@ fun Screen1Component(openDrawer: () -> Unit) {
         TopAppBar(
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            title = { Text("Screen 1 Title") },
+            title = { Text("Screen 1 Title", style = MaterialTheme.typography.titleLarge) },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
                     Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
@@ -239,7 +228,7 @@ fun Screen2Component(openDrawer: () -> Unit) {
         TopAppBar(
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            title = { Text("Screen 2 Title") },
+            title = { Text("Screen 2 Title", style = MaterialTheme.typography.titleLarge) },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
                     Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
@@ -289,7 +278,7 @@ fun Screen3Component(openDrawer: () -> Unit) {
         TopAppBar(
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            title = { Text("Screen 3 Title") },
+            title = { Text("Screen 3 Title", style = MaterialTheme.typography.titleLarge) },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
                     Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
