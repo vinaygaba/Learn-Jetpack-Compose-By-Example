@@ -36,11 +36,7 @@ jobs:
         run: ./gradlew test --stacktrace
 
   ui-testing:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        api-level: [26, 28, 29]
-        target: [default, google_apis]
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -61,8 +57,11 @@ jobs:
       - name: Run UI Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          emulator-build: 7425822
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: x86_64
+          api-level: 34
+          target: google_apis
+          arch: arm64-v8a
+          force-avd-creation: true
+          disable-animations: true
+          emulator-boot-timeout: 600
+          emulator-options: -no-window -no-snapshot -noaudio -no-boot-anim
           script: ./gradlew connectedCheck --no-daemon --stacktrace
