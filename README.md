@@ -78,11 +78,42 @@ I've also used the examples listed in this repo and given talks at conferences. 
 
 Setup
 -----
-To try out this sample app, you need to at least use the latest version
-of Android Studio. This project has been tested against Android Studio Artic Fox.
-[You can download it here](https://developer.android.com/studio/preview).
-In general, Jetpack Compose requires you to use the Canary version of
-Android Studio.
+This project targets the latest stable Android tooling and Jetpack Compose APIs.
+
+- Android Studio: Use the latest stable Android Studio (Hedgehog++/Koala or newer).
+- Gradle: Wrapper is pinned to 8.7.
+- Android Gradle Plugin: 8.5.x.
+- Kotlin: 2.0.x with Compose compiler plugin.
+- Compile SDK: 35. Min SDK: 21. Target SDK: 35.
+
+Quick start:
+
+1. Open the project in Android Studio (latest stable).
+2. Let Gradle sync. If the Android SDK path isn't configured, set it in local.properties:
+
+   ```
+   sdk.dir=/absolute/path/to/Android/Sdk
+   ```
+
+3. Build and run the `app` configuration.
+
+Key build changes (2025):
+
+- Uses Compose BOM to align Compose artifacts. Example in `app/build.gradle`:
+
+  ```
+  dependencies {
+      implementation platform("androidx.compose:compose-bom:2025.04.01")
+      implementation "androidx.compose.ui:ui"
+      implementation "androidx.compose.foundation:foundation"
+      implementation "androidx.compose.material3:material3"
+      debugImplementation "androidx.compose.ui:ui-tooling"
+  }
+  ```
+
+- Applies the Compose compiler via Kotlin plugin and targets Java 17 toolchain.
+- Migrated to AGP 8 DSL with `namespace` and `packaging { resources { excludes } }`.
+- Launcher activity is marked `android:exported="true"` to satisfy targetSdk 35.
 
 Examples
 -----------------

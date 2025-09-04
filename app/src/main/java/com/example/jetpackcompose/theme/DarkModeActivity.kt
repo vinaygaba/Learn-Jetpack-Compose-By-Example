@@ -10,22 +10,23 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.DrawerValue
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ModalDrawer
-import androidx.compose.material.Surface
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
+import androidx.compose.material3.Card
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.Typography
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.lightColors
-import androidx.compose.material.rememberDrawerState
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -84,12 +85,10 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable() (
     // for easy use. In this case, I'm just showing an example of how you can
     // override any of the values that are a part of the Palette even though I'm just using the
     // default values itself.
-    val lightColors = lightColors(
+    val lightColors = lightColorScheme(
         primary = Color(0xFF6200EE),
-        primaryVariant = Color(0xFF3700B3),
         onPrimary = Color(0xFFFFFFFF),
         secondary = Color(0xFF03DAC5),
-        secondaryVariant = Color(0xFF0000FF),
         onSecondary = Color(0xFF000000),
         background = Color(0xFFFFFFFF),
         onBackground = Color(0xFF000000),
@@ -102,14 +101,14 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable() (
     // darkColors is a default implementation of dark mode ColorPalette from the
     // Material Design specification
     // https://material.io/design/color/the-color-system.html#color-theme-creation.
-    val darkColors = darkColors()
+    val darkColors = darkColorScheme()
     val colors = if (enableDarkMode.value) darkColors else lightColors
 
     // Data class holding typography definitions as defined by the
     // Material typography specification
     // https://material.io/design/typography/the-type-system.html#type-scale
     val typography = Typography(
-        body1 = TextStyle(
+        bodyLarge = TextStyle(
             fontFamily = FontFamily.Serif,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp,
@@ -120,7 +119,7 @@ fun CustomTheme(enableDarkMode: MutableState<Boolean>, children: @Composable() (
 
     // A MaterialTheme comprises of colors, typography and the child composables that are going
     // to make use of this styling.
-    MaterialTheme(colors = colors, content = children, typography = typography)
+    MaterialTheme(colorScheme = colors, content = children, typography = typography)
 }
 
 // We represent a Composable function by annotating it with the @Composable annotation. Composable
@@ -146,10 +145,9 @@ fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
     // ModalDrawer is a pre-defined composable used to provide access to destinations in
     // the app. It's a common pattern used across multiple apps where you see a drawer on the
     // left of the screen.
-    ModalDrawer(
+    ModalNavigationDrawer(
         // Drawer state to denote whether the drawer should be open or closed.
         drawerState = drawerState,
-        gesturesEnabled = drawerState.isOpen,
         drawerContent = {
             //drawerContent takes a composable to represent the view/layout to display when the
             // drawer is open.
@@ -157,19 +155,18 @@ fun ThemedDrawerAppComponent(enableDarkMode: MutableState<Boolean>) {
                 currentScreen = currentScreen,
                 closeDrawer = { scope.launch { drawerState.close() } }
             )
-        },
-        content = {
-            // bodyContent takes a composable to represent the view/layout to display on the
-            // screen. We select the appropriate screen based on the value stored in currentScreen.
-            ThemedBodyContentComponent(
-                currentScreen = currentScreen.value,
-                enableDarkMode = enableDarkMode,
-                openDrawer = {
-                    scope.launch { drawerState.open() }
-                }
-            )
         }
-    )
+    ) {
+        // bodyContent takes a composable to represent the view/layout to display on the
+        // screen. We select the appropriate screen based on the value stored in currentScreen.
+        ThemedBodyContentComponent(
+            currentScreen = currentScreen.value,
+            enableDarkMode = enableDarkMode,
+            openDrawer = {
+                scope.launch { drawerState.open() }
+            }
+        )
+    }
 }
 
 @Composable
@@ -268,6 +265,7 @@ fun ThemedBodyContentComponent(
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemedScreen1Component(
     enableDarkMode: Boolean,
@@ -287,7 +285,7 @@ fun ThemedScreen1Component(
         TopAppBar(
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            title = { Text("Screen 1") },
+            title = { Text("Screen 1", style = MaterialTheme.typography.titleLarge) },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
                     Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
@@ -299,7 +297,7 @@ fun ThemedScreen1Component(
         // corners and apply a modifier.
         Card(
             modifier = Modifier.fillMaxWidth(),
-            backgroundColor = MaterialTheme.colors.surface
+            colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
@@ -309,7 +307,7 @@ fun ThemedScreen1Component(
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
                 Text(
                     text = "Enable Dark Mode",
-                    style = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onSurface),
+                    style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -317,10 +315,10 @@ fun ThemedScreen1Component(
         // Surface is a composable provided to fulfill the needs of the "Surface" metaphor from the
         // Material Design specification. It's generally used to change the background color, add
         // elevation, clip or add background shape to its children composables.
-        Surface(modifier = Modifier.weight(1f), color = MaterialTheme.colors.surface) {
+        Surface(modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.surface) {
             Text(
                 text = LOREM_IPSUM_1,
-                style = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onSurface),
+                style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
                 modifier = Modifier.padding(16.dp)
             )
         }
@@ -331,6 +329,7 @@ fun ThemedScreen1Component(
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemedScreen2Component(
     enableDarkMode: Boolean,
@@ -350,7 +349,7 @@ fun ThemedScreen2Component(
         TopAppBar(
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            title = { Text("Screen 2") },
+            title = { Text("Screen 2", style = MaterialTheme.typography.titleLarge) },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
                     Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
@@ -362,7 +361,7 @@ fun ThemedScreen2Component(
         // corners and apply a modifier.
         Card(
             modifier = Modifier.fillMaxWidth(),
-            backgroundColor = MaterialTheme.colors.surface
+            colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
@@ -371,7 +370,7 @@ fun ThemedScreen2Component(
                 // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
                 Text(
-                    text = "Enable Dark Mode", style = MaterialTheme.typography.body1,
+                    text = "Enable Dark Mode", style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -381,7 +380,7 @@ fun ThemedScreen2Component(
         // elevation, clip or add background shape to its children composables.
         Surface(modifier = Modifier.weight(1f)) {
             Text(
-                text = LOREM_IPSUM_2, style = MaterialTheme.typography.body1,
+                text = LOREM_IPSUM_2, style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(16.dp)
             )
         }
@@ -392,6 +391,7 @@ fun ThemedScreen2Component(
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ThemedScreen3Component(
     enableDarkMode: Boolean,
@@ -411,7 +411,7 @@ fun ThemedScreen3Component(
         TopAppBar(
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            title = { Text("Screen 3") },
+            title = { Text("Screen 3", style = MaterialTheme.typography.titleLarge) },
             navigationIcon = {
                 IconButton(onClick = openDrawer) {
                     Icon(imageVector = Icons.Filled.Menu, contentDescription = "Menu")
@@ -423,7 +423,7 @@ fun ThemedScreen3Component(
         // corners and apply a modifier.
         Card(
             modifier = Modifier.fillMaxWidth(),
-            backgroundColor = MaterialTheme.colors.surface
+            colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
         ) {
             // Row is a composable that places its children in a horizontal sequence. You
             // can think of it similar to a LinearLayout with the horizontal orientation.
@@ -432,7 +432,7 @@ fun ThemedScreen3Component(
                 // Design specification.
                 Switch(checked = enableDarkMode, onCheckedChange = onCheckChanged)
                 Text(
-                    text = "Enable Dark Mode", style = MaterialTheme.typography.body1,
+                    text = "Enable Dark Mode", style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
@@ -442,7 +442,7 @@ fun ThemedScreen3Component(
         // elevation, clip or add background shape to its children composables.
         Surface(modifier = Modifier.weight(1f)) {
             Text(
-                text = LOREM_IPSUM_3, style = MaterialTheme.typography.body1,
+                text = LOREM_IPSUM_3, style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(16.dp)
             )
         }

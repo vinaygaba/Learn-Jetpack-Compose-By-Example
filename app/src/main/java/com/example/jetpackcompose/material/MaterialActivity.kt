@@ -16,19 +16,19 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.ListItem
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Slider
-import androidx.compose.material.Snackbar
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
-import androidx.compose.material.TriStateCheckbox
+import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
+import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,7 +49,7 @@ import com.example.jetpackcompose.image.TitleComponent
 
 class MaterialActivity : AppCompatActivity() {
 
-    @ExperimentalMaterialApi
+    @OptIn(ExperimentalMaterial3Api::class)
     @Suppress("LongMethod")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,7 +138,7 @@ class MaterialActivity : AppCompatActivity() {
 // functions can only be called from within the scope of other composable functions. We should
 // think of composable functions to be similar to lego blocks - each composable function is in turn
 // built up of smaller composable functions.
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MaterialCardComponent() {
     // Card composable is a predefined composable that is meant to represent the card surface as
@@ -149,28 +149,23 @@ fun MaterialCardComponent() {
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable.
     Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
-        // ListItem is a predefined composable that is a Material Design implementation of [list
-        // items](https://material.io/components/lists). This component can be used to achieve the
-        // list item templates existing in the spec
-        ListItem(text = {
-            Text(text = "Title")
-        }, secondaryText = {
-            Text(text = "Subtitle")
-        }, icon = {
-            // Column is a composable that places its children in a vertical sequence. You
-            // can think of it similar to a LinearLayout with the vertical orientation. 
-            // In addition we also pass a few modifiers to it.
-            Column(
-                modifier = Modifier
-                    .width(48.dp)
-                    .height(48.dp)
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.landscape),
-                    contentDescription = "Landscape"
-                )
+        // Material 3 ListItem uses slots for headline/supporting/leading/trailing content
+        androidx.compose.material3.ListItem(
+            headlineContent = { Text(text = "Title", style = MaterialTheme.typography.titleMedium) },
+            supportingContent = { Text(text = "Subtitle", style = MaterialTheme.typography.bodyMedium) },
+            leadingContent = {
+                Column(
+                    modifier = Modifier
+                        .width(48.dp)
+                        .height(48.dp)
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.landscape),
+                        contentDescription = "Landscape"
+                    )
+                }
             }
-        })
+        )
     }
 }
 
@@ -330,7 +325,7 @@ fun MaterialRadioButtonGroupComponent() {
                     )
                     Text(
                         text = text,
-                        style = MaterialTheme.typography.body1.merge(),
+                        style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
@@ -473,14 +468,8 @@ fun MaterialSnackbarComponent() {
         // A pre-defined composable that's capable of rendering a Snackbar. It honors the Material
         // Design specification.
         Snackbar(
-            content = {
-                // The Text composable is pre-defined by the Compose UI library; you can use this
-                // composable to render text on the screen
-                Text(text = "I'm a very nice Snackbar")
-            }, action = {
-                Text(text = "OK", style = TextStyle(color = MaterialTheme.colors.secondary))
-            }
-        )
+            action = { Text(text = "OK", style = TextStyle(color = MaterialTheme.colorScheme.secondary)) }
+        ) { Text(text = "I'm a very nice Snackbar") }
     }
 
 }
@@ -591,7 +580,7 @@ fun MaterialSwitchComponent() {
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth(),
-        backgroundColor = Color(249, 249, 249)
+        colors = androidx.compose.material3.CardDefaults.cardColors(containerColor = Color(249, 249, 249))
     ) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier

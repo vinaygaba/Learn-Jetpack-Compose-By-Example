@@ -11,13 +11,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -71,6 +72,7 @@ fun App(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MyTopAppBar(
     currentScreen: AppScreen,
@@ -80,11 +82,11 @@ private fun MyTopAppBar(
 ) {
     TopAppBar(
         title = {
-            Text(text = currentScreen.title)
+            Text(text = currentScreen.title, style = MaterialTheme.typography.titleLarge)
         },
         modifier = modifier,
-        navigationIcon = if (canNavigateBack) {
-            {
+        navigationIcon = {
+            if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
@@ -92,7 +94,7 @@ private fun MyTopAppBar(
                     )
                 }
             }
-        } else null,
+        }
     )
 }
 
@@ -144,7 +146,7 @@ private fun ScreenA(
     ) {
         Text(
             text = "Screen A",
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.headlineSmall
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -172,7 +174,7 @@ private fun ScreenB(
     ) {
         Text(
             text = "Screen B",
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.headlineSmall
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -210,7 +212,7 @@ private fun ScreenC(
     ) {
         Text(
             text = "Screen C",
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.headlineSmall
         )
         Spacer(modifier = Modifier.height(16.dp))
 

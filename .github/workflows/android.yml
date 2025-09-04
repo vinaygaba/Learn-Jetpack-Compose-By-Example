@@ -2,22 +2,28 @@ name: Android CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: set up JDK 11
-        uses: actions/setup-java@v1
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          java-version: 11
-      - uses: actions/cache@v1
+          distribution: "temurin"
+          java-version: "17"
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Accept licenses and install SDK components
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+      - uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           # Key inspired from here -
@@ -30,20 +36,26 @@ jobs:
         run: ./gradlew test --stacktrace
 
   ui-testing:
-    runs-on: macos-10.15
-    strategy:
-      matrix:
-        api-level: [26, 28, 29]
-        target: [default, google_apis]
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: set up JDK 11
-        uses: actions/setup-java@v1
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          java-version: 11
-      - name: Checkout Branch
-        uses: actions/checkout@v2
-      - uses: actions/cache@v1
+          distribution: "temurin"
+          java-version: "17"
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Accept licenses and install SDK components
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "system-images;android-35;google_apis;x86_64"
+      - uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           # Key inspired from here -
@@ -54,8 +66,11 @@ jobs:
       - name: Run UI Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          emulator-build: 7425822
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
+          api-level: 35
+          target: google_apis
           arch: x86_64
+          force-avd-creation: true
+          disable-animations: true
+          emulator-boot-timeout: 600
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: ./gradlew connectedCheck --no-daemon --stacktrace

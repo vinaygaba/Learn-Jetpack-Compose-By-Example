@@ -8,9 +8,12 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -63,27 +66,31 @@ fun LazyColumnItemsScrollableComponent(personList: List<Person>) {
             // modify the composable that its applied to. In this example, we configure the
             // Row to occupify the entire available width using Modifier.fillMaxWidth() and also give
             // it a padding of 16dp.
-            Row(modifier = Modifier.fillParentMaxWidth()) {
+            Row(modifier = Modifier.fillMaxWidth()) {
                 // Card composable is a predefined composable that is meant to represent the card surface as
                 // specified by the Material Design specification. We also configure it to have rounded
                 // corners and apply a modifier.
                 Card(
                     shape = RoundedCornerShape(4.dp),
-                    backgroundColor = colors[index % colors.size],
                     modifier = Modifier
-                        .fillParentMaxWidth()
+                        .fillMaxWidth()
                         .padding(16.dp)
                 ) {
-                    // Text is a predefined composable that does exactly what you'd expect it to -
-                    // display text on the screen. It allows you to customize its appearance using
-                    // the style property.
-                    Text(
-                        person.name, style = TextStyle(
-                            color = Color.Black,
-                            fontSize = 20.sp,
-                            textAlign = TextAlign.Center
-                        ), modifier = Modifier.padding(16.dp)
-                    )
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        color = colors[index % colors.size]
+                    ) {
+                        // Text is a predefined composable that does exactly what you'd expect it to -
+                        // display text on the screen. It allows you to customize its appearance using
+                        // the style property.
+                        Text(
+                            person.name, style = TextStyle(
+                                color = Color.Black,
+                                fontSize = 20.sp,
+                                textAlign = TextAlign.Center
+                            ), modifier = Modifier.padding(16.dp)
+                        )
+                    }
                 }
             }
         })
@@ -101,10 +108,7 @@ fun VerticalScrollableComponent(personList: List<Person>) {
     val scrollState = rememberScrollState()
     // Column is a composable that places its children in a vertical sequence.
     Column(
-        modifier = Modifier.scrollable(
-            state = scrollState,
-            orientation = Orientation.Vertical
-        )
+        modifier = Modifier.verticalScroll(scrollState)
     ) {
         for ((index, person) in personList.withIndex()) {
             // Row is a composable that places its children in a horizontal sequence. You
@@ -124,19 +128,23 @@ fun VerticalScrollableComponent(personList: List<Person>) {
                 // corners and apply a modifier.
                 Card(
                     shape = RoundedCornerShape(4.dp),
-                    backgroundColor = colors[index % colors.size],
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    // Text is a predefined composable that does exactly what you'd expect it to
-                    // display text on the screen. It allows you to customize its appearance
-                    // using the style property.
-                    Text(
-                        person.name, style = TextStyle(
-                            color = Color.Black,
-                            fontSize = 20.sp,
-                            textAlign = TextAlign.Center
-                        ), modifier = Modifier.padding(16.dp)
-                    )
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        color = colors[index % colors.size]
+                    ) {
+                        // Text is a predefined composable that does exactly what you'd expect it to
+                        // display text on the screen. It allows you to customize its appearance
+                        // using the style property.
+                        Text(
+                            person.name, style = TextStyle(
+                                color = Color.Black,
+                                fontSize = 20.sp,
+                                textAlign = TextAlign.Center
+                            ), modifier = Modifier.padding(16.dp)
+                        )
+                    }
                 }
             }
         }

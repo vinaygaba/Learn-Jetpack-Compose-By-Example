@@ -1,13 +1,17 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.compose'
+}
 
 android {
-    compileSdkVersion 32
+    namespace 'com.example.jetpackcompose'
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.jetpackcomposeplayground"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdk 21
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -21,78 +25,64 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
     buildFeatures {
         compose true
     }
-    composeOptions {
-        kotlinCompilerVersion "${versions.kotlinCompilerVersion}"
-        kotlinCompilerExtensionVersion "${versions.compose}"
-
-    }
-    packagingOptions {
+    packaging {
         resources {
             excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
         }
     }
-    packagingOptions {
-        resources {
-            excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
-        }
-    }
-
-// Added to avoid this error -
-    // Execution failed for task ':app:mergeDebugAndroidTestJavaResource'.
-    // > A failure occurred while executing com.android.build.gradle.internal.tasks.MergeJavaResWorkAction
-    // > 2 files found with path 'META-INF/AL2.0' from inputs:
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation platform('androidx.compose:compose-bom:2025.06.01')
 
-    // Kotlin
-    implementation deps.kotlinStdLib
+    // Core Compose
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.foundation:foundation'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.compose.ui:ui-test-junit4-android:1.9.0'
+    implementation 'androidx.navigation:navigation-testing-android:2.9.3'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
 
-    // Support Libraries
-    implementation deps.support.appCompat
-    implementation deps.support.ktx
-    implementation deps.support.ktxViewModel
-    implementation deps.support.ktxLiveData
-    implementation deps.support.lifecycleExtensions
 
-    // CardView
-    implementation deps.cardView
 
-    // Constraint Layout
-    implementation deps.constraintLayout
+    // Material 3
+    implementation 'androidx.compose.material3:material3'
+    // Material 2 (for existing samples)
+    implementation 'androidx.compose.material:material'
 
-    // Coroutine
-    implementation deps.coroutine.core
+    // Compose integrations
+    implementation 'androidx.activity:activity-compose:1.9.3'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6'
+    implementation 'androidx.compose.runtime:runtime-livedata'
+    implementation 'androidx.navigation:navigation-compose:2.8.1'
+    implementation 'androidx.constraintlayout:constraintlayout-compose:1.0.1'
 
-    // Compose
-    implementation deps.compose.activityCompose
-    implementation deps.compose.composeRuntime
-    implementation deps.compose.constraintLayout
-    implementation deps.compose.composeNavigation
-    implementation deps.compose.core
-    implementation deps.compose.foundation
-    implementation deps.compose.tooling
-    implementation deps.compose.layout
-    implementation deps.compose.material
-    implementation deps.compose.savedInstanceState
-    implementation deps.compose.uiLiveData
-    androidTestImplementation deps.compose.composeNavigationTest
-    androidTestImplementation deps.compose.uiTest
+    // AndroidX core/support
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.6'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1'
 
     // Image loading
-    implementation deps.imageLoading.picasso
-    implementation deps.imageLoading.glideCore
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
 
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.junitImplementation
+    // Tests
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
 }
